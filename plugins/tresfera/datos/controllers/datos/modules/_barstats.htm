@@ -1,0 +1,73 @@
+<?php 
+$model = new \Tresfera\Statistics\Models\Result();
+$results = $model->getSpecifics($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+$colors = [
+			"1"=>"rgb(204, 51, 0)",
+			"2"=>"rgb(229, 169, 26)",
+			"3"=>"rgb(149, 183, 83)",
+		];
+$smiles = [
+	"1"=>"icon-frown-o",
+	"2"=>"icon-meh-o",
+	"3"=>"icon-smile-o",
+	
+];
+$class = [
+	"1"=>"ko",
+	"2"=>"mix",
+	"3"=>"ok",
+	
+];
+?>
+<?php
+
+$data = array();
+$max = 0;
+$total = 0;
+foreach($results as $result) { 
+	if($max < $result->numQuizz) $max = $result->numQuizz;
+	$total += $result->numQuizz;
+}
+foreach($results as $result) { 
+	if($result->value_type.$result->question_value == 0) continue;
+	$data[$result->value_type.$result->question_value] = [
+		"percent" 			=> number_format( (($result->numQuizz/$total)*100) , 2 )."%",
+		"question_value" 	=> $result->question_value,
+		"numQuizzs" 		=> $result->numQuizz,
+		"value_type" 		=> $result->value_type,
+		"disp_percent" 		=> (($result->numQuizz/$max)*100)."%",
+	];
+}
+
+ksort($data);
+?>
+<div data-control="">
+	    <h3><i class="icon-smile-o"></i>Motivos de insatisfacción</h3>
+		<div class="row" style="margin-top: 25px;">
+			<div class="col-md-12" data-url="<?=url("backend/tresfera/taketsystem/stats/?detalles=1&group_by=value&filter=question_title")?>">
+				<div class="control-chart" data-control="" data-size="180" data-center-text="101">
+				    <div class="chart-legend" style="width: 100%;">
+					   <table style="width: 100%;" class="big-bar-line">
+					      <tbody>
+						      <?php 
+						      
+						      if(isset($results))
+						      foreach($data as $result) { 
+						      ?>
+						     <tr class="bar_value value_type_<?=$result['value_type']?>">
+					            <td class="indicator"><i class="<?=$smiles[$result['value_type']]?>"></i></td>
+					            <td style="width: 20%;" class="text"><?=$result['question_value']?></td>
+					            <td class="value">
+						            <div class="bar-line bar-line-<?=$class[$result['value_type']]?>" style="width: <?=$result['disp_percent']?>"><div><?=$result['numQuizzs']?> (<?=$result['percent']?>)</div></div>
+						        </td>
+					         </tr>
+					         <?php
+					         }
+					         ?>
+					      </tbody>
+					   </table>
+					</div>
+				</div>						
+			</div>
+		</div>
+</div>

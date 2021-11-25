@@ -1,0 +1,13 @@
+<?php 
+if(isset($field['layer'])) {
+    $partial = "$/tresfera/taketsystem/slides/fields/select/_".$field['layer'].".htm";
+    echo $this->makePartial(
+    $partial,
+        [ 
+        'campo' => $field,
+        'slide' => $slide,
+        'lang' => $lang
+        ]
+    );
+}
+?>

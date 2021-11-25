@@ -1,0 +1,14 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+        hidden: true
+    date:
+        label: Fecha de contacto
+    cause:
+        label: Recordatorios
+           

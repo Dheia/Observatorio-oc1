@@ -1,0 +1,53 @@
+<?php
+	$faker = Faker\Factory::create();
+	$model = new \Tresfera\Statistics\Models\Result();
+
+  $totalsGeneral['ko'] = $model->getTotalsNPSLogico(1,$this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+  $totalsGeneral['mix']  = $model->getTotalsNPSLogico(2,$this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+  $totalsGeneral['ok'] = $model->getTotalsNPSLogico(3,$this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+  
+  $titles['ko'] = 'Motivos insatisfacción';
+  $titles['mix'] = 'Motivos no total satisfacción';
+  $titles['ok'] = 'Motivos satisfacción';
+
+?>
+ <div class="row">
+  <?php foreach($totalsGeneral as $type=>$results) {
+    if(count($results) == 0) continue;
+     $stats = [];
+    foreach($results as $sondeo) {
+
+			if( !isset($stats['total']) ) $stats['total'] = 0;
+
+			$stats['total'] += $sondeo->count;
+
+			if( !isset($stats['max']) ) $stats['max'] = 0;
+			if( !isset($stats['min']) ) $stats['min'] = 999999999;
+
+			$stats['class'] = $type;
+
+			if( $stats['min'] > $sondeo->count ) {
+				$stats['min'] = $sondeo->count;
+			}
+      
+			if( $stats['max'] < $sondeo->count ) {
+				$stats['max'] = $sondeo->count;
+		  }
+   } ?>
+   
+    <div class="col-md-4">
+        <div data-control="">
+          <h3><i class="icon-venus-mars"></i><?=$titles[$type]?></h3>
+          <?php foreach($results as $sondeo) { ?>
+          <div>
+            <div class="bar-line bar-line-<?=$stats['class']?>" style=" width: <?=($sondeo->count/$stats['max']*100)?>%">
+                <b><?=$sondeo->value?></b>
+                <br>
+                <span><?=$sondeo->count?> (<?=number_format(($sondeo->count/$stats['total']*100),2)?>%)</span>
+            </div>
+          </div>
+          <?php } ?>
+        </div>
+      </div>
+  <?php } ?>
+</div>

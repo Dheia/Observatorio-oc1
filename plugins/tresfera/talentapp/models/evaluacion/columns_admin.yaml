@@ -1,0 +1,116 @@
+columns:
+    id:
+        label: ID
+        type: text
+        invisible: false
+        searchable: true
+        clickable: false
+        sortable: true
+    proyecto:
+        label: 'tresfera.talentapp::lang.admin.proyecto'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/_proyecto_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    cliente:
+        label: 'tresfera.talentapp::lang.admin.cliente'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/_cliente_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    resumen:
+        label: 'tresfera.talentapp::lang.admin.progreso'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/_resumen_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    no_contestados:
+        label: 'tresfera.talentapp::lang.admin.evaluaciones_pendientes'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/_no_contestados_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    autoevaluacion:
+        label: 'tresfera.talentapp::lang.admin.autoevaluacion'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/_autoevaluacion_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    tiempo_restante:
+        label: 'tresfera.talentapp::lang.admin.tiempo_restante'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/_tiempo_restante_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+
+    proyecto_name:
+        label: 'tresfera.talentapp::lang.admin.proyecto'
+        relation: proyecto
+        select: name
+        searchable: true
+        clickable: false
+        invisible: true
+        cssClass: hidden
+    cuestionario_evaluado_id:
+        label: cuestionario_evaluado_id
+        type: number
+        searchable: false
+        sortable: false
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    cuestionario_evaluador_id:
+        label: cuestionario_evaluador_id
+        type: number
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+
+    name:
+        label: 'tresfera.talentapp::lang.admin.nombre_evaluado'
+        type: text
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    username:
+        label: username
+        type: text
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    email:
+        label: email
+        type: text
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    user_id:
+        label: user_id
+        type: number
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    stats:
+        label: user_id
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    client_id:
+        label: client_id
+        type: number
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden

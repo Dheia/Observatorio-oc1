@@ -1,0 +1,80 @@
+title = "Pag07"
+url = "/quiz/baja-es/pag7"
+layout = "cofidis"
+is_hidden = 0
+==
+<style type="text/css">* { box-sizing: border-box; } body {margin: 0;}
+*{box-sizing:border-box;}
+body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}
+#i9w7h-2{box-sizing:border-box;}
+#i880r-2{box-sizing:border-box;}
+#textarea-2{box-sizing:border-box;padding-top:20px;padding-right:30px;padding-bottom:6px;padding-left:30px;height:300px;}
+#i5rqk-2{box-sizing:border-box;}
+#download-button-2-2{box-sizing:border-box;}
+#i34h{box-sizing:border-box;}
+#isjk{box-sizing:border-box;}
+#ikisi{box-sizing:border-box;}
+#i9my5{box-sizing:border-box;}
+</style>
+<style>
+  .topbar {
+      width: {{ 6/8*100 }}%;
+  }
+</style>
+<h2 id="i9w7h-2" class="header center">
+    <div>Tu baja se podría haber evitado si…</div>
+</h2>
+<div id="i880r-2" class="row center">
+    <textarea id="textarea-2" 
+    data-question-type="free" 
+    data-answer-type="free"
+    data-question-title="La teva baixa s'hagués pogut evitar si..."
+    data-question="La teva baixa s'hagués pogut evitar si..." 
+    data-segmentacion-value-ok="Si"
+    data-segmentacion-value-ko="No"
+    data-segmentacion-answer-type="possibilitat-de-repesca"
+    data-segmentacion-question="Possibilitat de repesca"
+    data-segmentacion-question-title="Possibilitat de repesca"
+     rows="3" cols="20" class="mdc-text-field__input"></textarea>
+</div>
+<div id="i5rqk-2" class="row center">
+    <button id="download-button-2-2" class="btn-large waves-effect waves-light orange">continuar</button>
+</div>
+<script>
+  $(".orange").click(function(){
+    var sendData = [];
+    $("[data-question]").each(function(){
+      var data = {
+        value: $(this).val(),
+        question: $(this).data("question"),
+        question_title: $(this).data("question-title"),
+        question_type: $(this).data("question-type"),
+        value_type: $(this).data("value-type"),
+        answer_type: $(this).data("answer-type"),
+      };
+      if(data.value)
+        sendData.push(data);
+
+      var data = {
+        value: $(this).data("segmentacion-value-ko"),
+        question: $(this).data("segmentacion-question"),
+        question_title: $(this).data("segmentacion-question-title"),
+        question_type: 'segmentacion',
+        answer_type: $(this).data("segmentacion-answer-type"),
+      };
+      if($(this).val()) {
+        data.value = $(this).data("segmentacion-value-ok");
+      } 
+      sendData.push(data);
+    }
+                             )
+    $.request('onSaveAnswers', {
+      data: sendData,
+      success: function(data) {
+        window.location = "pag8?finish=true";
+      }
+    }
+    )
+  }
+)
+</script>

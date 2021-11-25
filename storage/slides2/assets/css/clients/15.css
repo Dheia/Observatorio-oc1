@@ -1,0 +1,58 @@
+section.questions h1, h1.titulo {
+    background-color: #bbc0c4;
+    color: #003a70
+}
+.bar-footer .button:last-child {
+    color: #003a70;
+}
+.button-icon.icon.ion-man:before, .button-icon.icon.ion-woman:before {
+    color: #003a70;
+}
+.item-radio .radio-icon {
+    color: #003a70;
+}
+.item-radio, .item.item-input, .item.item-textarea, textarea {
+	border-color: #003a70;
+}
+.item-radio .item-content {
+    font-weight: bold;
+}
+h3 {
+	font-size: 160%;
+	font-weight: bold;
+}
+
+.bar.bar-header.bar-light {
+    background: #003a70 !important;
+}
+
+.seguir {
+	color: #003a70;
+}
+.h-100.dotted {
+    background: none;
+}
+.full-image h1 {
+        color: #fff;
+    text-shadow: 3px 1px #000;
+    margin-top: 358px;
+}
+
+img.logoBig {
+    margin: 0 auto;
+    width: auto;
+    height: 38%;
+    margin-top: 4%;
+}
+
+@media (max-width: 460px) {
+	img.logoBig {
+	    margin: 0 auto;
+	    width: auto;
+	    height: 43%;
+	    margin-top: 5%;
+	}
+	section > div.h-30 {
+	    height: 13%;
+	}
+}

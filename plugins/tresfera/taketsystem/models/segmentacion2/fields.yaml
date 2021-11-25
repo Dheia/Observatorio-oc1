@@ -1,0 +1,44 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Nombre
+        type: text
+        span: left
+    client:
+        label: Cliente
+        type: relation
+        emptyOption: Sin cliente
+        span: right
+        tab: General
+    display_mode:
+        label: Representación en informes
+        type: dropdown
+        span: right
+        tab: General
+        options:
+            circle: Circulo
+            cloud-words: Nube de palabras
+    generate_url:
+        label: Generar url
+        span: left
+        type: switch
+    generate_multi_url:
+        label: Generar multiples url
+        span: left
+        type: switch
+    comparativa_segmentacion:
+        label: Mostrar en informes
+        span: left
+        type: switch
+    is_filter:
+        label: Permitir usar en filtros
+        span: left
+        type: switch
+    values-relation:
+        label: Valores
+        context: update
+        type: partial
+        path: $/tresfera/taketsystem/controllers/segmentaciones/_list_values.htm

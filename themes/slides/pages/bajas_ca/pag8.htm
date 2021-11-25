@@ -1,0 +1,81 @@
+title = "Pag08"
+url = "/quiz/baja-ca/pag8"
+layout = "cofidis"
+is_hidden = 0
+==
+<style type="text/css">* { box-sizing: border-box; } body {margin: 0;}
+*{box-sizing:border-box;}
+body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}
+img{max-height:140px;}
+#i880r-2-3{box-sizing:border-box;}
+#textarea-2-3{box-sizing:border-box;padding-top:12px;padding-right:30px;padding-bottom:6px;padding-left:30px;text-align:center;}
+#i880r-2-2-2{box-sizing:border-box;}
+#textarea-2-2-2{box-sizing:border-box;padding-top:12px;padding-right:30px;padding-bottom:6px;padding-left:30px;text-align:center;}
+#i5rqk-2-2{box-sizing:border-box;}
+#download-button-2-2-2{box-sizing:border-box;}
+</style>
+<style>
+  .topbar {
+      width: {{ 7/8*100 }}%;
+  }
+</style>
+<h4 class="header center4">Si vols una sol·lució nova i personalitzada per a reprendre el teu pla de salut i benestar amb nosaltres,
+    <div draggable="true" data-highlightable="1" id="it6x-3">deixa'ns el teu telèfon i correu electrònic i et contactarem.
+</div>
+</h4>
+<div id="i880r-2-3" class="row center">
+    <h4 class="or">número de telèfon
+  </h4>
+    <textarea id="textarea-2-3" data-question-type="phone" data-answer-type="phone" data-question-title="número de telèfon" data-question="número de telèfon" rows="3" cols="40" class="mdc-text-field__input2"></textarea>
+</div>
+<div id="i880r-2-2-2" class="row center">
+    <h4 class="or">correu electrònic
+  </h4>
+    <textarea id="textarea-2-2-2" data-question-type="email" data-answer-type="email_capturat" data-question-title="correu electrònic" data-question="correu electrònic" rows="3" cols="40" class="mdc-text-field__input2"></textarea>
+</div>
+<br/>
+<br/>
+<div id="iqbph-2-2-2" class="mdc-layout-grid answers">
+    <div id="ilmoc-2-2-2" class="mdc-layout-grid__inner">
+        <div id="ih8hx-2-2-2" class="mdc-layout-grid__cell one">
+            <button data-id="" 
+            data-question-title="No vull rebre més comunicacions" 
+            data-question="No vull rebre més comunicacions"
+             data-question-type="segmentacion"
+              data-value="No vull rebre més comunicacions"
+               data-answer-type="no-vull-rebre-mes-comunicacions" 
+               class="foo-button mdc-button mdc-button--outlined">
+                No vull rebre més comunicacions
+            </button>
+        </div>
+    </div>
+</div>
+<div id="i5rqk-2-2" class="row center">
+    <button id="download-button-2-2-2" class="btn-large waves-effect waves-light orange">continuar</button>
+</div>
+<script>
+  $(".orange").click(function(){
+    var sendData = [];
+    $("[data-question]").each(function(){
+      var data = {
+        value: $(this).val(),
+        question: $(this).data("question"),
+        question_title: $(this).data("question-title"),
+        question_type: $(this).data("question-type"),
+        value_type: $(this).data("value-type"),
+        answer_type: $(this).data("answer-type"),
+      };
+      if(data.value)
+        sendData.push(data);
+    }
+    )
+    $.request('onSaveAnswers', {
+      data: sendData,
+      success: function(data) {
+        window.location = "pag9?finish=true";
+      }
+    }
+    )
+  }
+)
+</script>

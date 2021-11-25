@@ -1,0 +1,33 @@
+1.0.1: 
+    - First version of Taketsystem
+    # Migrations
+    - create_regions_table.php
+    - create_cities_table.php
+    - create_regions_cp_table.php
+    - create_cities_cp_table.php
+    - create_clients_table.php
+    - create_shops_table.php
+    - create_devices_table.php
+    - create_device_logs_table.php
+    - create_quiz_types_table.php
+    - create_quizzes_table.php
+    - create_quiz_devices_table.php
+    - create_slide_types_table.php
+    - create_slides_table.php
+    - create_answers_table.php
+    - create_results_table.php
+    - create_questions_table.php
+    - create_sector_table.php
+    - create_section_table.php
+    - users_add_client.php
+    # Seeders
+    - seeders/SlideTypesSeeder.php
+    - seeders/QuizTypesSeeder.php
+    - seeders/SectorSeeder.php 
+    # Seeders Demo
+    - seeders/ClientsSeeder.php
+    - seeders/UsersSeeder.php
+    - seeders/ShopsSeeder.php
+    - seeders/DevicesSeeder.php
+    - seeders/QuizzesSeeder.php
+    - seeders/ResultsSeeder.php

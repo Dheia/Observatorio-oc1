@@ -1,0 +1,19 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    title:
+        label: Título
+    type:
+        label: Tipo
+        type: relation
+        span: left
+    order:
+        label: Orden
+        type: number
+        span: right
+    options:
+        table: Opciones
+        type: relation
+        nameFrom: label

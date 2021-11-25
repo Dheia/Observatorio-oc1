@@ -1,0 +1,53 @@
+title = "Pag29"
+url = "/cofidis/competencia2/pag29"
+layout = "cofidis"
+is_hidden = 0
+==
+<h2 class="header center">Cuéntanos con al menos 2 hashtags tus propios trucos para gestionar los cambios.</h2>
+  <h2 class="header center3">Ej: #buscotodalainfo</h2>
+<div class="row center">
+  <textarea id="textarea" data-peso="50" data-points="200" data-question="hastag1" class="mdc-text-field__input" rows="3" cols="40" placeholder="#"></textarea>
+</div>
+<div class="row center">
+  <textarea id="textarea" data-peso="50" data-points="200" data-question="hastag2" class="mdc-text-field__input" rows="3" cols="40"></textarea>
+</div> 
+<div class="row center">
+  <textarea id="textarea" data-peso="50" data-points="200" data-question="hastag2" class="mdc-text-field__input" rows="3" cols="40"></textarea>
+</div> 
+<div class="row center">
+  <textarea id="textarea" data-peso="50" data-points="200" data-question="hastag2" class="mdc-text-field__input" rows="3" cols="40"></textarea>
+</div> 
+<div class="row center">
+    <button 
+    id="download-button" 
+    class="btn-large waves-effect waves-light orange">
+    CONTINUAR
+  </button>
+</div>
+  
+<style>
+.topbar {
+  width: {{ 29*100/31 }}%;
+}
+</style>
+<script>
+    $("#download-button").click(function(){
+      var sendData = [];
+      $("[data-question]").each(function(){
+        var data = {
+            value: $(this).val(),
+            question: $(this).data("question"),
+            points: $(this).data("points"),
+            peso: $(this).data("peso"),
+        };
+        if(data.value)
+          sendData.push(data);
+      })
+      $.request('onSaveAnswers', {
+          data: sendData,
+          success: function(data) {
+            window.location = "pag30?finish=true";
+          }
+      })
+    })
+  </script>

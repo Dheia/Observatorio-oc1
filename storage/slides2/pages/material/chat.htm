@@ -1,0 +1,16 @@
+title = "Chat"
+url = "/slides/material/:code"
+layout = "material"
+description = "Para introducir cualquier tipo de elemento a través de codigo html"
+is_hidden = 0
+type = "material"
+
+[taketsystemTemplate]
+==
+{variable type="text" name="continueText" default="Continuar" label="Texto botón continuar"}{/variable}
+{variable type="text" name="backText" default="Volver" label="Texto botón volver"}{/variable}
+
+{variable type="codeeditor" tab="Datos" name="html" label="Html"}{/variable}
+{variable type="codeeditor" tab="Diseño" name="css" label="Personalizado"}{/variable}
+--
+{{html}}

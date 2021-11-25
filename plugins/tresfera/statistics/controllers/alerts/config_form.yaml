@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Alert
+
+# Model Form Field configuration
+form: $/tresfera/statistics/models/alert/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Statistics\Models\Alert
+
+# Default redirect location
+defaultRedirect: tresfera/statistics/alerts
+
+# Create page
+create:
+    title: Create Alert
+    redirect: tresfera/statistics/alerts/update/:id
+    redirectClose: tresfera/statistics/alerts
+
+# Update page
+update:
+    title: Edit Alert
+    redirect: tresfera/statistics/alerts
+    redirectClose: tresfera/statistics/alerts
+
+# Preview page
+preview:
+    title: Preview Alert

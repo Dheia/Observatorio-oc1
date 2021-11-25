@@ -1,0 +1,55 @@
+<div data-role="pregunta" 
+        data-question-type="segmentacion" 
+        data-answer-type="range"
+        data-question
+        <?php 
+            $partial = "$/tresfera/taketsystem/slides/_field_css_custom.htm";
+            echo $this->makePartial(
+            $partial,
+                [ 
+                'campo' => $campo,
+                'slide' => $slide
+                ]
+            );
+        ?>
+    <?php if($campo['max_answers']) { 
+        if($campo['max_answers'] > 0) { ?>
+        data-max-answers="<?=$campo['max_answers']?>" 
+    <?php } else { ?>
+            data-max-answers="<?=count($campo['segmentacion'])?>" 
+    <?php } } elseif($campo['max_answers'] > 0) { ?>
+        data-max-answers="<?=$campo['max_answers']?>" 
+    <?php } else { ?> 
+        data-max-answers="<?=(1)?>" 
+    <?php } ?>
+        data-question-title="<?=$campo['title']?>" 
+        data-question-id="<?=$campo['tag']?>" class="sondeo_<?=$campo['tag']?>">
+    <?php if(!$campo['hide_title']) { 
+        $set = array_values(array_reverse($campo['segmentacion']))[0];
+        
+        ?>
+    <h4><span class="title"><?=$campo['title']?></span><span><?=$set['title']?></span></h4><?php } ?>
+    
+    <div  class="voto-img">
+            <div class="button_less" onclick="if($('#range_<?=$campo['tag']?>').val() > 1) { $('#range_<?=$campo['tag']?>').val( $('#range_<?=$campo['tag']?>').val()-1 ); $('#range_<?=$campo['tag']?>').trigger('input'); }"></div>
+            <div class="button_plus" onclick="
+                if($('#range_<?=$campo['tag']?>').val() < <?=count($campo['segmentacion'])?>) { 
+                    $('#range_<?=$campo['tag']?>').val(parseInt($('#range_<?=$campo['tag']?>').val())+1); 
+                    $('#range_<?=$campo['tag']?>').trigger('input'); 
+                }"></div>
+            <input id="range_<?=$campo['tag']?>" 
+            data-cmd="range_cmd" 
+            data-options='<?=json_encode(array_values(array_reverse($campo['segmentacion'])))?>'
+            type="range"
+            value=1
+            min="1" max="<?=count($campo['segmentacion'])?>" step="1"
+         />
+    
+    <?php 
+       // foreach($campo['segmentacion'] as $answer) {
+    ?>
+    </div>	
+    <?php
+     //   }
+    ?>
+</div>

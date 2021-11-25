@@ -1,0 +1,10 @@
+name: FamiliaPuestos
+form: $/tresfera/organizaciones/models/familiapuesto/fields.yaml
+modelClass: Tresfera\Organizaciones\Models\FamiliaPuesto
+defaultRedirect: tresfera/organizaciones/familiapuestos
+create:
+    redirect: 'tresfera/organizaciones/familiapuestos/update/:id'
+    redirectClose: tresfera/organizaciones/familiapuestos
+update:
+    redirect: tresfera/organizaciones/familiapuestos
+    redirectClose: tresfera/organizaciones/familiapuestos

@@ -1,0 +1,11 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+subordinados:
+    label: Subordinados
+    view:
+        list: $/tresfera/organizaciones/models/persona/columns.yaml
+        toolbarButtons: add|remove
+    manage:
+        form: $/tresfera/organizaciones/models/persona/fields.yaml
+        recordsPerPage: 10

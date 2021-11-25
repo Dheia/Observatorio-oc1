@@ -1,0 +1,39 @@
+columns:
+    id:
+        label: ID
+    name:
+        label: 'tresfera.talentapp::lang.plugin.name'
+        type: text
+        searchable: true
+    email:
+        label: 'tresfera.talentapp::lang.proyectos.email'
+        type: text
+    tipo:
+        label: 'tresfera.talentapp::lang.proyectos.tipo'
+        type: number
+
+    num_licencias:
+        label: 'tresfera.talentapp::lang.proyectos.nlicencia'
+        type: number
+    num_licencias_usadas:
+        label: Lic. usadas 
+        type: number
+        searchable: false
+        sortable: false
+
+    estado:
+        label: 'tresfera.talentapp::lang.proyectos.estado'
+        type: number
+
+    fecha_inicio:
+        label: 'tresfera.talentapp::lang.proyectos.finicio'
+        type: text
+    fecha_fin:
+        label: 'tresfera.talentapp::lang.proyectos.fin'
+        type: text
+
+    _buttons:
+        label: ''
+        cssClass: nolink  
+        type: partial
+        path: ~/plugins/tresfera/talentapp/controllers/proyectos/_buttons_list.htm

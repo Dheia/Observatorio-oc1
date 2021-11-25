@@ -1,0 +1,146 @@
+title = "Taket"
+url = "/"
+layout = "base"
+description = "Segmentaciones"
+is_hidden = 0
+==
+function onStart()
+{
+    $quiz = \Tresfera\Taketsystem\Models\Quiz::where("md5",get('id'))->first();
+    $this['styles'] = $quiz->getStyles();
+}
+==
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+  <link href="{{ [
+      'assets/css/ionic.app.css',
+      'assets/css/style.css',
+      'assets/lib/jquery-bar-rating/themes/fontawesome-stars.css'
+    ]|theme }}" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <script src="{{ [
+      'assets/lib/jquery/jquery.min.js',
+      'assets/lib/ionic/js/ionic.bundle.min.js',
+      'assets/lib/ionic-service-core/ionic-core.js',
+      'assets/lib/jquery-bar-rating/jquery.barrating.min.js',
+      'assets/js/app.js',
+      'assets/js/controllers.js',
+      'assets/js/services.js',
+      'assets/lib/jquery/outerHTML-2.1.0-min.js',
+      'assets/js//taketsystem.js'
+  ]|theme }}"></script>
+
+  </head>
+  <body ng-app="starter" class="platform-android" ng-controller="MyCtrl">
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view hide-nav-bar="true" has-header="false" 
+                animation="fade-in-out"
+                scroll="false">
+    <section class="home-container">
+    </section>
+    </ion-nav-view>
+      <style>
+        {{styles|raw}}
+      </style> 
+      <style>
+        @-webkit-keyframes scaleDown {
+            to {
+                opacity: 0;
+                -webkit-transform: scale(.8);
+            }
+        }
+        @-moz-keyframes scaleDown {
+            to {
+                opacity: 0;
+                -moz-transform: scale(.8);
+            }
+        }
+        @keyframes scaleDown {
+            to {
+                opacity: 0;
+                transform: scale(.8);
+            }
+        }
+        @-webkit-keyframes scaleUp {
+            from {
+                opacity: 0;
+                -webkit-transform: scale(.8);
+            }
+        }
+        @-moz-keyframes scaleUp {
+            from {
+                opacity: 0;
+                -moz-transform: scale(.8);
+            }
+        }
+        @keyframes scaleUp {
+            from {
+                opacity: 0;
+                transform: scale(.8);
+            }
+        }
+        .platform-android ion-nav-view [nav-view-direction="forward"] {
+            left: 0;
+            z-index: 2;
+            -webkit-animation: scaleUp .2s ease both;
+            -moz-animation: scaleUp .2s ease both;
+            animation: scaleUp .2s ease both;
+            -webkit-transform: translate3d(0, 0, 0);
+        }
+
+        
+        .platform-android ion-nav-view [nav-view="active"] {
+            -webkit-animation: scaleUp .2s ease both;
+            -moz-animation: scaleUp .2s ease both;
+            animation: scaleUp .2s ease both;
+        }
+        .platform-android ion-nav-view [nav-view="cached"] {
+            left: 0;
+            z-index: 2;
+            -webkit-animation: scaleDown .2s ease both;
+            -moz-animation: scaleDown .2s ease both;
+            animation: scaleDown .2s ease both;
+        }
+        
+
+
+        /*
+        ion-nav-view [nav-view-direction="back"] {
+            left: 0;
+            z-index: 1;
+        }
+        */
+
+
+        /*
+        ion-nav-view [nav-view-direction="forward"] {
+            left: 0;
+            z-index: 1;
+        }
+        */
+
+
+        /*
+        .platform-android ion-nav-view [nav-view-direction="back"] {
+            left: 0;
+            z-index: 2;
+            -webkit-animation: scaleDown .2s ease both;
+            -moz-animation: scaleDown .2s ease both;
+            animation: scaleDown .2s ease both;
+        }
+        */
+
+    </style>
+  </body>
+</html>

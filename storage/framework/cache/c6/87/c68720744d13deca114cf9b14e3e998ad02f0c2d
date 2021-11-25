@@ -1,0 +1,94 @@
+1637748433a:1:{s:10:"iframe.htm";a:10:{s:8:"fileName";s:10:"iframe.htm";s:7:"content";s:908:"title = "reto-final"
+url = "/app/quiz/:quiz?"
+layout = "app"
+is_hidden = 0
+
+[Progreso]
+==
+function onStart()
+{
+     $this['quiz'] = $this->param('quiz');
+
+}
+==
+{% put main %}p-0{% endput %}
+
+<iframe src="/evaluacion/quiz/{{quiz}}/{{Progreso.currentpag(quiz)|default('0')}}"></iframe>
+<style>
+    .mdc-top-app-bar {
+    background: transparent;
+}
+.mdc-top-app-bar__title {
+    display: none;
+}
+.main-content {
+    height: 100%;
+    margin: 0;
+    margin-top: 0;
+    padding: 0;
+    padding-bottom: 0;
+}
+@media (max-width: 600px) {
+    .main-content {
+        padding-top: 0;
+        height: 100%;
+        margin: 0;
+    }
+    .p-0 {
+        margin-top: 0 !important;
+    }
+iframe {
+    height: calc(100% + 0px);
+    width: calc(100% + 0px);
+    border: none;
+    margin: 0px;
+    margin-top: 0px;
+}
+
+    .p-0 {
+        padding: 0 !important;
+    }
+}
+</style>";s:5:"mtime";i:1607512147;s:6:"markup";s:735:"{% put main %}p-0{% endput %}
+
+<iframe src="/evaluacion/quiz/{{quiz}}/{{Progreso.currentpag(quiz)|default('0')}}"></iframe>
+<style>
+    .mdc-top-app-bar {
+    background: transparent;
+}
+.mdc-top-app-bar__title {
+    display: none;
+}
+.main-content {
+    height: 100%;
+    margin: 0;
+    margin-top: 0;
+    padding: 0;
+    padding-bottom: 0;
+}
+@media (max-width: 600px) {
+    .main-content {
+        padding-top: 0;
+        height: 100%;
+        margin: 0;
+    }
+    .p-0 {
+        margin-top: 0 !important;
+    }
+iframe {
+    height: calc(100% + 0px);
+    width: calc(100% + 0px);
+    border: none;
+    margin: 0px;
+    margin-top: 0px;
+}
+
+    .p-0 {
+        padding: 0 !important;
+    }
+}
+</style>";s:4:"code";s:70:"function onStart()
+{
+     $this['quiz'] = $this->param('quiz');
+
+}";s:5:"title";s:10:"reto-final";s:3:"url";s:16:"/app/quiz/:quiz?";s:6:"layout";s:3:"app";s:9:"is_hidden";s:1:"0";s:8:"Progreso";a:0:{}}}

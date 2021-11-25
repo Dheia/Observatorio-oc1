@@ -1,0 +1,17 @@
+plugin:
+    name: 'tresfera.alertas::lang.plugin.name'
+    description: 'tresfera.alertas::lang.plugin.description'
+    author: Tresfera
+    icon: oc-icon-bullhorn
+    homepage: ''
+navigation:
+    alertas:
+        label: Alertas
+        url: tresfera/alertas/alertas
+        icon: icon-bullhorn
+        permissions:
+            - alertas.acceso
+permissions:
+    alertas.acceso:
+        tab: 'tresfera.alertas::lang.plugin.name'
+        label: Accès

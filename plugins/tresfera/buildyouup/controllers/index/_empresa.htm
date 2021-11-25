@@ -1,0 +1,303 @@
+
+            <?php
+                use Tresfera\Buildyouup\Models\Proyecto;
+                use Tresfera\Buildyouup\Models\Equipo;
+                use Tresfera\Buildyouup\Models\Equipo_Evaluador;
+                use Tresfera\Buildyouup\Classes\UserControl;
+
+                $fecha_actual = new DateTime( date("Y/m/d") );
+
+                $evaluaciones_en_curso = Equipo::select("tresfera_buildyouup_evaluacion.*")->join(
+                                                            "tresfera_buildyouup_proyecto",
+                                                            'tresfera_buildyouup_proyecto.id', '=', 'tresfera_buildyouup_evaluacion.proyecto_id')
+                                                    ->where('tresfera_buildyouup_proyecto.client_id',$user->client_id)
+                                                    ->whereIn('tresfera_buildyouup_evaluacion.estado', [1,2])
+                                                    ->get();
+
+                $evaluaciones_finalizadas = Equipo::select("tresfera_buildyouup_evaluacion.*")->join(
+                                                            "tresfera_buildyouup_proyecto",
+                                                            'tresfera_buildyouup_proyecto.id', '=', 'tresfera_buildyouup_evaluacion.proyecto_id')
+                                                    ->where('tresfera_buildyouup_proyecto.client_id',$user->client_id)
+                                                    ->where('tresfera_buildyouup_evaluacion.estado', '=', 3)
+                                                    ->get();
+
+                $evaluaciones_completadas = Equipo::join(
+                                                            "tresfera_buildyouup_proyecto",
+                                                            'tresfera_buildyouup_proyecto.id', '=', 'tresfera_buildyouup_evaluacion.proyecto_id')
+                                                    ->where('tresfera_buildyouup_proyecto.client_id',$user->client_id)
+                                                    ->whereIn('tresfera_buildyouup_evaluacion.estado', [3])
+                                                                ->count();
+                $evaluaciones_no_completadas = Equipo::join(
+                                                            "tresfera_buildyouup_proyecto",
+                                                            'tresfera_buildyouup_proyecto.id', '=', 'tresfera_buildyouup_evaluacion.proyecto_id')
+                                                    ->where('tresfera_buildyouup_proyecto.client_id',$user->client_id)
+                                                    ->whereIn('tresfera_buildyouup_evaluacion.estado', [1,2])
+                                                                ->count();
+
+
+                function muestraEquipos($evaluaciones, $user)
+                {
+                  $fecha_actual = new DateTime( date("Y/m/d") );
+              ?>
+                    <div class="control-list">
+                        <table class="table data">
+                            <thead>
+                                <tr>
+                                    <th class="active sort-desc"><span>Proyecto</span></th>
+                                    <th><span>Resumen</span></th>
+                                    <th><span>AutoEvaluacion</span></th>
+                                    <th><span>Tiempo Restante</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach($evaluaciones as $index=>$evaluacion)
+                                {
+                                    $proyecto = Proyecto::where('id', $evaluacion->proyecto_id)->first();
+                                    $ev_completadas = isset($evaluacion->stats['numAnswered'])?$evaluacion->stats['numAnswered']:0;
+                                    $ev_total = isset($evaluacion->stats['numTotal'])?$evaluacion->stats['numTotal']:1;
+                                    $ev_pendientes = $ev_total - $ev_completadas;
+                                    $participacion = $ev_completadas*100/($ev_total);
+
+                                    $d2 = new DateTime($proyecto->fecha_fin);
+                                    $diff = $fecha_actual->diff($d2);
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <a href="/backend/tresfera/buildyouup/proyectos/update/<?=$proyecto->id?>"><?=$proyecto->name?></a>
+                                        </td>
+                                        <td>
+                                            <span class="text-success">
+                                                Equipos completadas: <b><?=$ev_completadas?></b>
+                                            </span>
+                                            <br/>
+                                            <span class="text-info">
+                                                Equipos pendientes: <b><?=$ev_pendientes?></b>
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <p class="<?=($diff->days < 5) ? 'text-danger' : ''?>">
+                                                <?='Finaliza en ' . $diff->days . ' días';?>
+                                            </p>
+                                        </td>
+                                        <td>
+                                          <?php
+                                            if($evaluacion->estado == 1) {
+                                              ?>
+                                              <a
+                                                  href="<?=url("/backend/tresfera/buildyouup/proyectos/onSend/?id=".$evaluacion->id)?>"
+                                                  class="btn btn-xs btn-default pull-left">
+                                                   Empezar evaluación
+                                              </a>
+                                              <?php
+                                            } elseif($evaluacion->estado == 2) {
+                                              ?>
+                                              <a
+                                                  href="<?=url("/backend/tresfera/buildyouup/evaluaciones/update/".$evaluacion->id)?>"
+                                                  class="btn btn-xs btn-default pull-left">
+                                                   Seguimiento
+                                              </a>
+                                              <?php
+                                            }
+                                             else {
+                                              ?>
+                                              <a
+                                                  href="#"
+                                                  class="btn btn-xs btn-warning pull-left">
+                                                   Ver informe
+                                              </a>
+                                              <?php
+                                            }
+                                            ?>
+
+                                            <a href="<?=url('/backend/tresfera/buildyouup/evaluaciones/update/'.$evaluacion->id)?>" class="btn btn-xs btn-default pull-left">Gestionar</a>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php
+                }
+
+                function muestraEquipos2($evaluaciones)
+                {
+                ?>
+                    <div class="control-list">
+                        <table class="table data">
+                            <thead>
+                                <tr>
+                                    <th class="active sort-desc"><span>Proyecto</span></th>
+                                    <th><span>Fecha de Finalización</span></th>
+                                    <th><span>Participación</span></th>
+                                    <th><span>Participación (%)</span></th>
+                                    <th><span></span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach($evaluaciones as $index=>$evaluacion)
+                                {
+                                    $proyecto = Proyecto::where('id', $evaluacion->proyecto_id)->first();
+                                    $ev_completadas = $evaluacion->stats['numAnswered'];
+                                    $ev_total = $evaluacion->stats['numTotal'];
+                                    $ev_pendientes = $ev_total - $ev_completadas;
+                                    $participacion = $ev_completadas*100/($ev_total);
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <?=$proyecto->name?>
+                                        </td>
+                                        <td>
+                                            <?=$proyecto->fecha_fin?>
+                                        </td>
+                                        <td>
+                                            <span class="text-success">
+                                                Equipos completadas: <b><?=$ev_completadas?></b>
+                                            </span>
+                                            <br/>
+                                            <span class="text-info">
+                                                Equipos pendientes: <b><?=$ev_pendientes?></b>
+                                            </span>
+
+                                        </td>
+                                        <td>
+                                            <div class="scoreboard-item title-value" data-control="goal-meter" data-value="<?=$participacion?>">
+                                                <p><?=$participacion?>%</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                          <a href="<?=url('/backend/tresfera/buildyouup/evaluaciones/update/'.$evaluacion->id)?>" class="text-center btn btn-primary">Gestionar</a>
+                                        </td>
+
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php
+                }
+
+                function muestraListaVacia()
+                {
+                    ?>
+                    <div class="control-list">
+                        <table class="table data">
+                            <thead>
+                                <tr>
+                                    <th class="active sort-desc"><span>Proyecto</span></th>
+                                    <th><span>Resumen</span></th>
+                                    <th><span>Tiempo Restante</span></th>
+                                    <th><span></span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="no-data">
+                                    <td colspan="100" class="nolink">
+                                        <p class="no-data">
+                                            No hay evaluaciones para mostrar.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php
+                }
+
+                function muestraListaVacia2()
+                {
+                    ?>
+                    <div class="control-list">
+                        <table class="table data">
+                            <thead>
+                                <tr>
+                                    <th class="active sort-desc"><span>Proyecto</span></th>
+                                    <th><span>Fecha de Finalización</span></th>
+                                    <th><span>Participación</span></th>
+                                    <th><span>Participación (%)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="no-data">
+                                    <td colspan="100" class="nolink">
+                                        <p class="no-data">
+                                            No hay evaluaciones para mostrar.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php
+                }
+                ?>
+
+                <div class="row">
+                    <div class="col-xs-8">
+                    <h4>Bienvenido '<?=$user->first_name?>'</h4>
+                    <br/>
+                    <a href="/backend/tresfera/buildyouup/proyectos/create" type="button" class="btn btn-primary oc-icon-plus">Nuevo Proyecto</a>
+                    <br/>
+                    <br/>
+                    <div class="scoreboard">
+                            <div class="" data-control="toolbar">
+
+                                <div class="scoreboard-item title-value">
+                                    <h4>Equipos</h4>
+                                    <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                            <ul>
+                                                <li data-color="#95b753">En curso <span><?=count($evaluaciones_en_curso)?></span></li>
+                                                <li data-color="#cc3300">Finalizados <span><?=count($evaluaciones_finalizadas)?></span></li>
+                                            </ul>
+                                        </div>
+                                </div>
+
+                                <div class="scoreboard-item title-value">
+                                    <h4>Tasa de Respuesta</h4>
+                                    <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                            <ul>
+                                                <li data-color="#95b753">Equipos completadas <span><?=$evaluaciones_completadas?></span></li>
+                                                <li data-color="#cc3300">Equipos sin completar <span><?=$evaluaciones_no_completadas?></span></li>
+                                            </ul>
+                                        </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-4">
+
+                        <div style="display: none;border:solid 1px #BDBDBD; border-radius:15px">
+                            <img style="border-radius:15px" src="https://d500.epimg.net/cincodias/imagenes/2015/05/08/pyme/1431098283_691735_1431098420_noticia_normal.jpg" width="400" height="150"/>
+                    </div>
+
+                    </div>
+                </div>
+
+
+                <h4>Estás siendo evaluado:</h4>
+
+                <?php
+
+                if(count($evaluaciones_en_curso)==0) muestraListaVacia();
+                else muestraEquipos($evaluaciones_en_curso,$this->user);
+
+                ?>
+
+                <br/>
+
+                <h4>Equipos Finalizadas</h4>
+
+                <?php
+
+                if(count($evaluaciones_finalizadas)==0) muestraListaVacia2();
+                else muestraEquipos2($evaluaciones_finalizadas);
+
+                ?>

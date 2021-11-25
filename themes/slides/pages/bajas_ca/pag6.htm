@@ -1,0 +1,57 @@
+title = "Pag06"
+url = "/quiz/baja-ca/pag6"
+layout = "cofidis"
+is_hidden = 0
+==
+<style type="text/css">* { box-sizing: border-box; } body {margin: 0;}
+*{box-sizing:border-box;}
+body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}
+#i9w7h-2{box-sizing:border-box;}
+#i880r-2{box-sizing:border-box;}
+#textarea-2{box-sizing:border-box;padding-top:20px;padding-right:30px;padding-bottom:6px;padding-left:30px;height:300px;}
+#i5rqk-2{box-sizing:border-box;}
+#download-button-2-2{box-sizing:border-box;}
+</style>
+<style>
+  .topbar {
+      width: {{ 5/8*100 }}%;
+  }
+</style>
+<h2 id="i9w7h-2" class="header center">Vols fer algun comentari a la direcció del club?
+</h2>
+<div id="i880r-2" class="row center">
+    <textarea id="textarea-2" 
+                                data-question-type="free" 
+                                  data-answer-type="free"
+                                  data-question-title="Vols fer algun comentari a la direcció del club?"
+                              data-question="Vols fer algun comentari a la direcció del club?" rows="3" cols="20" class="mdc-text-field__input"></textarea>
+</div>
+<div id="i5rqk-2" class="row center">
+    <button id="download-button-2-2" class="btn-large waves-effect waves-light orange">continuar  </button>
+</div>
+<script>
+  $(".orange").click(function(){
+    var sendData = [];
+    $("[data-question]").each(function(){
+      var data = {
+        value: $(this).val(),
+        question: $(this).data("question"),
+        question_title: $(this).data("question-title"),
+        question_type: $(this).data("question-type"),
+        value_type: $(this).data("value-type"),
+        answer_type: $(this).data("answer-type"),
+      };
+      if(data.value)
+        sendData.push(data);
+    }
+                             )
+    $.request('onSaveAnswers', {
+      data: sendData,
+      success: function(data) {
+        window.location = "pag7?finish=true";
+      }
+    }
+    )
+  }
+)
+</script>

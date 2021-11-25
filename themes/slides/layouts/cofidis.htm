@@ -1,0 +1,199 @@
+description = "APP"
+
+[Progreso]
+competencia = "competencia1"
+==
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>{{ this.page.title }}</title>
+  {% styles %}
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+
+  <link href="{{'assets/app/css/materialize.css'|theme}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{'assets/app/css/style.css'|theme}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{'assets/app/css/style-quiz.css'|theme}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{'assets/app/css/custom-quiz.css' |theme}}?v=1.02" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<style>
+    .answers .mdc-button2:hover, .waves-effect:hover {
+        /* border: 2px solid #ec5106 !important; */
+        box-shadow: 0px 0px 6px 2px #3c3c3c;
+        border: none;
+    }
+    .answers .mdc-button3:hover {
+        border-color: #c7c6c6 !important;
+        background: #c7c6c6 !important;
+        color: #000 !important;
+    }
+    .blue {
+        background-color: #000000 !important;
+    }
+    .topbar {
+        background: #0070CE;
+        height: 6px;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <nav class="grey darken-1">
+            <div class="container">
+                <div class="nav-wrapper">
+               <!-- <h4 class="title"><b>claror</b> fundació</h4>-->
+                    <img style="height: 50px; padding-top: 15px;" src="/storage/app/media/claror/logo.png">
+               
+                </div>
+            </div>
+        </nav>
+        <div class="topbar blue "></div>
+    </header>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            {% page %}
+            <br><br>
+        </div>
+    </div>
+    <!--  Scripts-->
+    <script>
+        function pad(num, size) {
+            var s = num+"";
+            while (s.length < size) s = "0" + s;
+            return s;
+        }
+        function saveAnswer(element) {
+            var sendData = {
+                points: $(element).data("points"),
+                value: $(element).text(),
+                question: $(element).data("question"),
+                question_title: $(element).data("question-title"),
+                question_type: $(element).data("question-type"),
+                value_type: $(element).data("value-type"),
+                answer_type: $(element).data("answer-type"),
+                peso: $(element).data("peso"),
+                id: $(element).data("id"),
+            };
+            if($(element).find("img").length > 0) {
+                sendData.value = $(element).find("img").attr("src");
+            }
+            if($(element).val()) {
+                sendData.value = $(element).val();
+            }
+            if($(element).data("value")) {
+                sendData.value = $(element).data("value");
+            }
+            $.request('onSaveAnswer', {
+                data: sendData,
+                success: function(data) {
+                    $(element).attr("data-id",data.id);
+                    if($(element).attr("data-url")) {
+                        window.location = $(element).attr("data-url");
+                    }
+                }
+            })
+        }
+        function removeAnswer(element) {
+            var sendData = {
+                id: $(element).attr("data-id"),
+            };
+            $.request('onRemoveAnswer', {
+                data: sendData,
+                success: function(data) {
+                    $(element).attr("data-id","")
+                }
+            })
+        }
+        $("button[data-question]").click(function(){
+            if($(this).parent('[data-max-answers]').length) {
+                if($(this).closest("[data-max-answers]").data("max-answers") == 1) {
+                    $(this).closest("[data-max-answers]").children(".activated").each(function(){
+                        removeAnswer(this);
+                    })
+                    $(this).closest("[data-max-answers]").children(".activated").removeClass("activated");
+                } else 
+                if($(this).closest("[data-max-answers]").data("max-answers") <= $(this).closest("[data-max-answers]").children(".activated").length && !$(this).hasClass("activated")) return;
+
+                $(this).toggleClass("activated");
+
+                if($(this).hasClass("activated")) {
+                    saveAnswer(this);
+                } else {
+                    removeAnswer(this);
+                }
+
+                if($("[data-question].activated").length > 0)
+                    $("#download-button").removeClass("disabled");
+                else {
+                    $("#download-button").addClass("disabled");
+                }
+            }
+            else {
+                if($(this).closest("[data-max-answers]").data("max-answers") == 1) {
+                    $(this).closest("[data-max-answers]").children().children(".activated").each(function(){
+                        removeAnswer(this);
+                    })
+                    $(this).closest("[data-max-answers]").children().children(".activated").removeClass("activated");
+                } else
+                    if($(this).closest("[data-max-answers]").data("max-answers") <= $(this).closest("[data-max-answers]").children().children(".activated").length && !$(this).hasClass("activated")) return;
+                
+                $(this).toggleClass("activated");
+
+                if($(this).hasClass("activated")) {
+                    $(this).parent().find(".subquestion").show();
+                    saveAnswer(this);
+                } else {
+                    removeAnswer(this);
+                    $(this).parent().find(".subquestion").hide();
+                    $(this).parent().find(".subquestion").children(".activated").each(function(){
+                        removeAnswer(this);
+                        $(this).toggleClass("activated");
+                    })
+                }
+
+                if($("[data-question].activated").length > 0)
+                    $("#download-button").removeClass("disabled");
+                else {
+                    $("#download-button").addClass("disabled");
+                }
+            } 
+                
+            
+            
+        })
+
+    if($("#myProgress").length > 0) {
+        var count = 30, timer = setInterval(function() {
+        $("#myBar").css("width",((count--)*100/30)+'%');
+        $("#myBar-text").html("00:"+pad(count,2));
+            if(count == 0) clearInterval(timer);
+        }, 1000);
+    }
+    
+    if($("button").length > 0 && $(".success1").length == 0 && $(".success2").length == 0 && $("button.orange").length == 0 ) {
+        $("#download-button").addClass("disabled");
+    }
+    
+    </script>
+    <!--Start of Zendesk Chat Script-->
+
+<!--End of Zendesk Chat Script-->
+{% framework extras %}
+{% scripts %}
+    <script src="{{ 'assets/app/js/materialize.js'|theme }}"></script>
+    <script src="{{'assets/app/js/init.js'|theme }}"></script>
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+        {% scripts %}
+    </body>
+</html>

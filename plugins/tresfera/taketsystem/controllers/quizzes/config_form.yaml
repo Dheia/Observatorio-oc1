@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Quiz
+
+# Model Form Field configuration
+form: $/tresfera/taketsystem/models/quiz/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Taketsystem\Models\Quiz
+
+# Default redirect location
+defaultRedirect: tresfera/taketsystem/quizzes
+
+# Create page
+create:
+    title: Create Quiz
+    redirect: tresfera/taketsystem/quizzes/update/:id
+    redirectClose: tresfera/taketsystem/quizzes
+
+# Update page
+update:
+    title: Edit Quiz
+    redirect: tresfera/taketsystem/quizzes
+    redirectClose: tresfera/taketsystem/quizzes
+
+# Preview page
+preview:
+    title: Preview Quiz

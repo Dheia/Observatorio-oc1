@@ -1,0 +1,149 @@
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li><a href="<?=url("backend/tresfera/statistics/stats/comparativas")?>">Comparativas</a></li>
+		        <li class="h3">
+		        <?php 
+		        	if(get('detalles')) {
+			    ?>
+			    	<?=get("filterName")?>    	
+			    <?php
+		        	} else {
+			    ?>
+			    	Visió general   	
+			    <?php    	
+		        	}
+		        ?>
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+<?php Block::endPut() ?>
+
+<?php
+$tiendas = \Tresfera\Statistics\Models\Result::getTiendas();
+
+$filter_cuestionario = $this->getCuestionario();
+$filter_tiendas = $this->getTiendas($filter_cuestionario);
+
+$metricas = \Tresfera\Statistics\Models\Result::getMetricas();
+
+$filter_metricas = $this->getMetricas();
+?>
+<form action="<?=url("backend/tresfera/statistics/stats/comparativas")?>" method="post">
+<div class="row">
+	<div class="col-md-5">
+		<label>Métricas a comparar</label>
+		<select data-request="" name="metrica" class="form-control custom-select" >
+			<?php
+				foreach($metricas as $metrica) {
+			?>
+			<option <?php if($metrica['id'] == $filter_metricas) echo "selected=selected" ?> value="<?=$metrica['id']?>"><?=$metrica['name']?></option>
+			<?php
+				}
+			?> 
+	    </select>
+    </div>
+	<div class="col-md-5">
+		<label>Puntos de venta a comparar</label>
+		<select data-request="" name="tiendas[]" class="form-control custom-select" multiple="multiple">
+			<?php
+				foreach($tiendas as $tienda) {
+			?>
+			<option <?php if(in_array($tienda->id,$filter_tiendas)) echo "selected=selected" ?> value="<?=$tienda->id?>"><?=$tienda->name?> <?=(isset($tienda->city->name))?"(".$tienda->city->name.")":''?></option>
+			<?php
+				}
+			?> 
+	    </select>
+    </div>
+    <div class="col-md-2">
+	    <button
+	    			style="margin-top: 26px;"
+                    type="submit"
+                    data-load-indicator="Comparando..."
+                    class="btn btn-primary btn-lg btn-block">
+                    Comparar
+                </button>
+    </div>
+</div>
+</form>
+<div class="row">
+    <div class="col-md-12">
+	    <h3><i class="icon-area-chart"></i>Comparativa</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+	    <div id="chartdiv" style="width: 100%; height: 410px; background-color: #FFFFFF;" ></div>
+    </div>
+</div>
+
+<style>
+	#chartdiv {
+		background: transparent !important;
+	}
+</style>
+<script type="text/javascript">
+	AmCharts.makeChart("chartdiv",
+		{
+			"type": "serial",
+			"path": "http://www.amcharts.com/lib/3/",
+			"categoryField": "date",
+			"dataDateFormat": "YYYY-MM-DD",
+			"plotAreaFillColors": "#F9F9F9",
+			"backgroundColor": "#F9F9F9",
+			"categoryAxis": {
+				"parseDates": true
+			},
+			"chartCursor": {},
+			"chartScrollbar": {},
+			"trendLines": [],
+			"graphs": [
+				{
+					"bullet": "round",
+					"id": "AmGraph-global",
+					"title": "Global",
+					"valueField": "global",
+					"type": "smoothedLine",
+					"lineThickness": 2,
+					"minimum": 0,
+				},
+				<?php 
+					foreach($filter_tiendas as $tienda) {
+						$tiendaObj = \Tresfera\Devices\Models\Shop::find($tienda);
+				?>	
+					{
+						"bullet": "round",
+						"id": "AmGraph-<?=$tienda?>",
+						"title": "<?=$tiendaObj->name?>",
+						"valueField": "<?="shop_".$tienda?>",
+						"lineThickness": 1,
+					},
+				<?php		
+					}
+				?>
+			],
+			"guides": [],
+			"valueAxes": [
+				{
+					"id": "ValueAxis-1",
+					"title": "Axis title",
+					"titleFontSize": 0
+				}
+			],
+			"allLabels": [],
+			"balloon": {},
+			"legend": {
+				"useGraphSettings": true
+			},
+			"dataLoader": {
+			    "url": "<?=url("backend/tresfera/statistics/stats/getComparativaData")?>",
+			    "format": "json"
+			  },
+		}
+	);
+</script>

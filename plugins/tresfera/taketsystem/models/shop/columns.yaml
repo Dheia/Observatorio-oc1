@@ -1,0 +1,22 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+    name:
+        label: Nombre
+        searchable: true
+    city:
+        label: Ciudad
+        relation: city
+        select: name
+        searchable: true
+    created_at:
+        label: Creado
+        type: datetime
+    updated_at:
+        label: Actualizado
+        type: datetime

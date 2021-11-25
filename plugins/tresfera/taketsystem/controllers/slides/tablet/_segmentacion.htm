@@ -1,0 +1,182 @@
+<?php if(isset($data["age"]) || isset($data["sex"]) || isset($data["cp"])) { ?>
+<style>
+	input[type="text"], textarea {
+	    font-size: 200%;
+	    line-height: 100%
+	}
+	.item-radio {
+	    margin: 0 auto;
+	    width: 30%;
+	    font-size: 123%;
+	}
+	.item-radio .radio-icon {
+	    color: #375080;
+	    right: -4px;
+	}
+
+	.icon-disabled:before {
+		color: #bababa !important;;
+	}
+</style>
+
+<section class="flex-wrap flex-horizontal">
+	<div class="bar bar-header bar-light">
+	  <img class="logoBig" cache-src="<?=$logo?>"/>
+	</div>
+    <!-- Flex Items , Flex Box themselves -->
+	<div class="h-20">
+	    <div>
+	        <h1 class="titulo">
+		        <?php if(isset($question)) { ?>
+		        	<?=$question->getTranslateAttribute('title',$lang)?>
+		        <?php } else { ?>
+		       		<?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.segmentacion.title')?>
+		       	<?php } ?>
+		    </h1>
+	    </div> <!-- Flex Items  -->
+	</div>  
+    <div class="w-100">
+		
+		<?php if($data["age"] == 1) { ?>
+		<div class="h-30 w-33">
+			<div data-role="pregunta" 
+				<?php
+				if(isset($data["age_block"]))
+				if($data["age_block"] == 1) { 
+				?>
+				   data-answer-block="1"				
+				<?php } ?>
+				   data-question-type="age" 
+				   data-answer-type="age"
+				   data-max-answers="1" 
+				   data-question-title="" 
+				   data-question-id=""
+				   data-question-number="1"
+				   data-question="">
+			    <h3><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.segmentacion.age')?></h3>
+				<ion-list>
+				    <ion-radio ng-model="choice" ng-value="15">- 20</ion-radio>
+					<ion-radio ng-model="choice" ng-value="25">20-29</ion-radio>
+					<ion-radio ng-model="choice" ng-value="35">30-39</ion-radio>
+					<ion-radio ng-model="choice" ng-value="45">40-49</ion-radio>
+					<ion-radio ng-model="choice" ng-value="55">50-59</ion-radio>
+					<ion-radio ng-model="choice" ng-value="65">+ 60</ion-radio>
+				</ion-list>
+			</div>
+		</div>
+		<?php } ?>
+		<?php 		
+		if(isset($data["age2"]))
+		if($data["age2"] == 1) { ?>
+		<div class="h-30 w-33">
+			<div data-role="pregunta" 
+				   data-question-type="age" 
+				   data-answer-type="age"
+				   data-max-answers="1" 
+				   data-question-title="" 
+				   data-question-id=""
+				   data-question-number="1"
+				   data-question="">
+			    <h3><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.segmentacion.age')?></h3>
+				<ion-list>
+					<ion-radio ng-model="choice" ng-value="25">18-29</ion-radio>
+					<ion-radio ng-model="choice" ng-value="35">30-39</ion-radio>
+					<ion-radio ng-model="choice" ng-value="45">40-49</ion-radio>
+					<ion-radio ng-model="choice" ng-value="55">50-59</ion-radio>
+					<ion-radio ng-model="choice" ng-value="65">60-69</ion-radio>
+					<ion-radio ng-model="choice" ng-value="75">70-79</ion-radio>
+					<ion-radio ng-model="choice" ng-value="75">+ 80</ion-radio>
+				</ion-list>
+			</div>
+		</div>
+		<?php } ?>
+		<?php if($data["sex"] == 1) { ?>
+		<div class="h-30 w-33">
+			<div data-role="pregunta" 
+				<?php 
+				if(isset($data["sex_block"]))
+				if($data["sex_block"] == 1) { ?>
+				   data-answer-block="1"				
+				<?php } ?>
+				   data-question-type="sex" 
+				   data-answer-type="sex"
+				   data-max-answers="1" 
+				   data-question-title="" 
+				   data-question-id=""
+				   data-question-number="1"
+				   data-question="" class="sex">
+			    <h3><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.segmentacion.sex')?></h3>
+				<div class="list">
+					<input type="hidden" name="sex">
+						<a onClick="$(this).parent().find('input').val(2); $('.bar-footer').show(); $('#woman').addClass( 'icon-disabled' ); $('#man').removeClass( 'icon-disabled' )" id="man" class="button button-large button-icon icon ion-woman icon-disabled">
+							<ion-radio ng-model="choice" ng-value="2"><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.segmentacion.woman')?></ion-radio>
+						</a>
+						<a onClick="$(this).parent().find('input').val(1); $('.bar-footer').show(); $('#man').addClass( 'icon-disabled' ); $('#woman').removeClass( 'icon-disabled' )" id="woman" class="button button-large button-icon icon ion-man icon-disabled">
+							<ion-radio ng-model="choice" ng-value="1"><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.segmentacion.man')?></ion-radio>
+						</a>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+		<?php if($data["cp"] == 1) { ?>
+		<div class="h-30 w-33">
+		<div data-role="pregunta" 
+				   data-question-type="cp" 
+				   data-answer-type="cp"
+				   data-max-answers="1" 
+				   data-question-title="" 
+				   data-question-id=""
+				   data-question-number="1"
+				   data-question="">
+		    <h3><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.segmentacion.cp')?></h3>
+			<div class="list">
+			  <label class="item item-input">
+			    <input type="number" name="cp"/>
+			  </label>
+			</div>
+		</div>
+		</div>
+		<?php } ?>
+		<?php 
+		if(isset($data["country"]))
+		if($data["country"] == 1) { ?>
+		<div class="h-30 w-33 country">
+			<div data-role="pregunta" 
+					   data-question-type="country" 
+					   data-answer-type="country"
+					   data-max-answers="1" 
+					   data-question-title="" 
+					   data-question-id=""
+					   data-question-number="1"
+					   data-question="">
+			    <h3><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.segmentacion.country')?></h3>
+				<div class="list">
+				  	<ion-list>
+					    <ion-radio ng-model="choice" ng-value="ES">Española</ion-radio>
+						<ion-radio ng-model="choice" ng-value="EN">Inglesa</ion-radio>
+						<ion-radio ng-model="choice" ng-value="FR">Francesa</ion-radio>
+						<ion-radio ng-model="choice" ng-value="">40-49</ion-radio>
+						<ion-radio ng-model="choice" ng-value="55">50-59</ion-radio>
+						<ion-radio ng-model="choice" ng-value="65">+ 60</ion-radio>
+					</ion-list>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+	    
+		
+    </div>
+        
+	<div class="bar bar-footer">
+	    <button ng-click="respuestas()" type="submit" class="button icon-right ion-chevron-right button-clear button-dark">
+	    	<?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.continue')?>
+	    </button>
+	</div>   
+</section>
+<style>
+.country .item-radio {
+    float: left;
+    width: 50%;
+}
+</style>
+<?php } ?>

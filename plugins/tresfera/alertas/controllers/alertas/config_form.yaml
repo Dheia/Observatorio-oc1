@@ -1,0 +1,10 @@
+name: Alertas
+form: $/tresfera/alertas/models/alerta/fields.yaml
+modelClass: Tresfera\Alertas\Models\Alerta
+defaultRedirect: tresfera/alertas/alertas
+create:
+    redirect: 'tresfera/alertas/alertas/update/:id'
+    redirectClose: tresfera/alertas/alertas
+update:
+    redirect: tresfera/alertas/alertas
+    redirectClose: tresfera/alertas/alertas

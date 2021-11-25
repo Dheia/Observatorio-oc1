@@ -1,0 +1,27 @@
+<?php if(!$field['hide_title']) { ?>
+    <h3 class="question_h3_<?=$field['tag']?>"><?=$field['title']?></h3>
+<?php } ?>
+<div
+data-question
+<?php if(isset($field['action_type']) and $field['action_type']) { ?>
+    data-calc-type="<?=$field['action_type']?>"
+    data-calc-dest="<?=$field['action_dest']?>"
+    data-calc-calc="<?=$field['action_calc']?>"
+<?php } ?>
+data-question-title="<?=$field['title']?$field['title']:$field['tag']?>" 
+data-question-id="<?=$field['tag']?>" 
+class="question_<?=$field['tag']?>">
+<input
+    type="text"
+    <?php 
+        $partial = "$/tresfera/taketsystem/slides/_field_css_custom.htm";
+        echo $this->makePartial(
+        $partial,
+            [ 
+            'campo' => $field,
+            'slide' => $slide
+            ]
+        );
+    ?>
+    name="<?=$field['tag']?>">
+</div>

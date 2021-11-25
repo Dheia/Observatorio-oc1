@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Shop
+
+# Model Form Field configuration
+form: $/tresfera/taketsystem/models/shop/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Taketsystem\Models\Shop
+
+# Default redirect location
+defaultRedirect: tresfera/taketsystem/shops
+
+# Create page
+create:
+    title: Create Shop
+    redirect: tresfera/taketsystem/shops/update/:id
+    redirectClose: tresfera/taketsystem/shops
+
+# Update page
+update:
+    title: Edit Shop
+    redirect: tresfera/taketsystem/shops
+    redirectClose: tresfera/taketsystem/shops
+
+# Preview page
+preview:
+    title: Preview Shop

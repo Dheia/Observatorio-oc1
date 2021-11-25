@@ -1,0 +1,129 @@
+<style>
+.over:hover {
+    color: black !important;
+    cursor: pointer;
+}
+.title-value p {
+    font-size: 16px;
+}
+</style>
+
+<?php
+use Tresfera\Buildyouup\Models\Proyecto;
+use Tresfera\Buildyouup\Models\Equipo;
+use Tresfera\Buildyouup\Models\Equipo_Evaluador;
+use Tresfera\Buildyouup\Classes\UserControl;
+
+$evaluacion_id = $model->id;
+$proyecto_id = $model->proyecto_id;
+$proyecto = Proyecto::find($proyecto_id);
+$nombre_proyecto = $proyecto->name;
+
+$evaluadores = Evaluacion_Evaluador::where('eval',$evaluacion_id)->get();
+
+
+
+function muestraEvaluadores($evaluadores)
+{
+?>
+    <div class="control-list">
+        <table class="table data" data-control="rowlink">
+            <thead>
+                <tr>
+                    <th><span>Email</span></th>
+                    <th><span>Tipo</span></th>
+                    <th class="text-center"><span>Completado</span></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach($evaluadores as $index=>$evaluador)
+                {
+                    ?>
+                    <tr id="<?=$evaluador->evaluador?>">
+                        <td>
+                            <?=$evaluador->evaluador?>
+                        </td>
+                        <td>
+                            <?=$evaluador->tipo?>
+                        </td>
+                        <td class="text-center">
+                            <?= ($evaluador->completado) ? '<span class="text-success icon-check"></span>' : '<span class="text-danger icon-ban"></span>' ?>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+<?php    
+}
+
+function muestraListaVacia()
+{
+    ?>
+    <div class="control-list">
+        <table class="table data">
+            <thead>
+                <tr>
+                    <th><span>Email</span></th>
+                    <th><span>Tipo</span></th>
+                    <th><span>Completado</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="no-data">
+                    <td colspan="100" class="nolink">
+                        <p class="no-data">
+                            No hay evaluadores para esta evaluación.
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <?php
+}
+
+?>
+
+
+<div class="control-breadcrumb">
+    <ul>
+        <li><a href="<?= Backend::url('tresfera/buildyouup') ?>">Buildyouup</a></li>
+        <li><a href="/backend/tresfera/buildyouup/proyectos/p/<?= $proyecto_id ?>"><?=$nombre_proyecto?></a></li>
+        <li>Evaluación: <?=$evaluado?></li>
+    </ul>
+</div>
+
+<div class="scoreboard">
+    <div class="row" data-control="toolbar">
+
+        <div class="col-xs-6">
+            
+                <div class="scoreboard-item title-value">
+                    <h4>Evaluador</h4>
+                    <p class="oc-icon-star"><b><?=$evaluado?></b></p>
+                </div> 
+        </div>
+
+        <div class="col-xs-6 text-right">
+            <?php 
+            $n_respuestas = 1; // TODO - Hacer consulta BDD
+            $porcentaje = round( $n_respuestas*100/count($evaluadores), 1);
+            ?>
+            <div class="scoreboard-item title-value" data-control="goal-meter" data-value="<?=$porcentaje?>">
+                <p>Completado</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <h4>Evaluadores</h4>
+<?php
+    if(count($evaluadores)==0) muestraListaVacia();
+    else muestraEvaluadores($evaluadores);
+?>

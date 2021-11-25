@@ -1,0 +1,31 @@
+<?php
+$ev_completadas = $record->getContestadas();
+$ev_total = $record->getNumEvaluadores();
+$ev_pendientes = $record->getPendientes();
+if($ev_total)
+    $participacion = round($ev_completadas*100/($ev_total),1);
+else
+    $participacion = 0;
+?>
+<ul>
+<li data-color="#e5a91a"><b><?= e(trans('tresfera.talentapp::lang.admin.evaluaciones_totales')) ?>: <span><?=$ev_total?></span></b></li>
+</ul>
+<div class="scoreboard">
+    <div data-control="toolbar">
+
+        <div class="scoreboard-item title-value" data-control="goal-meter" data-value="<?=$participacion?>">
+            <h4><?= e(trans('tresfera.talentapp::lang.admin.evaluaciones_totales')) ?></h4>
+            <p><?=$participacion?>%</p>
+            <p class="description"><?= e(trans('tresfera.talentapp::lang.admin.evaluaciones')) ?></p>
+        </div>
+       
+        <div class="scoreboard-item control-chart" data-control="chart-bar">
+                
+            <ul>
+                <li data-color="#95b753"><?= e(trans('tresfera.talentapp::lang.admin.evaluaciones_completadas')) ?>: <span><?=$ev_completadas?></span></li>
+                <li data-color="#cc3300"><?= e(trans('tresfera.talentapp::lang.admin.evaluaciones_pendientes')) ?>: <span><?=$ev_pendientes?></span></li>
+            </ul>
+        </div>
+
+    </div>
+</div>

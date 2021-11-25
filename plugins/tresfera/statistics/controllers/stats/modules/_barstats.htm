@@ -1,0 +1,150 @@
+<?php 
+$model = new \Tresfera\Statistics\Models\Result();
+$results = $model->getSpecifics($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+if(count($results)) {
+  $colors = [
+        "1"=>"rgb(204, 51, 0)",
+        "2"=>"rgb(229, 169, 26)",
+        "3"=>"rgb(149, 183, 83)",
+      ];
+  $smiles = [
+    "1"=>"icon-frown-o",
+    "2"=>"icon-meh-o",
+    "3"=>"icon-smile-o",
+
+  ];
+  $class = [
+    "1"=>"ko",
+    "2"=>"mix",
+    "3"=>"ok",
+
+  ];
+  ?>
+  <?php
+
+  $data = array();
+  $max = 0;
+  $total = 0;
+  foreach($results as $result) { 
+    if($max < $result->numQuizz) $max = $result->numQuizz;
+    $total += $result->numQuizz;
+  }
+  foreach($results as $result) { 
+    if($result->value_type.$result->question_value == 0) continue;
+    $data[$result->value_type.$result->question_value] = [
+      "percent" 			=> number_format( (($result->numQuizz/$total)*100) , 2 )."%",
+      "question_value" 	=> $result->question_value,
+      "numQuizzs" 		=> $result->numQuizz,
+      "value_type" 		=> $result->value_type,
+      "disp_percent" 		=> (($result->numQuizz/$max)*100)."%",
+    ];
+  }
+
+  ksort($data);
+  ?>
+  <div data-control="">
+        <h3><i class="icon-smile-o"></i>Motivos de insatisfacción</h3>
+      <div class="row" style="margin-top: 25px;">
+        <div class="col-md-12" data-url="<?=url("backend/tresfera/taketsystem/stats/?detalles=1&group_by=value&filter=question_title")?>">
+          <div class="control-chart" data-control="" data-size="180" data-center-text="101">
+              <div class="chart-legend" style="width: 100%;">
+               <table style="width: 100%;" class="big-bar-line">
+                  <tbody>
+                    <?php 
+
+                    if(isset($results))
+                    foreach($data as $result) { 
+                        if(!isset($smiles[$result['value_type']])) continue;
+                    ?>
+                   <tr class="bar_value value_type_<?=$result['value_type']?>">
+                        <td class="indicator"><i class="<?=$smiles[$result['value_type']]?>"></i></td>
+                        <td style="width: 20%;" class="text"><?=$result['question_value']?></td>
+                        <td class="value">
+                          <div class="bar-line bar-line-<?=$class[$result['value_type']]?>" style="width: <?=$result['disp_percent']?>"><div><?=$result['numQuizzs']?> (<?=$result['percent']?>)</div></div>
+                      </td>
+                     </tr>
+                     <?php
+                     }
+                     ?>
+                  </tbody>
+               </table>
+            </div>
+          </div>						
+        </div>
+      </div>
+  </div>
+<?php } else { 
+  $totalsGeneral['ko'] = $model->getSpecificsLogico(1,$this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+  $totalsGeneral['mix']  = $model->getSpecificsLogico(2,$this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+  $totalsGeneral['ok'] = $model->getSpecificsLogico(3,$this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+   $num_count = 0;
+   foreach($totalsGeneral as $type=>$results) {
+    if(count($results)) $num_count++;
+   }
+  if($num_count > 0)
+    $row_width = 12/$num_count;
+  
+
+  $titles['ko'] = 'Motivos insatisfacción';
+  $titles['mix'] = 'Motivos no total satisfacción';
+  $titles['ok'] = 'Motivos satisfacción';
+
+ foreach($totalsGeneral as $type=>$results) {
+    if(!count($results)) continue;
+     $stats = [];
+    foreach($results as $sondeo) {
+
+			if( !isset($stats['total']) ) $stats['total'] = 0;
+
+			$stats['total'] += $sondeo->count;
+
+			if( !isset($stats['max']) ) $stats['max'] = 0;
+			if( !isset($stats['min']) ) $stats['min'] = 999999999;
+
+			$stats['class'] = $type;
+
+			if( $stats['min'] > $sondeo->count ) {
+				$stats['min'] = $sondeo->count;
+			}
+      
+			if( $stats['max'] < $sondeo->count ) {
+				$stats['max'] = $sondeo->count;
+		  }
+   } ?>
+   
+    <div class="col-md-<?=$row_width?>">
+        <div data-control="">
+          <h3><i class="icon-venus-mars"></i><?=$titles[$type]?></h3>
+          <?php foreach($results as $sondeo) { ?>
+          <div>
+            <div class="bar-line-small">
+              <div class="bar-line bar-line-<?=$stats['class']?>" style=" width: <?=($sondeo->count/$stats['max']*100)?>%">
+                <b><?=$sondeo->value?></b>
+                <br>
+                <span><?=$sondeo->count?> (<?=number_format(($sondeo->count/$stats['total']*100),2)?>%)</span>
+              </div>
+            </div>
+            
+          </div>
+          <?php } ?>
+        </div>
+      </div>
+  <?php } ?>
+</div>
+<style>
+.general .col-md-5 {
+  display: none;
+  }
+  .general .col-md-7 {
+    width:100%;
+  }
+  .bar-line-small {
+    padding: 5px 0;
+    clear: both;
+}
+  .bar-line-small .bar-line{
+       padding: 5px;
+ 
+  }
+</style>
+<?php } ?>

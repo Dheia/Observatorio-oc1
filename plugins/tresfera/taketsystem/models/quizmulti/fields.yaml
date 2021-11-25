@@ -1,0 +1,25 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    title:
+        label: Título
+        type: text
+        span: left
+        commentAbove: Texto que aparecerá como respuesta
+    icon:
+        label: Imágen
+        type: fileupload
+        mode: image
+        imageHeight: 260
+        imageWidth: 260
+        span: right
+        commentAbove: Imágen que se mostrará com respuesta
+    quizzes:
+        label: Cuestionario
+        type: relation
+        nameFrom: title
+        span: left
+        commentAbove: Encuesta que se rellenerá si se pulsa esta respuesta
+

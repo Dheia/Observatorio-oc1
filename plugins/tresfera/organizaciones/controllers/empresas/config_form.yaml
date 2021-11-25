@@ -1,0 +1,10 @@
+name: Empresas
+form: $/tresfera/organizaciones/models/empresa/fields.yaml
+modelClass: Tresfera\Organizaciones\Models\Empresa
+defaultRedirect: tresfera/organizaciones/empresas
+create:
+    redirect: 'tresfera/organizaciones/empresas/update/:id'
+    redirectClose: tresfera/organizaciones/empresas
+update:
+    redirect: tresfera/organizaciones/empresas
+    redirectClose: tresfera/organizaciones/empresas

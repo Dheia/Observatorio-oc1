@@ -1,0 +1,21 @@
+<?php if(!$field['hide_title']) { ?>
+    <h3 class="question_h3_<?=$field['tag']?>"><?=$field['title']?></h3>
+<?php } ?>
+
+<textarea
+    <?php 
+        $partial = "$/tresfera/taketsystem/slides/_field_css_custom.htm";
+        echo $this->makePartial(
+        $partial,
+            [ 
+            'campo' => $field,
+            'slide' => $slide
+            ]
+        );
+    ?>
+    data-question
+    data-question-type="textarea"
+    name="<?=$field['tag']?>" 
+    data-answer-type="textarea"
+    data-question-id="<?=$field['tag']?>"
+    name="<?=$field['tag']?>"></textarea>

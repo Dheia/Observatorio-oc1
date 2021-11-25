@@ -1,0 +1,34 @@
+scopes:
+    proyecto:
+        label: Proyecto
+        modelClass: Tresfera\Skillyouup\Models\Proyecto
+        conditions: proyecto_id in (:filtered)
+        nameFrom: name
+    cliente:
+        label: Cliente
+        modelClass: Tresfera\Clients\Models\Client
+        conditions: client_id in (:filtered)
+        nameFrom: name
+    evaluado:
+        label: Evaluado
+        modelClass: Tresfera\Skillyouup\Models\Equipo
+        conditions: id in (:filtered) 
+        nameFrom: email
+    
+    estado:
+        label: Estado
+        type: group
+        conditions: estado in (:filtered)
+        options:
+            2: Completados
+            1: No completados
+    
+    estado_informe:
+        label: Estado informe
+        type: group
+        conditions: estado_informe in (:filtered) 
+        options:
+            3: Completados
+            2: Procesando
+            1: En cola
+            -1: Error

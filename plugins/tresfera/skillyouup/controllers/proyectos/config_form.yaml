@@ -1,0 +1,11 @@
+name: Proyectos
+modelClass: Tresfera\Skillyouup\Models\Proyecto
+form: $/tresfera/skillyouup/models/proyecto/fields.yaml
+defaultRedirect: tresfera/skillyouup
+create:
+    redirect: 'tresfera/skillyouup/proyectos/update/:id'
+    redirectClose: tresfera/skillyouup
+update:
+    redirect: 'tresfera/skillyouup/proyectos/update/:id'
+    redirectClose: tresfera/skillyouup
+preview: {  }

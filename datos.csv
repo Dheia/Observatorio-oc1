@@ -1,0 +1,133 @@
+Org. (nueva segmentacion),NIVEL,GRUPO,NOMBRE ,CORREO ELECTRÓNICO,Tipo de evaluación,º,DESCRIPCION ÁREA,DESCRIPCIÓN CARGO,PERSONAS A CARGO ,# DE PERSONAS A CARGO,CARGO
+UCSP,3,L,Laures García Guillermo Reynaldo,glaures@ucsp.edu.pe,A - S - P - C,360º,Departamento Ciencia de la Computación,Administrador Dpto Ciencias Computación,SI,3,Administrador
+UCSP,3,-,Loayza Argüelles Artemia,aloayza@ucsp.edu.pe,A - S - P - C,180º,Departamento de Ciencias Naturales,Coordinadora Dpto. Ciencias Naturales,SI,8,Coordinador
+UCSP,2,D,Ancca Juarez Amelia Edith Frida,aeancca@ucsp.edu.pe,A - S - P,180º,Dirección de Comunidad Universitaria,Coordinadora Del Programa Beca 18,SI,2,Coordinador
+UCSP,2,D,Tejada Cuadros Solange Ximena,stejada@ucsp.edu.pe,A - S - P - C,360º,Dirección de Comunidad Universitaria,Coordinadora Comunidad Univer. Alumnos,SI,3,Coordinador
+UCSP,3,G,Valencia Zevallos Gabriela del Rosario,gvalencia@ucsp.edu.pe,A - S - P - C,360º,Área de Servicios Academicos,Coordinadora de Gestión Académica,SI,6,Coordinador
+UCSP,3,P,Quiroz Pacheco Claudia Lucia,cquiroz@ucsp.edu.pe,A - S - P - C,360º,"Departamento de Teología, Filosofía y Humanidades","Coord. Dpto. Teología, Filosofia y Human",SI,22,Coordinador
+UCSP,3,P,Pinto de Alarcón Paola Alexandra,papinto@ucsp.edu.pe,A - S - P,180º,"Departamento de Teología, Filosofía y Humanidades","Administrador Dpto. Teología, Filosofia y Human",NO,0,Administrador
+UCSP,3,R,Heredia Cáceres Juan Pablo,jpheredia@ucsp.edu.pe,A - S - P,180º,Dirección de Pregrado,Asistente de innovación y excelencia educativa,NO,0,Asistente
+UCSP,3,R,Madariaga Miranda Gerardo Luis,glmadariaga@ucsp.edu.pe,A - S - P,180º,Dirección de Pregrado,Asistente de Dirección de Pregrado,NO,0,Asistente
+UCSP,4,W,Castillo Ureta María Luz de Fátima,mcastillo@ucsp.edu.pe,A - S - P - C,360º,Fac. Cs. Econ. Empresariales y Humanidad,Decana Fac. Cs. Economico Emp. y Humanas,NO CORRESPONDE,0,Decano
+UCSP,4,W,Santa María D'Angelo Rafael Rubén,rsantamaria@ucsp.edu.pe,A - S - P - C,360º,Facultad de Derecho,Decano Facultad De Derecho,NO CORRESPONDE,0,Decano
+UCSP,4,W,Zeballos Velarde Carlos,crzeballos@ucsp.edu.pe,A - S - P - C,360º,Facultad de Ingeniería y Computación,Decano Facultad de Igeniería y Computación,NO CORRESPONDE,,Decano
+UCSP,1,B,Reaño Velarde Gerardo Antonio,greano@ucsp.edu.pe,A - S - C,180º*,Dirección Administrativa y Financiera,Director General de Administración,SI,7,Director
+UCSP,3,-,Nina Ortiz Dugán Paul,dnina@ucsp.edu.pe,A - S - P - C,360º,Departamento Matemáticas y Estadística,Director Dpto. Matemática y Estadística,SI,3,Director
+UCSP,1,B,Huamani Chije Saúl Néstor,snhuamani@ucsp.edu.pe,A - S - P,180º,Área de Logística,Supervisor De Seguridad,NO,0,Supervisor
+UCSP,2,"C , S",Sumaria Del Campo José Renato,rsumaria@ucsp.edu.pe,A - S - P - C,360º,Dirección de Centro San Juan Pablo II,"Director del Centro San Juan Pablo II
+Jefe de Comunicación Institucional",SI,2,Director
+UCSP,2,C,Sardá Candia Juan Alonso,jasarda@ucsp.edu.pe,A - S - P,180º,Area de Liderazgo para el Desarrollo,Coordinador De Liderazgo Juvenil,NO,0,Coordinador
+UCSP,3,Q,Calvi de Quintanilla Patricia María,pcalvi@ucsp.edu.pe,A - S - P - C,360º,Fondo Editorial,Directora Del Fondo Editorial,SI,4,Director
+UCSP,"3, 4","W , G",Cárdenas Paredes Víctor Miguel,vcardenas@ucsp.edu.pe,A - S - P - C,360º,Dirección  de Gestión Académica,Director de Gestión Académica,SI,11,Director
+UCSP,2,C,Silva Noboa Paul Bradley,pbsilva@ucsp.edu.pe,A - S - P,180º,Dirección Serv. y Proyección a la Socied,Director Relaciones Empresariales e Institucionales (CENDES),NO,0,Director
+UCSP,"3, 4","W , Q",Zenteno Bolaños Efrain José,ezenteno@ucsp.edu.pe,A - S - P - C,360º,Direccion de Investigación,Director De Investigación,SI,5,Director
+UCSP,"2, 4","X , F",Manrique Málaga Juan Pablo,jmanrique@ucsp.edu.pe,A - S - P - C,360º,Dirección de Planeamiento Estratégico,Director De Planeación Estratégica,SI,5,Director
+UCSP,2,D,Olivares Miranda Fabiola Milagros,folivares@ucsp.edu.pe,A - S - P,180º,Área de Espiritualidad y Apostolado,Coordinadora Espiritualidad y Apostolado,NO,0,Coordinador
+UCSP,"2, 4","Y , E",Quintanilla Salinas Lucia Fiorella Decita,f.quintanilla@ucsp.edu.pe,A - S - P - C,360º,Dirección de Centro de las Artes,Directora Del Centro De Las Artes,SI,5,Director
+UCSP,"2, 4","Y , C",Cabieses Colmenares María Gabriela,gcabieses@ucsp.edu.pe,A - S - P - C,360º,Dirección Serv. y Proyección a la Socied,Directora Serv. y Proyección a la Soc.,SI,8,Director
+UCSP,2,C,Quintanilla Montoya Jafeth Felipe Bernabe,j.quintanilla@ucsp.edu.pe,A - S - P - C,360º,Dirección de Formación Continua,Director Formación Continua para la Emp.,SI,4,Director
+UCSP,2,E,Llerena Llerena Vanessa Mirella,vllerena@ucsp.edu.pe,A - S - P,180º,Dirección de Centro de las Artes,Coordinadora Artes Escénicas y Visuales,NO,0,Coordinador
+UCSP,2,E,Rivera Rivera Thais Patricia,trivera@ucsp.edu.pe,A - S - P,180º,Dirección de Centro de las Artes,Coordinadora de Artes Musicales,NO,0,Coordinador
+UCSP,3,M,Castillo Aranibar Patricia Raquel,pcastillo@ucsp.edu.pe,A - S - P - C,360º,Escuela Ing. Electrónica y Telecomunicac,Director E.P. Ing. Electrónica. y Teleco,SI,3,Director
+UCSP,3,N,Pinto Rodríguez Galvarino,gpinto@ucsp.edu.pe,A - S - P - C,360º,Escuela de Ingeniería Civil,Director Escuela Prof. Ingeniería Civil,SI,2,Director
+UCSP,"2, 4","Y , D",Vela de Cisneros Patricia Graciela,pvela@ucsp.edu.pe,A - S - P - C,360º,Dirección de Comunidad Universitaria,Directora De Comunidad Universitaria,SI,11,Director
+UCSP,3,O,Tapia Portugal Henry Francisco,ctapiap@ucsp.edu.pe,A - S - P,180º,Dirección Centro Desarrollo de Educación,Director Ctro Desarrollo para Educación,SI,2,Director
+UCSP,3,H,Malpartida Tabuchi Daniel Humberto,dmalpartida@ucsp.edu.pe,A - S - P - C,360º,Dpto. Cs. Economicas y Empresariales,Director Dpto. Cs. Económicas y Empresa,SI,18,Director
+UCSP,3,H,Riesgo Lind Gustavo Alfredo,griesco@ucsp.edu.pe,A - S - P - C,360º,Dpto. Cs. Economicas y Empresariales,Director Centro de Estudio en Empresa y Economía,SI,?,Director
+UCSP,3,P,Ugarte Cornejo Manuel Alejandro,mugartec@ucsp.edu.pe,A - S - P,180º,Centro de Pensamiento Social Católico,Director Ctro Pensamiento Social Catolic,SI,1,Director
+UCSP,3,I,Timaná Kure Carlos Fernando,ctimana@ucsp.edu.pe,A - S - P - C,360º,Centro de Gobierno,"Director Centro De Gobierno ""J.L.B y R.""",SI,5,Director
+UCSP,3,G,Concha Rondón Victoria Rosario,vrconcha@ucsp.edu.pe,A - S - P,180º,Vicerrectorado Académico,Coordinadora Académica,NO,0,Coordinador
+UCSP,3,G,Gonzales León Ángela Beatriz,agonzales@ucsp.edu.pe,A - S - P,180º,Área de Servicios Academicos,Coordinadora de Procesos Académicos,NO,0,Coordinador
+UCSP,3,G,Núñez Portugal Paloma Moreika,pnunezp@ucsp.edu.pe,A - S - P,180º,Vicerrectorado Académico,Coordinadora Académica,NO,0,Coordinador
+UCSP,3,I,Ugarte Mostajo Daniel Leonardo,dugarte@ucsp.edu.pe,A - S - P - C,360º,Departamento Derecho y Ciencia Política,Director Dpto. Derecho y Ciencia Polític,SI,14,Director
+UCSP,3,J,Aguilar Franco José Alberto,jaaguilar@ucsp.edu.pe,A - S - P - C,360º,Instituto de Energía y Medio Ambiente,Director del I.E.M.,SI,5,Director
+UCSP,3,K,Soto Añari Marcio Fernando,msoto@ucsp.edu.pe,A - S - P - C,360º,Centro de Investigación en Psicología,Director Centro Invest. En Psicología,NO,0,Director
+UCSP,3,L,Loaiza Fernandez Manuel Eduardo,meloaiza@ucsp.edu.pe,A - S - P - C,180º,Centro Invest. Ciencia de la Computación,Dir. C.I. e Innovación Ciencia Computaci,NO,0,Director
+UCSP,3,M,Ludeña Choez Jimmy Diestin,jludenac@ucsp.edu.pe,A - S - P - C,360º,Centro Investigación Electrónica y Telec,Director Ctro Invest. Electr. y Telecom.,NO,0,Director
+UCSP,3,J,Villanueva Llapa Ana Daneida,advillanueva@ucsp.edu.pe,A - S - P - C,360º,Departamento de Ingeniería Industrial,Director Dpto. Ing. Ind. y Medio Ambient,SI,11,Director
+UCSP,3,I,Mauricio José Delgado Larrazábal,mdelgadol@ucsp.edu.pe,A,0º,Departamento Derecho y Ciencia Política,Administrador de Departamento Derecho y Ciencia Política,NO,0,Administrador
+UCSP,3,J,Salazar Carpio Xiomara Roselina,xrsalazar@ucsp.edu.pe,A - S - P,180º,Departamento de Ingeniería Industrial,Administrador Dpto. de Ing. Industrial,NO,0,Administrador
+UCSP,3,K,Diez Canseco Briceño María Lorena,ldiezcanseco@ucsp.edu.pe,A - S - P - C,360º,Departamento de Psicología,Director del Departamento de Psicología,SI,7,Director
+UCSP,3,K,Sosa Cruz Miguel Francisco,mfsosa@ucsp.edu.pe,A - S - P,180º,Departamento de Psicología,Administrador de Departamento de Psicología,NO,0,Administrador
+UCSP,3,L,Cuadros Vargas Alex Jesús,acuadros@ucsp.edu.pe,A - S - P - C,360º,Departamento Ciencia de la Computación,Director Dpto. Ciencia de la Computación,SI,13,Director
+UCSP,3,P,Steiger Salazar Tomás Esteban,tesalazar@ucsp.edu.pe,A - S - P,180º,Departamento de Humanidades,Profesor a tiempo completo,SI,2,Director
+UCSP,3,I,Franco García Devora Katheryn,dfranco@ucsp.edu.pe,A - S - P - C,360º,Escuela de Derecho,Director Escuela Profesional De Derecho,NO,0,Director
+UCSP,3,M,Huanca Cayo Eber,ehuanca@ucsp.edu.pe,A - S - P - C,360º,Dpto. Ingeniería Eléctrica y electrónica,Director Dpto. Ing. Eléctrica y Electron,SI,8,Director
+UCSP,3,M,Cuellar Díaz Lucía Carolina Eliana,lcuellar@ucsp.edu.pe,A - S - P,180º,Dpto. Ingeniería Eléctrica y electrónica,Administrador de Dpto. Ing. Eléctrica y Electron,NO,0,Administrador
+UCSP,"3, 4",W,Ticona Herrera Regina Paola,rticona@ucsp.edu.pe,A - S - P - C,180º,Direccion de Postgrado,Directora de la Escuela de Postgrado,SI,1,Director
+UCSP,3,N,Simbort Zeballos Enrique Gerardo,egsimbort@ucsp.edu.pe,A - S - P - C,360º,Departamento de ingeniería civil,Director Dpto. Ingeniería Civil,SI,5,Director
+UCSP,3,N,Valcárcel Alegría Luisa Elena,lvalcarcel@ucsp.edu.pe,A - S - P,180º,Departamento de ingeniería civil,Administrador Dpto. Ingeniería Civil,NO,0,Administrador
+UCSP,3,H,Gómez Burns Ana Elizabeth,agomez@ucsp.edu.pe,A - S - P - C,360º,Escuela de Administración de Negocios,Director E.P. Administración De Negocios,NO,0,Director
+UCSP,3,H,Leiva Flores Edgard Fredy,efleivaf@ucsp.edu.pe,A - S - P - C,360º,Escuela de Contabilidad,Director Esc. Profesional Contabilidad,NO,0,Director
+UCSP,"3, 4","W , R",Manrique Linares Eithel Adolfo,eithel.manrique@ucsp.edu.pe,A - S - P - C,360º,Dirección de Pregrado,Director De Pre grado,SI,2,Director
+UCSP,3,J,Tejada Barreda Cristina del Rocío,ctejada@ucsp.edu.pe,A - S - P - C,360º,Escuela de Ingeniería Industrial,Director Escuela Prof. Ing. Industrial,NO,0,Director
+UCSP,3,K,Franco Delgado de Carpio Elva Danet,edfranco@ucsp.edu.pe,A - S - P - C,360º,Escuela de Psicología,Director Escuela Prof. Psicologia,NO,0,Director
+UCSP,3,O,Pacheco Tejada Jorge Adalberto,jpacheco@ucsp.edu.pe,A - S - P - C,360º,Departamento de Educación,Director del Departamento de Educación,SI,7,Director
+UCSP,3,O,Rodríguez Revilla María Ximena,mxrodriguez@ucsp.edu.pe,A - S - P,180º,Departamento de Educación,Administrador de Departamento de Educación,NO,0,Administrador
+UCSP,3,N,Becerra Stock Luis Alberto,lbecerra@ucsp.edu.pe,A - S - P,180º,Escuela de Ingeniería Civil,Coordinador Escuela Prof. Ing. Civil,NO,0,Coordinador
+UCSP,3,P,Castro Salinas Rodolfo José,r.castro@ucsp.edu.pe,A - S - P - C,360º,Instituto para el Matrimonio y Familia,Director I.M.F.,SI,4,Director
+UCSP,3,L,Gómez Nieto Erick Mauricio,emgomez@ucsp.edu.pe,A - S - P - C,360º,Escuela de Ciencia de la Computación,Director Escuela Prof. Cs. Computación,NO,0,Director
+UCSP,"2, 4",Y,Maldonado Adrián María Alejandra,mmaldonado@ucsp.edu.pe,A - S - P,180º,Direccion de Relaciones Internacionales,Directora Relaciones Internac. Y Cooper.,SI,2,Director
+UCSP,1,A,Calle Chaparro Celso José Luis,ccalle@ucsp.edu.pe,A - S - P,180º,Sección de Asesoría Legal,Jefe De Seccion De Asesoría Legal,SI,1,Jefe
+UCSP,1,A,Lovón Alvarado Gina,glovon@ucsp.edu.pe,A - S - P - C,360º,Sección Registros Académicos y Archivo,Jefe Seccion Reg. Acad. y Archivo Centra,SI,3,Jefe
+UCSP,3,O,Cano Aguirre María Eugenia,mcanoa@ucsp.edu.pe,A - S - P - C,360º,Escuela de Educación,Director Esc. Profesional De Educación,NO,0,Director
+UCSP,3,P,Cabala Banda de Vega Pamela Denisse,pcabala@ucsp.edu.pe,A - S - P,180º,Centro de Estudios Peruanos,Coordinadora Centro De Estudios Peruanos,NO,0,Coordinador
+UCSP,1,B,Quispe Amésquita Marco Antonio,mquispe@ucsp.edu.pe,A - S - P - C,360º,Área de Contabilidad,Sub Contador General,SI,3,Jefe
+UCSP,1,B,Canazas Cayo Juan Pedro,jcanazas@ucsp.edu.pe,A - S - P - C,360º,Área de Contabilidad,Jefe Del Área De Contabilidad,SI,4,Jefe
+UCSP,2,C,Llerena Chavez Jessica Roxana,jllerena@ucsp.edu.pe,A - S - P,180º,Seccion de Liderazgo Empresarial,Jefe de Sección de Liderazgo Empresarial,SI,1,Jefe
+UCSP,"2, 4","X , S",Midolo Arredondo Angello Luis,almidolo@ucsp.edu.pe,A - S - P - C,360º,Dirección de Comunicación y Marketing,Director De Comunicaciones y Marketing,SI,6,Director
+UCSP,2,D,Mayhuire Ampuero de Valz Sandy Vanessa,smayhuire@ucsp.edu.pe,A - S - P,180º,Sección de Comunidad de Antiguos Alumnos,Jefe Sección Comunidad y Antiguos Alumno,SI,1,Jefe
+UCSP,3,H,Saavedra Pinto Patricia Catherine,psaavedra@ucsp.edu.pe,A - S - P,180º,Dpto. Cs. Economicas y Empresariales,Administrador de Departamento Cs. Económicas y Empresariales,NO,0,Administrador
+UCSP,1,B,Chávez Arenas Luis Miguel,lchavez@ucsp.edu.pe,A - S - P - C,360º,Área de Logística,"Jefe Area Logistica, Infraest. Y Segurid",SI,7,Jefe
+UCSP,1,B,Martínez Poblete Manuel Alexander,mmartinez@ucsp.edu.pe,A - S - P - C,360º,Sección Infraestructura y Mantenimiento,Jefe Sección Infraestructura y Mantenimi,SI,33,Jefe
+UCSP,3,R,Díaz Ramos Gerardo Alfredo,gadiaz@ucsp.edu.pe,A - S - P,180º,Dirección de Pregrado,Coordinador de Operaciones,NO,0,Coordinador
+UCSP,3,R,Salazar Soler Marcela,marcela.salazar@ucsp.edu.pe,A - S - P,180º,Dirección de Pregrado,Coordinadora Acad. Dirección De Pregrado,NO,0,Coordinador
+UCSP,2,F,Manchego Revilla Paul Javier,pjmanchego@ucsp.edu.pe,A - S - P - C,360º,Dirección de Planeamiento Estratégico,Jefe De Innovación Y Estrategia Digital,SI,3,Jefe
+UCSP,2,F,Puma Chávez Cesar Franz,cpuma@ucsp.edu.pe,A - S - P,180º,Dirección de Planeamiento Estratégico,Jefe de Seccion de Planeación y control de gestión ,SI,2,Jefe
+UCSP,1,B,Surco Calcina Ricardo,rsurco@ucsp.edu.pe,A - S - P - C,360º,Área de Tesorería,Jefe Del Área De Tesoreria,SI,5,Jefe
+UCSP,2,F ,Talavera Linares Carlos Fernando,ctalavera@ucsp.edu.pe,A - S - P - C,360º,Área de Tecnologias de la Información,Jefe Área Tecnología De La Información,SI,3,Jefe
+UCSP,2,F,Núñez Hurtado Karina Noelia,knunezh@ucsp.edu.pe,A - S - P,180º,Sección de Calidad y Acreditación Univ.,Jefe Sección Calidad y Acred. Universita,SI,2,Jefe
+UCSP,"2, 4","X , F",Febres Siancas Alfredo,afebresf@ucsp.edu.pe,A - S - P - C,360º,Área de Desarrollo Humano,Jefe de Desarrollo Humano,SI,6,Jefe
+UCSP,2,D,Paz Yáñez Vilma Lourdes,l.paz@ucsp.edu.pe,A - S - P - C,360º,Área de Bienestar Universitario,Jefa Del Área De Bienestar Universitario,SI,9,Jefe
+UCSP,2,F,Salas Pinto César Ernesto,csalas@ucsp.edu.pe,A - S - P - C,360º,Sección de Desarrollo de Sistemas,Jefe Seccion Desarrollo De Sistemas,SI,4,Jefe
+UCSP,2,F,Vargas Aragón Regina María Adriana,rmvargas@ucsp.edu.pe,A - S - P - C,360º,Sección de Administración de Personal,Jefe Sección Administración De Personal,SI,5,Jefe
+UCSP,3,N,Garnica Cuba Fernando José,fjgarnica@ucsp.edu.pe,A - S - P - C,360º,Escuela de Ingeniería Civil,Jefe De Laboratorio De Ingenieria Civil,SI,3,Jefe
+UCSP,2,F,Villegas Tapia Gonzalo,gvillegas@ucsp.edu.pe,A - S - P - C,360º,Seccion de Soporte Técnico,Jefe De Seccion De Soporte Tecnico,SI,8,Jefe
+UCSP,2,S,Villena Echegaray María del Pilar,mpvillena@ucsp.edu.pe,A - S - P - C,360º,Sección de Eventos,Jefe Sección De Eventos,SI,3,Jefe
+UCSP,3,Q,Briceño Medina Enrique Miguel,ebriceno@ucsp.edu.pe,A - S - P - C,360º,Área de Biblioteca,Jefe Del Area De Biblioteca,SI,15,Jefe
+UCSP,2,S,Aguilar Campos Carlos,caguilar@ucsp.edu.pe,A - S - P - C,360º,Publicidad y Medios,Jefe Área de Publicidad y Medios,SI,7,Jefe
+UCSP,2,S,Bravo Cornejo Renzo Enrique,rbravo@ucsp.edu.pe,A - S - P - C,360º,Sección de Marketing,Jefe de Sección De Marketing,SI,5,Jefe
+UCSP,2,S,Chávez Delgado Mirtha Tania,mtchavez@ucsp.edu.pe,A - S - P - C,360º,Seccion Ventas - Postgrado y Extensión,Jefe De Seccion De Ventas,SI,6,Jefe
+UCSP,2,S,PERSONAL POR CONTRATAR,,A - S - P - C,360º,Sección Ventas - Pregrado,Jefe De Seccion De Ventas,SI,12,Jefe
+UCSP,2,S,Paredes Villanueva María Angélica,maparedes@ucsp.edu.pe,A - S - P - C,360º,Sección Comunicación y Relaciones Instit,Jefe Seccion Comunic. y Rel. Institucio,SI,8,Jefe
+UCSP,"2, 4","Z , X",Quintanilla Pérez Wicht Pio Alonso María,a.quintanilla@ucsp.edu.pe,A - P - C,- 180º,Prorrectorado Desarrollo Institucional,Prorrector para Desarrollo Institucional,NO,0,Prorrector
+UCSP,"2, 4","Z , Y",Salazar Steiger Miguel Arturo,msalazar@ucsp.edu.pe,A - P - C,- 180º,Prorrectorado para la Persona y Cultura,Prorrector Para La Persona y La Cultura,SI,10,Prorrector
+UCSP,"1, 4","Z , A",Chávez Contreras German Trinidad,gchavez@ucsp.edu.pe,A - P - C,- 180º,Rectorado,Rector,NO CORRESPONDE,0,Rector
+UCSP,1,A,Cruz Mercado Héctor Francisco,hcruz@ucsp.edu.pe,A - S - C,180º*,Secretaría General,Secretario General / Dir. Asesoria Legal,SI,4,Secretario
+UCSP,"2, 4","Z , W",Estenós Loayza Alejandro Ecipión,aestenos@ucsp.edu.pe,A - P - C,- 180º,Vicerrectorado Académico,Vicerrector Académico,SI,26,Vicerrector
+ISUR,1,Z + A,ALCAZAR BELAUNDE ANDRES ENRIQUE,aalcazar@isur.edu.pe,A + P + C,- 180°,DIRECCIÓN ADMINISTRATIVA Y FINANCIERA,DIRECTOR ADMINISTRATIVO Y FINANCIERO,SI,7,
+ISUR,1,Z + F,CACERES VILLANUEVA ELVIS JOSE FERNANDO,ecaceres@isur.edu.pe,A + P + C,- 180°,DIRECCIÓN DE TECNOLOGIAS E INGENIERÍA EMPRESARIAL,DIRECTOR DE TECNOLOGÍAS DE INGENIERÍA EMPRESARIAL,SI,4,
+ISUR,1,Z + C,CAMPOS VALENCIA MARIA TERESA,mcampos@isur.edu.pe ,A + P + C,- 180°,DIRECCIÓN DE GESTIÓN ACADÉMICA,DIRECTOR DE GESTIÓN ACADÉMICA,SI,11,
+ISUR,1,B,CARPIO LOZADA MARIA FERNANDA,mcarpio@isur.edu.pe,A + S + P + C,360°,DIRECCIÓN DE MARKETING Y GESTION COMERCIAL,COORDINADORA DE MARKETING Y MEDIOS,SI,3,
+ISUR,1,C,CASTILLO URETA ROSARIO ANGELICA,rcastillo@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE GESTIÓN ACADÉMICA,SUB DIRECTOR DE LA UNIDAD ACADÉMICA DE TURISMO,SI,1,
+ISUR,1,Z + E,CHANAME DOMINGUEZ MARIA DE JESUS,jchaname@isur.edu.pe,A + P + C,- 180°,DIRECCIÓN ACADÉMICA,DIRECTORA DE CALIDAD EDUCATIVA,SI,3,
+ISUR,1,D,CHUI VALENTIN DANIEL AUGUSTO,dchui@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE FORMACIÓN,JEFE DE LA LINEA DE FORMACIÓN EN LIDERAZGO PROFESIONAL,SI,2,
+ISUR,1,F,COLQUE HUAMANI JAVIER FLAVIO,jcolque@isur.edu.pe,A + S + P + C,360°,DIRECCIÓN DE TECNOLOGIAS E INGENIERÍA EMPRESARIAL,COORDINADOR DE INFRAESTRUCTURA Y SOLUCIONES TECNOLÓGICAS ,SI,3,
+ISUR,1,A,D`TORMMO ROJAS KADIR,kdtormmo@isur.edu.pe,A + S + P + C,360°,DIRECCIÓN ADMINISTRATIVA Y FINANCIERA,"JEFE DE LOGISTICA, INFRAESTRUCTURA Y SEGURIDAD",SI,12,
+ISUR,1,C,DELGADO UGARTE GUSTAVO GERARDO,gdelgado@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE GESTIÓN ACADÉMICA,SUB DIRECTOR DE LA UNIDAD ACADÉMICA DE TECNOLOGÍAS DE LA INFORMACIÓN,SI,1,
+ISUR,1,B,ESPINOZA SALINAS JOHANA LETICIA,jespinoza@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE MARKETING Y GESTION COMERCIAL,COORDINADORA DE COMUNICACIONES Y EVENTOS,SI,1,
+ISUR,1,Z + B,FREUNDT SOTO MARCELA ISABEL VIOLETA,mfreundt@isur.edu.pe,A + P + C,- 180°,DIRECCIÓN DE MARKETING Y GESTION COMERCIAL,DIRECTORA DE MARKETING Y GESTIÓN COMERCIAL,SI,4,
+ISUR,1,C,GALINDO GALINDO GABRIELA FERNANDA,ggalindo@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE GESTIÓN ACADÉMICA,SUB DIRECTOR DE UNIDAD ACADÉMICA DE EXTENSIÓN PROFESIONAL,SI,1,
+ISUR,1,E,GOMEZ MARTINEZ ANA BEATRIZ,agomez@isur.edu.pe,A + S + P,180°,DIRECCIÓN ACADÉMICA,JEFE DE GESTIÓN DOCENTE,SI,1,
+ISUR,1,C,HINOJOSA CHAVEZ DE TRIPET CLAUDIA CECILIA,chinojosa@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE GESTIÓN ACADÉMICA,SUB DIRECTOR DE LA UNIDAD ACADÉMICA DE GASTRONOMÍA,SI,2,
+ISUR,1,Z + D,LAZARTE HAQUIM MARÍA LOURDES,mlazarte@isur.edu.pe,A + P + C,- 180°,DIRECCIÓN DE FORMACIÓN,DIRECTORA DE FORMACION,SI,5,
+ISUR,1,B,LINARES CARREON GLADYS ANGELICA ELVIRA,glinares@isur.edu.pe,A + S + P + C,360°,DIRECCIÓN DE MARKETING Y GESTION COMERCIAL,JEFE DE VENTAS,SI,13,
+ISUR,1,C,MASÍAS CASTAÑÓN MARIANA,mmasias@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE GESTIÓN ACADÉMICA,SUB DIRECTOR DE LA UNIDAD ACADÉMICA DE DISEÑO,SI,2,
+ISUR,1,C,MEDINA CATERIANO EUGENIA CAROLINA,emedinac@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE GESTIÓN ACADÉMICA,SUB DIRECTOR DE LA UNIDAD ACADÉMICA DE NEGOCIOS,SI,2,
+ISUR,1,D,NARVAEZ TOSI RICARDO RAFAEL,rnarvaez@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE FORMACIÓN,JEFE DE FORMACION HUMANA PARA DOCENTES Y ADMINISTRATIVOS,NO,,
+ISUR,1,E,NEGRELLO  MARIANA ANDREA,mnegrello@isur.edu.pe,A + S + P,180°,DIRECCIÓN ACADÉMICA,COORDINADORA DE EDUCACIÓN SEMI PRESENCIAL,SI,1,
+ISUR,1,F,PARDO LINARES JOSE ENRIQUE,jpardo@isur.edu.pe,A + S + P,180°,DIRECCIÓN DE TECNOLOGIAS E INGENIERÍA EMPRESARIAL,COORDINADOR DE DESARROLLO DE SOFTWARE,SI,2,
+ISUR,1,Z + A,RIVERA DIAZ ALFREDO MARCO,arivera@isur.edu.pe,A + P + C,- 180°,DIRECCIÓN ADMINISTRATIVA Y FINANCIERA,DIRECTOR GENERAL,SI,8,
+ISUR,1,C,RODRIGUEZ AMPUERO CHRISTIAN FRANCIS,crodriguez@isur.edu.pe ,A + S + P + C,360°,DIRECCIÓN DE GESTIÓN ACADÉMICA,SECRETARIO ACADÉMICO,SI,3,
+ISUR,1,A,SALINAS LINARES RICARDO ERNESTO,rsalinas@isur.edu.pe,A + S + P,180°,DIRECCIÓN ADMINISTRATIVA Y FINANCIERA,SUB CONTADOR GENERAL,SI,1,
+ISUR,1,A,ZEGARRA MOLINA CARLOS DAVID,czegarra@isur.edu.pe,A + S + P,180°,DIRECCIÓN ADMINISTRATIVA Y FINANCIERA,JEFE LEGAL,NO,,

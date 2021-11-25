@@ -1,0 +1,6 @@
+{
+    "require": {
+        "szymach/c-pchart": "^3.0",
+        "zanysoft/laravel-zip": "^1.0"
+    }
+}

@@ -1,0 +1,27 @@
+<?php
+	$model = new \Tresfera\Taketsystem\Models\Result();
+	$totalsObj = $model->getTotalsSex($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+	$totals = $totalsObj[0];
+?>
+<div data-control="">
+	<h3><i class="icon-venus-mars"></i>Género clientes</h3>
+	<!--<div class="row" style="padding: 0;">
+	    <div class="col-md-12">
+		    <h4>El <b><?=$totals->percentWomen?></b> de los encuestados son mujeres
+	    </div>
+	</div>-->
+	<div class="row">
+		<div class="col-md-12">
+			<div
+			    class="control-chart"
+			    data-control="chart-pie"
+			    data-size="150"
+			    data-center-text="<?=$totals->count?>">
+			    <ul>
+			        <li>Mujer <span><?=$totals->numWomen?> (<?=$totals->percentWomen?>)</span></li>
+			        <li>Hombre <span><?=$totals->numMen?> (<?=$totals->percentMen?>)</span></li>
+			    </ul>
+			</div>
+		</div>
+	</div>
+</div>

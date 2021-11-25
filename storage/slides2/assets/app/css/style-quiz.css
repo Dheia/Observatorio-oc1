@@ -1,0 +1,44 @@
+.answers .mdc-button {
+    width: 100%;
+    text-transform: capitalize;
+    text-align: left;
+    background: #fdf0cf;
+    border-color: #f5a621;
+    color: #7c7566;
+    
+    height: 100%;
+    padding: 15px;
+    line-height: 120%;
+}
+.mdc-layout-grid.answers {
+    margin: 0 -20px;
+}
+.answers .mdc-button--raised {
+    background: #f5a621;
+    color: #fff;
+}
+video {
+    max-width: 100%;
+}
+img {
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+.topbar {
+    height: 4px;
+    overflow: hidden;
+}
+.fixed-bottom {
+    position: fixed;
+    bottom: 20px;
+    width: 70%;
+}
+@media (max-width: 479px) {
+    .fixed-bottom {
+        width: 90%;
+    }
+    header {
+        z-index: 5;
+    }
+}

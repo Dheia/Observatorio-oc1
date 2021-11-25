@@ -1,0 +1,173 @@
+title = "Título, descripción y fondo"
+url = "/slides/slide/:code"
+layout = "render"
+description = "Personaliza al máximo tu página explicativa cambiando el título, descripción y poniendo un fondo personalizado"
+is_hidden = 0
+
+[taketsystemTemplate]
+==
+{variable type="text" name="title" label="Título"}{/variable}
+{variable type="text" name="subtitle" label="Subtítulo"}{/variable}
+
+{variable type="checkbox" name="continue" label="Mostrar Botón continuar"}{/variable}
+{variable type="checkbox" name="privacidad" label="Mostrar política de privacidad"}{/variable}
+{variable type="text" name="privacidadURL" label="Enlace LOPD"}https://talentapp360.taket.es/politica-de-privacidad{/variable}
+{variable type="text" name="continueText" default="Continuar" label="Texto botón continuar"}{/variable}
+{variable type="checkbox" name="start" label="Mostrar Botón Empezar"}{/variable}
+{variable type="text" name="startText" default="Empezar" label="Texto botón empezaar"}{/variable}
+{variable type="checkbox" name="back" label="Mostrar volver a atrás"}{/variable}
+{variable type="checkbox" name="next" label="Mostrar siguiente"}{/variable}
+
+{variable type="checkbox" name="finish" label="Última página"}{/variable}
+{variable type="checkbox" name="repeat" label="Repetir cuestionario"}{/variable}
+{variable type="text" name="repeatText" label="Repetir cuestionario"}{/variable}
+
+{mediafinder name="bg" label="Fondo"}{/mediafinder}
+{variable type="codeeditor" name="css" label="Personalizado"}{/variable}
+
+--
+<div id="{{slide_id}}" class="slide_{{slide_id}} main frases"
+{% if finish %}
+ data-init-run="save"
+{% endif %}
+{% if continue == 0 and next == 0 and start == 0 and privacidad == 0 and repeat == 0 %}
+ng-click="nextStep()"
+{% endif %}
+>
+
+  <h1 class="title w-100">{{title}}</h1>
+  <h3 class="title w-100">{{subtitle}}</h3>
+  {% if start %}
+  <div id="start">
+      <button ng-click="nextStep()" type="submit" class="button icon-right ion-chevron-right button-clear button-dark">
+        {{startText}}
+      </button>
+  </div>
+  {% endif %}
+  {% if continue %}
+  <div id="continue">
+    <button ng-click="nextStep()" type="submit" class="button icon-right ion-chevron-right button-clear button-dark">
+      {{continueText}}
+    </button>
+  </div>
+  {% endif %}
+  {% if repeat %}
+  <div id="repeat">
+    <button ng-click="goTo(1)" type="button" class="button icon-right ion-chevron-right button-clear button-dark">
+      {{repeatText}}
+    </button>
+  </div>
+  {% endif %}
+  {% if privacidad %}
+  <div class="lopd">
+      <input type="checkbox" id="lopd" value="1"> Acepto <a href="{{privacidadURL}}" target="_blank">política de privacidad</a>
+  </div>
+  <div id="continue">
+    <button ng-click="nextStepLopd()" type="submit" class="button icon-right ion-chevron-right button-clear button-dark">
+      {{continueText}}
+    </button>
+  </div>
+  {% endif %}
+    {% if next or back %}
+    <div class="arrows" id="arrows">
+        {% if back %}
+        <div ng-click="prevStep()" id="back">
+            <i class="ion-android-arrow-back"></i>
+        </div>
+        {% endif %}
+
+        {% if next %}
+        <div ng-click="nextStep()" id="next">
+            <i class="ion-android-arrow-forward"></i>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<style>
+.slide_{{slide_id}} button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -180px;
+}
+.slide_{{slide_id}} section {
+  position: absolute;
+  width: 1200px;
+  height: 700px;
+}
+.slide_{{slide_id}} {
+    background-image: url('//talentapp360.taket.es/storage/app/media/{{bg}}');
+    background-position: top;
+    background-size: 100%;
+    height: 700px;
+}
+.slide_{{slide_id}}.main {
+    height: 100%;
+    width: 100%;
+    height: 700px;
+}
+.slide_{{slide_id}} .arrows div {
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+}
+.slide_{{slide_id}}.arrows {
+    font-size: 70px;
+    color: #666;
+}
+@media only screen and (max-width: 600px) {
+  .slide_{{slide_id}} .frases.main {
+    background-position: center !important;
+    background-size: 200% !important;
+    background-repeat: no-repeat !important;
+  }
+  .slide_{{slide_id}} .view-container {
+    height: calc(100% + 60px);
+  }
+  .slide_{{slide_id}} .frases h3.title {
+      position: absolute;
+      display: flex;
+      font-size: 14px;
+      font-weight: normal;
+      width: 40%;
+      text-align: center;
+      left: 50%;
+      margin-top: 59%;
+      color: #fff;
+      margin-left: -19%;
+  }
+  .slide_{{slide_id}} {
+    background-position: center;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    height: 100% !important;
+  }
+  .slide_{{slide_id}} #start button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 62%;
+    margin-left: 50%;
+    left: -20%;
+  }
+  .slide_{{slide_id}} h3.title {
+    position: absolute;
+    display: flex;
+    font-size: 11px;
+    font-weight: normal;
+    width: 40%;
+    text-align: center;
+    left: 40%;
+    /* margin-left: -10%; */
+    margin-top: 79%;
+    color: #fff;
+  }
+  .slide_{{slide_id}} .lopd {
+    width: 200px;
+    font-size: 12px;
+    left: 50%;
+    position: absolute;
+    margin-left: -27%;
+    top: 61%;
+    color: #fff;
+  }
+}
+{{css}}
+
+</style>

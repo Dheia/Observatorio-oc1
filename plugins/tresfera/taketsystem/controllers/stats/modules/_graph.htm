@@ -1,0 +1,101 @@
+
+
+<script type="text/javascript">
+	AmCharts.makeChart("chartdiv",
+		{
+			"type": "serial",
+			"path": "http://www.amcharts.com/lib/3/",
+			"categoryField": "date",
+			"dataDateFormat": "YYYY-MM-DD",
+			"plotAreaFillColors": "#F9F9F9",
+			"backgroundColor": "#F9F9F9",
+			"categoryAxis": {
+				"parseDates": true
+			},
+			"chartCursor": {},
+			"chartScrollbar": {},
+			"trendLines": [],
+			"graphs": [
+				{
+					"bullet": "round",
+					"id": "AmGraph-1",
+					"title": "Insatisfechos",
+					"valueField": "ko"
+				},
+				{
+					"bullet": "square",
+					"id": "AmGraph-2",
+					"title": "Neutrales",
+					"valueField": "mix"
+				},
+				{
+					"bullet": "round",
+					"id": "AmGraph-4",
+					"title": "Satisfechos",
+					"valueField": "ok"
+				}
+			],
+			"guides": [],
+			"valueAxes": [
+				{
+					"id": "ValueAxis-1",
+					"title": "Axis title",
+					"titleFontSize": 0
+				}
+			],
+			"allLabels": [],
+			"balloon": {},
+			"legend": {
+				"useGraphSettings": true
+			},
+			"dataLoader": {
+			    "url": "<?=url("backend/tresfera/taketsystem/stats/getStatsData")?>",
+			    "format": "json"
+			  },
+			/*"dataProvider": [
+				{
+					"date": "2014-03-01",
+					"ko": 8,
+					"mix": 5,
+					"ok": 89
+				},
+				{
+					"date": "2014-03-02",
+					"ko": 6,
+					"mix": 7,
+					"ok": 94
+				},
+				{
+					"date": "2014-03-03",
+					"ko": 2,
+					"mix": 3,
+					"ok": 2
+				},
+				{
+					"date": "2014-03-04",
+					"ko": 1,
+					"mix": 3,
+					"ok": 68
+				},
+				{
+					"date": "2014-03-05",
+					"ko": 2,
+					"mix": 1,
+					"ok": 2
+				},
+				{
+					"date": "2014-03-06",
+					"ko": 3,
+					"mix": 2,
+					"ok": 57
+				},
+				{
+					"date": "2014-03-07",
+					"ko": 6,
+					"mix": 8,
+					"ok": 93
+				}
+			]*/
+		}
+	);
+</script>

@@ -1,0 +1,83 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table tresfera_organizaciones_empresa'
+    - builder_table_create_tresfera_organizaciones_empresa.php
+1.0.3:
+    - 'Updated table tresfera_organizaciones_empresa'
+    - builder_table_update_tresfera_organizaciones_empresa.php
+1.0.4:
+    - 'Created table tresfera_organizaciones_'
+    - builder_table_create_tresfera_organizaciones_.php
+1.0.5:
+    - 'Updated table tresfera_organizaciones_'
+    - builder_table_update_tresfera_organizaciones_departamento.php
+1.0.6:
+    - 'Updated table tresfera_organizaciones_departamento'
+    - builder_table_update_tresfera_organizaciones_departamento_2.php
+1.0.7:
+    - 'Updated table tresfera_organizaciones_empresa'
+    - builder_table_update_tresfera_organizaciones_empresa_2.php
+1.0.8:
+    - 'Updated table tresfera_organizaciones_empresa'
+    - builder_table_update_tresfera_organizaciones_empresa_3.php
+1.0.9:
+    - 'Updated table tresfera_organizaciones_departamento'
+    - builder_table_update_tresfera_organizaciones_departamento_3.php
+1.0.10:
+    - 'Created table tresfera_organizaciones_familia_puesto'
+    - builder_table_create_tresfera_organizaciones_familia_puesto.php
+1.0.11:
+    - 'Created table tresfera_organizaciones_puesto'
+    - builder_table_create_tresfera_organizaciones_puesto.php
+1.0.12:
+    - 'Created table tresfera_organizaciones_persona'
+    - builder_table_create_tresfera_organizaciones_persona.php
+1.0.13:
+    - 'Created table tresfera_organizaciones_'
+    - builder_table_create_tresfera_organizaciones__2.php
+1.0.14:
+    - 'Created table tresfera_organizaciones_localizacion'
+    - builder_table_create_tresfera_organizaciones_localizacion.php
+1.0.15:
+    - 'Updated table tresfera_organizaciones_'
+    - builder_table_update_tresfera_organizaciones_persona_puesto.php
+1.0.16:
+    - 'Updated table tresfera_organizaciones_persona'
+    - builder_table_update_tresfera_organizaciones_persona.php
+1.0.17:
+    - 'Updated table tresfera_organizaciones_persona'
+    - builder_table_update_tresfera_organizaciones_persona_2.php
+1.0.18:
+    - 'Updated table tresfera_organizaciones_departamento'
+    - builder_table_update_tresfera_organizaciones_departamento_4.php
+1.0.19:
+    - 'Updated table tresfera_organizaciones_departamento'
+    - builder_table_update_tresfera_organizaciones_departamento_5.php
+1.0.20:
+    - 'Updated table tresfera_organizaciones_departamento'
+    - builder_table_update_tresfera_organizaciones_departamento_6.php
+1.0.21:
+    - 'Updated table tresfera_organizaciones_persona'
+    - builder_table_update_tresfera_organizaciones_persona_3.php
+1.0.22:
+    - 'Updated table tresfera_organizaciones_persona'
+    - builder_table_update_tresfera_organizaciones_persona_4.php
+1.0.23:
+    - 'Updated table tresfera_organizaciones_puesto'
+    - builder_table_update_tresfera_organizaciones_puesto.php
+1.0.24:
+    - 'Updated table tresfera_organizaciones_persona'
+    - builder_table_update_tresfera_organizaciones_persona_5.php
+1.0.25:
+    - 'Updated table tresfera_organizaciones_puesto'
+    - builder_table_update_tresfera_organizaciones_puesto_2.php
+1.0.26:
+    - 'Updated table tresfera_organizaciones_persona'
+    - builder_table_update_tresfera_organizaciones_persona_6.php
+1.0.27:
+    - 'Updated table tresfera_organizaciones_persona'
+    - builder_table_update_tresfera_organizaciones_persona_7.php
+1.0.28:
+    - 'Updated table tresfera_organizaciones_localizacion'
+    - builder_table_update_tresfera_organizaciones_localizacion.php

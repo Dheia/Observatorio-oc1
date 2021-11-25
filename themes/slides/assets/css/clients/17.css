@@ -1,0 +1,61 @@
+section.questions h1, h1.titulo {
+    background-color: #000000;
+    color: #ffffff;
+}
+.bar-footer .button:last-child {
+    color: #ff0c19;
+}
+.button-icon.icon.ion-man:before, .button-icon.icon.ion-woman:before {
+    color: #ff0c19;
+}
+.item-radio .radio-icon {
+    color: #ff0c19;
+}
+.item-radio, .item.item-input, .item.item-textarea, textarea {
+	border-color: #ff0c19;
+}
+.item-radio .item-content {
+    font-weight: bold;
+}
+h3 {
+	font-size: 160%;
+	font-weight: bold;
+}
+
+.bar.bar-header.bar-light {
+    background: #ff0c19 !important;
+}
+
+.seguir {
+	color: #ff0c19;
+}
+.h-100.dotted {
+    background: none;
+}
+.full-image h1 {
+    color: #fff;
+    text-shadow: 3px 1px #000;
+    margin-top: 358px;
+    display: none;
+}
+section > div.h-10 {
+    height: 12%;
+}
+section > div.h-20 {
+height: 14%;
+}
+section > div.h-80 {
+    height: 95%;
+}
+.item-complex .item-content, .item-radio .item-content {
+    padding: 13px 49px 13px 16px;
+}
+ .sex label.item.item-radio {
+    width: 100% !important;
+}
+.button-icon.icon.ion-woman {
+    margin-right: 6%;
+}
+.item-content {
+	text-overflow: initial;
+}

@@ -1,0 +1,10 @@
+name: Datos
+form: $/tresfera/envios/models/dato/fields.yaml
+modelClass: Tresfera\Envios\Models\Dato
+defaultRedirect: tresfera/envios/datos
+create:
+    redirect: 'tresfera/envios/datos/update/:id'
+    redirectClose: tresfera/envios/datos
+update:
+    redirect: tresfera/envios/datos
+    redirectClose: tresfera/envios/datos

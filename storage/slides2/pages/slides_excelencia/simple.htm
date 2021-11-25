@@ -1,0 +1,30 @@
+title = "1 Pregunta"
+url = "/slides/slide/:code"
+description = "No usar"
+type = "excelencia"
+layout = 'default'
+
+[taketsystemTemplate]
+==
+
+<!-- Content -->
+<section>
+    <!-- Flex Items , Flex Box themselves -->
+    <div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+	{repeater name="questions" prompt="Añadir otra pregunta"}
+    <div class="h-80">
+        <div>
+	      <div data-role="pregunta" data-type="smiles">
+            <h2>{question name="question" label="Pregunta"}{/question}</h2>
+          </div>
+    	</div>
+    </div>
+    {/repeater}
+    <div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+</section>

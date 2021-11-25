@@ -1,0 +1,10 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+scopes:
+    Devices:
+        # Filter name
+        label: Tablets
+        group: device_id
+        modelClass: Tresfera\Taketsystem\Models\Result
+        nameColumn: device_id

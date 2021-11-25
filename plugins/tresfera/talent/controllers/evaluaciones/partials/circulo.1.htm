@@ -1,0 +1,444 @@
+
+ <style>
+    .circle-1.circle-little > div {
+       border-radius: 100px; 
+       border-right:  8px  solid red; 
+       border-bottom:  8px  solid red; 
+       background-color: transparent; 
+       height: 100px; width: 100px;
+   }
+   .circle-little .circle-part-2 {
+       margin-top: -34px;
+   
+   }
+   .circle-little .circle-part-3 {
+       margin-left: -34px;
+   }
+   .circle-2.circle-little > div {
+       border-radius: 35px; 
+       border-right:  8px  solid red; 
+       border-bottom:  8px  solid red; 
+       background-color: transparent; 
+       height: 35px; width: 35px;
+   }
+   .circle-2.circle-little .circle-part-2 {
+       margin-top: -19px;
+   
+   }
+   .circle-2.circle-little .circle-part-3 {
+       margin-left: -19px;
+   }
+   .circle-3.circle-little > div {
+       border-radius: 20px; 
+       border-right:  8px  solid red; 
+       border-bottom:  8px  solid red; 
+       background-color: transparent; 
+       height: 20px; width: 20px;
+   }
+   .circle-3.circle-little .circle-part-2 {
+       margin-top: -4px;
+   
+   }
+   .circle-3.circle-little .circle-part-3 {
+       margin-left: -4px;
+   }
+    </style>
+    
+    <div class="elemento {{class}}" style="top: {{top}}px;left: {{left}}px">
+           {% set num_semicircles = (value1 / (3)) + 1 %}
+           {% set grados = (270 * value1/ (5)) - 180 %}
+           {% set gradosPrimos = (270 * value1/ (5)) %}
+           <div class="circle circle-1 circle-little circle-color-1">
+               {% if gradosPrimos >= 0 %}
+                   {% if gradosPrimos >= 89 %}
+                       <div class="circle-part-2"></div>
+                   {% else %}
+                       {% if gradosPrimos > 0 and gradosPrimos <= 10 %}
+                           {% set marginLeft = -30 %}
+                           {% set marginTop  = -36 %}
+                           {% set grados  = 10 - 180 %}
+                       {% elseif gradosPrimos > 10 and gradosPrimos < 20 %}
+                           {% set marginLeft = -24 %}
+                           {% set marginTop  = -38 %}
+                           {% set grados  = 20 - 180 %}
+                       {% elseif gradosPrimos > 20 and gradosPrimos < 30 %}
+                           {% set marginLeft = -20 %}
+                           {% set marginTop  = -38 %}
+                           {% set grados  = 30 - 180 %}
+                       {% elseif gradosPrimos > 30 and gradosPrimos < 40 %}
+                           {% set marginLeft = -15 %}
+                           {% set marginTop  = -38 %}
+                           {% set grados  = 40 - 180 %}
+                       {% elseif gradosPrimos > 40 and gradosPrimos < 50 %}
+                           {% set marginLeft = -12 %}
+                           {% set marginTop  = -39 %}
+                           {% set grados  = 50 - 180 %}
+                       {% elseif gradosPrimos > 50 and gradosPrimos < 60 %}
+                           {% set marginLeft = -7 %}
+                           {% set marginTop  = -39 %}
+                           {% set grados  = 60 - 180 %}
+                       {% elseif gradosPrimos > 60 and gradosPrimos < 70 %}
+                           {% set marginLeft = -3 %}
+                           {% set marginTop  = -38 %}
+                           {% set grados  = 70 - 180 %}
+                       {% elseif gradosPrimos > 70 and gradosPrimos < 89 %}
+                           {% set marginLeft = 0 %}
+                           {% set marginTop  = -34 %}
+                           {% set grados  = 85 - 180 %}
+                       {% endif %}
+                       <div class="circle-part-2" style="transform: rotate({{grados}}deg);margin-left: {{marginLeft|number_format(0)}}px;margin-top: {{marginTop|number_format(0)}}px;"></div>
+                   {% endif %}
+               {% endif %}
+               {% if gradosPrimos > 90 %}
+                   {% if gradosPrimos >= 179 %}
+                       <div class="circle-part-1"></div>
+                   {% else %}
+                       {% if gradosPrimos > 89 and gradosPrimos <= 100 %}
+                           {% set marginLeft = 3 %}
+                           {% set marginTop  = -30 %}
+                           {% set grados  = 100 - 180 %}
+                       {% elseif gradosPrimos > 100 and gradosPrimos < 110 %}
+                           {% set marginLeft = 5 %}
+                           {% set marginTop  = -27 %}
+                           {% set grados  = 110 - 180 %}
+                       {% elseif gradosPrimos > 110 and gradosPrimos < 120 %}
+                           {% set marginLeft = 7 %}
+                           {% set marginTop  = -23 %}
+                           {% set grados  = 120 - 180 %}
+                       {% elseif gradosPrimos > 120 and gradosPrimos < 130 %}
+                           {% set marginLeft = 7 %}
+                           {% set marginTop  = -19 %}
+                           {% set grados  = 130 - 180 %}
+                       {% elseif gradosPrimos > 130 and gradosPrimos < 140 %}
+                           {% set marginLeft = 7 %}
+                           {% set marginTop  = -15 %}
+                           {% set grados  = 140 - 180 %}
+                       {% elseif gradosPrimos > 140 and gradosPrimos < 150 %}
+                           {% set marginLeft = 7 %}
+                           {% set marginTop  = -10 %}
+                           {% set grados  = 150 - 180 %}
+                       {% elseif gradosPrimos > 150 and gradosPrimos < 160 %}
+                           {% set marginLeft = 5 %}
+                           {% set marginTop  = -6 %}
+                           {% set grados  = 160 - 180 %}
+                       {% elseif gradosPrimos > 160 and gradosPrimos < 170 %}
+                           {% set marginLeft = 3 %}
+                           {% set marginTop  = -1 %}
+                           {% set grados  = 170 - 180 %}
+                       {% elseif gradosPrimos > 170 and gradosPrimos < 180 %}
+                           {% set marginLeft = 0 %}
+                           {% set marginTop  = 0 %}
+                           {% set grados  = 180 - 180 %}
+                       {% endif %}
+   
+                       <div class="circle-part-1" style="transform: rotate({{grados}}deg);margin-left: {{marginLeft|number_format(0)}}px;margin-top: {{marginTop|number_format(0)}}px;"></div>
+                   {% endif %}
+               {% endif %}
+               {% if gradosPrimos > 180 %}
+                   {% if gradosPrimos >= 265 %}
+                       <div class="circle-part-3"></div>
+                   {% else %}
+                       {% if gradosPrimos > 179 and gradosPrimos <= 190 %}
+                           {% set marginLeft = -3 %}
+                           {% set marginTop  = 3 %}
+                           {% set grados  = 190 - 180 %}
+                       {% elseif gradosPrimos > 190 and gradosPrimos < 200 %}
+                           {% set marginLeft = -7 %}
+                           {% set marginTop  = 5 %}
+                           {% set grados  = 200 - 180 %}
+                       {% elseif gradosPrimos > 200 and gradosPrimos < 210 %}
+                           {% set marginLeft = -27 %}
+                           {% set marginTop  = 3 %}
+                           {% set grados  = 210 - 180 %}
+                       {% elseif gradosPrimos > 210 and gradosPrimos < 220 %}
+                           {% set marginLeft = -15 %}
+                           {% set marginTop  = 7 %}
+                           {% set grados  = 220 - 180 %}
+                       {% elseif gradosPrimos > 220 and gradosPrimos < 230 %}
+                           {% set marginLeft = -19 %}
+                           {% set marginTop  = 7 %}
+                           {% set grados  = 230 - 180 %}
+                       {% elseif gradosPrimos > 230 and gradosPrimos < 240 %}
+                           {% set marginLeft = -22 %}
+                           {% set marginTop  = 6 %}
+                           {% set grados  = 240 - 180 %}
+                       {% elseif gradosPrimos > 240 and gradosPrimos < 250 %}
+                           {% set marginLeft = -26 %}
+                           {% set marginTop  = 4 %}
+                           {% set grados  = 250 - 180 %}
+                       {% elseif gradosPrimos > 250 and gradosPrimos < 265 %}
+                           {% set marginLeft = -30 %}
+                           {% set marginTop  = 3 %}
+                           {% set grados  = 260 - 180 %}
+                       {% endif %}
+                       <div class="circle-part-3" style="transform: rotate({{grados}}deg);margin-left: {{marginLeft|number_format(0)}}px;margin-top: {{marginTop|number_format(0)}}px;"></div>
+                   {% endif %}
+               {% endif %}
+   
+           </div>
+           
+           {% set num_semicircles = (value2 / (3)) + 1 %}
+           {% set grados = (270 * value2/ (5)) - 180 %}
+           {% set gradosPrimos = (270 * value2/ (5)) %}
+           <div class="circle circle-2 circle-little circle-color-1">
+               {% if gradosPrimos >= 0 %}
+                   {% if gradosPrimos >= 89 %}
+                       <div class="circle-part-2"></div>
+                   {% else %}
+                       {% if gradosPrimos > 0 and gradosPrimos <= 10 %}
+                           {% set marginLeft = -30/2 %}
+                           {% set marginTop  = -36/2 %}
+                           {% set grados  = 10 - 180 %}
+                       {% elseif gradosPrimos > 10 and gradosPrimos < 20 %}
+                           {% set marginLeft = -24/2 %}
+                           {% set marginTop  = -38/2 %}
+                           {% set grados  = 20 - 180 %}
+                       {% elseif gradosPrimos > 20 and gradosPrimos < 30 %}
+                           {% set marginLeft = -20/2 %}
+                           {% set marginTop  = -38/2 %}
+                           {% set grados  = 30 - 180 %}
+                       {% elseif gradosPrimos > 30 and gradosPrimos < 40 %}
+                           {% set marginLeft = -15/2 %}
+                           {% set marginTop  = -38/2 %}
+                           {% set grados  = 40 - 180 %}
+                       {% elseif gradosPrimos > 40 and gradosPrimos < 50 %}
+                           {% set marginLeft = -12/2 %}
+                           {% set marginTop  = -39/2 %}
+                           {% set grados  = 50 - 180 %}
+                       {% elseif gradosPrimos > 50 and gradosPrimos < 60 %}
+                           {% set marginLeft = -7/2 %}
+                           {% set marginTop  = -39/2 %}
+                           {% set grados  = 60 - 180 %}
+                       {% elseif gradosPrimos > 60 and gradosPrimos < 70 %}
+                           {% set marginLeft = -3/2 %}
+                           {% set marginTop  = -38/2 %}
+                           {% set grados  = 70 - 180 %}
+                       {% elseif gradosPrimos > 70 and gradosPrimos < 89 %}
+                           {% set marginLeft = 0/2 %}
+                           {% set marginTop  = -34/2 %}
+                           {% set grados  = 85 - 180 %}
+                       {% endif %}
+                       <div class="circle-part-2" style="transform: rotate({{grados}}deg);margin-left: {{marginLeft|number_format(0)}}px;margin-top: {{marginTop|number_format(0)}}px;"></div>
+                   {% endif %}
+               {% endif %}
+               {% if gradosPrimos > 90 %}
+                   {% if gradosPrimos >= 179 %}
+                       <div class="circle-part-1"></div>
+                   {% else %}
+                       {% if gradosPrimos > 89 and gradosPrimos <= 100 %}
+                           {% set marginLeft = 3/2 %}
+                           {% set marginTop  = -30/2 %}
+                           {% set grados  = 100 - 180 %}
+                       {% elseif gradosPrimos > 100 and gradosPrimos < 110 %}
+                           {% set marginLeft = 5/2 %}
+                           {% set marginTop  = -27/2 %}
+                           {% set grados  = 110 - 180 %}
+                       {% elseif gradosPrimos > 110 and gradosPrimos < 120 %}
+                           {% set marginLeft = 7/2 %}
+                           {% set marginTop  = -23/2 %}
+                           {% set grados  = 120 - 180 %}
+                       {% elseif gradosPrimos > 120 and gradosPrimos < 130 %}
+                           {% set marginLeft = 7/2 %}
+                           {% set marginTop  = -19/2 %}
+                           {% set grados  = 130 - 180 %}
+                       {% elseif gradosPrimos > 130 and gradosPrimos < 140 %}
+                           {% set marginLeft = 7/2 %}
+                           {% set marginTop  = -15/2 %}
+                           {% set grados  = 140 - 180 %}
+                       {% elseif gradosPrimos > 140 and gradosPrimos < 150 %}
+                           {% set marginLeft = 7/2 %}
+                           {% set marginTop  = -10/2 %}
+                           {% set grados  = 150 - 180 %}
+                       {% elseif gradosPrimos > 150 and gradosPrimos < 160 %}
+                           {% set marginLeft = 5/2 %}
+                           {% set marginTop  = -6/2 %}
+                           {% set grados  = 160 - 180 %}
+                       {% elseif gradosPrimos > 160 and gradosPrimos < 170 %}
+                           {% set marginLeft = 3/2 %}
+                           {% set marginTop  = -1/2 %}
+                           {% set grados  = 170 - 180 %}
+                       {% elseif gradosPrimos > 170 and gradosPrimos < 180 %}
+                           {% set marginLeft = 0 %}
+                           {% set marginTop  = 0 %}
+                           {% set grados  = 180 - 180 %}
+                       {% endif %}
+   
+                       <div class="circle-part-1" style="transform: rotate({{grados}}deg);margin-left: {{marginLeft|number_format(0)}}px;margin-top: {{marginTop|number_format(0)}}px;"></div>
+                   {% endif %}
+               {% endif %}
+               {% if gradosPrimos > 180 %}
+                   {% if gradosPrimos >= 265 %}
+                       <div class="circle-part-3"></div>
+                   {% else %}
+                       {% if gradosPrimos > 179 and gradosPrimos <= 190 %}
+                           {% set marginLeft = -3/2 %}
+                           {% set marginTop  = 3/2 %}
+                           {% set grados  = 190 - 180 %}
+                       {% elseif gradosPrimos > 190 and gradosPrimos < 200 %}
+                           {% set marginLeft = -7/2 %}
+                           {% set marginTop  = 5/2 %}
+                           {% set grados  = 200 - 180 %}
+                       {% elseif gradosPrimos > 200 and gradosPrimos < 210 %}
+                           {% set marginLeft = -27/2 %}
+                           {% set marginTop  = 3/2 %}
+                           {% set grados  = 210 - 180 %}
+                       {% elseif gradosPrimos > 210 and gradosPrimos < 220 %}
+                           {% set marginLeft = -15/2 %}
+                           {% set marginTop  = 7/2 %}
+                           {% set grados  = 220 - 180 %}
+                       {% elseif gradosPrimos > 220 and gradosPrimos < 230 %}
+                           {% set marginLeft = -19/2 %}
+                           {% set marginTop  = 7/2 %}
+                           {% set grados  = 230 - 180 %}
+                       {% elseif gradosPrimos > 230 and gradosPrimos < 240 %}
+                           {% set marginLeft = -22/2 %}
+                           {% set marginTop  = 6/2 %}
+                           {% set grados  = 240 - 180 %}
+                       {% elseif gradosPrimos > 240 and gradosPrimos < 250 %}
+                           {% set marginLeft = -26/2 %}
+                           {% set marginTop  = 4/2 %}
+                           {% set grados  = 250 - 180 %}
+                       {% elseif gradosPrimos > 250 and gradosPrimos < 265 %}
+                           {% set marginLeft = -30/2 %}
+                           {% set marginTop  = 3/2 %}
+                           {% set grados  = 260 - 180 %}
+                       {% endif %}
+                       <div class="circle-part-3" style="transform: rotate({{grados}}deg);margin-left: {{marginLeft|number_format(0)}}px;margin-top: {{marginTop|number_format(0)}}px;"></div>
+                   {% endif %}
+               {% endif %}
+           </div>
+           {% set num_semicircles = (value3 / (3)) + 1 %}
+           {% set grados = (270 * value3/ (5)) - 180 %}
+           {% set gradosPrimos = (270 * value3/ (5)) %}
+           <div class="circle circle-3 circle-little circle-color-1">
+               {% if gradosPrimos >= 0 %}
+                   {% if gradosPrimos >= 89 %}
+                       <div class="circle-part-2"></div>
+                   {% else %}
+                       {% if gradosPrimos > 0 and gradosPrimos <= 10 %}
+                           {% set marginLeft = -30/4.6 %}
+                           {% set marginTop  = -36/4.6 %}
+                           {% set grados  = 10 - 180 %}
+                       {% elseif gradosPrimos > 10 and gradosPrimos < 20 %}
+                           {% set marginLeft = -24/4.6 %}
+                           {% set marginTop  = -38/4.6 %}
+                           {% set grados  = 20 - 180 %}
+                       {% elseif gradosPrimos > 20 and gradosPrimos < 30 %}
+                           {% set marginLeft = -20/4.6 %}
+                           {% set marginTop  = -38/4.6 %}
+                           {% set grados  = 30 - 180 %}
+                       {% elseif gradosPrimos > 30 and gradosPrimos < 40 %}
+                           {% set marginLeft = -15/4.6 %}
+                           {% set marginTop  = -38/4.6 %}
+                           {% set grados  = 40 - 180 %}
+                       {% elseif gradosPrimos > 40 and gradosPrimos < 50 %}
+                           {% set marginLeft = -12/4.6 %}
+                           {% set marginTop  = -39/4.6 %}
+                           {% set grados  = 50 - 180 %}
+                       {% elseif gradosPrimos > 50 and gradosPrimos < 60 %}
+                           {% set marginLeft = -7/4.6 %}
+                           {% set marginTop  = -39/4.6 %}
+                           {% set grados  = 60 - 180 %}
+                       {% elseif gradosPrimos > 60 and gradosPrimos < 70 %}
+                           {% set marginLeft = -3/4.6 %}
+                           {% set marginTop  = -38/4.6 %}
+                           {% set grados  = 70 - 180 %}
+                       {% elseif gradosPrimos > 70 and gradosPrimos < 89 %}
+                           {% set marginLeft = 0/4.6 %}
+                           {% set marginTop  = -34/4.6 %}
+                           {% set grados  = 85 - 180 %}
+                       {% endif %}
+                       <div class="circle-part-2" style="transform: rotate({{grados}}deg);margin-left: {{marginLeft|number_format(0)}}px;margin-top: {{marginTop|number_format(0)}}px;"></div>
+                   {% endif %}
+               {% endif %}
+               {% if gradosPrimos > 90 %}
+                   {% if gradosPrimos >= 179 %}
+                       <div class="circle-part-1"></div>
+                   {% else %}
+                       {% if gradosPrimos > 89 and gradosPrimos <= 100 %}
+                           {% set marginLeft = 3/4.6 %}
+                           {% set marginTop  = -30/4.6 %}
+                           {% set grados  = 100 - 180 %}
+                       {% elseif gradosPrimos > 100 and gradosPrimos < 110 %}
+                           {% set marginLeft = 5/4.6 %}
+                           {% set marginTop  = -27/4.6 %}
+                           {% set grados  = 110 - 180 %}
+                       {% elseif gradosPrimos > 110 and gradosPrimos < 120 %}
+                           {% set marginLeft = 7/4.6 %}
+                           {% set marginTop  = -23/4.6 %}
+                           {% set grados  = 120 - 180 %}
+                       {% elseif gradosPrimos > 120 and gradosPrimos < 130 %}
+                           {% set marginLeft = 7/4.6 %}
+                           {% set marginTop  = -19/4.6 %}
+                           {% set grados  = 130 - 180 %}
+                       {% elseif gradosPrimos > 130 and gradosPrimos < 140 %}
+                           {% set marginLeft = 7/4.6 %}
+                           {% set marginTop  = -15/4.6 %}
+                           {% set grados  = 140 - 180 %}
+                       {% elseif gradosPrimos > 140 and gradosPrimos < 150 %}
+                           {% set marginLeft = 7/4.6 %}
+                           {% set marginTop  = -10/4.6 %}
+                           {% set grados  = 150 - 180 %}
+                       {% elseif gradosPrimos > 150 and gradosPrimos < 160 %}
+                           {% set marginLeft = 5/4.6 %}
+                           {% set marginTop  = -6/4.6 %}
+                           {% set grados  = 160 - 180 %}
+                       {% elseif gradosPrimos > 160 and gradosPrimos < 170 %}
+                           {% set marginLeft = 3/4.6 %}
+                           {% set marginTop  = -1/4.6 %}
+                           {% set grados  = 170 - 180 %}
+                       {% elseif gradosPrimos > 170 and gradosPrimos < 180 %}
+                           {% set marginLeft = 0 %}
+                           {% set marginTop  = 0 %}
+                           {% set grados  = 180 - 180 %}
+                       {% endif %}
+   
+                       <div class="circle-part-1" style="transform: rotate({{grados}}deg);margin-left: {{marginLeft|number_format(0)}}px;margin-top: {{marginTop|number_format(0)}}px;"></div>
+                   {% endif %}
+               {% endif %}
+               {% if gradosPrimos > 180 %}
+                   {% if gradosPrimos >= 265 %}
+                       <div class="circle-part-3"></div>
+                   {% else %}
+                       {% if gradosPrimos > 179 and gradosPrimos <= 190 %}
+                           {% set marginLeft = -3/4.6 %}
+                           {% set marginTop  = 3/4.6 %}
+                           {% set grados  = 190 - 180 %}
+                       {% elseif gradosPrimos > 190 and gradosPrimos < 200 %}
+                           {% set marginLeft = -7/4.6 %}
+                           {% set marginTop  = 5/4.6 %}
+                           {% set grados  = 200 - 180 %}
+                       {% elseif gradosPrimos > 200 and gradosPrimos < 210 %}
+                           {% set marginLeft = -27/4.6 %}
+                           {% set marginTop  = 3/4.6 %}
+                           {% set grados  = 210 - 180 %}
+                       {% elseif gradosPrimos > 210 and gradosPrimos < 220 %}
+                           {% set marginLeft = -15/4.6 %}
+                           {% set marginTop  = 7/4.6 %}
+                           {% set grados  = 220 - 180 %}
+                       {% elseif gradosPrimos > 220 and gradosPrimos < 230 %}
+                           {% set marginLeft = -19/4.6 %}
+                           {% set marginTop  = 7/4.6 %}
+                           {% set grados  = 230 - 180 %}
+                       {% elseif gradosPrimos > 230 and gradosPrimos < 240 %}
+                           {% set marginLeft = -22/4.6 %}
+                           {% set marginTop  = 6/4.6 %}
+                           {% set grados  = 240 - 180 %}
+                       {% elseif gradosPrimos > 240 and gradosPrimos < 250 %}
+                           {% set marginLeft = -26/4.6 %}
+                           {% set marginTop  = 4/4.6 %}
+                           {% set grados  = 250 - 180 %}
+                       {% elseif gradosPrimos > 250 and gradosPrimos < 265 %}
+                           {% set marginLeft = -30/4.6 %}
+                           {% set marginTop  = 3/4.6 %}
+                           {% set grados  = 260 - 180 %}
+                       {% endif %}
+                       <div class="circle-part-3" style="transform: rotate({{grados}}deg);margin-left: {{marginLeft|number_format(0)}}px;margin-top: {{marginTop|number_format(0)}}px;"></div>
+                   {% endif %}
+               {% endif %}
+           </div>
+           <div    class="tope" 
+                   style="background: #f1e7db; border: none; border-radius: 0; position: absolute; z-index: 10;margin-left: -76px;margin-top:-43px">
+           </div>
+   
+       </div>

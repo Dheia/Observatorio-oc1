@@ -1,0 +1,41 @@
+<div data-role="pregunta" 
+        data-question-type="segmentacion" 
+        data-answer-type="stars"
+        data-question
+        <?php 
+            $partial = "$/tresfera/taketsystem/slides/_field_css_custom.htm";
+            echo $this->makePartial(
+            $partial,
+                [ 
+                'campo' => $campo,
+                'slide' => $slide
+                ]
+            );
+        ?>
+    <?php if($campo['max_answers']) { 
+        if($campo['max_answers'] > 0) { ?>
+        data-max-answers="<?=$campo['max_answers']?>" 
+    <?php } else { ?>
+            data-max-answers="<?=count($campo['segmentacion'])?>" 
+    <?php } } elseif($campo['max_answers'] > 0) { ?>
+        data-max-answers="<?=$campo['max_answers']?>" 
+    <?php } else { ?> 
+        data-max-answers="<?=(1)?>" 
+    <?php } ?>
+        data-question-title="<?=$campo['title']?>" 
+        data-question-id="<?=$campo['tag']?>" class="sondeo_<?=$campo['tag']?>">
+    <?php if(!$campo['hide_title']) { ?><h1><?=$campo['title']?></h1><?php } ?>
+
+    <select class="bar-stars" id="stars_<?=$campo['tag']?>"> <!-- now hidden -->
+        <option value=""></option>
+
+        <?php 
+        foreach($campo['segmentacion'] as $answer) {
+    ?>
+        <option value="<?=$answer['code']?>"><?=$answer['title']?></option>
+    <?php
+        }
+    ?>
+      </select>
+    
+</div>

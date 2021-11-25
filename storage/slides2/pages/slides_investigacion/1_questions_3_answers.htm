@@ -1,0 +1,36 @@
+title = "1 preguntas - 3 respuestas"
+url = "/slides/slide/:code"
+layout = "render"
+description = "Haremos 1 preguntas con 3 respuestas"
+is_hidden = 0
+
+[taketsystemTemplate]
+==
+<!-- Content -->
+<section>
+    <!-- Flex Items , Flex Box themselves -->
+    <div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+    <div class="h-80">
+        <div>
+          <div data-role="pregunta" data-type="smiles">
+            <h2>{text name="question_1" label="Pregunta"}trato y amabilidad{/text}</h2>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="1" class="smile smile-1">
+	            <span>No</span>
+            </div>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="2" class="smile smile-2">
+	            <span>¿?</span>
+            </div>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="3" class="smile smile-3">
+	            <span>Sí</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+</section>

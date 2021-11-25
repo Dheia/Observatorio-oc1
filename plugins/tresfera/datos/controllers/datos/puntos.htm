@@ -1,0 +1,75 @@
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li><a href="<?=url("backend/tresfera/statistics/stats/dashboard")?>">Análisis</a></li>
+		        <li class="h3">
+		        <?php 
+		        	if(get('detalles')) {
+						?>
+							<?=get("filterName")?>    	
+						<?php
+								} else {
+						?>
+			    	Visió general   	
+			    	<?php    	
+		        	}
+		        ?>
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+<?php Block::endPut() ?>
+<?php echo $this->makePartial("$/tresfera/datos/controllers/datos/_filter_new.htm"); ?>  
+<a style="float: right;display: inline-block;margin-top: -60px;margin-right: 15px; margin-right: 100px;" 
+target="_blank"
+    class="btn btn-success" href="//devel.taket.es/backend/tresfera/datos/datos/puntosCSV">
+    CSV
+</a>
+<?php
+$keysOrder = [];
+if(isset($data[0]))
+$keysOrder = array_keys($data[0]);
+?>
+<div class="control-list" style="margin: -17px;">
+    <table class="table data">
+        <thead>
+            <tr>
+                            <?php
+                            foreach($keysOrder as $key=>$titulo) {
+                            ?>
+                            <th><span><?=$titulo?></span></th>
+                            <?php
+                            }
+                            ?>
+            </tr>
+        </thead>
+        <tbody>
+                        <?php
+$i=0;
+
+            if(isset($data))
+                            foreach($data as $id=>$row) {
+                             
+    $i++;
+//if($i>=100) continue;
+
+                        ?>
+                    <tr>
+                        <?
+                                foreach($keysOrder as $key=>$titulo) {
+                        ?>
+                        <th><span><?=isset($row[$titulo])?$row[$titulo]:""?></span></th>
+                        <?php
+                            }
+                        ?>
+                    </tr>
+                        <?php
+                        }
+                        ?>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,10 @@
+name: Departamentos
+form: $/tresfera/organizaciones/models/departamento/fields.yaml
+modelClass: Tresfera\Organizaciones\Models\Departamento
+defaultRedirect: tresfera/organizaciones/departamentos
+create:
+    redirect: 'tresfera/organizaciones/departamentos/update/:id'
+    redirectClose: tresfera/organizaciones/departamentos
+update:
+    redirect: tresfera/organizaciones/departamentos
+    redirectClose: tresfera/organizaciones/departamentos

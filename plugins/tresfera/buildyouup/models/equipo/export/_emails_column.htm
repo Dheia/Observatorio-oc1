@@ -1,0 +1,54 @@
+<?php 
+use Mja\Mail\Models\Email;
+use Mja\Mail\Models\EmailOpens;
+$leidos = 0;
+$no_leidos = 0;
+$no_enviados = 0;
+$evaluadores = $record->getEvaluadores();
+if(is_array($evaluadores))
+{
+foreach($evaluadores as $tipo=>$values) 
+{ 
+if(is_array($values)) {
+foreach($values as $evaluador) 
+{
+if( ( $tipo == "autoevaluado" && !$record->isCompletedAutoevaluado() )
+|| ( $tipo != "autoevaluado" && !$record->isCompletedEvaluador($evaluador['email']))    
+) 
+{
+if($tipo == "autoevaluado") 
+{
+if(!$evaluador['email'] || !isset($evaluador['send_at']) || !isset($evaluador['send_at']['date']))               
+$email = Email::whereIn("code", ['buildyouup.require.aprovacion','buildyouup.require.aprovacion_en'])
+->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+->whereRaw(\DB::raw("DATE(date) = DATE('".$record->created_at."')"))
+->first();
+else
+$email = Email::whereIn("code", ['buildyouup.require.aprovacion','buildyouup.require.aprovacion_en'])
+->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+->whereRaw(\DB::raw("DATE(date) = DATE('".$evaluador['send_at']['date']."')"))
+->first();
+} else {
+if(!$evaluador['email'] || !isset($evaluador['send_at']) || !isset($evaluador['send_at']['date'])) continue;
+$email = Email::whereIn("code", ['buildyouup.require.aprovacion','buildyouup.require.aprovacion_en','buildyouup.require.answer.evaluado_en','buildyouup.require.answer.evaluador','buildyouup.require.answer.evaluador_en'])
+->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+->whereRaw(\DB::raw("DATE(date) = DATE('".$evaluador['send_at']['date']."')"))
+->first();
+// echo $record->id." ".$evaluador['send_at']['date']."<br>";
+}
+if( isset($email->id) )
+{
+if($email->getTimesOpenedAttribute() > 0) $leidos++;
+else $no_leidos++;
+} else {
+echo $no_enviados++;
+}
+}
+}
+}
+}
+echo "Leidos: ".$leidos."\n";
+echo "No leidos: ".$no_leidos."\n";
+echo "No enviados: ".$no_enviados."\n";
+}
+?>

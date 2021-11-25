@@ -1,0 +1,19 @@
+# ===================================
+#  Import/Export Behavior Config
+# ===================================
+
+#defaultRedirect: 
+
+#import:
+#    title: Importar Equipos
+#    modelClass: Tresfera\Skillyouup\Models\Equipo
+#    list: $/tresfera/skillyouup/models/evaluacion/columns_admin_csv.yaml
+
+export:
+    title: Exportar Equipos
+    modelClass: Tresfera\Skillyouup\Models\EquipoExport
+#    modelClass: Tresfera\Skillyouup\Models\Equipo
+    list: $/tresfera/skillyouup/models/evaluacion/columns_admin_csv.yaml
+    fileName: evaluaciones.csv
+    redirect: tresfera/skillyouup/administrador
+#    useList: true

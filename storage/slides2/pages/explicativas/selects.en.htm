@@ -1,0 +1,525 @@
+title = "Segmentaciones"
+url = "/slides/slide/:code"
+layout = "render"
+description = "Segmentaciones"
+is_hidden = 0
+
+[taketsystemTemplate]
+==
+{variable type="text" name="title" label="Título"}{/variable}
+
+{variable type="text" name="continueText" default="Continuar" label="Texto botón continuar"}{/variable}
+
+{variable type="text" span="auto" name="numItems" label="Progreso: Pantalla actual"}{/variable}
+{variable type="text" span="auto" name="totalITems" label="Progreso: Total pantallas"}{/variable}
+{variable type="checkbox" span="auto" name="showProgres" label="Mostrar progreso"}{/variable}
+
+
+{repeater name="selects" prompt="Añade una nueva segmentacion"}
+  {variable type="text" span="auto" name="segmentacion" label="Segmentacion"}{/variable}
+  {variable type="text" span="auto" name="option" label="Opción"}{/variable}
+{/repeater}
+
+{mediafinder name="bg" label="Fondo"}{/mediafinder}
+{variable type="codeeditor" name="css" label="Personalizado"}{/variable}
+--
+<div id="{{slide_id}}" class="main bg selects">
+  <div class="row">
+    {% if showProgres %}
+
+    <div class="col">
+      <div class="num-progress">
+        {{numItems}}
+      </div>
+      <div class="progress">
+        <div class="percent" style="width: {{ numItems / totalITems * 100 }}%">
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="col">
+      <h1 class="title w-100">{{title}}</h1>
+    </div>
+  </div>
+  <div class="row" id="question">
+    <div class="col">
+      {% set segmentacionOld = '' %}
+      {% set nextIterator = 1 %}
+      {% for segmentacion in selects %}
+        {% if segmentacion.segmentacion != segmentacionOld %}
+        <div class="h-10">
+          <div>
+            <h3>{{segmentacion.segmentacion}}</h3>
+              <select  
+                  ng-modal="selectValue"
+                  data-require=1
+                  data-answer-type="sondeo"
+                  voto data-voto="1" 
+                  data-question-title="{{segmentacion.segmentacion}}" 
+                  data-question="{{segmentacion.segmentacion}}" 
+                  data-question-type="select" 
+                  data-value-type="sondeo" >
+                  <option value="">- Select one option -</option>
+        {% endif %}
+                  <option value="{{segmentacion.option}}">{{segmentacion.option}}</option>
+        {% if selects[nextIterator] is defined %}
+            {% set nextOption = selects[nextIterator] %}
+
+            {% if nextOption.segmentacion != segmentacion.segmentacion %}
+                </select>
+              </div>
+            </div>
+            {% endif %}
+        {% else %}
+              </select>
+            </div>
+          </div>
+        {% endif %}
+                
+        {% set nextIterator = nextIterator + 1 %}
+
+        {% set segmentacionOld = segmentacion.segmentacion %}
+      {% endfor %}
+    </div>
+  </div>
+
+
+  <div id="continue">
+      <button ng-click="prevStep()" type="submit" class="button goback icon-right ion-chevron-right button-clear button-dark">
+          Back
+    </button>
+    <button  ng-click="respuestas()" type="submit" class="button icon-right ion-chevron-right button-clear button-dark">
+      Continue
+    </button>
+  </div>
+
+</div>
+
+<style>
+  button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -180px;
+}
+section {
+  position: absolute;
+  width: 1200px;
+  height: 700px;
+}
+{{css}}
+.bg {
+    background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.main {
+    height: 100%;
+    width: 100%;
+}
+.circle {
+  height: 150px;
+    background-size: 100%;
+    background-position: 0;
+}
+.smile span {
+    font-size: 70%;
+    background-color: #fff;
+    text-align: center;
+    list-style: none;
+    line-height: 100%;
+    height: auto;
+    display: block;
+    width: 100%;
+    word-wrap: initial;
+    margin-top: 0;
+}
+#question {
+    position: absolute;
+    top: 64%;
+}
+.circle.circle-1 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn1.png);
+}
+.circle.circle-2 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn2.png);
+}
+.circle.circle-3 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn3.png);
+}
+.circle.circle-4 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn4.png);
+}
+.circle.circle-5 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn5.png);
+}
+.button.button-dark.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 0px 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 165px;
+}
+.button.icon-right:before {
+display: none;
+}
+
+
+div#back {
+    position: absolute;
+}
+.bg {
+    background-position: bottom left;
+    background-size: 100%;
+}
+.row {
+    display: block;
+    width: 100%;
+    position: absolute;
+}
+.col-25 {
+    max-width: 31.3333%;
+    display: inline-block;
+    margin-top: 27px;
+}
+.pregunta.horizontal h2 {
+    text-align: left;
+    display: inline-block;
+    width: 45%;
+    font-weight: normal;
+    font-size: 19px;
+}
+.col-12 {
+  max-width: 11.3333%;
+  display: inline-block;
+}
+h1, .h1 {
+    font-size: 110%;
+    color: #fff;
+}
+.transparent {
+    vertical-align: middle;
+}
+
+.transparent span {
+  padding: 15px 30px;
+  line-height: 100%;
+  font-size: 80%;
+  display: block;
+  color: #fff;
+  font-style: italic;
+  background: rgba(255,255,255,.5);
+  width: 97%;
+}
+.percent {
+    background: rgba(255, 255, 255, 0.6);
+    height: 10px;
+}
+.progress {
+    width: 60%;
+    margin-left: 20%;
+    border: 2px solid #fff;
+    margin-bottom: 25px;
+}
+.num-progress {
+    position: relative;
+    left: -29%;
+    color: #fff;
+    margin-bottom: 11px;
+    margin-top: 23px;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #e3c06a;
+    border-color: #e3c06a;
+}
+body, .ionic-body {
+    font-size: 26px;
+}
+.circle {
+    height: 150px;
+    background-size: 120%;
+    background-position: -10px;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #e3c06a;
+    border-color: #e3c06a;
+    left: 50%;
+    margin-left: -40px;
+}
+#question {
+    position: absolute;
+    top: 37%;
+}
+.pregunta.horizontal h2 {
+    color: #fff;
+}
+.pregunta.horizontal .smile {
+    vertical-align: middle;
+    margin-top: -10px;
+    margin-left: 2%;
+    height: 75px;
+    width: 66px;
+    background-size: 145%;
+    background-position-y: -7px;
+}
+.smile span {
+  display: none;
+
+     background: transparent;
+    color: #fff;
+
+     margin-top: -30px;
+    vertical-align: bottom;
+}
+#question > .col > *:first-child span {
+    display: block;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #fff;
+    border-color: #fff;
+    left: 67%;
+    margin-left: -40px;
+    bottom: 80px;
+}
+.circle.noselect {
+    background-image: url(//talentapp360.taket.es/storage/app/media/test/btn_active.png);
+}.col-25 {
+    max-width: 31.3333%;
+    display: inline-block;
+    margin-top: 27px;
+    text-align: center;
+    margin-left: 20px;
+}
+.smile.noselect {
+    background-position-y: -10px;
+}
+.selects .h-10 {
+    padding-left: 90px;
+}
+.selects .h-10 h3 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: -3px;
+}
+.selects .h-10 {
+    padding-left: 90px;
+    width: 40%;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 15px;
+}
+select {
+    padding: 7px;
+    margin-top: 10px;
+    width: 100%;
+}
+.selects h1 {
+    text-align: center;
+}
+.selects h1.title.w-100 {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 35px;
+    color: #fff;
+    left: 0;
+    color: #fff;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -220px;
+}
+button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -360px;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    bottom: 40px;
+}
+.selects .h-10 {
+    padding-left: 107px;
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    .selects.bg {
+      background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+  }
+  .view-container {
+    height: calc(100% + 60px);
+}
+  .selects button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 0%;
+}
+.selects #start button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 67%;
+    margin-left: 48%;
+    left: -62px;
+}
+.selects h1.title.w-100 {
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 24px;
+    top: 2%;
+    /* left: 520px; */
+    color: #000;
+}
+.selects h3.title {
+    position: relative;
+    display: inline;
+    font-size: 19px;
+    font-weight: normal;
+    width: 20%;
+    text-align: center;
+    left: 10%;
+    margin-left: -10%;
+    margin-top: 308px;
+    color: #000;
+}
+.selects .progress {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 12px;
+}
+.selects .num-progress {
+    position: relative;
+    left: 15%;
+    color: #fff;
+    margin-bottom: 11px;
+    margin-top: 2px;
+}
+.selects h1.title.w-100 {
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 18px;
+    top: 0%;
+    left: 0;
+    color: #fff;
+}
+.selects.bg {
+    background-image: url(//talentapp360.taket.es/storage/app/media//test/DeepinScreenshot_20181114121128.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.selects .row {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+.selects #question {
+    position: relative;
+    top: 0;
+}
+
+
+.selects .h-10 {
+    padding-left: 0;
+}
+.selects .pregunta.horizontal h2 {
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+}
+.selects .smile span {
+    display: none;
+    background: transparent;
+    color: #fff;
+    margin-top: -10px;
+    vertical-align: bottom;
+    font-size: 13px;
+    display: none !important;
+}
+.selects .pregunta.horizontal .smile {
+    vertical-align: middle;
+    margin-top: -8px;
+    width: 16%;
+    background-size: 175%;
+    background-position-y: -27px;
+    background-position-x: -13px;
+    margin-bottom: 15px;
+}
+.selects button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    bottom: 10px;
+}
+.selects .pregunta.horizontal .smile.noselect {
+    background-position-y: -26px !important;
+}
+.selects button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -40px;
+}
+.selects #question {
+    position: relative;
+    top: 0;
+}
+.selects .row {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+.selects button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin: 0;
+    margin-left: 5px;
+}
+.selects div#continue {
+    width: 100%;
+    margin-left: -40%;
+    position: relative;
+    margin-top: 30px;
+}
+.selects button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: 40px !important;
+    position: relative;
+}
+.selects button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -80px !important;
+}
+.selects .h-10 {
+    padding-left: 107px;
+    width: 90%;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 15px;
+    margin-left: 5%;
+    padding-left: 0;
+
+}
+.main {
+    height: auto;
+    width: 100%;
+    min-height: 100%;
+}
+
+}
+</style>

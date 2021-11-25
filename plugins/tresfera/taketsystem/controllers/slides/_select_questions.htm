@@ -1,0 +1,15 @@
+<select
+	        id="Form-field-Slide-syntax_data-<?=$idQ?>"
+	        name="Slide[syntax_data][<?=$idQ?>]"
+	        class="form-control custom-select"
+	        >
+		    
+		  <option value="">Selecciona una pregunta</option>    
+        <?php 
+        	foreach($options as $id => $title) {
+	    ?>
+	        <option value="<?=$id?>"><?=$title?></option>
+	    <?php
+			}
+    	?>	     
+</select>

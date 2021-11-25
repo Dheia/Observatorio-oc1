@@ -1,0 +1,78 @@
+section.questions h1, h1.titulo {
+    background-color: #101f62;
+    color: #ffffff;
+}
+.bar-footer .button:last-child {
+    color: #101f62;
+}
+.button-icon.icon.ion-man:before, .button-icon.icon.ion-woman:before {
+    color: #101f62;
+}
+.item-radio .radio-icon {
+    color: #101f62;
+}
+.item-radio, .item.item-input, .item.item-textarea, textarea {
+	border-color: #101f62;
+	
+}
+.bar.bar-light {    
+    
+}
+.wellcome .bar.bar-light {
+	border-bottom: 56px #101f62 solid;
+	height: 30%;
+}
+.item-radio .item-content {
+    font-weight: bold;
+}
+h3 {
+	font-size: 160%;
+	font-weight: bold;
+}
+.sex label.item.item-radio {
+    width: 100%;
+}
+.bar.bar-header.bar-light {
+    background: #ffffff !important;
+}
+.sex .item-radio .radio-icon {
+    visibility: visible;
+}
+.sex .icon-disabled .item-radio .radio-icon {
+    visibility: hidden;
+}
+.seguir {
+	color: #101f62;
+}
+.h-100.dotted {
+    background: none;
+}
+.full-image h1 {
+    color: #fff;
+    text-shadow: 3px 1px #000;
+    margin-top: 558px;
+}/*
+section > div.h-10 {
+    height: 12%;
+}
+section > div.h-20 {
+height: 14%;
+}
+section > div.h-80 {
+    height: 95%;
+}*/
+.bar.bar-footer .title {
+	font-size: 16px;
+}
+.item-complex .item-content, .item-radio .item-content {
+    padding: 13px 49px 13px 16px;
+}
+ .sex label.item.item-radio {
+    width: 100% !important;
+}
+.button-icon.icon.ion-woman {
+    margin-right: 6%;
+}
+.item-content {
+	text-overflow: initial;
+}

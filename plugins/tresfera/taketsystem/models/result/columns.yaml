@@ -1,0 +1,56 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    shop_id:
+        label: Tienda
+        relation: shop
+        select: name
+    device_id:
+        label: Tablet
+        relation: device
+        select: mac
+    city_id:
+        label: Ciudad
+        relation: city
+        select: name
+    region_id:
+        label: Provincia
+        relation: region
+        select: name
+    quiz_id:
+        label: Encuesta
+        relation: quiz
+        select: title
+    question_title:
+        label: Pregunta
+        relation: answers
+        select: question_title
+    numQuizzs:
+        label: Núm. Encuestas
+        select: count(distinct tresfera_taketsystem_results.id)
+    numQuestions:
+        label: Núm. Pregutas
+        select: SUM(if(question_type = 'smiles', 1, 0))
+    numOk:
+        label: Núm. Buenas
+        select: SUM(if(value = 3, 1, 0)) 
+    percentOk:
+        label: %Buenas
+        select: CONCAT(FORMAT(SUM(if(value = 3, 1, 0))/SUM(if(question_type = 'smiles', 1, 0))*100,2),'%')
+    numKo:
+        label: Núm. Malas
+        select: SUM(if(value = 1, 1, 0))
+    percentKo:
+        label: %Malas
+        select: CONCAT(FORMAT(SUM(if(value = 1, 1, 0))/SUM(if(question_type = 'smiles', 1, 0))*100,2),'%')
+    numMix:
+        label: Núm. Regulares
+        select: SUM(if(value = 2, 1, 0))
+    percentMix:
+        label: %Regular
+        select: CONCAT(FORMAT(SUM(if(value = 2, 1, 0))/SUM(if(question_type = 'smiles', 1, 0))*100,2),'%')
+    emails:
+        label: Núm. emails
+        select: SUM(if(question_type = 'email' and value <> '', 1, 0))        

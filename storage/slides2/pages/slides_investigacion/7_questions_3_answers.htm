@@ -1,0 +1,92 @@
+title = "1 enunciado - 7 preguntas - 3 respuestas"
+url = "/slides/slide/:code"
+description = "Haremos 7 preguntas con 3 respuestas en base a un enunciado principal"
+type = "investigacion"
+layout = "render"
+
+[taketsystemTemplate]
+==
+
+<!-- Content -->
+<section>
+    <!-- Flex Items , Flex Box themselves -->
+    <div class="h-20">
+        <div>
+	        <h1>{text name="enunciado" label="Enunciado"}En general... ¿Qué valoración nos hace de...?{/text}</h1>
+        </div> <!-- Flex Items  -->
+    </div>
+    <div class="h-10">
+        <div>
+          <div data-role="pregunta" data-type="smiles" class="pregunta horizontal">
+            <h2>{question name="question_1" label="Pregunta"}Atención y calidad de servicio{/question}</h2>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="2" class="smile smile-2"></div>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="3" class="smile smile-3"></div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+          <div data-role="pregunta" data-type="smiles" class="pregunta horizontal">
+            <h2>{question name="question_2" label="Pregunta"}Estancia y descanso{/question}</h2>
+            <div voto ng-click="voto($event)" data-voto="2" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="2" data-value="2" class="smile smile-2"></div>
+            <div voto ng-click="voto($event)" data-voto="2" data-value="3" class="smile smile-3"></div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+          <div data-role="pregunta" data-type="smiles" class="pregunta horizontal">
+            <h2>{question name="question_3" label="Pregunta"}Restaurante{/question}</h2>
+            <div voto ng-click="voto($event)" data-voto="3" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="3" data-value="2" class="smile smile-2"></div>
+            <div voto ng-click="voto($event)" data-voto="3" data-value="3" class="smile smile-3"></div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+          <div data-role="pregunta" data-type="smiles" class="pregunta horizontal">
+            <h2>{question name="question_4" label="Pregunta"}Limpieza y orden{/question}</h2>
+            <div voto ng-click="voto($event)" data-voto="4" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="4" data-value="2" class="smile smile-2"></div>
+            <div voto ng-click="voto($event)" data-voto="4" data-value="3" class="smile smile-3"></div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+          <div data-role="pregunta" data-type="smiles" class="pregunta horizontal">
+            <h2>{question name="question_5" label="Pregunta"}Precio/Calidad{/question}</h2>
+            <div voto ng-click="voto($event)" data-voto="5" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="5" data-value="2" class="smile smile-2"></div>
+            <div voto ng-click="voto($event)" data-voto="5" data-value="3" class="smile smile-3"></div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+          <div data-role="pregunta" data-type="smiles" class="pregunta horizontal">
+            <h2>{question name="question_6" label="Pregunta"}Actividades del hotel{/question}</h2>
+            <div voto ng-click="voto($event)" data-voto="6" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="6" data-value="2" class="smile smile-2"></div>
+            <div voto ng-click="voto($event)" data-voto="6" data-value="3" class="smile smile-3"></div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+          <div data-role="pregunta" data-type="smiles" class="pregunta horizontal">
+            <h2>{question name="question_7" label="Pregunta"}Recepción{/question}</h2>
+            <div voto ng-click="voto($event)" data-voto="7" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="7" data-value="2" class="smile smile-2"></div>
+            <div voto ng-click="voto($event)" data-voto="7" data-value="3" class="smile smile-3"></div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+</section>

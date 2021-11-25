@@ -1,0 +1,19 @@
+# ===================================
+#  Import/Export Behavior Config
+# ===================================
+
+#defaultRedirect: 
+
+#import:
+#    title: Importar Evaluaciones
+#    modelClass: Tresfera\Talent\Models\Evaluacion
+#    list: $/tresfera/talent/models/evaluacion/columns_admin_csv.yaml
+
+export:
+    title: Exportar Evaluaciones
+    modelClass: Tresfera\Talent\Models\EvaluacionExport
+#    modelClass: Tresfera\Talent\Models\Evaluacion
+    list: $/tresfera/talent/models/evaluacion/columns_admin_csv.yaml
+    fileName: evaluaciones.csv
+    redirect: tresfera/talent/administrador
+#    useList: true

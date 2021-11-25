@@ -1,0 +1,106 @@
+<i>Perfil: Evaluador</i>
+<div class="row">
+  <div class="col-xs-8">
+    <br><br>
+    <h2>Bienvenido <?=$user->first_name.' '.$user->last_name?></h2>
+  </div>
+  <div class="col-xs-4" style="display: none">
+    <img style="border:solid 1px #BDBDBD; border-radius:15px" src="https://d500.epimg.net/cincodias/imagenes/2015/05/08/pyme/1431098283_691735_1431098420_noticia_normal.jpg" width="400" height="150"/>
+  </div>
+</div>
+
+
+<h4>Cuestionarios pendientes:</h4>
+
+<div class="control-list">
+    <table class="table data">
+        <thead>
+            <tr>
+                <th class="active sort-asc"><span>Proyecto</span></th>
+                <th><a href="/">Evaluado</a></th>
+                <th class="active sort-asc text-center"><a href="/">Fecha de finalización</a></th>
+                <th class="text-center"><a href="/">Cuestionario</a></th>
+            </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+              <td>
+                  Nombre del Proyecto
+              </td>
+              <td>
+                José Pérez Maldonado
+            </td>
+            <td>
+              <p class="text-center">21 de Noviembre de 2018</p>
+            </td>
+            <td>
+              <button type="button" class="text-center btn btn-primary btn-lg btn-block"><b>INICIAR CUESTIONARIO</b></button>
+            </td>
+          </tr>
+          <tr>
+              <td>
+                  Nombre del Proyecto
+              </td>
+              <td>
+                José Pérez Maldonado
+            </td>
+            <td>
+              <p class="text-center">12 de Febrero de 2019</p>
+            </td>
+            <td>
+              <button type="button" class="text-center btn btn-primary btn-lg btn-block"><b>CONTINUAR CUESTIONARIO</b></button>
+            </td>
+          </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<br/>
+<h4>Cuestionarios finalizados:</h4>
+<div class="control-list">
+    <table class="table data">
+        <thead>
+            <tr>
+                <th class="active sort-asc"><span>Proyecto</span></th>
+                <th><a href="/">Evaluado</a></th>
+                <th class="active sort-asc text-center"><a href="/">Fecha de finalización</a></th>
+                <th><a href="/">Estado</a></th>
+            </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+              <td>
+                  Nombre del Proyecto
+              </td>
+              <td>
+                Pedro Ruiz Jimeno
+            </td>
+            <td>
+              <p class="text-center">1 de Septiembre de 2018</p>
+            </td>
+            <td>
+              <span class="text-success icon-check"></span> COMPLETADO
+            </td>
+          </tr>
+          <tr>
+              <td>
+                  Nombre del Proyecto
+              </td>
+              <td>
+                Maria Prado Gonzalez
+            </td>
+            <td>
+              <p class="text-center">3 de Octubre de 2018</p>
+            </td>
+            <td>
+              <span class="text-danger icon-ban"></span> NO COMPLETADO
+            </td>
+          </tr>
+
+
+        </tbody>
+    </table>
+</div>

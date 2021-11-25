@@ -1,0 +1,14 @@
+<?php
+use Tresfera\Clients\Models\Client;
+use Tresfera\Talentapp\Models\Proyecto;
+
+if( isset($record->proyecto_id) )
+{
+    $proyecto = Proyecto::find($record->proyecto_id);
+    if( isset($proyecto->client_id) )
+    {
+        $cliente = Client::find($proyecto->client_id);
+        echo $cliente->name;
+    }
+}
+?>

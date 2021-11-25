@@ -1,0 +1,52 @@
+<?php
+	$model = new \Tresfera\Statistics\Models\Result();
+	$datos = new \Tresfera\Envios\Models\Dato();
+	$dateRange = $this->getDateRange();
+	$totalsObj = $model->getTotals($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+	$numSession = "Taket.statistics.filters";
+	$filters = Session::get($numSession);
+
+	$envios 	= 	count($datos->isSendFilters($filters)->whereRaw("DATE(tresfera_envios_datos.created_at) >= DATE('".$dateRange['start']."') AND DATE(tresfera_envios_datos.created_at) <= DATE('".$dateRange['end']."')")->get());
+	$abiertos 	= 	count($datos->isOpenFilters($filters)->whereRaw("DATE(tresfera_envios_datos.created_at) >= DATE('".$dateRange['start']."') AND DATE(tresfera_envios_datos.created_at) <= DATE('".$dateRange['end']."')")->get());
+	$completados = 	count($datos->isCompletedFilters($filters)->whereRaw("DATE(tresfera_envios_datos.created_at) >= DATE('".$dateRange['start']."') AND DATE(tresfera_envios_datos.created_at) <= DATE('".$dateRange['end']."')")->get());
+
+	if(isset($totalsObj[0])) {
+		$totals = $totalsObj[0];
+
+	$config = \Tresfera\Statistics\Models\Config::find(1);
+	$color['sends'] = '#333';
+	$color['opens'] = '#666';
+	$color['completeds'] = '#ccc';
+	if(isset($config->config) and isset($config->config['envios'])) {
+		if(isset($config->config['envios']['sends']) and $config->config['envios']['sends']) {
+			$color['sends'] = $config->config['envios']['sends'];
+		}
+		if(isset($config->config['envios']['opens']) and $config->config['envios']['opens']) {
+			$color['opens'] = $config->config['envios']['opens'];
+		}
+		if(isset($config->config['envios']['completeds']) and $config->config['envios']['completeds']) {
+			$color['completeds'] = $config->config['envios']['completeds'];
+		}
+	}
+?>
+<div class="scoreboard">
+	<div data-control="">
+		<h3><i class="icon-question-circle-o"></i><?=get('filter')?'Enquestes':'Experiencias'?></h3>
+		<div class="row">
+		    <div class="col-md-12">
+				
+				<div class="scoreboard-item control-chart" data-control="chart-bar">
+					<ul>
+						<li data-color="<?=$color['sends']?>">Enviadas <span><?=$envios?></span></li>
+						<li data-color="<?=$color['opens']?>">Abiertas <span><?=$abiertos?></span></li>
+						<li data-color="<?=$color['completeds']?>">Completadas <span><?=$completados?></span></li>
+					</ul>
+				</div>
+				
+		    </div>
+		</div>
+	</div>
+</div>
+<?php } else { ?>
+	Aún no se ha recogido ningún cuestionario
+<?php } ?>

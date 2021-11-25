@@ -1,0 +1,31 @@
+columns:
+    id:
+        label: ID
+        type: number
+    client_id:
+        label: 'tresfera.skillyouup::lang.proyectos.client_id'
+        type: number
+    name:
+        label: 'tresfera.skillyouup::lang.plugin.name'
+        type: text
+    tipo:
+        label: 'tresfera.skillyouup::lang.proyectos.tipo'
+        type: number
+    fecha_inicio:
+        label: 'tresfera.skillyouup::lang.proyectos.finicio'
+        type: text
+    fecha_fin:
+        label: 'tresfera.skillyouup::lang.proyectos.fin'
+        type: text
+    num_licencias:
+        label: 'tresfera.skillyouup::lang.proyectos.nlicencia'
+        type: number
+    description:
+        label: 'tresfera.skillyouup::lang.proyectos.descripcion'
+        type: text
+    estado:
+        label: 'tresfera.skillyouup::lang.proyectos.estado'
+        type: number
+    gestor_id:
+        label: 'tresfera.skillyouup::lang.proyectos.gestor'
+        type: number

@@ -1,0 +1,60 @@
+fields:
+    name:
+        label: Nombre
+        type: text
+    page:
+        label: Tipo
+        type: dropdown
+        options:
+            slides/portada: Portada
+            slides/portada_custom: 'Portada personalizada'
+            slides/explicativa: Explicativa
+            slides/nps: NPS
+            slides/logica: Lógica
+            slides/lineal: 'Lineal smiles'
+            slides/lineal_numerica: 'Lineal numérica'
+            slides/multipregunta: 'Multipregunta numérica'
+            slides/sondeo2: Sondeo
+            slides/multiquiz: Multienquesta
+            slides/segmentacion: Segmentación
+            slides/informacion: Información
+            slides/freefields: '2 campos libres'
+            slides/despedida: Despedida
+            slides/segmentacion_custom: 'Segmentación personalizada'
+            slides/custom: 'Personalizada (código)'
+        span: left
+    order:
+        label: Orden
+        type: number
+        span: right
+tabs:
+    fields:
+        campo:
+            label: Tipo
+            prompt: 'Añade un nuevo campo'
+            span: full
+            type: repeater
+            tab: 'Captura de datos'
+            form:
+                fields:
+                    type:
+                        label: Tipo
+                        options:
+                            text: Texto
+                            textarea: 'Área de texto'
+                            select: Segmentación
+                            question: Pregunta
+                        span: auto
+                        type: dropdown
+                    tag:
+                        label: Etiqueta
+                        span: auto
+                        type: text
+                    config:
+                        label: Configuración
+                        span: auto
+                        trigger:
+                            action: show
+                            field: type
+                            condition: text
+                        type: section

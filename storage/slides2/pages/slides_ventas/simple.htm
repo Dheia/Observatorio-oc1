@@ -1,0 +1,22 @@
+title = "1 Pregunta"
+url = "/slides/slide/:code"
+description = "Ventas 1"
+type = "ventas"
+
+[taketsystemTemplate]
+==
+
+<!-- Content -->
+<div>
+    <h2>
+        {text name="title" label="Título"}{/text}
+    </h2>
+</div>
+
+{repeater name="questions" prompt="Añadir otra pregunta"}
+    <div>
+        <h3>
+            {text name="question_title" label="Pregunta"}{/text}
+        </h3>
+    </div>
+{/repeater}

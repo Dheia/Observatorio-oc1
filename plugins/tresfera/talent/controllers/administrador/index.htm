@@ -1,0 +1,201 @@
+<?php
+
+use Tresfera\Talentapp\Classes\UserControl;
+
+
+// FUNCTIONS
+function getCurrentFilters() {
+    $filters = [];
+    foreach (\Session::get('widget', []) as $name => $item) {
+        if (str_contains($name, 'Filter')) {
+            $filter = @unserialize(@base64_decode($item));
+            if ($filter) {
+                array_push($filters, $filter);
+            }
+        }
+    }
+
+    return $filters;
+}
+
+// --------- END FUNCTIONS ----------
+$user = BackendAuth::getUser();
+//$rol = UserControl::getRole($user);
+if( !UserControl::isAdmin($user)  && !$user->hasPermission(["talent.gestor"]) )
+{
+?>
+    <script>window.location.replace("/backend/tresfera/talent/");</script>
+<?php   
+}
+?>
+
+<div class="control-breadcrumb">
+    <ul>
+        <li><a href="#">TalentApp</a></li>
+        <li>Panel de control</li>
+    </ul>
+</div>
+
+
+<div class="encabezado">
+    <?php
+    $user = BackendAuth::getUser();
+    if(UserControl::isAdmin($user)) {
+    ?>
+    <div class="dropdown" style="float:left;">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-plus">Crear</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Crear nuevos clientes, proyectos,...">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url('/backend/tresfera/clients/clients/create')?>" class="oc-icon-plus">Nuevo cliente</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url('/backend/tresfera/talent/proyectos/create')?>" class="oc-icon-plus">Nuevo proyecto</a></li>
+        </ul>
+    </div>
+    <?php   
+    }
+    ?>
+    <div class="dropdown" style="float:left; margin-left: 5px">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-file-text">Informes</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Gestionar informes">
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onGenerateRapports"
+                    data-request-confirm="<?= e('Estas seguro?') ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                        Generar informe
+                </a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onDownloadRapports"
+                    data-request-confirm="<?= e('¿Deseas descargar los informes?') ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-cloud-download">
+                    Descargar informes (en ZIP)
+                </a>
+            </li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="oc-icon-paper-plane">Enviar informe</a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown" style="float:left; margin-left: 5px">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-envelope-o">Enviar emails a los seleccionados</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Gestionar informes">
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onSendEmailActivacion"
+                    data-request-confirm="<?= e('¿Deseas reenviar el email de activación a todos los seleccionados?') ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                        Activación
+                </a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onSendEmailRecordatorio"
+                    data-request-confirm="<?= e('¿Deseas reenviar el email de recordatorio a todos los seleccionados?') ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                    Recordatorio
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="dropdown" style="float:left; margin-left: 5px">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-lock">Permisos</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Permisos del Evaluado">
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked'),
+                        permiso: 1
+                    })"
+                    data-request="onPermisoVerInforme"
+                    data-request-confirm="<?= e('¿Deseas dar permiso para ver los informes a todos los seleccionados?') ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                        Dar permiso para ver informes
+                </a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked'),
+                        permiso: 0
+                    })"
+                    data-request="onPermisoVerInforme"
+                    data-request-confirm="<?= e('¿Deseas eliminar el permiso para ver los informes a todos los seleccionados?') ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                        Quitar permiso para ver informes
+                </a>
+            </li>
+        </ul>
+    </div>
+    <?php
+    $user = BackendAuth::getUser();
+    if(UserControl::isAdmin($user)) {
+        ?>
+    <a
+        style="float:left; margin-left: 5px"
+        data-request="onDownloadDatosBrutos"
+        data-request-confirm="<?= e('¿Deseas descargar los datos brutos?') ?>"
+        class="btn btn-primary oc-icon-cloud-download">
+        Descargar datos brutos
+    </a>
+    <?php   
+    }
+    ?>
+    <div style="float:right; margin-right:20px;">
+        <a class="btn btn-default oc-icon-cloud-upload" href="<?=url('/backend/tresfera/talent/administrador/importar')?>">
+            Importar evaluadores
+        </a>
+        <a class="btn btn-default oc-icon-server" href="<?=url('/backend/tresfera/talent/administrador_csv')?>">
+            Exportar seguimiento
+        </a>
+    </div>
+</div>
+<div style="clear: left;"></div>
+<?= $this->makePartial('estadisticas', []) ?>
+<?= $this->listRender() ?>

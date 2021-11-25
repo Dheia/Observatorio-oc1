@@ -1,0 +1,8 @@
+rapport_lines:
+    label: Programados
+    manage:
+        form: $/tresfera/statistics/models/rapportline/fields.yaml
+        list: $/tresfera/statistics/models/rapportline/columns.yaml
+    view:
+        list: $/tresfera/statistics/models/rapportline/columns.yaml
+        toolbarButtons: create|delete

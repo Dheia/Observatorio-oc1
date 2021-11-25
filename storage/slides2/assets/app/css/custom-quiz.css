@@ -1,0 +1,634 @@
+h4.header {
+    color: #5c98a4;
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+h5.header.light {
+    font-size: 1.34rem;
+    padding: 0.3rem 2rem;
+    font-weight: 500;
+}
+.topbar {
+    background: #0070CE;
+    height: 3px;
+}
+.answers .mdc-button {
+    width: 100%;
+    text-transform: initial;
+    text-align: left;
+    background: #F2F2F2 !important;
+    border-color: #b7b5b5 !important;
+    color: #000000 !important;
+}
+h4.header {
+    color: #5c98a4;
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    margin-top: 0rem;
+}
+nav .nav-wrapper {
+    position: relative;
+    height: 100%;
+    text-align: center;
+}
+.row {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+}
+h1 {
+    color: #0070CE;
+    font-size: 22px !important;
+}
+h2 {
+   /* color: #0070CE; */
+    font-size: 24px !important;
+    margin-top: 90px;
+}
+h3 {
+    color: #383B41;
+    font-size: 20px !important;
+}
+h4 {
+    color: #383B41 !important;
+    font-size: 17px !important;
+    text-align: left;
+    font-weight: normal !important;
+}
+h5 {
+    color: #383B41;
+    font-size: 16px !important;
+    text-align: left;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 5px;
+    text-align: center;
+    background: #f3f3f3;
+}
+input[type=range] + .thumb.active {
+    display: none;
+}
+input[type=range] {
+    margin: 0px 0 !important;
+    padding: 0;
+}
+h6 {
+    color: ##383B41;
+    font-size: 7px !important;    
+}
+h7 {
+    color: #000000;
+    font-size: 14px !important;    
+    text-align: center;
+    display: block;
+    margin-bottom: 10px;
+}
+h8 {
+    color: #000;
+    font-size: 10px !important;    
+    text-align: center;
+    display: block;
+}
+
+.chat ul {
+		display: none;
+}
+.body {
+		height: 200px;
+}
+.body .me {
+		text-align: left;
+}
+div#index-banner {
+    margin-top: -30px;
+}
+.body a {
+    color: blue !important;
+    cursor: pointer !important;
+}
+span.typed-cursor {
+    display: none;
+}
+.chat img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 22px;
+}
+.bg-typed {
+    position: fixed;
+    bottom: 80px;
+    width: 100%;
+    height: 55px;
+    left: 0;
+    background: #f2f3f5;
+    padding: 10px 5%;
+}
+.typed {
+    height: 40px;
+    color: #333;
+    text-align: left;
+    background: #fff;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+.body {
+    position: fixed;
+    color: #333;
+    text-align: left;
+    overflow-y: auto;
+    left: 0px;
+    height: calc(100% - 250px);
+    background: url(https://talentapp360.taket.es/storage/app/media/cofidis/bg-whatsapp.png);
+    top: 116px;
+    width: 100%;
+}
+
+
+
+.body div {
+    position: relative;
+    margin: 5px;
+    min-height: 50px;
+}
+.body div div {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+    max-width: 75%;
+    box-shadow: 0px 2px 2px 0px #bdbdbd;
+}
+.body div:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.you div {
+    float: left;
+    background: #ffffff;
+}
+.me div {
+    float: right;
+    display: block;
+    clear: both;
+    background: #d6ffad;
+    border: none !important;
+}
+.avatar {
+    position: fixed;
+    top: 67px;
+    height: 50px;
+    width: 100%;
+    margin-left: -5%;
+    padding-left: 10px;
+    background: #009688;
+    left: 5%;
+}
+.avatar img {
+    width: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin: 5px 0;
+    margin-right: 10px;
+}
+
+nav.darken-1 {
+background: rgb(246,165,0) !important;
+background: linear-gradient(0deg, rgb(208,16,58) 0%, #d8072d 100%) !important;
+}
+.answers-img {
+    margin-bottom: 20px;
+}
+textarea {
+    border-radius: 5px !important;
+    border: 1px solid #818181 !important;
+    background: #f2f2f2 !important;
+    margin-bottom: 10px;
+}
+button.foo-button.mdc-button.mdc-button--outlined:hover {
+    color: #383B41;
+    background: #FFE9AE;
+    border-color: #F6A500;
+}
+
+#myProgress {
+    width: 70%;
+    background-color: #fff2cf;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    margin-left: 15%;
+}
+
+#myBar {
+  width: 100%;
+  height: 10px;
+  background-color: #f6a500;
+  border-radius: 5px;
+}
+div#myBar-text {
+    position: absolute;
+    text-align: center;
+    width: 63%;
+    margin-top: -22px;
+    color: #f6a500;
+    font-weight: bold;
+}
+button.foo-button.mdc-button.mdc-button--outlined.activated {
+    color: #FFFFFF;
+    background: #F6A500;
+    border-color: #F6A500;
+}
+.row img {
+    max-width: 100%;
+}
+datalist select {
+    display: block;
+}
+datalist option {
+    display: block;
+}
+.range .value {
+    display: inline-block;
+    font-size: 12px;
+    width: 19%;
+    vertical-align: top;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+.range .value:nth-child(1),
+.range .value:nth-child(2) {
+    text-align: left;
+}
+.range .value:nth-child(4),
+.range .value:nth-child(5) {
+    text-align: right;
+}
+.row img {
+max-width: 430px;
+}
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 6.2px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4.6px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0.1px #000000, 0px 0px 0px #0d0d0d;
+  background: #d8072d;
+  border-radius: 1.3px;
+  border: 0.2px solid rgba(1, 1, 1, 0);
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1.6px solid #d8072d;
+  height: 17px;
+  width: 16px;
+  border-radius: 8px;
+  background: #d8072d;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6.4px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #007ee8;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 4.6px;
+  cursor: pointer;
+  box-shadow: 0px 0px 0.1px #000000, 0px 0px 0px #0d0d0d;
+  background: #0070ce;
+  border-radius: 1.3px;
+  border: 0.2px solid rgba(1, 1, 1, 0);
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1.6px solid #0070ce;
+  height: 17px;
+  width: 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 4.6px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #0062b5;
+  border: 0.2px solid rgba(1, 1, 1, 0);
+  border-radius: 2.6px;
+  box-shadow: 0px 0px 0.1px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #0070ce;
+  border: 0.2px solid rgba(1, 1, 1, 0);
+  border-radius: 2.6px;
+  box-shadow: 0px 0px 0.1px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1.6px solid #0070ce;
+  height: 17px;
+  width: 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  height: 4.6px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #0070ce;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #007ee8;
+}
+.row.center {
+    max-width: 70%;
+}
+.row img {
+    max-width: 310px;
+}
+.row.center {
+    max-width: initial;
+}
+.answers .mdc-button {
+    max-width: 280px;
+}
+header {
+    position: fixed;
+    width: 100%;
+    height: 67px;
+    top: 0;
+}
+
+
+#download-button.orange.btn-large {
+    background: linear-gradient(0deg, rgb(208,16,58) 0%, #d8072d 100%);
+    border-radius: 7px;
+}
+a#download-button.orange.disabled.btn-large {
+    pointer-events: none;
+    background: #DFDFDF !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #9F9F9F !important;
+    cursor: default;
+}
+.btn-large {
+    height: 44px;
+    line-height: 44px;
+    font-size: 15px;
+    padding: 0 48px;
+}
+
+.blue {
+    background-color: #F6A500 !important;
+}
+
+button.foo-button.mdc-button.mdc-button--outlined.activated {
+    color: #FFFFFF;
+    background: #FFF2CF !important;
+    border-color: #F6A500 !important;
+}
+
+.answers .mdc-button.success1 {
+    background: #e3fac0  !important;
+    border: 1px solid #79C500;
+    color: #000000 !important;
+}
+.answers .mdc-button.success2 {
+    background: #e3fac0 !important;
+    border: 1px solid #79C500;
+    color: #000000 !important;
+}
+
+h3.header.center {
+    padding-bottom: 5px;
+    margin-top: 100px;
+    background: #F2F2F2;
+    border-color: #b7b5b5;
+    border: 1px solid #b7b5b5;
+    padding-top: 5px;
+    border-radius: 5px;
+}
+
+h3.acertado {
+    text-align: center;
+}
+
+h3.header.center2 {
+    padding-bottom: 5px;
+    margin-top: 100px;
+    padding-top: 5px;
+    border-radius: 5px;
+    padding-right: 3px;
+    padding-left: 2px;
+    text-align: center;
+}
+
+h2.header.center2 {
+    text-align: center;
+    margin-top: 20px !important;
+}
+
+h1.header.center2 {
+    margin-top: 90px !important;
+    text-align: center;
+    color: #000;
+    font-size: 30px !important;
+}
+
+.answers.answers-img {
+    margin-top: 20px;
+    margin-bottom: 45px;
+}
+
+a#download-button {
+    color: #FFF !important;
+}
+
+img.img_entrevista {
+    margin-top: 90px !important;
+}
+
+h4.h4_entrevista {
+    text-align: center;
+}
+
+.droppable {
+    color: #9e9e9e !important;
+    
+    
+}    
+.desc {
+    background: #F2F2F2 !important;
+    border: 1px solid #868585 !important;
+}
+
+.drags {
+     margin-top: 110px !important;
+     margin-bottom: 25px !important;
+}
+
+.drags2 {
+    margin-top: 110px !important;
+    margin-bottom: 25px !important;
+    opacity: 0.3;
+}
+
+.desc.success1 {
+    background: #F5FFE6 !important;
+    border: 1px solid #9AD340 !important;
+}
+
+span.desc2 {
+    color: #f9d28c;
+}
+
+h2.header.center3 {
+    text-align: center;
+    margin-top: 25px;
+}
+
+h1.header.center3 {
+    margin-top: 100px;
+    color: #000;
+    text-align: center;
+    font-size: 31px !important;
+}
+
+h1.header.center4 {
+    color: #000;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 28px;
+    font-size: 30px !important;
+}
+
+h3.center2 {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.xxx {
+    margin-top: 100px;
+}
+
+@media (max-width: 479px) {
+    .answers .mdc-button {
+        width: 100%;
+        text-transform: initial;
+        text-align: left;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .answers-img button {
+        width: 100px !important;
+        margin-left: calc(50% - 50px);
+    }
+    .answers-img button {
+        width: 100px !important;
+        margin-left: calc(50% - 50px);
+    }
+    .answers-img button img {
+        max-width: 100%;
+    }
+    .answers-results button {
+        width: 100% !important;
+        margin-left: 0;
+    }
+    .answers-results img {
+        display: inline-block;
+        vertical-align: top;
+        width: 70px;
+        margin-right: 20px;
+    }
+    .answers-results button div {
+        display: inline-block;
+        width: calc(100% - 100px);
+    }
+    .mdc-layout-grid__cell {
+        width: auto;
+        grid-column-end: span 2;
+    }
+    .images .mdc-layout-grid__cell {
+        width: auto;
+        grid-column-end: span 0;
+    }
+    .images img {
+        width: 30%;
+        margin: 0px 35%;
+    }
+    .row img {
+        max-width: 100%;
+    }
+    .avatar {
+        left: 0%;
+        padding-left: 7%;
+        width: 107%;
+    }
+    .range .value {
+        font-size: 10px;
+    }
+    
+    .answers .mdc-button {
+        max-width: 100%;
+    }
+    .answers-results img {
+        display: inline-block;
+        vertical-align: top;
+        width: 70px;
+        margin-right: 0px;
+        margin-left: 20px;
+    }
+    
+    .answers-img2 button {
+    width: 230px !important;
+    margin-left: calc(50% - 107px);
+}
+
+.answers.answers-img2 {
+    margin-top: 20px;
+    margin-bottom: 45px;
+}
+
+img.imgbutton {
+    max-height: 113px;
+}
+
+img.imgsuccess {
+    width: 100% !important;
+    margin-top: 0px !important;
+    margin-left: 0% !important;
+}
+}
+@media only screen and (min-width: 993px) {
+    .container {
+        width: 848px;
+    }
+    div#myBar-text {
+        width: 600px;
+    }
+    header {
+        z-index: 2;
+    }
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+    /* IE10+ specific styles go here */  
+    .answers-img img {
+        margin-left: 0;
+    }
+}

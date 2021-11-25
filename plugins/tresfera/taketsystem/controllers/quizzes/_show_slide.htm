@@ -1,0 +1,6 @@
+<?php
+$id = explode(".",$field->fieldName);
+$id = $id[1];
+?>
+	<iframe id="responseCode" data-src="<?php echo url('backend/tresfera/taketsystem/slides/update/'.$id .'?incrust=1&quizz_id='.$model->id ); ?>">
+	</iframe>

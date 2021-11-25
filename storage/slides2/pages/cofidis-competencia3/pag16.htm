@@ -1,0 +1,60 @@
+title = "Pag16"
+url = "/cofidis/competencia3/pag16"
+layout = "cofidis"
+is_hidden = 0
+==
+<h2 class="header center">La respuesta correcta es...</h2>
+<div class="answers answers-img answers-results">
+    <button class="foo-button mdc-button mdc-button--outlined">
+      <div>Confiar es bueno, pero no confiar es mejor.</div>
+      <img src="/storage/app/media/cofidis/11.0 Gustavo.png">
+    </button>
+    <button class="foo-button mdc-button mdc-button--outlined success2">
+      <div>Hablar claro y sincero evita malas interpretaciones.</div>
+      <img src="/storage/app/media/cofidis/11.1 Gustavo.png">
+    </button>
+</div>
+
+<div class="row center">
+  <a href="pag17?finish=true" 
+      id="download-button" 
+      class="btn-large waves-effect waves-light orange">
+      CONTINUAR
+    </a>
+</div>
+<style>
+.topbar {
+  width: {{ 16*100/31 }}%;
+}
+@media (max-width: 479px) {
+  .answers-img button {
+      width: 150px !important;
+      margin-left: calc(50% - 75px);
+  }
+  .answers-img button img {
+    width: 80%;
+    margin-top: 12px;
+    margin-left: 10%;
+}
+  button div {
+    font-size: 10px;
+    line-height: 120%;
+    text-align: center;
+  }
+  
+  .answers-results button div {
+    display: block;
+    width: calc(100%);
+  }
+}
+@media only screen and (min-width: 993px)
+{
+  .container {
+      width: 40%;
+  }
+  .answers .mdc-button {
+    max-width: 520px;
+    margin-bottom: 10px;
+}
+}
+</style>

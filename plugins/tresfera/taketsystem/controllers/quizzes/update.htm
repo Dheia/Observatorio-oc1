@@ -1,0 +1,106 @@
+<?php Block::put('breadcrumb') ?>
+	<div class="row">
+		<div class="col-md-12">
+		    <ul>
+		        <li><a href="<?= Backend::url('tresfera/taketsystem/quizzes') ?>">Cuestionarios</a></li>
+		        <li class="">
+		       Modificación de su cuestionario
+		        </li>
+		    </ul>
+		</div>
+	</div>
+<?php Block::endPut() ?>
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout fancy-layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+
+    <?= Form::close() ?>
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('tresfera/paypercall/campaigns') ?>" class="btn btn-default">Volver al listado de cuestionarios</a></p>
+
+<?php endif ?>
+
+<script>
+	$( document ).ready(function() {
+		var iframe = $('iframe');
+		$(iframe).on("load", function () {
+		    // do something once the iframe is loaded
+		    $(this).contents().find("[data-request=onSave]").click(function(){
+				console.log("click hecho!")
+			});	
+		});
+	});
+	function newTab() {
+		$('#Form-secondaryTabs').ocTab('addTab', 'Nueva página', '<div class="form-group  partial-field span-full  layout-relative " data-field-name="slide.new" id="Form-field-Quiz-slide.new-group"><iframe id="responseCode" src="<?= Backend::url("tresfera/taketsystem/slides/create/?incrust=1&quizz_id=".$this->params[0]) ?>"></iframe></div>',null,'layout-cell');
+	}
+	function removeTab() {
+		$('#Form-secondaryTabs').ocTab('closeTab')
+	}
+	
+	
+</script>
+
+<script>
+	$( document ).ready(function() {
+		$("#Form-secondaryTabs .nav-tabs > li").on("click", function() {
+			console.dir($($(this).find("a").data("target")).find("iframe").attr("src"));
+			
+			if($($(this).find("a").data("target")).find("iframe").attr("src")==undefined)
+				$($(this).find("a").data("target")).find("iframe").attr("src",$($(this).find("a").data("target")).find("iframe").data("src"))
+		});
+		
+		var li_pantallas = $("#Form-primaryTabs ul.nav li").last();
+		$("#Form-primaryTabs ul.nav li").on("click", function() {
+			$("#Form-secondaryTabs").css("display","none")
+		})
+		$(li_pantallas).on("click", function() {
+			$("#Form-secondaryTabs").css("display","flex");
+			$("#Form-secondaryTabs .tab-pane.active").find("iframe").prop("src", function(){
+		        // Set their src attribute to the value of data-src
+		        return $(this).data("src");
+		    });
+			$("#"+$(li_pantallas).data("target")).css("display","none");
+		})
+		
+	});
+	$("#responseCode").show(function(){
+	    // Find the iframes within our newly-visible element
+	    $(this).find("iframe").prop("src", function(){
+		    
+	        // Set their src attribute to the value of data-src
+	        return $(this).data("src");
+	    });
+	});
+</script>
+
+<style>
+	.fluidMedia {
+	    position: relative;
+	    padding-bottom: 56.25%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
+	    padding-top: 30px;
+	    height: 0;
+	    overflow: hidden;
+	}
+	
+	.fluidMedia iframe {
+	    position: absolute;
+	    top: 0; 
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	}
+</style>
+
+
+<style>
+	body {
+		  overflow: hidden;
+	}
+
+</style>

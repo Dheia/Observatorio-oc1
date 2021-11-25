@@ -1,0 +1,37 @@
+<?php 
+
+// Completada / No completada (Email leido, email no leido, email no enviado)
+use Mja\Mail\Models\Email;
+use Mja\Mail\Models\EmailOpens;
+
+if($record->isCompleted()) 
+{
+    ?>
+    <b class="text-success">Evaluación completada</b>
+    <?php
+}
+else
+{
+    $email = Email::whereIn("code", ['skillyouup.require.aprovacion','skillyouup.require.aprovacion_en'])
+                ->whereRaw(\DB::raw("`to` LIKE '%".$record->email."%'"))
+                ->whereRaw(\DB::raw("DATE(date) = DATE('".$record->created_at."')"))
+                ->first();
+    
+    echo '<b class="text-danger">Evaluación no completada</b><br>';
+    if( isset($email->id) )
+    {
+        if($email->getTimesOpenedAttribute() > 0) echo '<b><span class="text-success oc-icon-eye" title="Email leído"></span></b> <i>Email leído</i>';
+        else echo '<b><span class="text-warning oc-icon-eye-slash" title="Email no leído"></span></b> <i>Email no leído</i>';
+    } else {
+        echo '<b><span class="text-danger oc-icon-bolt" title="Email no enviado"></span></b> <i>Email no enviado</i>';
+    }
+    
+}
+
+
+            
+
+                    
+
+       
+?>

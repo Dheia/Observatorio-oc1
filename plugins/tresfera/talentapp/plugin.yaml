@@ -1,0 +1,60 @@
+plugin:
+    name: talentapp
+    description: 'tresfera.talentapp::lang.plugin.description'
+    author: tresfera
+    icon: oc-icon-circle-o
+    homepage: ''
+permissions:
+    manage_user_alta:
+        tab: talentApp360
+        label: 'Gestionar usuarios'
+    manage_proyecto:
+        tab: talentApp360
+        label: 'Gestionar Proyecto (Crear, eliminar, editar, duplicar)'
+    rol_evaluado:
+        tab: talentApp360
+        label: Evaluado
+    rol_evaluador:
+        tab: talentApp360
+        label: Evaluador
+    rol_admin:
+        tab: talentApp360
+        label: Administrador
+    rol_gestor:
+        tab: talentApp360
+        label: Gestor
+    view_fields_lopd:
+        tab: talentApp360
+        label: 'Ver campos sensibles'
+    validate_inform:
+        tab: talentApp360
+        label: 'Validar ver informe'
+    start_evaluacion:
+        tab: talentApp360
+        label: 'Empezar evaluaciones'
+    panel_administrador:
+        tab: talentApp360
+        label: 'Visualizar panel de administrador'
+navigation:
+    talentapp:
+        label: TalentApp360
+        url: tresfera/talentapp
+        icon: icon-clipboard
+        permissions:
+            - rol_evaluado
+            - rol_gestor
+            - rol_evaluador
+            - rol_admin
+        sideMenu:
+            proyectos:
+                label: 'tresfera.talentapp::lang.evaluadores.proyectos'
+                url: tresfera/talentapp/proyectos
+                icon: icon-th-list
+                permissions:
+                    - rol_gestor
+            administrador:
+                label: 'tresfera.talentapp::lang.evaluadores.panel_control'
+                url: tresfera/talentapp/administrador
+                icon: icon-dashboard
+                permissions:
+                    - panel_administrador

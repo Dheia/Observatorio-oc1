@@ -1,0 +1,78 @@
+<?php
+	$faker = Faker\Factory::create();
+	$user = \BackendAuth::getUser();
+	$model = new \Tresfera\Statistics\Models\Result();
+  $totalsGeneral = $model->getTotalsGeneral($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+if(isset($totalsGeneral) && count($totalsGeneral)) {
+?>
+<div data-control="">
+			    <h3><i class="icon-frown-o"></i>
+						<?php if(get("filterId")) { ?> 
+							<?=get("filterId")?>
+						<?php } else { ?> 
+							Motius d'insatisfacció
+						<?php } ?>
+						
+						</h3>
+				<div class="row">
+					<div class="col-md-12" data-url="<?=url("backend/tresfera/statistics/stats/dashboardDetail/?detalles=1&group_by=value&filter=question_title")?>">
+						<div class="control-chart" data-control="" data-size="180" data-center-text="101">
+						    <div class="chart-legend" style="width: 100%;">
+							   <table style="width: 100%;">
+							      <tbody>
+								      <?php 
+                      					$old = "";
+								      if(isset($totalsGeneral))
+								      foreach($totalsGeneral as $general) { 
+												if(get("filterId")) {
+													$question = $general->value;
+													$questionTitle = $general->value;
+												} else {
+													$question = $general->question_title;
+													$questionTitle = $general->question_title;
+												}
+									      if(!get("filterId")) {
+										      $url = 'backend/tresfera/statistics/stats/dashboard/?detalles=1&amp;group_by=value&amp;filter=question&amp;filterId='.$question.'&amp;filterName='.$questionTitle;
+									      } 
+											?>
+											<?php if($general->slide_id != $old) { 
+												if($user->client_id == 240) {
+												$slide = \Tresfera\Taketsystem\Models\Slide::find($general->slide_id);
+												if(isset($slide->id)) {
+												?>
+												<tr>
+													 <td colspan="3">
+														<h4>
+														 <?=$slide->name?>  
+														 </h4>
+													 </td>
+												</tr>
+												<?php } ?>
+												<?php } ?>
+											 <?php } ?>
+								     <tr>
+							            <td class="indicator"><i style="background-color: <?=$faker->hexcolor?>;"></i></td>
+													<td style="width: 30%;">
+														<?php if(isset($url)) { ?><a href="<?php echo url($url); ?>"><?=$question?></a><?php }
+														else { ?><?=$question?><?php } ?>
+													</td>
+							            <td class="value">
+									        <div class="bar-line bar-line-ko" style=" width: <?=$general->percent*100?>%"><div><?=$general->count?> (<?=number_format($general->percent*100,2)?>%)</div></div>
+								            
+								            
+								        </td>
+											 </tr>
+											 <?php
+                        $old = $general->slide_id;
+							         ?>
+							         <?php
+							         }
+							         ?>
+							      </tbody>
+							   </table>
+							</div>
+						</div>						
+					</div>
+				</div>
+		</div>
+<?php } ?>

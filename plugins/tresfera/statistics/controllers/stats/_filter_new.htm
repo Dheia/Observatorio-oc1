@@ -1,0 +1,141 @@
+<?php
+$groupBy = $this->getGroupBy();
+$dateRange = $this->getDateRange();
+
+$quizzes = \Taket\Creator\Models\Quiz::all()->lists("name","id");
+$sexs = ['1'=>'Hombre','2'=>'Mujer'];
+$ages = [
+			'15'=>'Menos de 20',
+			'25'=>'20 - 29',
+			'35'=>'30 - 39',
+			'45'=>'40 - 49',
+			'55'=>'50 - 59',
+			'65'=>'60 - 69',
+			'75'=>'70 - 79',
+			'85'=>'Más de 80',
+			'0'=>'No especificado',
+		];
+$geoO = \Tresfera\Statistics\Models\Result::getGeo();
+$geo =array();
+if(is_object($geoO))
+ $geo = $geoO->lists("citycp_name","citycp_id");
+
+$sondeos0 = \Tresfera\Statistics\Models\Result::getSondeosFilter();
+
+ $sondeos = array();
+if(is_object($sondeos0)) {
+	$sondeos_list = $sondeos0->get();
+  
+	foreach($sondeos_list as $sondeo) {
+		if(!isset($sondeo->quiz_id)) continue;
+		$quiz = \Tresfera\Taketsystem\Models\Quiz::find($sondeo->quiz_id);
+		$value = $sondeo->value;
+
+		if($sondeo->value) {
+			$answerSondeo = \Tresfera\TaketSystem\Models\QuizMulti::find($sondeo->value);
+			if(isset($answerSondeo->title))
+				$value = $answerSondeo->title;
+		}
+		$sondeos[$sondeo->value] = $quiz->title." - ".$sondeo->question_title."::".$value;
+	}
+	//$sondeos = $sondeos0->lists("question_title","value");
+	//
+}
+
+$shop = \Tresfera\Statistics\Models\Result::getTiendas()->lists("name","id");
+$hour = [6=>8,7=>9,8=>10,9=>11,10=>12,11=>13,12=>14,13=>15,14=>16,15=>17,16=>18,17=>19,18=>20,19=>21,20=>22,21=>23];
+
+$data = [
+	'quizzes' 	=> $quizzes,
+	'quizzes_status' => [
+		'open' => "Obertes",
+		'completed' => "Completades"					
+	]
+];
+
+$filter_cuestionario = $this->getCuestionario();
+$filters = $this->getFilters();
+$actual_link = "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+$user = BackendAuth::getUser();
+if($user->client_id) 
+  $client = \Tresfera\Clients\Models\Client::find($user->client_id);
+  
+?>
+	<div id="filterExample" 
+			class="control-filter" 
+			data-control="filterwidget"
+			data-update-handler="onFilterUpdate"
+			data-options-handler="onFilterGetOptions">
+
+	    <!-- Group -->
+	    <a href="javascript:;" class="filter-scope <?=count($filters['quizzes'])?'active':''?>" data-scope-name="quizzes">
+	        <span class="filter-label">Experiencia:</span>
+	        <span class="filter-setting"><?=count($filters['quizzes'])?count($filters['quizzes']):'Tots'?></span>
+		</a>
+		<a href="javascript:;" class="filter-scope <?=count($filters['quizzes_status'])?'active':''?>" data-scope-name="quizzes_status">
+	        <span class="filter-label">Estado experiencia:</span>
+	        <span class="filter-setting"><?=count($filters['quizzes_status'])?count($filters['quizzes_status']):'Tots'?></span>
+	    </a>
+      <?php
+        //sondeos personalizados
+        $user = BackendAuth::getUser();
+            $segmentaciones = \Taket\Structure\Models\Question::with("options")->where("is_filter",1)->get();
+            if(count($segmentaciones)) {
+              foreach($segmentaciones as $segmentacion) {
+				  $slug = str_slug($segmentacion->id);
+                  $data[$slug] = [];
+                  foreach($segmentacion->options as $value) {
+                    $data[$slug][$value->id] = $value->value;
+                  }
+                  ?>
+                  <a href="javascript:;" class="filter-scope <?=count($filters[$slug])?'active':''?>" data-scope-name="<?=$slug?>">
+                      <span class="filter-label"><?=$segmentacion->name?>:</span>
+                      <span class="filter-setting"><?=count($filters[$slug])?count($filters[$slug]):'Tots'?></span>
+                  </a>
+				<?php
+              }
+            }
+      ?>
+		<!-- Group -->
+
+		<a style="float: right;display: inline-block;margin-top: 8px;margin-right: 15px;" class="btn btn-warning" href="<?="//".$_SERVER['HTTP_HOST']."/backend/tresfera/statistics/stats/cleanFilters"?>">
+			<i class=" icon-trash-o"></i> Restaurar Filtros
+		</a>
+	</div>
+<script>
+    $('#filterExample').data('filterScopes', {
+	    <?php foreach($data as $key => $values) { ?>
+        '<?=$key?>': {
+            available: [
+	            <?php $i=0;
+				foreach($values as $id => $value) {
+		        	//if(!$id) continue;
+		        ?>
+		            <?php if(!in_array($id,array_pluck($filters[$key], 'id'))) { ?>
+		            { id: '<?=$id?>', name: '<?=str_replace("'","\'", $value)?>' },
+		            <?php } ?>
+					<?php
+					
+						$i++;
+						//if($i >= 200) break;
+					?>
+	            <?php } ?>
+            ],
+            active: [
+	            <?php foreach($values as $id => $value) {
+		        ?>
+		            <?php
+		            foreach($filters[$key] as $f)
+		            	if($id == $f['id']) { ?>
+							{ id: '<?=$id?>', name: '<?=str_replace("'","\'", $value)?>' },
+						<?php } ?>
+	            <?php } ?>
+            ]
+        },
+        <?php } ?>
+    })
+</script>
+<style>
+
+</style>

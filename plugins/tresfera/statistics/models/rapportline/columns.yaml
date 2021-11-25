@@ -1,0 +1,16 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+columns:
+    period:
+      label: Periodo
+      sortable: false
+    date_send:
+      label: Fecha de envio
+    generated:
+      label: Generado
+      type: switch
+    send:
+      label: Enviado
+      type: switch

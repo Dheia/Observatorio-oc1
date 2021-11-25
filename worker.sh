@@ -1,0 +1,10 @@
+sudo supervisorctl reread
+sudo supervisorctl update
+supervisorctl restart taket-emails:*
+supervisorctl restart taket-emailsevaluadores:*
+supervisorctl restart taket-emailsevaluadoresavisos:*
+supervisorctl restart taket-rapports:*
+supervisorctl restart taket-sendrapports:*
+supervisorctl restart taket-exportdatosbrutos:*
+supervisorctl restart taket-sendemailasignacion:*
+supervisorctl restart taket-sendinformesproyectos:*

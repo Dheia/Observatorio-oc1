@@ -1,0 +1,17 @@
+title = "Bombonera digital"
+url = "/quiz/:url"
+layout = "blank"
+
+==
+public function onStart() {
+   $this['quiz_id'] = \Taket\Creator\Models\Quiz::where("url",$this->param('url'))->first()->id;
+   $this['u'] = get('u');
+}
+==
+<style>
+    body,html {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+<iframe style="width: 100vw; height: 100vh;border: none;" src="/evaluacion/quiz/{{quiz_id}}/0?u={{u}}">

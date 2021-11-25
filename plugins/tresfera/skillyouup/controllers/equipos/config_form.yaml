@@ -1,0 +1,10 @@
+name: Equipos
+form: $/tresfera/skillyouup/models/equipo/fields.yaml
+modelClass: Tresfera\Skillyouup\Models\Equipo
+defaultRedirect: tresfera/skillyouup/
+create:
+    redirect: 'tresfera/skillyouup/equipos/update/:id'
+    redirectClose: tresfera/skillyouup/
+update:
+    redirect: tresfera/skillyouup/equipos
+    redirectClose: tresfera/skillyouup/

@@ -1,0 +1,16 @@
+title = "Login"
+url = "/reset-pass"
+layout = "app-login"
+description = "Segmentaciones"
+is_hidden = 0
+
+[session]
+security = "guest"
+allowedUserGroups[] = "guest"
+redirect = ""
+
+[resetPassword]
+==
+<section class="login-container">
+  {% component 'resetPassword' %}
+</section>

@@ -1,0 +1,170 @@
+<?php
+	$groupBy = $this->getGroupBy();
+	$dateRange = $this->getDateRange();
+?>
+<?php 
+	$model = $this->widget->list->model; 
+	$totalsObj = $model->getTotals($this->getFilter(),$this->getFilterId());
+	$totals = $totalsObj[0];
+?>
+   
+<script>
+ $("#dateRange").daterangepicker({
+     presetRanges: [{
+         text: 'Hoy',
+         dateStart: function() { return moment() },
+         dateEnd: function() { return moment() }
+     }, {
+         text: 'Ayer',
+         dateStart: function() { return moment().subtract('days', 1) },
+         dateEnd: function() { return moment().subtract('days', 1) }
+     }, {
+         text: 'Los últimos 7 dias',
+         dateStart: function() { return moment() },
+         dateEnd: function() { return moment().subtract('days', 6) }
+     }, {
+         text: 'Última semana',
+         dateStart: function() { return moment().add('weeks', 1).startOf('week') },
+         dateEnd: function() { return moment().subtract('weeks', 1).endOf('week') }
+     }],
+     onChange: function() { 
+	     $.request('onChangeDimension', {data: {dateRange: JSON.stringify($("#dateRange").daterangepicker("getRange"))}})
+		 
+	 },
+     applyOnMenuSelect: false,
+     /*datepickerOptions: {
+         minDate: 0,
+         maxDate: null
+     }*/
+ });
+
+var queryStart = '<?=$dateRange['start']?>',
+dateParts = queryStart.match(/(\d+)/g)
+realStart = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]); 
+
+var queryEnd = '<?=$dateRange['end']?>',
+dateParts = queryEnd.match(/(\d+)/g)
+realEnd = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]); 
+
+ $("#dateRange").daterangepicker("setRange", {start: realStart, end: realEnd});
+</script>
+
+
+<script type="text/javascript">
+	AmCharts.makeChart("chartdiv",
+		{
+			"type": "serial",
+			"path": "http://www.amcharts.com/lib/3/",
+			"categoryField": "date",
+			"dataDateFormat": "YYYY-MM-DD",
+			"plotAreaFillColors": "#F9F9F9",
+			"backgroundColor": "#F9F9F9",
+			"categoryAxis": {
+				"parseDates": true
+			},
+			"chartCursor": {},
+			"chartScrollbar": {},
+			"trendLines": [],
+			"graphs": [
+				{
+					"bullet": "round",
+					"id": "AmGraph-1",
+					"title": "Insatisfechos",
+					"valueField": "ko"
+				},
+				{
+					"bullet": "square",
+					"id": "AmGraph-2",
+					"title": "Poco satisfechos",
+					"valueField": "mix"
+				},
+				{
+					"bullet": "round",
+					"id": "AmGraph-4",
+					"title": "Satisfechos",
+					"valueField": "ok"
+				}
+			],
+			"guides": [],
+			"valueAxes": [
+				{
+					"id": "ValueAxis-1",
+					"title": "Axis title",
+					"titleFontSize": 0
+				}
+			],
+			"allLabels": [],
+			"balloon": {},
+			"legend": {
+				"useGraphSettings": true
+			},
+			"dataLoader": {
+			    "url": "<?=url("backend/tresfera/statistics/stats/getStatsData")?>",
+			    "format": "json"
+			  },
+			/*"dataProvider": [
+				{
+					"date": "2014-03-01",
+					"ko": 8,
+					"mix": 5,
+					"ok": 89
+				},
+				{
+					"date": "2014-03-02",
+					"ko": 6,
+					"mix": 7,
+					"ok": 94
+				},
+				{
+					"date": "2014-03-03",
+					"ko": 2,
+					"mix": 3,
+					"ok": 2
+				},
+				{
+					"date": "2014-03-04",
+					"ko": 1,
+					"mix": 3,
+					"ok": 68
+				},
+				{
+					"date": "2014-03-05",
+					"ko": 2,
+					"mix": 1,
+					"ok": 2
+				},
+				{
+					"date": "2014-03-06",
+					"ko": 3,
+					"mix": 2,
+					"ok": 57
+				},
+				{
+					"date": "2014-03-07",
+					"ko": 6,
+					"mix": 8,
+					"ok": 93
+				}
+			]*/
+		}
+	);
+</script>
+<style>
+.amcharts-chart-div a {
+  display: none !important;
+}
+.scoreboard .row {
+  padding-top: 21px;
+}
+div.scoreboard {
+	padding: 0 !important;
+}
+.list-header h3 {
+  font-size: 22px;
+  color: #333;
+  text-transform: none;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+</style>

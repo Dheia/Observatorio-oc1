@@ -1,0 +1,42 @@
+title = "Pag17"
+url = "/cofidis/competencia1/pag17"
+layout = "cofidis"
+is_hidden = 0
+==
+<h2 class="header" style="text-align: left;">Cuenta alguna situación, propia o ajena, en la que se hayan puesto en práctica los aprendizajes generados por un error.</h2>
+<div class="row center">
+  <textarea id="textarea" data-peso="35" data-points="100" data-question="Cuenta brevemente alguna situación (propia o ajena), en la que, tras haber cometido un error, la persona haya aplicado los aprendizajes derivados de ese error adoptando una actitud de mejora continua." class="mdc-text-field__input" rows="8" cols="40"></textarea>
+</div>
+<div class="row center">
+  <button 
+      id="download-button" 
+      class="btn-large waves-effect waves-light orange">
+      CONTINUAR
+    </button>
+</div>
+<style>
+.topbar {
+  width: {{ 17*100/31 }}%;
+}
+</style>
+<script>
+  $("#download-button").click(function(){
+    var sendData = [];
+    $("[data-question]").each(function(){
+      var data = {
+          value: $(this).val(),
+          question: $(this).data("question"),
+          points: $(this).data("points"),
+          peso: $(this).data("peso"),
+      };
+      if(data.value)
+        sendData.push(data);
+    })
+    $.request('onSaveAnswers', {
+        data: sendData,
+        success: function(data) {
+          window.location = "pag18?finish=true";
+        }
+    })
+  })
+</script>

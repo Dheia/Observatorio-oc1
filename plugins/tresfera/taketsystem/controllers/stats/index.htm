@@ -1,0 +1,45 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><?= e($this->pageTitle) ?></a></li>
+        <li>Visión general</li>
+    </ul>
+<?php Block::endPut() ?>
+<?php 
+	$model = $this->widget->list->model; 
+	$totalsObj = $model->getTotals();
+	$totals = $totalsObj[0];
+
+?>
+<div class="scoreboard">
+    <div data-control="toolbar">
+	    <div class="scoreboard-item title-value">
+            <h4>Total</h4>
+            <p><?=$totals->numQuestions?></p>
+            <p class="description">preguntas</p>
+        </div>
+        <div class="scoreboard-item control-chart" data-control="chart-bar">
+            <ul>
+                <li data-color="#95b753">Buenas <span><?=$totals->numOk?> (<?=$totals->percentOk?>)</span></li>
+                <li data-color="#e5a91a">Regular <span><?=$totals->numMix?> (<?=$totals->percentMix?>)</span></li>
+                <li data-color="#cc3300">Malas <span><?=$totals->numKo?> (<?=$totals->percentKo?>)</span></li>
+            </ul>
+        </div>
+		
+		
+		<div class="scoreboard-item title-value">
+            <h4>Total</h4>
+            <p><?=$totals->numQuizz?></p>
+            <p class="description">encuestas</p>
+        </div>
+        <div class="scoreboard-item control-chart" data-control="chart-pie">
+            <ul>
+                <li data-color="#95b753">Completadas <span><?=$totals->numQuizz?></span></li>
+                <li data-color="#e5a91a">Parciales <span><?=$totals->numQuizz?></span></li>
+                <li data-color="#cc3300">Inacabadas <span><?=$totals->numQuizz?></span></li>
+            </ul>
+        </div>
+
+        
+    </div>
+</div>
+<?= $this->listRender() ?>

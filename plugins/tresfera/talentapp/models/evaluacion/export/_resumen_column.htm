@@ -1,0 +1,13 @@
+<?php
+$ev_completadas = $record->getContestadas();
+$ev_total = $record->getNumEvaluadores();
+$ev_pendientes = $record->getPendientes();
+if($ev_total)
+    $participacion = round($ev_completadas*100/($ev_total),1);
+else
+    $participacion = 0;
+?>
+PARTICIPACION: <?=$participacion." %\n\n"?> 
+-Evaluaciones totales: <?=$ev_total."\n"?>
+-Evaluaciones completadas: <?=$ev_completadas."\n"?>
+-Evaluaciones pendientes: <?=$ev_pendientes."\n"?>

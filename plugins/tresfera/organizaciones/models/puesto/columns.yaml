@@ -1,0 +1,25 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    client_id:
+        label: client_id
+        type: number
+    parent_id:
+        label: parent_id
+        type: number
+    name:
+        label: name
+        type: text
+    familia_puesto_id:
+        label: familia_puesto_id
+        type: number
+    organizacion_id:
+        label: organizacion_id
+        type: number

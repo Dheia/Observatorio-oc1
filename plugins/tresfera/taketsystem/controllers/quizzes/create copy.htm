@@ -1,0 +1,63 @@
+<?php Block::put('breadcrumb') ?>
+	<div class="row">
+		<div class="col-md-12">
+		    <ul>
+		        <li><a href="<?= Backend::url('tresfera/taketsystem/quizzes') ?>">Cuestionarios</a></li>
+		        <li class="h3">
+		        Nuevo
+		        </li>
+		    </ul>
+		</div>
+	</div>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <?php Block::put('form-contents') ?>
+    	<?= Form::open(['class' => 'layout fancy-layout']) ?>
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+
+       <div class="form-buttons loading-indicator-container">
+		    <!-- Save -->
+		    <a
+		        href="javascript:;"
+		        class="btn btn-primary oc-icon-check save"
+		        data-request="onSave"
+		        data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+		        data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
+		        data-hotkey="ctrl+s, cmd+s">
+		            Guardar
+		    </a>
+		
+		        <!-- Save and Close -->
+		        <a
+		            href="javascript:;"
+		            class="btn btn-primary oc-icon-check save"
+		            data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
+		            data-request="onSave"
+		            data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>">
+		                Guardar y cerrar
+		        </a>
+		</div>
+		
+
+    <?php Block::endPut() ?>
+
+    <?php Block::put('form-sidebar') ?>
+        <?= $this->makePartial('content_guide') ?>
+    <?php Block::endPut() ?>
+
+    <?php Block::put('body') ?>
+        <?= Form::open(['class'=>'layout stretch']) ?>
+            <?= $this->makeLayout('form-with-sidebar') ?>
+        <?= Form::close() ?>
+    <?php Block::endPut() ?>
+<?= Form::close() ?>
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('responsiv/campaign/messages') ?>" class="btn btn-default">Return to messages list</a></p>
+
+<?php endif ?>

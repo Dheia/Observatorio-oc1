@@ -1,0 +1,41 @@
+title = "Comentario y email"
+url = "/slides/slide/:code"
+description = "Solicitamos un comentario abierto y el email"
+type = "segmentacion"
+layout = "render"
+
+[taketsystemTemplate]
+==
+<!-- Content -->
+<section>
+    <!-- Flex Items , Flex Box themselves -->
+    <div class="h-30">
+        <div>
+          <div data-role="pregunta" data-answer-type="free" data-question-type="free">
+            <h2>{text name="observacion" label="Comentario"}¿Tiene algún comentario o sugerencia?{/text}</h2>
+            <div class="list">
+			  <label class="item item-input">
+			    <textarea data-question="1" name="observaciones" placeholder=""></textarea>
+			  </label>
+			</div>
+          </div>
+        </div>
+    </div>
+    <div class="h-30">
+        <div>
+          <div data-role="pregunta" data-answer-type="email" data-question-type="email">
+            <h2>{text name="email" label="Email"}Si nos deja su email le enviamos su regalo{/text}</h2>
+            <div class="list">
+			  <label class="item item-input">
+			    <input data-question="2" type="text" placeholder="@" name="email"/>
+			  </label>
+			</div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+	  		<button ng-click="respuestas()" type="submit" class="button button-block button-positive">Continuar</button>
+        </div>
+    </div>
+</section>

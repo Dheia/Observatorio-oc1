@@ -1,0 +1,54 @@
+<?php
+use Tresfera\Talentapp\Models\Evaluacion;
+use Tresfera\Talentapp\Models\Proyecto;
+
+use Mja\Mail\Models\Email;
+use Mja\Mail\Models\EmailOpens;
+
+
+$estadisticas = Proyecto::getEstadisticas("tresfera_talentapp-Administrador-Filter-listFilter");
+
+?>
+<div id="estadisticas">
+<h4 class="mt ml" style="float:left"><?= e(trans('tresfera.talentapp::lang.admin.estadisticas_generales')) ?></h4>
+<!--<h4 class="mt mr" style="float:right">Estadísticas Emails</h4>-->
+
+<div style="clear: left;">
+    <div class="scoreboard" style="float:left">
+        <div class="" data-control="toolbar">
+
+            <div class="scoreboard-item title-value">
+                <h4><b><?= e(trans('tresfera.talentapp::lang.admin.proyectos')) ?></b></h4>
+                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                        <ul>
+                            <li data-color="#e5a91a"><?= e(trans('tresfera.talentapp::lang.admin.en_curso')) ?> <span><?=$estadisticas['proyectos_en_curso']?></span></li>
+                            <li data-color="#95b753"><?= e(trans('tresfera.talentapp::lang.admin.finalizados')) ?> <span><?=$estadisticas['proyectos_finalizados']?></span></li>
+                        </ul>
+                    </div>
+            </div>
+
+            <div class="scoreboard-item title-value">
+                <h4><b><?= e(trans('tresfera.talentapp::lang.admin.evaluados')) ?></b></h4>
+                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                    <ul>
+                        <li data-color="#e5a91a"><?= e(trans('tresfera.talentapp::lang.admin.activos')) ?> <span><?=$estadisticas['evaluados_activos']?></span></li>
+                        <li data-color="#95b753"><?= e(trans('tresfera.talentapp::lang.admin.finalizados')) ?> <span><?=$estadisticas['evaluados_finalizadas']?></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="scoreboard-item title-value">
+                <h4><b><?= e(trans('tresfera.talentapp::lang.admin.evaluaciones')) ?></b></h4>
+                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                        <ul>
+                            <li data-color="#e5a91a"><?= e(trans('tresfera.talentapp::lang.admin.pendientes')) ?> <span><?=$estadisticas['evaluaciones_pendientes']?></span></li>
+                            <li data-color="#95b753"><?= e(trans('tresfera.talentapp::lang.admin.completadas')) ?> <span><?=$estadisticas['evaluaciones_completadas']?></span></li>
+                        </ul>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</div>

@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Question Option
+
+# Model Form Field configuration
+form: $/tresfera/taketsystem/models/questionoption/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Taketsystem\Models\QuestionOption
+
+# Default redirect location
+defaultRedirect: tresfera/taketsystem/questionoptions
+
+# Create page
+create:
+    title: Create Question Option
+    redirect: tresfera/taketsystem/questionoptions/update/:id
+    redirectClose: tresfera/taketsystem/questionoptions
+
+# Update page
+update:
+    title: Edit Question Option
+    redirect: tresfera/taketsystem/questionoptions
+    redirectClose: tresfera/taketsystem/questionoptions
+
+# Preview page
+preview:
+    title: Preview Question Option

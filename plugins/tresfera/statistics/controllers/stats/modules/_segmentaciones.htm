@@ -1,0 +1,64 @@
+<div class="row">
+<?php
+ $user = BackendAuth::getUser();
+	$model = new \Tresfera\Statistics\Models\Result();
+	$config = \Tresfera\Statistics\Models\Config::find(1);
+  if(isset($config->config['segmentaciones']))
+    $colors = $config->config['segmentaciones'];
+
+
+  $segmentaciones = \Taket\Structure\Models\Question::with("options")->where("comparativa_segmentacion",1)->orderBy("order","ASC")->get();
+  $totalsObj = $model->getTotals($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+  if(count($segmentaciones)) {
+    if(isset($totalsObj[0])) {
+      $totals2 = $totalsObj[0];
+    foreach($segmentaciones as $segmentacion) {
+      $totals = $model->getTotalsSegmentacion($segmentacion->id,$this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+      //if(count($totals) == 0) continue;
+      $count_total = 0;
+      foreach($totals as $total) {
+        $count_total += $total->count;
+      }
+          
+?>
+	<div class="col-md-4">
+		<div data-control="">
+      <h3><i class=""></i><?=$segmentacion->name?></h3>
+      <div class="row">
+        <div class="col-md-12">
+          <div
+              class="control-chart"
+              data-control="chart-pie"
+              data-size="120"
+              data-center-text="<?=$count_total?>">
+              <ul>
+                  <?php 
+                  $i = 0;  
+                  $color = "";  
+                  foreach($totals as $total) {
+                    if(isset($colors)) {
+                      if(isset($colors[$i]))
+                        $color = $colors[$i]['color'];
+                      else {
+                        $i = 0;
+                        $color = $colors[$i]['color'];
+                      }
+                    }
+                    $i++;
+                    $seg_value = \Tresfera\Taketsystem\Models\SegmentacionValue::where("value",$total->value)->where("segmentacion_id",$segmentacion->id)->first();
+                    ?>
+                  <li <?=isset($seg_value->data_color)?'data-color="'.$seg_value->data_color.'"':'data-color="'.$color.'"'?>><?=$total->value?> <span><?=$total->count?> (<?=number_format(($total->count/$count_total)*100,2)?>%)</span></li>
+                  <?php } ?>
+              </ul>
+          </div>
+        </div>
+      </div>	  
+    </div>
+  </div>
+<?php 
+    }
+  }
+  }
+
+?>
+</div>

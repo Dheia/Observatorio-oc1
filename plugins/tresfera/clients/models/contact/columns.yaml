@@ -1,0 +1,24 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    date:
+        label: Fecha
+        select: (SELECT date FROM tresfera_clients_contacts_seguimientos WHERE tresfera_clients_contacts_seguimientos.contact_id = tresfera_taketsystem_clients_contacts.id ORDER BY date LIMIT 1)
+    dni:
+        label: Empresa
+    sector:
+        label: Sector
+    npv:
+        label: NPV
+    name:
+        label: Nombre de contacto
+    telf:
+        Label: Telf.
+    direc:
+        label: Dirección
+    email:
+        label: E-mail
+    observ:
+        label: Observaciones

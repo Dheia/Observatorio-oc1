@@ -1,0 +1,47 @@
+<?php 
+/* PRUEBAS */
+
+use Tresfera\Taketsystem\Models\Result;
+use Tresfera\Taketsystem\Models\Answer;
+use Tresfera\Taketsystem\Models\Slide;
+use Tresfera\Clients\Models\Client;
+
+
+$p1 = new Tresfera\Talent\Models\Proyecto();
+$p2 = new Tresfera\Talent\Models\Proyecto();
+$p1->name = "P1";
+$p1->prueba();
+$p2->name = "P2";
+$p2->prueba();
+
+
+exit;
+
+\Queue::push('Tresfera\Talent\Classes\Jobs\SendInformeProyecto', ['proyecto_id' => 88], 'sendinformesproyectos');
+
+exit;
+
+
+/*
+$emails = $proyecto->getEmailsActivacion();
+foreach($emails['no_leidos'] as $email)
+{
+    $cont = 0;
+    foreach($emails['no_leidos'] as $email2)
+    {
+        if($email == $email2)    $cont++;
+    }
+    if($cont>1) echo $email;
+}*/
+dd($proyecto->getEmailsActivacion());
+echo "<br>Emails activacion evaluados leidos: " . $proyecto->getEmailsActivacion();
+echo "<br>Usuarios evaluadores asignados: " . $proyecto->getUsuariosEvaluadoresAsignados();
+echo "<br>Evaluados totales: " . $proyecto->getEvaluadosTotales();
+
+$evaluaciones = $proyecto->getNumEvaluaciones();
+echo "<br>Evaluaciones completadas: " . $evaluaciones['completadas'];
+echo "<br>Evaluaciones totales: " . $evaluaciones['totales'];
+
+
+
+?>

@@ -1,0 +1,10 @@
+name: Puestos
+form: $/tresfera/organizaciones/models/puesto/fields.yaml
+modelClass: Tresfera\Organizaciones\Models\Puesto
+defaultRedirect: tresfera/organizaciones/puestos
+create:
+    redirect: 'tresfera/organizaciones/puestos/update/:id'
+    redirectClose: tresfera/organizaciones/puestos
+update:
+    redirect: tresfera/organizaciones/puestos
+    redirectClose: tresfera/organizaciones/puestos

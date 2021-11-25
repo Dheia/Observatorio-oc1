@@ -1,0 +1,110 @@
+title = "Pag2"
+url = "/cofidis/competencia1/pag2"
+layout = "cofidis"
+is_hidden = 0
+==
+<div class="avatar">
+<img src="/storage/app/media/cofidis/2.3 Foto.png"><span style="color: #FFFFFF">AitanaFriky</span>
+</div>
+<div class="chat">
+	 	<ul>
+			<li class="me">
+        Pues me compré un piso de 2ª mano hace un par de meses y acabo de mudarme. Ahora estoy conociendo el barrio. Creo que va a ser una adaptación algo más acelerada de lo que pensaba.
+      </li>
+			<li class="you">
+        ¿En serio? ¡Qué bien! ¿no? estarás contenta. ¿Y porqué acelerada?
+      </li>
+      <li class="me">
+        No te lo vas a creer pero fui a la primera reunión de vecinos y va y me dan la sorpresa de que me toca ser presidenta de la comunidad este año. Yo, que no lo he hecho nunca, y precisamente ahora que hay que hacer unas obras en el edificio “delicadas” me han dicho... <img src="/storage/app/media/cofidis/2.0 Emoticon.png">
+      </li>
+			<li class="you">
+        Vaya, sí que aterrizas fuerte. No te preocupes, tú puedes <img src="/storage/app/media/cofidis/2.1 Emoticon.png">
+      </li>
+      <li class="me">
+        Noo, tú lo ves fácil pero yo no me entero. No sé por dónde empezar y tiene que ser ¡ya!. Puff, ya me conoces, que quiero hacerlo bieeennnn.
+      </li>
+		</ul>
+		<div class="body">
+    </div>
+    <div class="bg-typed">
+      <div class="typed"></div>
+    </div>
+	</div>
+      <div class="row center fixed-bottom">
+        <a href="pag3?finish=true" 
+            id="download-button" 
+            class="btn-large waves-effect waves-light orange">
+            CONTINUAR
+          </a>
+      </div>
+      <style>
+.topbar {
+  width: {{ 2*100/31 }}%;
+}
+</style>
+
+<script>
+$( document ).ready(function() {
+    var strings = [];
+      var elements = $(" .chat ul li");
+      console.dir(elements)
+      var i = 0;
+      $("body").on('DOMSubtreeModified', ".chat .typed", function() {
+        console.log($(this)[0].scrollHeight)
+        $(this).scrollTop($(this)[0].scrollHeight);
+
+      });
+      function run(num) {
+          if(elements[num] == undefined) return;
+          if($(elements[num]).hasClass("me")) {
+              var options = {
+                  strings: [""],
+                  typeSpeed: 40,
+                  onComplete: function(self) { 
+                      
+                      $(".typed").html("");
+                      $(".typed-cursor").remove();
+                      if(strings[num]) {
+                        $(".chat .body").append("<div class='me'><div>"+strings[num]+"</div></div>");
+                        var $container = $('.chat .body'),
+                        $scrollTo = $('.chat .body div').last();
+  
+                        $container.scrollTop(
+                            $scrollTo.offset().top - $container.offset().top + $container.scrollTop()
+                        );
+                      }
+
+                      if(i>num)
+                          run(num+1)
+                  }
+              }
+              setTimeout(function(){
+                var typed = new Typed(".typed", options);
+              }, 2000);
+              
+          } else {
+              if(i>num)
+                  setTimeout(function(){
+                      $(".chat .body").append("<div class='you'><div>"+strings[num]+"</div></div>");
+                      var $container = $('.chat .body'),
+                      $scrollTo = $('.chat .body div').last();
+
+                      $container.scrollTop(
+                          $scrollTo.offset().top - $container.offset().top + $container.scrollTop()
+                      );
+                      run(num+1)
+                  }, 2000);
+                  
+          }
+          
+      }
+
+      $(".chat ul li").each(function(){
+          strings[i] = $(this).html();
+          i++;
+      })
+      
+      run(0);
+});
+      
+</script>

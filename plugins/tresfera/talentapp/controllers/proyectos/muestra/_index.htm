@@ -1,0 +1,188 @@
+<?php
+
+use Tresfera\Talentapp\Classes\UserControl;
+
+
+$user = BackendAuth::getUser();
+
+?>
+<style>
+a {
+    cursor: pointer;
+}
+
+        .profile-pic {
+          position: relative;
+          display: inline-block;
+            
+            
+        }
+        
+        .profile-pic:hover .edit {
+          display: block;
+        }
+        
+        .edit_img:hover {
+            transition:all .3s ease-in-out;
+            filter: blur(3px);
+        }
+        
+        .edit {
+          padding-top: 7px;
+          padding-right: 7px;
+          position: absolute;
+          right: 0;
+          top: 0;
+          display: none;
+        }
+        
+        .edit a {
+          color: #000;
+        }
+
+</style>
+
+
+
+
+
+<div id="index">
+Página de inicio según el tipo de usuario:
+
+<ul>
+    <li><a id="administrador">Administrador</a></li>
+    <li><a id="empresa">Empresa</a></li>
+    <li><a id="gestor">Gestor</a></li>
+    <li><a id="evaluado">Evaluado</a></li>
+    <li><a id="evaluador">Evaluador</a></li>
+</ul>
+</div>
+
+<div id="div_admin">
+        <?php include('_administrador.htm'); ?>
+        <br/>
+          <a class="volver">Volver</a>
+</div>
+
+
+<div id="div_empresa">
+        <?php include('_empresa.htm'); ?>
+        <br/>
+        <a class="volver">Volver</a>
+</div>
+
+
+<div id="div_gestor">
+        <?php include('_gestor.htm'); ?>
+        <br/>
+        <a class="volver">Volver</a>
+</div>
+
+<div id="div_evaluado">
+        <?php include('_evaluado.htm'); ?>
+        <br/>
+        <a class="volver">Volver</a>
+</div>
+
+<div id="div_evaluador">
+        <?php include('_evaluador.htm'); ?>
+        <br/>
+        <a class="volver">Volver</a>
+</div>
+
+<div id="div_detalles_proyecto">
+        <?php include('_detalles_proyecto.htm'); ?>
+        <br/>
+        <a class="volver">Volver</a>
+</div>
+
+<div id="div_gestionar_proyecto">
+        <?php include('_proyecto_gestor.htm'); ?>
+        <br/>
+        <a class="volver">Volver</a>
+</div>
+
+<div id="div_detalles_evaluacion">
+        <?php include('_detalles_eval.htm'); ?>
+        <br/>
+        <a class="volver">Volver</a>
+</div>
+
+<div id="div_cuestionario_evaluador">
+        <?php include('_detalles_cuestionario_evaluador.htm'); ?>
+        <br/>
+        <a class="volver">Volver</a>
+</div>
+
+<script>
+
+function init() {
+    $('#div_admin').hide();
+    $('#div_empresa').hide();
+    $('#div_gestor').hide();
+    $('#div_evaluado').hide();
+    $('#div_evaluador').hide();
+    $('#div_detalles_proyecto').hide();
+    $('#div_gestionar_proyecto').hide();
+    $('#div_detalles_evaluacion').hide();
+    $('#div_cuestionario_evaluador').hide();
+    
+    $('#index').show();
+}
+
+init();
+
+  $(document).ready(function() {
+      $('#administrador').on('click', function() {
+        $('#index').hide();
+        $('#div_admin').show();
+      });
+
+      $('#empresa').on('click', function() {
+        $('#index').hide();
+        $('#div_empresa').show();
+      });
+
+      $('#gestor').on('click', function() {
+        $('#index').hide();
+        $('#div_gestor').show();
+      });
+
+      $('#evaluado').on('click', function() {
+        $('#index').hide();
+        $('#div_evaluado').show();
+      });
+
+      $('#evaluador').on('click', function() {
+        $('#index').hide();
+        $('#div_evaluador').show();
+      });
+
+      $('.volver').on('click', function() {
+        init();
+      });
+
+      $('.detalles_proyecto').on('click', function() {
+        $('#div_admin').hide();
+        $('#div_detalles_proyecto').show();
+      });
+
+      $('#gestionar_proyecto').on('click', function() {
+        $('#div_detalles_proyecto').hide();
+        $('#div_gestionar_proyecto').show();
+      });
+
+      $('.detalles_evaluacion').on('click', function() {
+        $('#div_detalles_proyecto').hide();
+        $('#div_detalles_evaluacion').show();
+      });
+
+      $('.cuestionario_evaluador').on('click', function() {
+        $('#div_detalles_evaluacion').hide();
+        $('#div_cuestionario_evaluador').show();
+      });
+
+
+
+  });
+</script>

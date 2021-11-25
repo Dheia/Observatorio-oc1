@@ -1,0 +1,14 @@
+plugin:
+    name: Clients
+    description: 'tresfera.clients::lang.plugin.description'
+    author: Tresfera
+    icon: oc-icon-user
+    homepage: ''
+
+navigation:
+    clients:
+        label: Clients
+        url: tresfera/clients/clients
+        icon: icon-user-circle
+        permissions: [admin]
+        order: 300

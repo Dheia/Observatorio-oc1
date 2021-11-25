@@ -1,0 +1,2 @@
+modelClass: Tresfera\Taketsystem\Models\Quiz
+relationName: slides

@@ -1,0 +1,8 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table tresfera_flex360_proyectos'
+    - builder_table_create_tresfera_flex360_proyectos.php
+1.0.3:
+    - 'Created table tresfera_flex360_subproyectos'
+    - builder_table_create_tresfera_flex360_subproyectos.php

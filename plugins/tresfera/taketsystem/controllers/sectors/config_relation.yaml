@@ -1,0 +1,14 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+sections:
+    label: Áreas
+    manage:
+        form: $/tresfera/taketsystem/models/section/fields.yaml
+        list: $/tresfera/taketsystem/models/section/columns.yaml
+        showSearch: true
+        recordsPerPage: 10
+    view:
+        list: $/tresfera/taketsystem/models/section/columns.yaml
+        toolbarButtons: create|delete

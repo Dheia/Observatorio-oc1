@@ -1,0 +1,10 @@
+name: Administrador
+form: $/tresfera/skillyouup/models/evaluacion/fields.yaml
+modelClass: Tresfera\Skillyouup\Models\Equipo
+defaultRedirect: tresfera/skillyouup/administrador
+create:
+    redirect: 'tresfera/skillyouup/evaluacion/update/:id'
+    redirectClose: tresfera/skillyouup/administrador
+update:
+    redirect: tresfera/skillyouup/administrador
+    redirectClose: tresfera/skillyouup/administrador

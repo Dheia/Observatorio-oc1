@@ -1,0 +1,228 @@
+title = "Metricas"
+url = "/cofidis/metricas"
+layout = "app"
+description = "Segmentaciones"
+is_hidden = 0
+
+[session]
+security = "user"
+redirect = "cofidis/login"
+==
+use RainLab\User\Models\User;
+use Tresfera\Taketsystem\Models\Timming;
+use Tresfera\Taketsystem\Models\Progreso;
+public function onStart() {
+    $users = User::all();
+    foreach($users as $user) {
+        $data = [];
+        //Número de horas totales de conexión por competencia.
+        for($i=1;$i<=5;$i++) {
+            $data['conexion_competencia']['competencia'.$i] = Timming::where("page","/cofidis/app/competencia".$i)->sum("time") / 60;
+        }
+        //Número de personas conectadas por franja horaria, por competencia.
+        for($i=1;$i<=5;$i++) {
+            $data['franja_horaria_competencia']['competencia'.$i] = Timming::where("page","/cofidis/app/competencia".$i)
+                            ->select(DB::raw('hour(created_at) as hora'), DB::raw('COUNT(id) as numero'))
+                            ->groupBy(DB::raw('hour(created_at)'))->lists("numero","hora");
+        }
+        $data['horas'] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+        $data['franja_horaria'] = Timming::select(DB::raw('hour(created_at) as hora'), DB::raw('COUNT(id) as numero'))
+                            ->groupBy(DB::raw('hour(created_at)'))->lists("numero","hora");
+        //Número de personas que han finalizado la experiencia, por competencia.
+        for($i=1;$i<=5;$i++) {
+            $data['finalizado_competencia']['competencia'.$i] = count(Progreso::where("quiz","cofidis-competencia".$i)
+                            ->where("pag","28")
+                            ->groupBy("user_id")->get());
+            $data['iniciado_competencia']['competencia'.$i] = count(Progreso::where("quiz","cofidis-competencia".$i)
+                            ->groupBy("user_id")->get())-$data['finalizado_competencia']['competencia'.$i];
+        }
+        //Tiempo promedio entre el número de personas y el total de horas, para saber cuánto tiempo han estado haciendo la experiencia.
+        for($i=1;$i<=5;$i++) {
+            $list = Progreso::where("quiz","cofidis-competencia".$i)
+                            ->where("pag","30")
+                            ->groupBy("user_id")->lists("user_id","user_id");
+            $data['promedo_tiempo_finish']['competencia'.$i] = Timming::whereIn("user_id",$list)->where("page","/cofidis/app/competencia".$i)->sum("time") / 60;
+
+        }
+        //Número de personas que han completado todos los retos por competencia, por día.
+        for($i=1;$i<=5;$i++) {
+            $data['finish_por_dia']['competencia'.$i] = Progreso::select(DB::raw('DATE(created_at) as dia'),DB::raw('count(DISTINCT user_id) as usuarios'))->where("quiz","cofidis-competencia".$i)
+                                                                        ->where("pag","30")
+                                                                        ->groupBy(DB::raw('DATE(created_at)'))->lists("usuarios","dia");
+
+        }
+        
+        $this['data'] = $data;
+    }
+}
+==
+{% put head %}
+<style>
+.main-content {
+    margin: 0;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+}
+tr > * {
+    padding: 5px;
+    text-align: right;
+}
+table {
+    border-collapse: collapse;
+    margin-bottom: 50px;
+}
+</style>
+{% endput %}
+
+
+<h1>
+    GRADO DE AVANCE POR COMPETENCIA
+</h1>
+<table>
+<tr>
+    <th>Competencia</th>
+    <th>Finalizado</th>
+    <th>Sin finalizar</th>
+</tr>
+{% for competencia,minutos in data['finalizado_competencia'] %}
+<tr>
+    <td>{{competencia}}</td>
+    <td>{{minutos}}</td>
+    <td>{{data['iniciado_competencia'][competencia]}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h1>
+    Horas totales por competencia
+</h1>
+<canvas id="chart1" width="750" height="280" style="border: 1px solid black;">Canvas is not supported</canvas>
+
+<table id="table1">
+        <thead>
+            <tr>
+                <th>Competencia</th>
+                <th>Minutos totales</th>
+            </tr>
+        </thead>
+<tbody>
+{% for competencia,minutos in data['conexion_competencia'] %}
+<tr>
+    <td>{{competencia}}</td>
+    <td>{{minutos}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+
+<h1>
+Horas totales por competencia y franja horaria
+</h1>
+<canvas id="chart2" width="950" height="280" style="border: 1px solid black;">Canvas is not supported</canvas>
+
+<table id="table2">
+    <thead>
+        <tr>
+            <th></th>
+            {% for hora in data['horas'] %}
+            <th>{{hora}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for competencia,horas in data['franja_horaria_competencia'] %}
+    <tr>
+        <td>{{competencia}}</td>
+        {% for hora in data['horas']  %}
+            {% if horas[hora] %}
+            <td>{{horas[hora]}}</td>
+            {% else %}
+            <td>0</td>
+            {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h1>
+Horas totales por franja horaria
+</h1>
+<table>
+    <tr>
+        <th></th>
+        {% for hora in data['horas'] %}
+        <th>{{hora}}</th>
+        {% endfor %}
+    </tr>
+<tr>
+    <td>Total</td>
+    {% for hora in data['horas']  %}
+    <td>{{data['franja_horaria'][hora]}}</td>
+    {% endfor %}
+</tr>
+</table>
+
+
+
+
+<h1>Tiempo promedio entre el número de personas y el total de horas</h1>
+<table>
+<tr>
+    <th>Competencia</th>
+    <th>Minutos</th>
+</tr>
+{% for competencia,minutos in data['promedo_tiempo_finish'] %}
+<tr>
+    <td>{{competencia}}</td>
+    <td>{{minutos|number_format(0)}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h1>
+    Número de personas que han completado todos los retos por competencia, por día
+</h1>
+<table>
+    <tr>
+        <th>Dias</th>
+        {% for competencia,usuarios in data['finish_por_dia'] %}
+        <th>{{competencia}}</th>
+        {% endfor %}
+    </tr>
+    {% for dia,num in data['finish_por_dia']['competencia1'] %}
+    <tr>
+        <td>{{dia}}</td>
+        {% for competencia in ["competencia1","competencia2","competencia3","competencia4","competencia5"]  %}
+        <td>{{data['finish_por_dia'][competencia][dia]}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{% scripts %}
+<script type="text/javascript" src="{{'/assets/app/js/graficarBarras.js'|theme}}"></script>
+<script type="text/javascript" src="{{'/assets/app/js/tabla2array.js'|theme}}"></script>
+<script type="text/javascript">
+    var misParam ={
+        miMargen : 0.80,
+        separZonas : 0.01,
+        tituloGraf : "-",
+        tituloEjeX : "-",
+        tituloEjeY : "-",
+        nLineasDiv : 5,
+        mysColores :[
+                        ["rgba(213,10,49)","rgba(213,10,49)"],  //red
+                        ["rgba(213,10,49)","rgba(213,10,49)"], //yellow
+                        ["rgba(213,10,49)","rgba(213,10,49)"], //yellow
+                        ["rgba(213,10,49)","rgba(213,10,49)"], //yellow
+                        ["rgba(213,10,49)","rgba(213,10,49)"], //yellow
+                    ],
+        anchoLinea : 2,
+    };
+
+    obtener_datos_tabla_convertir_en_array('table1',graficarBarras,'chart1','750','280',misParam,true);
+    obtener_datos_tabla_convertir_en_array('table2',graficarBarras,'chart2','950','280',misParam,false);
+</script>
+{% scripts %}

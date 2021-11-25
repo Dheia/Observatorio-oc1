@@ -1,0 +1,39 @@
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li><a href="<?=url("backend/tresfera/taketsystem/stats/")?>">Análisis</a></li>
+		        <li class="h3">
+		        <?php 
+		        	if(get('group_by')) {
+			    ?>
+			    	<?=$this->typePage[get('group_by')]?>    	
+			    <?php
+		        	} else {
+			    ?>
+			    	Visió general   	
+			    <?php    	
+		        	}
+		        ?>
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+<?php Block::endPut() ?>
+<?php echo $this->makePartial("filter_new"); ?>  
+
+<?= $this->listRender() ?>
+
+<style>
+body.slim-container .control-breadcrumb {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+div#filterExample {
+    margin-bottom: 16px;
+}
+</style>

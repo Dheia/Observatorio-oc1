@@ -1,0 +1,10 @@
+name: Equipos
+form: $/tresfera/buildyouup/models/equipo/fields.yaml
+modelClass: Tresfera\Buildyouup\Models\Equipo
+defaultRedirect: tresfera/buildyouup/
+create:
+    redirect: 'tresfera/buildyouup/equipos/update/:id'
+    redirectClose: tresfera/buildyouup/
+update:
+    redirect: tresfera/buildyouup/equipos
+    redirectClose: tresfera/buildyouup/

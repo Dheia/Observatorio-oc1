@@ -1,0 +1,154 @@
+<style>
+.over:hover {
+    color: black !important;
+    cursor: pointer;
+}
+</style>
+
+<?php
+use Tresfera\Buildyouup\Models\Proyecto;
+use Tresfera\Buildyouup\Models\Equipo;
+use Tresfera\Buildyouup\Models\Equipo_Evaluador;
+use Tresfera\Buildyouup\Classes\UserControl;
+
+$proyecto_id = $model->id;
+$proyecto = Proyecto::find($proyecto_id);
+$nombre_proyecto = $proyecto->name;
+
+$evaluaciones = Equipo::where('proyecto_id',$proyecto_id)->get();
+
+function muestraEquipos($evaluaciones)
+{
+?>
+    <div class="control-list">
+        <table class="table data" data-control="rowlink">
+            <thead>
+                <tr>
+                    <th><span>Persona Evaluada</span></th>
+                    <th><span>Tipo de Evaluación</span></th>
+                    <th><span>Número de Evaluadores</span></th>
+                    <th><span>Tasa de Respuesta</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach($evaluaciones as $index=>$evaluacion)
+                {
+                    ?>
+                    <tr id="<?=$evaluacion->id?>">
+                        <td>
+                            <a href="/backend/tresfera/buildyouup/proyectos/p/<?=$evaluacion->proyecto_id?>/evaluacion/<?=$evaluacion->id?>"><?=UserControl::getFullName($evaluacion->evaluado_id)?></a>
+                        </td>
+                        <td>
+                            <?=$evaluacion->tipo?>
+                        </td>
+                        <td>
+                            <?php $n_evaluadores = Evaluacion_Evaluador::where('eval', $evaluacion->id)->count(); ?>
+                            <?=$n_evaluadores?>
+                        </td>
+                        <td>
+                            <?php 
+                                $n_respuestas = 1; // TODO - Hacer consulta BDD
+                                $porcentaje = $n_respuestas*100/$n_evaluadores;
+                            ?>
+                            <div class="scoreboard-item title-value" data-control="goal-meter" data-value="<?=$porcentaje?>">
+                                <p><?=round($porcentaje,1)?>%</p>
+                                <p class="description"><?=$n_respuestas?> personas</p>
+                            </div>
+                        </td>
+                        <td class="nolink">
+                            <div>
+                                <a href="/backend/tresfera/buildyouup/proyectos/update/<?=$evaluacion->proyecto_id?>"><span class="over oc-icon-pencil"></span></a>
+                                <span id_evaluacion="<?=$evaluacion->id?>" class="trash over oc-icon-trash"></span>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+<?php    
+}
+
+function muestraListaVacia()
+{
+    ?>
+    <div class="control-list">
+        <table class="table data">
+            <thead>
+                <tr>
+                    <th><span>Persona Evaluada</span></th>
+                    <th><span>Tipo de Evaluación</span></th>
+                    <th><span>Número de Evaluadores</span></th>
+                    <th><span>Tasa de Respuesta</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="no-data">
+                    <td colspan="100" class="nolink">
+                        <p class="no-data">
+                            No hay evaluaciones para este proyecto.
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <?php
+}
+
+?>
+
+
+<div class="control-breadcrumb">
+    <ul>
+        <li><a href="<?= Backend::url('tresfera/buildyouup') ?>">Buildyouup</a></li>
+        <li><?=$nombre_proyecto?></li>
+    </ul>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-6 text-left">
+        <a href="/backend/tresfera/buildyouup/evaluaciones/create/<?=$proyecto_id?>" type="button" class="btn btn-primary oc-icon-plus">Nueva Evaluación</a>
+    </div>
+
+    <div class="col-xs-6 text-right">
+        <a id="gestionar_proyecto" href="/backend/tresfera/buildyouup/proyectos/gestion/<?=$proyecto_id?>" type="button" class="btn btn-primary oc-icon-universal-access">Gestionar Proyecto</a>
+        <a href="/backend/tresfera/buildyouup/proyectos/update/<?=$proyecto_id?>" type="button" class="btn btn-primary oc-icon-pencil">Modificar Proyecto</a>
+    </div>
+</div>
+    
+    <br/>
+
+<?php
+    if(count($evaluaciones)==0) muestraListaVacia();
+    else muestraEquipos($evaluaciones);
+?>
+
+<script>
+      $(document).ready(function() {
+    
+          $('.trash').on('click', function(){
+              var id_evaluacion = $(this).attr('id_evaluacion');
+
+              if( confirm("¿Estás seguro de eliminar esta evaluación?") )
+              {
+                $.request("onDeleteEval", {
+                    data:
+                    {
+                        id_evaluacion
+                    }
+                });
+    
+                $('#'+id_evaluacion).remove();
+              }
+          });
+    
+      });
+    
+    </script>

@@ -1,0 +1,13 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    region:
+        label: Província
+        relation: region
+        select: name
+        searchable: true
+    name:
+        label: Nombre
+        searchable: true

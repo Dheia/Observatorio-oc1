@@ -1,0 +1,11 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    title:
+        label: Pregunta
+    sections:
+        label: Áreas
+        type: partial
+        path: $/tresfera/taketsystem/controllers/sectors/_list_sections.htm

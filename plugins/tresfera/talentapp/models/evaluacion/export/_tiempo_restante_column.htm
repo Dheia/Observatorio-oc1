@@ -1,0 +1,13 @@
+<?php
+if(isset($record->proyecto->fecha_fin))
+{
+    $d2 = \Carbon\Carbon::parse($record->proyecto->fecha_fin);
+    $fecha_actual = \Carbon\Carbon::now();
+    $diff = $fecha_actual->diffInDays($d2,false);
+    ?>
+    <?php if($diff < 0) { ?> 
+Finalizado
+    <?php } else { ?> 
+<?='Finaliza en ' . $diff . ' días';?>
+    <?php } 
+}

@@ -1,0 +1,15 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+scopes:
+    sector:
+        # Filter name
+        label: Sectores
+
+        # Model Class name
+        modelClass: Tresfera\Taketsystem\Models\Sector
+
+        # Model attribute to display for the name
+        nameFrom: title
+
+        conditions: sector_id in (:filtered)

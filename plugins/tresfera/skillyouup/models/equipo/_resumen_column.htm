@@ -1,0 +1,24 @@
+<?php
+$stats = $record->getPlayers();
+if(is_array($stats)) {
+    ?>
+    <table>
+    <?php
+foreach($stats as $type=>$evaluador) {
+    ?>
+        <tr>
+            <td><?=$evaluador['name']?></td>
+            <td>
+              Total: <?php echo $record->countAnswereds($evaluador['name']); ?><br>
+              <?php foreach($record->listPlayersAnswereds($evaluador['name']) as $observador) { ?>
+                <?=$observador->value?> (<?=$observador->num?>)<br>
+              <?php } ?>
+            </td>
+        </tr>
+<?php
+  }
+?>
+</table>
+<?php
+}
+?>

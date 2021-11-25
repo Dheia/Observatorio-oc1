@@ -1,0 +1,110 @@
+<style>
+	input[type="text"], textarea {
+	    font-size: 200%;
+	    line-height: 100%
+	}
+</style>
+<section class="flex-wrap flex-horizontal">
+	<div class="bar bar-header bar-light">
+	  <img class="logoBig" cache-src="<?=$logo?>"/>
+	</div>
+	<div class="h-20">
+	    <div>
+	        <h1 class="titulo">
+		        <?php if(isset($question)) { ?>
+		        	<?=$question->getTranslateAttribute('title',$lang)?>
+		        <?php } else { ?>
+		       		<?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.segmentacion.title')?>
+		       	<?php } ?>
+	        </h1>
+	    </div> <!-- Flex Items  -->
+	</div>
+    <!-- Flex Items , Flex Box themselves -->
+    <?php if($data["email"] == 1 || $data["tlf"] == 1) { ?>
+        <div class="w-100 h-30 question-email">
+			<?php if($data["email"] == 1) { ?>
+			<div data-role="pregunta" 
+				   data-question-type="email" 
+				   data-answer-type="email"
+				   data-max-answers="1" 
+				   data-question-title="" 
+				   data-question-id=""
+				   data-question-number="1"
+				   data-question="">
+			    <h3><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.informacion.email')?></h3>
+				<div class="list">
+				  <label class="item item-input">
+				    <input type="email" name="libre"/>
+				  </label>
+				</div>
+			<h4 class="lopd"><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.informacion.emailLOPD')?></h4>
+			</div>
+			<?php } ?>
+			
+			<?php if($data["tlf"] == 1) { ?>
+			<div data-role="pregunta" 
+				   data-question-type="tlf" 
+				   data-answer-type="tlf"
+				   data-max-answers="1" 
+				   data-question-title="" 
+				   data-question-id=""
+				   data-question-number="1"
+				   data-question="">
+			    <h3><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.informacion.telefono')?></h3>
+				<div class="list">
+				  <label class="item item-input">
+				    <input type="tel" name="libre"/>
+				  </label>
+				</div>
+			</div>
+			<?php } ?>
+			
+        </div>
+        <?php } ?>
+        <?php 
+			if(isset($data["room"]))
+			if($data["room"] == 1) { ?>
+        <div class="w-100 question-room">
+	        
+			<div data-role="pregunta" 
+				   data-question-type="room" 
+				   data-answer-type="room"
+				   data-max-answers="1" 
+				   data-question-title="" 
+				   data-question-id=""
+				   data-question-number="1"
+				   data-question="">
+			    <h3><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.informacion.room')?></h3>
+				<div class="list">
+				  <label class="item item-input">
+				    <input type="number" name="libre"/>
+				  </label>
+				</div>
+			</div>
+			
+        </div>
+        <?php } ?>
+        <div class="w-100 question-free">
+        
+        	<?php if($data["free"] == 1) { ?>
+			<div style="margin: 5% 0 0 0;" data-role="pregunta" 
+				   data-question-type="free" 
+				   data-answer-type="free"
+				   data-max-answers="1" 
+				   data-question-title="" 
+				   data-question-id=""
+				   data-question-number="1"
+				   data-question="">
+			    <h3><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.informacion.comments')?></h3>
+				<div class="list">
+				  <label class="item item-input">
+				    <textarea keyboard-attach name="libre"></textarea>
+				  </label>
+				</div>
+			</div>
+			<?php } ?>
+        </div>
+	<div class="bar bar-footer">
+	    <button ng-click="respuestas()" type="submit" class="button icon-right ion-chevron-right button-clear button-dark">Continuar</button>
+	</div>   
+</section>

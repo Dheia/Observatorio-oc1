@@ -1,0 +1,10 @@
+name: Personas
+form: $/tresfera/organizaciones/models/persona/fields.yaml
+modelClass: Tresfera\Organizaciones\Models\Persona
+defaultRedirect: tresfera/organizaciones/personas
+create:
+    redirect: 'tresfera/organizaciones/personas/update/:id'
+    redirectClose: tresfera/organizaciones/personas
+update:
+    redirect: tresfera/organizaciones/personas
+    redirectClose: tresfera/organizaciones/personas

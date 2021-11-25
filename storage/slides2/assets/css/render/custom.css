@@ -1,0 +1,137 @@
+html, body {
+	text-align: center;
+	font-weight: normal !important;
+	font-family: 'Merriweather', sans-serif;
+	font-weight: normal;
+}
+
+header img {
+	margin-top: 0%;
+	height: 100%
+}
+
+header.ui-header.ui-bar-inherit {
+	background: transparent;
+	  border: none;
+	  margin-bottom: -7%;
+	  height: 20%;
+	  position: absolute;
+	  width: 100%;
+	  
+  padding-top: 3%;
+}
+.logoBig {
+	width: 40%;
+	  height: auto;
+	  align-content: center;
+	  margin-left: 60%;
+	  left: -30%;
+	  position: relative;
+}
+.ui-content {
+  border-width: 0;
+  overflow: visible;
+  overflow-x: hidden;
+  position: absolute;
+  width: 100%;
+  vertical-align: middle;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+    padding: 0 !important;
+}
+.home h1 {
+	font-size: 320%;
+}
+
+h2 {
+	font-size: 200%;
+	color: #0075e1;
+}
+
+h2 span {
+	color: #c80000;
+}
+
+h1.bg-black {
+  font-size: 150%;
+  margin: 0 0% 0% 0%;
+  color: #fff;
+  background: #000;
+  padding: 4%;
+  text-shadow: none;
+  top: 0;
+  position: absolute;
+  width: 100%;
+}
+#preguntas {
+	margin-top: 10%;
+}
+.preguntas h2 {
+	font-size: 120%;
+	margin-top: 2%;
+}
+
+.ui-content .smile {
+	background-image: url(../img/smiles.png);
+	height: 60px;
+	width: 60px;
+	display: inline-block;
+	background-size: 550%;
+	margin-left: 5%;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+.smile-1{
+	margin-left: 0 !important;
+}
+.smile-2{
+	background-position-x: -132px;
+}
+.smile-3{
+	background-position-x: -265px;
+}
+
+.ui-content .smile.noselect {
+background-position-y: 70px;
+/*filter: url('#grayscale');  Versión SVG para IE10, Chrome 17, FF3.5, Safari 5.2 and Opera 11.6 
+-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+-ms-filter: grayscale(100%);
+-o-filter: grayscale(100%);
+filter: grayscale(100%); 
+filter: Gray(); IE4-8 and 9 */
+
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+-ms-transition: all 0.5s ease;
+-o-transition: all 0.5s ease;
+transition: all 0.5s ease;
+
+
+
+}
+.voto-img {
+	display: inline-block;
+	width: 49%;
+}
+.voto-img.noselect {
+	filter: url('#grayscale');  
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	filter: grayscale(100%); 
+	filter: Gray();
+	opacity: 0.3;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-ms-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}

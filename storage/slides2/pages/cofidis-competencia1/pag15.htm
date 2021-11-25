@@ -1,0 +1,58 @@
+title = "Pag3"
+url = "/cofidis/competencia1/pag15"
+layout = "cofidis"
+is_hidden = 0
+==
+<h3 class="header center2">¿Qué aprendizaje tiene que extraer Aitana del error que cometió en el pasado?</h3>
+<div class="answers answers-img">
+    <button class="foo-button mdc-button mdc-button--outlined" data-peso="35" data-id="" data-points="-50">
+      <div>Confiar es bueno, pero no confiar es mejor.</div>
+      <img src="/storage/app/media/cofidis/11.0 Gustavo.png">
+    </button>
+    <button class="foo-button mdc-button mdc-button--outlined" data-peso="35" data-id="" data-points="200">
+      <div>Hablar claro y sincero evita malas interpretaciones.</div>
+      <img src="/storage/app/media/cofidis/11.1 Gustavo.png">
+    </button>
+</div>
+<div id="myProgress">
+  <div id="myBar-text"></div>
+  <div id="myBar"></div> 
+</div>
+<div class="row center">
+  <a href="pag16?finish=true" 
+      id="download-button" 
+      class="btn-large waves-effect waves-light orange">
+      CONTINUAR
+    </a>
+</div>
+<style>
+.topbar {
+  width: {{ 15*100/31 }}%;
+}
+@media (max-width: 479px) {
+  .answers-img button {
+      width: 150px !important;
+      margin-left: calc(50% - 75px);
+  }
+  .answers-img button img {
+    max-width: 80%;
+    margin-top: 12px;
+  }
+  button div {
+    font-size: 10px;
+    line-height: 120%;
+    text-align: center;
+  }
+  
+}
+@media only screen and (min-width: 993px)
+{
+  .container {
+      width: 40%;
+  }
+  .answers .mdc-button {
+    max-width: 520px;
+    margin-bottom: 10px;
+}
+}
+</style>

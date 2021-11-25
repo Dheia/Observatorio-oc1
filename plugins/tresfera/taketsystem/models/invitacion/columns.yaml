@@ -1,0 +1,13 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+   # email:
+    #    label: email
+    phone:
+        label: Móvil
+    estado:
+        label: Estado
+    envio_at:
+        label: Fecha de envío

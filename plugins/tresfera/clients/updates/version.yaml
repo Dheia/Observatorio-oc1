@@ -1,0 +1,17 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table tresfera_clients_'
+    - builder_table_create_tresfera_clients_.php
+1.0.3:
+    - 'Updated table tresfera_clients_'
+    - builder_table_update_tresfera_clients_clients.php
+1.0.4:
+    - UsersAddClient
+    - users_add_client.php
+1.0.5:
+    - 'Updated table tresfera_clients_clients'
+    - builder_table_update_tresfera_clients_clients_2.php
+1.0.6:
+    - 'Updated table tresfera_clients_clients'
+    - builder_table_update_tresfera_clients_clients_3.php

@@ -1,0 +1,17 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    title:
+        label: Pregunta
+        searchable: true
+    order:
+        label: Orden
+    typeView:
+        label: Tipo
+        searchable: true
+    countTranslate:
+        label: Traducciones
+        type: partial
+        path: $/tresfera/taketsystem/controllers/questions/_count_langs.htm

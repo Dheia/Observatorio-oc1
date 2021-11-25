@@ -1,0 +1,10 @@
+name: Rapports
+form: $/tresfera/skillyouup/models/rapport/fields.yaml
+modelClass: Tresfera\Skillyouup\Models\Rapport
+defaultRedirect: tresfera/skillyouup/rapports
+create:
+    redirect: 'tresfera/skillyouup/rapports/update/:id'
+    redirectClose: tresfera/skillyouup/rapports
+update:
+    redirect: tresfera/skillyouup/rapports
+    redirectClose: tresfera/skillyouup/rapports

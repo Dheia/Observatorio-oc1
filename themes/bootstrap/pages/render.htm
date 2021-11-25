@@ -1,0 +1,568 @@
+title = "Retos"
+url = "/evaluacion/quiz/:quiz_id/:pag"
+layout = "quiz"
+description = "Segmentaciones"
+is_hidden = 0
+[Render]
+==
+function onStart()
+{
+    $this['url'] = $this->param('url');
+    $this['evaluado_id'] = $this->param('evaluado_id');
+    $this['pag'] = $this->param('pag');
+    $this['type'] = "quiz";
+    
+}
+==
+<style>
+    .progress-bar {
+        width: 100%;
+        height: 10px;
+        background: #fff;
+        margin-top: 60px;
+    }
+    .progress-bar .progresss {
+        height: 10px;
+        background: #000;
+    }
+    .banner {
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+    }
+    html {
+        background-size: contain;
+    }
+    html, body {
+        background-size: contain;
+        background-position: top center;
+    }
+    .navbar-home {
+    }
+    @media (min-width: 600px) {
+        textarea, input[type=text], input[type=password] {
+            width: 100% !important;
+            margin-left: 0% !important;
+        }
+    }
+
+</style>
+<!-- about -->
+<div class="navbar navbar-home">
+    <div class="container">
+        <div class="content-left">
+        </div>
+        <div class="content-center">
+            <img class="logo" src={{Render.logo}}>
+        </div>
+        <div class="content-right">
+        </div>
+    </div>
+</div>
+{% if Render.max_pag %}
+<div class="progress-bar">
+    <div class="progresss" style="width: {{Render.pag/Render.max_pag*100}}%"></div>
+</div>
+{% else %}
+<div class="progress-bar">
+    <div class="progresss" style="width: 0%"></div>
+</div>
+{% endif %}
+{{Render.render|raw}}
+{% put styles %}
+    <style>
+        {{Render.css|raw}}
+    </style>
+{% endput %}
+{% put scripts %}
+<script>
+
+$(".custom-range").each(function(){
+    var selected = $(this).val();
+    var data = $(this).data("options");
+    console.dir(data);
+    $("#range-literal-"+$(this).data("question-id")).html(data[selected])
+})
+$(".custom-range").on("input",function(){
+    var selected = $(this).val();
+    var data = $(this).data("options");
+    console.dir(data);
+    $("#range-literal-"+$(this).data("question-id")).html(data[selected])
+});
+
+if($(".options").length && $("[data-max-answers]").data("max-answers")>0) {
+    var num_answers = $(".options").find(".activated").length;
+    if(num_answers == 0)
+        $( "[data-click=next]" ).prop( "disabled", true );
+    else 
+        $( "[data-click=next]" ).prop( "disabled", false );
+
+        
+}
+
+$("button[data-question-id]").click(function() {
+    try {
+        var num_answers = $(this).parent().parent().find(".activated").length;
+        if(num_answers == 0)
+            $( "[data-click=next]" ).prop( "disabled", true );
+        else 
+            $( "[data-click=next]" ).prop( "disabled", false );
+
+
+
+        if($(this).attr("data-id") > 0) {
+            element = this;
+            $(this).removeClass("activated");
+            $(this).parent().find(".subquestion").hide(400);
+
+            var sendData = {
+                id: $(this).attr("data-id"),
+            };
+            $.request('onRemoveAnswer', {
+                data: sendData,
+                success: function(data) {
+                    $(element).attr("data-id","");
+                }
+            })
+            $(element).attr("data-id","");
+            return;
+
+        }
+        
+        var num_answers = $(this).parent().parent().find(".activated").length;
+        if(num_answers == 0)
+            $( "[data-click=next]" ).prop( "disabled", true );
+        else 
+            $( "[data-click=next]" ).prop( "disabled", false );
+
+
+        if(num_answers >= $(this).data("max-answers")) {
+            return;
+        } 
+        
+        var num_answers = $(this).parent().parent().find(".activated").length;
+        if(num_answers == 0)
+            $( "[data-click=next]" ).prop( "disabled", true );
+        else 
+            $( "[data-click=next]" ).prop( "disabled", false );
+
+
+
+        if($(this).data("max-answers") == 1)
+        $(this).parent().parent().find("button[data-question-id]").each(function(){
+            element = this;
+            $(this).removeClass("activated");
+            if($(this).attr("data-id") > 0) {
+                var sendData = {
+                    id: $(this).attr("data-id"),
+                };
+                $.request('onRemoveAnswer', {
+                    data: sendData,
+                    success: function(data) {
+                        $(element).attr("data-id","")
+                    }
+                })
+                $(element).attr("data-id","")
+            }
+        })
+        element = this;
+        puntos = $(this).data("puntos");
+        if($(this).parent().parent().data("tries-num")) {
+            if($(this).parent().parent().data("tries-modifier")) {
+                if($(this).parent().parent().data("tries-used"))
+                    puntos = puntos * (($(this).parent().parent().data("tries-modifier")/$(this).parent().parent().data("tries-used"))/100)
+                if($(this).parent().parent().data("tries-used") >= $(this).parent().parent().data("tries-num"))
+                    puntos = 0;
+            }
+        }
+        var data = {
+            value: $(this).data("value"),
+            question_id: $(this).data("question-id"),
+            answer_id: $(this).data("answer-id"),
+            dimension_id: $(this).data("dimension-id"),
+            requestion_id: $(this).data("requestion-id"),
+            competencia_id: $(this).data("competencia-id"),
+            type: $(this).data("type"),
+            id: $(this).attr("data-id"),
+            peso: $(this).data("peso"),
+            value_string: $(this).html(),
+            dimension_peso: $(this).data("dimension-peso"),
+            competencia_peso: $(this).data("competencia-peso"),
+            puntos: puntos,
+            tries: $(this).parent().parent().data("tries-used"),
+        };
+        $(this).addClass("activated");
+        $(this).parent().find(".subquestion").show(400);
+
+        url = "";
+        if($(this).data("link-quiz")) {
+            if($(this).data("link-quiz")) {
+                url = "/evaluacion/quiz/"+$(this).data("link-quiz")+"/{{Render.evaluado_id}}/"+$(this).data("link-slide")
+            }
+        }
+        $.request('onSaveAnswer', {
+            data: data,
+            success: function(data) {
+                $(element).attr("data-id",data.id)
+                $( "[data-click=next]" ).prop( "disabled", false );
+                /*if($(element).data("max-answers") == 1) {
+                    //simulamos el click
+                    var location = "/evaluacion/quiz/{{Render.quiz}}/{{Render.evaluado_id}}/{{Render.pag+1}}"
+                    if(url) {
+                    location = url;
+                    } 
+                    window.location = location;
+                }*/
+            }
+        })
+        var num_answers = $(this).parent().parent().find(".activated").length;
+        if(num_answers == 0)
+            $( "[data-click=next]" ).prop( "disabled", true );
+        else 
+            $( "[data-click=next]" ).prop( "disabled", false );
+        } catch(ex) {
+    }
+});
+let url = '';
+$("[data-click]").click(function(){
+        notSend = false;
+        loaded = false;
+        var sendData = [];
+        $("[data-question-id]").each(function(){
+            if($(this).data("type") == "dragdrop") {
+                var data = {
+                    value_string: $(".dragdrop").html(),
+                    question_id: $(this).data("question-id"),
+                    dimension_id: $(this).data("dimension-id"),
+                    competencia_id: $(this).data("competencia-id"),
+                    type: $(this).data("type"),
+                    value_string: $(".dragdrop").html(),
+                    id: $(this).attr("data-id"),
+                    puntos: $(this).data("puntos"),
+                };
+                
+                data.result_id = {{Render.result_id}};
+                data.slide_id = {{pag}};
+                data.id = $(this).attr("data-id");
+                if(data.value) {
+                    sendData.push(data);
+                } 
+            }
+            if($(this).data("type") == "range") {
+                var data = {
+                    value: $(this).val(),
+                    question_id: $(this).data("question-id"),
+                    dimension_id: $(this).data("dimension-id"),
+                    competencia_id: $(this).data("competencia-id"),
+                    type: $(this).data("type"),
+                    value_string: $("#range-literal-"+$(this).data("question-id")).html(),
+                    id: $(this).attr("data-id"),
+                    peso: $(this).data("peso"),
+                    dimension_peso: $(this).data("dimension-peso"),
+                    competencia_peso: $(this).data("competencia-peso"),
+                    puntos: $(this).data("puntos"),
+                };
+                if($(this).data("points-answers-ok")) {
+                    if(data.value > 0) {
+                        data.puntos = $(this).data("points-answers-ok");
+                    } else {
+                        data.puntos = $(this).data("points-answers-ko");
+                    }
+                }
+                data.result_id = {{Render.result_id}};
+                data.slide_id = {{pag}};
+                data.id = $(this).attr("data-id");
+                if(data.value) {
+                    sendData.push(data);
+                } 
+                /*else {
+                    Swal.fire({
+                        text: '{{'Debes valorar todas las preguntas'|_}}',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                    notSend = true;
+                }*/
+            }
+            if($(this).data("type") == "textarea") {
+                var data = {
+                    value: $(this).val(),
+                    question_id: $(this).data("question-id"),
+                    dimension_id: $(this).data("dimension-id"),
+                    competencia_id: $(this).data("competencia-id"),
+                    type: $(this).data("type"),
+                    id: $(this).attr("data-id"),
+                    peso: $(this).data("peso"),
+                    dimension_peso: $(this).data("dimension-peso"),
+                    competencia_peso: $(this).data("competencia-peso"),
+                    puntos: $(this).data("puntos"),
+                };
+                if($(this).data("points-completed-ok")) {
+                    if(data.value.length >= $(this).data("points-characters") && !$(this).data("correct-answer")) {
+                        data.puntos = $(this).data("points-completed-ok");
+                    } else {
+                        if($(this).data("correct-answer") && $(this).data("correct-answer") == $(this).val()) {
+                            data.puntos = $(this).data("points-completed-ok");
+                        } else {
+                            data.puntos = $(this).data("points-completed-ko");
+                        }
+                    } 
+                } else {
+                    if($(this).data("correct-answer") && $(this).data("correct-answer").toLowerCase() == $(this).val().toLowerCase()) {
+                            
+                    } else {
+                        if($(this).data("correct-answer")) {
+                            notSend = true;
+                            Swal.fire({
+                                text: $(this).data("required-check")+'a',
+                                icon: 'error',
+                                confirmButtonText: 'Aceptar'
+                            })
+                        }
+                    }
+                }
+
+                if($(this).data("required-check") && $(this).val() && $("#check_"+$(this).data("question-id")).length && !$("#check_"+$(this).data("question-id")).prop('checked')) {
+                    notSend = true;
+                    Swal.fire({
+                        text: $(this).data("required-check"),
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+
+                data.result_id = {{Render.result_id}};
+                data.slide_id = {{pag}};
+                data.id = $(this).attr("data-id");
+                if(data.value || $(this).data("points-completed-ok")) 
+                    sendData.push(data);
+
+                if($(this).data("set-question") && $(this).data("set-answer") && data.value && !loaded) {
+                    loaded = true;
+                    var question = ($(this).data("set-question"));
+                    var answer = ($(this).data("set-answer"));
+
+                    var data = {
+                        value: answer.value,
+                        question_id: question.id,
+                        answer_id: answer.id,
+                        dimension_id: question.category_id,
+                        competencia_id: question.subcategory_id,
+                        type: 'button',
+                        value_string: answer.title_quiz,
+                        puntos: answer.puntos
+                    };
+                    
+                    data.result_id = {{Render.result_id}};
+                    data.slide_id = {{pag}};
+                    if(data.value)
+                        sendData.push(data);
+                }
+                if($(this).data("set-question") && !$(this).data("set-answer") && $(this).data("link-quiz")) {
+                    if($(this).data("set-rellenado") && $(this).val()) {
+                        location = "/evaluacion/quiz/"+$(this).data("link-quiz")+"/{{Render.evaluado_id}}/"+$(this).data("link-slide")
+                        window.location = location;
+                    }
+                    if(!$(this).data("set-rellenado") && !$(this).val()) {
+                        location = "/evaluacion/quiz/"+$(this).data("link-quiz")+"/{{Render.evaluado_id}}/"+$(this).data("link-slide")
+                        window.location = location;
+                    }
+
+
+                }
+            }
+            if($(this).data("type") == "order") {
+                if($("#items").data("tries-num")) {
+                    $('[data-tries-num]').data("tries-used",$('[data-tries-num]').data("tries-used")+1);
+                    if(!$("#items").data("correct")) {
+                        notSend = true;
+                        //avisamos a usuario
+
+                        if($("#items").data("tries-used") > $("#items").data("tries-num")) {
+                            $("#items").data("puntos",0);
+                        } else {
+                            Swal.fire({
+                                text: "{{'Tu respuesta no es correcta. Tienes '|_}}" + $('[data-tries-num]').data("tries-used")+"/"+$('[data-tries-num]').data("tries-num")+"  {{'intentos.'|_}}",
+                                icon: 'error',
+                                confirmButtonText: 'Ok'
+                            })
+                            multiplicador = (($("#items").data("tries-modifier")*($("#items").data("tries-used")-1)))
+                            $("#items").data("puntos",$("#items").data("puntos-max")-($("#items").data("puntos-max")*(multiplicador/100)))
+                        }
+
+                        //si ya hemos llegado al maximo, borramos los puntos
+                        if($('[data-tries-num]').data("tries-used") >= $('[data-tries-num]').data("tries-num")) {
+                            notSend = false;
+                        }
+                    } else {
+                        multiplicador = (($("#items").data("tries-modifier")*($("#items").data("tries-used")-1)))
+                        $("#items").data("puntos",$("#items").data("puntos-max")-($("#items").data("puntos-max")*(multiplicador/100)))
+
+                    }   
+                    
+                }
+                var data = {
+                    value: JSON.stringify(sortable.toArray()),
+                    value_string: $(this).html(),
+                    question_id: $(this).data("question-id"),
+                    dimension_id: $(this).data("dimension-id"),
+                    competencia_id: $(this).data("competencia-id"),
+                    type: $(this).data("type"),
+                    id: $(this).attr("data-id"),
+                    peso: $(this).data("peso"),
+                    tries: $(this).data("tries-used"),
+                    puntos: $(this).data("puntos"),
+                };
+                
+                data.result_id = {{Render.result_id}};
+                data.slide_id = {{pag}};
+                data.id = $(this).attr("data-id");
+                if(data.value)
+                    sendData.push(data);
+
+            }
+            if($(this).data("type") == "select") {
+                var data = {
+                    value: $(this).find("option:selected").val(),
+                    value_string: $(this).find("option:selected").val(),
+                    question_id: $(this).data("question-id"),
+                    dimension_id: $(this).data("dimension-id"),
+                    competencia_id: $(this).data("competencia-id"),
+                    type: $(this).data("type"),
+                    id: $(this).attr("data-id"),
+                    peso: $(this).data("peso"),
+                    dimension_peso: $(this).data("dimension-peso"),
+                    competencia_peso: $(this).data("competencia-peso"),
+                    puntos: $(this).data("puntos"),
+                };
+                
+                data.result_id = {{Render.result_id}};
+                data.slide_id = {{pag}};
+                data.id = $(this).attr("data-id");
+                if(data.value)
+                    sendData.push(data);
+            }
+        })
+        if($(this).data("click") == "next" || $(this).data("click") == "prev") {
+            if($(this).data("click") == "next") {
+                var location = "/evaluacion/quiz/{{Render.quiz}}/{{Render.evaluado_id}}/{{Render.pag+1}}"
+                if($(this).data("link-quiz")) {
+                    if($(this).data("link-slide") && $(this).data("link-slide") != undefined) {
+                        location = "/evaluacion/quiz/"+$(this).data("link-quiz")+"/{{Render.evaluado_id}}/"+$(this).data("link-slide")
+                    }
+                }
+                //check si hay algun boton activo
+                if($(".activated").data("link-quiz")) {
+                    if($(".activated").data("link-slide") && $(".activated").data("link-slide") != undefined) {
+                        location = "/evaluacion/quiz/"+$(".activated").data("link-quiz")+"/{{Render.evaluado_id}}/"+$(".activated").data("link-slide")
+                    }
+                }
+
+                //comprobamos intentos y puntos si aplica
+                $("[data-tries-num]").each(function(){
+                    if($(this).find("[data-correct=1]").length != $(this).find(".activated[data-correct=1]").length) {
+                        notSend = true;
+                        //gastamos un nuevo intento
+                        $('[data-tries-num]').data("tries-used",$('[data-tries-num]').data("tries-used")+1);
+                        
+                        //avisamos a usuario
+                        Swal.fire({
+                                text: "{{'Tu respuesta no es correcta. Tienes '|_}}"+$('[data-tries-num]').data("tries-used")+"/"+$('[data-tries-num]').data("tries-num")+"  {{'intentos.'|_}}",
+                                icon: 'error',
+                                confirmButtonText: 'Ok'
+                            })
+                        //borramos los datos
+                        try {
+                            activos = $(this).find(".activated");
+                            $(this).find(".activated").each(function(){
+                                try {
+                                    $(this).click();
+                                } catch(ex) {
+
+                                }
+                            })
+                        } catch(ex) {
+
+                        }
+                        //si ya hemos llegado al maximo, borramos los puntos
+                        if($('[data-tries-num]').data("tries-used") >= $('[data-tries-num]').data("tries-num")) {
+                            try {
+                                activos.each(function(){
+                                    $(this).click();
+                                })
+                            } catch(ex) {
+
+                            }
+                            Swal.fire({
+                                text: "{{'Tu respuesta no es correcta. Tienes '|_}}"+$('[data-tries-num]').data("tries-used")+"/"+$('[data-tries-num]').data("tries-num")+"  {{'intentos.'|_}}",
+                                icon: 'error',
+                                confirmButtonText: 'Ok',
+                                willClose: () => {
+                                    window.location = location;
+                                }
+                            })
+                            //notSend = false;
+                        }
+                    } 
+                })
+
+            } else {
+                var location = "/evaluacion/quiz/{{Render.quiz}}/{{Render.evaluado_id}}/{{Render.pag-1}}?back=1"
+               // window.history.go(-1);
+            }
+            if(url) {
+                location = url;
+            } 
+            
+            
+            //window.location = location
+            //alert(location);
+        }
+        if($(this).data("click") == "close") {
+            try{
+                window.close();
+            }
+            catch (e){
+                console.log("text");
+            }
+        }
+        if(sendData.length && !notSend) {
+            $.request('onSaveAnswers', {
+                data: sendData,
+                success: function(data) {
+                    window.location = location;
+                }
+            })
+        } else {
+            if(!notSend)
+                window.location = location;
+        }
+
+        
+    
+    
+})
+window.onload = function()
+{
+   /* var baseWindowHeight = Math.max(window.innerHeight);
+      var classAdded = false;
+      var documentBody = document.body;
+      document.addEventListener('scroll', function(e){
+        var newWindowHeight = Math.max(window.innerHeight);
+        if(newWindowHeight-50 > baseWindowHeight) {
+          if (!document.body.classList.contains("ios-toolbar-gone")) {
+            document.body.classList.add("ios-toolbar-gone");
+          }
+        } else {
+          if (document.body.classList.contains("ios-toolbar-gone")) {
+            document.body.classList.remove("ios-toolbar-gone");
+          }
+        }
+      });*/
+}
+</script>
+{% endput %}
+<style type="text/css">
+    .ios-toolbar-gone button {
+      transform: translateY(-25px);
+    }
+</style>

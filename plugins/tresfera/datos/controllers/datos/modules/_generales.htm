@@ -1,0 +1,80 @@
+<?php
+	$faker = Faker\Factory::create();
+	$model = new \Tresfera\Statistics\Models\Result();
+    $totalsGeneral = $model->getTotalsGeneral($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+?>
+<div data-control="">
+			    <h3><i class="icon-bar-chart"></i>Valoraciones generales</h3>
+				<div class="row">
+					<div class="col-md-12" data-url="<?=url("backend/tresfera/statistics/stats/dashboardDetail/?detalles=1&group_by=value&filter=question_title")?>">
+						<div class="control-chart" data-control="" data-size="180" data-center-text="101">
+						    <div class="chart-legend" style="width: 100%;">
+							   <table style="width: 100%;">
+							      <tbody>
+								      <?php 
+								      if(isset($totalsGeneral))
+								      foreach($totalsGeneral as $general) { 
+									     /* $p['percentKo']=$general->percentKo;
+									      $p['percentMix']=$general->percentMix;
+									      $p['percentOk']=$general->percentOk;
+									      
+									      if($general->percentKo=="0.00%"||$general->percentMix=="0.00%"||$general->percentOk=="0.00%") {
+										      if($general->percentKo=="0.00%") {
+											      $p['percentKo']="10.00%";
+											      $p['percentOk']="45.00%";
+											      $p['percentMix']="45.00%";
+										      }
+										      if($general->percentOk=="0.00%") {
+											      
+											      $p['percentKo']="45.00%";
+											      $p['percentOk']="10.00%";
+											      $p['percentMix']="45.00%";
+										      }
+										      if($general->percentMix=="0.00%") {
+											      $general->percentKo="45.00%";
+											      $p['percentOk']="45.00%";
+											      $p['percentMix']="10.00%";
+										      }
+									      }*/
+									      if(get('filter')=='citycp_id'||get('filter')=='shop_id') {
+										      $url = 'backend/tresfera/statistics/stats/dashboard/?detalles=1&multipleFilter=1&amp;group_by=value&amp;filter=question&amp;filterId='.$general->question_title.'&amp;filterName='.$general->question_title;
+									      } else {
+										      $url = 'backend/tresfera/statistics/stats/dashboard/?detalles=1&amp;group_by=value&amp;filter=question&amp;filterId='.$general->question_title.'&amp;filterName='.$general->title;
+									      }
+								      ?>
+								     <tr>
+							            <td class="indicator"><i style="background-color: <?=$faker->hexcolor?>;"></i></td>
+							            <td style="width: 30%;"><a href="<?php echo url($url); ?>"><?=$general->question_title?></a></td>
+							            <td class="value">
+								            <?php if($general->percentKo!="0.00%") {
+									        ?>
+									        <div class="bar-line bar-line-ko" style=" width: <?=$general->percentKo?>"><div><?=$general->percentKo?></div></div>
+									        <?php
+								            }
+								            ?>
+								            <?php if($general->percentMix!="0.00%") {
+									        ?>
+									        <div class="bar-line bar-line-mix" style=" width: <?=$general->percentMix?>"><div><?=$general->percentMix?></div></div>
+									        <?php
+								            }
+								            ?>
+								            <?php if($general->percentOk!="0.00%") {
+									        ?>
+									        <div class="bar-line bar-line-ok" style=" width: <?=$general->percentOk?>"><div><?=$general->percentOk?></div></div>
+									        <?php
+								            }
+								            ?>
+								            
+								            
+								        </td>
+							         </tr>
+							         <?php
+							         }
+							         ?>
+							      </tbody>
+							   </table>
+							</div>
+						</div>						
+					</div>
+				</div>
+		</div>

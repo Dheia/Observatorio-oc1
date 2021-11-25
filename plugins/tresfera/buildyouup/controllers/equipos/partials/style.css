@@ -1,0 +1,182 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url('plugins/renatio/dynamicpdf/assets/fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: bold;
+    src: url('plugins/renatio/dynamicpdf/assets/fonts/OpenSans-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    src: url('plugins/renatio/dynamicpdf/assets/fonts/OpenSans-Italic.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: bold;
+    src: url('plugins/renatio/dynamicpdf/assets/fonts/OpenSans-BoldItalic.ttf');
+}
+
+@page {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+.page-break {
+    page-break-after: always;
+}
+.page {
+    height: 793px;
+    width: 100%;
+    position: absolute;
+    background-position: -20px !important;
+}
+.elemento, .circle, .circle > div {
+    position: absolute;
+}
+.fondo > img {
+    position: absolute;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+.circle > div {
+    transform: rotate(0deg); 
+    border-radius: 50px; 
+    border-right:  8px  solid red; 
+    border-bottom:  8px  solid red; 
+    background-color: transparent; 
+    height: 50px; width: 50px;
+}
+.circle-1.circle-little > div {
+    border-radius: 50px; 
+    border-right:  8px  solid red; 
+    border-bottom:  8px  solid red; 
+    background-color: transparent; 
+    height: 50px; width: 50px;
+}
+.circle-little .circle-part-2 {
+    margin-top: -34px;
+
+}
+.circle-little .circle-part-3 {
+    margin-left: -34px;
+}
+.circle-2.circle-little > div {
+    border-radius: 35px; 
+    border-right:  8px  solid red; 
+    border-bottom:  8px  solid red; 
+    background-color: transparent; 
+    height: 35px; width: 35px;
+}
+.circle-2.circle-little .circle-part-2 {
+    margin-top: -19px;
+
+}
+.circle-2.circle-little .circle-part-3 {
+    margin-left: -19px;
+}
+.circle-3.circle-little > div {
+    border-radius: 20px; 
+    border-right:  8px  solid red; 
+    border-bottom:  8px  solid red; 
+    background-color: transparent; 
+    height: 20px; width: 20px;
+}
+.circle-3.circle-little .circle-part-2 {
+    margin-top: -4px;
+
+}
+.circle-3.circle-little .circle-part-3 {
+    margin-left: -4px;
+}
+
+.circle .circle-part-1 {
+    transform: rotate(0deg); 
+}
+.circle .circle-part-2 {
+    transform: rotate(-90deg); 
+}
+.circle .circle-part-3 {
+    transform: rotate(-270deg); 
+}
+.tope {
+    background: #f1e7db;
+    width: 80px;
+    height: 50px;
+}
+
+.estrategia  .circle-1  div {
+     border-color: #bc4166; 
+}
+.estrategia  .circle-2  div {
+     border-color: #9f334d; 
+}
+.estrategia  .circle-3  div {
+     border-color:  #7e2c46; 
+}
+.estrategia > * {
+    color: #7e2c46;
+}
+.interpersonal  .circle-1  div {
+     border-color: #87a164; 
+}
+.interpersonal  .circle-2  div {
+     border-color: #7b9c59; 
+}
+.interpersonal  .circle-3  div {
+     border-color:  #71944f; 
+}
+.interpersonal > * {
+    color: #71944f;
+}
+
+.autogestion  .circle-1  div {
+     border-color: #6d81a3; 
+}
+.autogestion  .circle-2  div {
+     border-color: #5f769d; 
+}
+.autogestion  .circle-3  div {
+     border-color:  #546d99; 
+}
+.autogestion > * {
+    color: #546d99;
+}
+
+
+.autodesarrollo  .circle-1  div {
+     border-color: #d19e3b; 
+}
+.autodesarrollo  .circle-2  div {
+     border-color: #d2a545; 
+}
+.autodesarrollo  .circle-3  div {
+     border-color:  #cf9f38; 
+}
+.autodesarrollo > * {
+    color: #cf9f38;
+}
+
+.autoliderazgo  .circle-1  div {
+     border-color: #ca3c31; 
+}
+.autoliderazgo  .circle-2  div {
+     border-color: #af2d2c; 
+}
+.autoliderazgo  .circle-3  div {
+     border-color:  #88272a; 
+}
+.autoliderazgo > * {
+    color: #88272a;
+}
+
+

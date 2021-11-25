@@ -1,0 +1,20 @@
+<!-- Flex Box -->
+<section>
+	<div class="bar bar-header bar-light">
+	  <h1 class="title">Alta de tablet en el sistema</h1>
+	</div>
+    <!-- Flex Items , Flex Box themselves -->
+    <div class="list">
+	<form ng-submit="submit(secret, mac)" >
+	  <label class="item item-input">
+	    <input type="text" name="secret" ng-model="secret" placeholder="Código de la tienda">
+	  </label>
+	  <label class="item item-input">
+	    <input type="text" name="mac" ng-model="mac" value="{{mac}}" placeholder="Identificador de la tablet">
+	  </label>
+	  <button type="submit" class="button button-block button-positive">Registrar</button>
+	  
+  	</form>
+</div>
+</section>
+

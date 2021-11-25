@@ -1,0 +1,19 @@
+columns:
+    name:
+        label: 'tresfera.skillyouup::lang.evaluacion.name'
+        type: text
+    email:
+        label: email
+        type: text
+    created_at:
+        label: created_at
+        type: datetime
+    estado:
+        label: 'tresfera.skillyouup::lang.evaluacion.estado'
+        type: number
+    players:
+        label: Jugadores
+        type: repeater
+    _config:
+        label: config
+        type: buttons-evaluaciones

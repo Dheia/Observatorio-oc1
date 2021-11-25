@@ -1,0 +1,11 @@
+name: Proyectos
+modelClass: Tresfera\Talent\Models\Proyecto
+form: $/tresfera/talent/models/proyecto/fields.yaml
+defaultRedirect: tresfera/talent
+create:
+    redirect: 'tresfera/talent/proyectos/update/:id'
+    redirectClose: tresfera/talent
+update:
+    redirect: 'tresfera/talent/proyectos/update/:id'
+    redirectClose: tresfera/talent
+preview: {  }

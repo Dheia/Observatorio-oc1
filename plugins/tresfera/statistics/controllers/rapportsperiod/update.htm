@@ -1,0 +1,148 @@
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li><a href="<?=url("backend/tresfera/statistics/stats/dashboard")?>">Informe</a></li>
+		        <li class="h3">
+		      		Programación de informes
+		        </li>
+		    </ul>
+		</div>
+	</div>
+<?php Block::endPut() ?>
+<?php echo $this->makePartial("filter_new"); ?>
+<br>
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+        <?php
+        	$user = $this->user;
+        	if(isset($user->permissions['superuser']))
+    		if($user->permissions['superuser'] == 1):
+    	?>
+    		<div class="control-list">
+    			<a
+    				 data-request-data="id: <?=$this->vars['formModel']->id?>"
+    		        href="javascript:;"
+    		        class="btn btn-primary oc-icon-check save"
+    		        data-request="onGenerateFecha"
+    		        data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+    		        data-request-before-update="$el.trigger('unchange.oc.changeMonitor')"
+    		       data-request-data="redirect:0"
+    				 data-attach-loading
+    		        >
+    		            Generar siguiente fecha
+    		    </a>
+    			<br><br>
+    		</div>
+    	<?php endif ?>
+				<?php
+					//get Rapports
+					$rapports = \Tresfera\Statistics\Models\Rapport::where("rapportperiod_id","=",$this->vars['formModel']->id)->get();
+					if(count($rapports)) {
+						?>
+
+		<div class="control-list">
+    <table class="table data">
+        <thead>
+            <tr>
+                <th class=""><span>Data Inicio</span></th>
+                <th class=""><span>Data Fin</span></th>
+                <th class=""><span></span></th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+
+						<?php
+						foreach($rapports as $rapport) {
+							$date_start = \Carbon\Carbon::parse(($rapport['date_start']));
+							$date_end = \Carbon\Carbon::parse(($rapport['date_end']));
+						?>
+							<tr>
+                <td><?=$date_start->format('d-m-Y')?></td>
+                <td><?=$date_end->format('d-m-Y')?></td>
+                <td>
+									<div data-request-data="id: <?=$rapport->id?>">
+                    <button data-attach-loading data-request="onReloadRapport" class="btn btn-default btn-xs" role="button">
+											<i class="icon-refresh"></i>
+										</button>
+                    <a target="_blank" class="btn btn-default btn-xs" href="<?=url("informes/".$rapport->md5)?>" role="button">
+											<i class="icon-eye"></i>
+										</a>
+										<button data-attach-loading data-request="onSendRapport" class="btn btn-default btn-xs" href="<?=url("informes/".$rapport->md5)?>" role="button">
+											<i class="icon-envelope-o"></i>
+										</button>
+										<button data-attach-loading data-request="onDeleteRapport" class="btn btn-xs" href="<?=url("informes/".$rapport->md5)?>" role="button">
+											<i class="icon-trash-o"></i>
+										</button>
+									</div>
+								</td>
+            </tr>
+					<?php
+						}
+						?>
+				</tbody>
+			</table>
+		</div>
+					<?php
+					}
+				?>
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button
+                    type="submit"
+                    data-request="onSave"
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-request-data="redirect:0"
+                    data-load-indicator="Creating rapport..."
+                    class="btn btn-primary">
+                    Programar
+                </button>
+                <button
+                    type="button"
+                    data-request="onSave"
+                    data-request-data="close:1"
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="Creating rapport..."
+                    class="btn btn-default">
+                    Programar y cerrar
+                </button>
+
+                <button
+                    type="button"
+                    class="oc-icon-trash-o btn-icon danger pull-right"
+                    data-request="onDelete"
+                    data-load-indicator="Deleting rapport..."
+                    data-request-confirm="¿Estas seguro de borrar definitivamente este informe?">
+                </button>
+                <span class="btn-text">
+                    o <a href="<?= Backend::url('tresfera/statistics/rapportsperiod') ?>">Cancelar</a>
+                </span>
+            </div>
+        </div>
+
+    <?= Form::close() ?>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('tresfera/statistics/rapports') ?>" class="btn btn-default">Return to rapports list</a></p>
+
+<?php endif ?>
+	</div>
+</div>
+<style>
+	.control-breadcrumb {
+		margin-bottom: 0px;
+	}
+	div#filterExample {
+	    margin-top: 0px;
+	    margin-bottom: 0px;
+	}
+</style>

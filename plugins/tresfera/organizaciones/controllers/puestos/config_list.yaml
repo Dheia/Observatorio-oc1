@@ -1,0 +1,12 @@
+list: $/tresfera/organizaciones/models/puesto/columns.yaml
+modelClass: Tresfera\Organizaciones\Models\Puesto
+title: Puestos
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'tresfera/organizaciones/puestos/update/:id'

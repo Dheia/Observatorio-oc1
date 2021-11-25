@@ -1,0 +1,14 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+answers:
+    label: Respuestas
+    manage:
+        form: $/tresfera/taketsystem/models/questionanswer/fields.yaml
+        list: $/tresfera/taketsystem/models/questionanswer/columns.yaml
+        showSearch: true
+        recordsPerPage: 10
+    view:
+        list: $/tresfera/taketsystem/models/questionanswer/columns.yaml
+        toolbarButtons: create|delete

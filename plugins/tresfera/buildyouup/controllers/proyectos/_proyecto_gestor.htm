@@ -1,0 +1,90 @@
+<?php
+use Tresfera\Buildyouup\Models\Proyecto;
+use Tresfera\Buildyouup\Classes\UserControl;
+
+$proyecto_id = $model->id;
+$proyecto = Proyecto::find($proyecto_id);
+$nombre_proyecto = $proyecto->name;
+$empresa_id = $proyecto->empresa_id;
+$gestores = UserControl::getGestores($empresa_id)
+?>
+
+<h4>Asignar un gestor al proyecto '<?=$nombre_proyecto?>'</h4>
+
+<select class="form-control custom-select">
+    <option value="" >- Ningún gestor asignado -</option>
+    <?php
+    foreach($gestores as $gestor)
+    {
+        ?>
+        <option value="<?=$gestor->id?>" <?=($gestor->id == $proyecto->gestor_id) ? "selected" : "" ?>><?=UserControl::getFullName($gestor->id)?></option>
+        <?php
+    }
+    ?>
+</select>
+
+<br/>
+
+<h4>Permisos del gestor</h4>
+
+<p><b>General</b></p>
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Modificar logotipo de la Empresa</label>
+</div>
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Modificar mensaje emails</label>
+</div>
+
+<p><b>Usuarios</b></p>
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Crear usuarios</label>
+</div>
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Modificar usuarios</label>
+</div>
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Eliminar usuarios</label>
+</div>
+
+<p><b>Cuestionarios</b></p>
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Enviar link</label>
+</div>
+
+
+
+<p><b>Informes</b></p>
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Editar</label>
+</div>
+<div class="checkbox custom-checkbox">
+        <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+        <label for="checkbox1">Programar (Asignar)</label>
+</div>
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Enviar</label>
+</div>
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Explotar</label>
+</div>
+
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Recibir</label>
+</div>
+
+<div class="checkbox custom-checkbox">
+    <input name="checkbox" value="1" type="checkbox" id="checkbox1" />
+    <label for="checkbox1">Validar</label>
+</div>
+
+<button type="button" class="btn btn-primary">Guardar Cambios</button>

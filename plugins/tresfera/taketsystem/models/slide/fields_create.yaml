@@ -1,0 +1,21 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Nombre
+        span: left
+    order: 
+        label: Orden
+        span: right
+    type:
+        label: Tipo
+        type: relation
+        context: create
+        span: left
+    page:
+        label: Selecciona una plantilla
+        type: Tresfera\Taketsystem\FormWidgets\SlideTemplateSelector
+        dependsOn: type
+        context: create

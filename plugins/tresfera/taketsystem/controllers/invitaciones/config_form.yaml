@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Invitacione
+
+# Model Form Field configuration
+form: $/tresfera/taketsystem/models/invitacion/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Taketsystem\Models\Invitacion
+
+# Default redirect location
+defaultRedirect: tresfera/taketsystem/invitaciones
+
+# Create page
+create:
+    title: Create Invitacione
+    redirect: tresfera/taketsystem/invitaciones/update/:id
+    redirectClose: tresfera/taketsystem/invitaciones
+
+# Update page
+update:
+    title: Edit Invitacione
+    redirect: tresfera/taketsystem/invitaciones
+    redirectClose: tresfera/taketsystem/invitaciones
+
+# Preview page
+preview:
+    title: Preview Invitacione

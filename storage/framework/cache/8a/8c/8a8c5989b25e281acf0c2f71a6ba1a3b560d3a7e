@@ -1,0 +1,113 @@
+1637748433a:1:{s:15:"front/login.htm";a:13:{s:8:"fileName";s:15:"front/login.htm";s:7:"content";s:2118:"title = "Login"
+url = "/login"
+layout = "app-login"
+description = "Segmentaciones"
+is_hidden = 0
+
+[session]
+security = "guest"
+allowedUserGroups[] = "guest"
+redirect = "/login"
+
+[account]
+redirect = "/"
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+
+[localePicker]
+==
+<style>
+  select.form-control {
+    width: 100%;
+    height: 55px;
+    border-radius: 4px 0 4px 0;
+}
+.locale {
+    display: block;
+    width: 300px;
+    margin: 20px auto;
+    border-color: gray;
+    color: gray;
+}
+</style>
+<section class="login-container">
+  <div class="mdc-text-field locale">
+    {% component 'localePicker' %}
+  </div>
+  {{ form_ajax('onSignin') }}
+    <div class="mdc-text-field username mdc-text-field--with-leading-icon">
+      <i class="material-icons mdc-text-field__icon" role="none">account_circle</i>
+      <input type="text" class="mdc-text-field__input" id="username-input" name="username" tabindex="1" required>
+      <label class="mdc-floating-label" for="username-input">{{ loginAttributeLabel }}</label>
+      <div class="mdc-line-ripple"></div>
+    </div>
+    <div class="mdc-text-field password">
+      <input type="password" class="mdc-text-field__input" id="password-input" name="password" required minlength="6" tabindex="2">
+      <label class="mdc-floating-label" for="password-input">{{'Contraseña'|_}}</label>
+      <div class="mdc-line-ripple"></div>
+    </div>
+    <div class="button-container">
+    <button class="mdc-button mdc-button--raised mdc-button-outline-width mdc-button-shape-radius20 w-auto next">
+      <div class="mdc-button__ripple"></div>
+      <i class="material-icons mdc-button__icon" aria-hidden="true">favorite</i>
+      <span class="mdc-button__label2">{{'Entra'|_}}</span>
+    </button>
+    </div>
+      <div class="button-container">
+        <button onclick="window.location='/reset-pass'" type="button" class="mdc-button cancel">
+        <span class="mdc-button__label">
+          {{'¿No te acuerdas de tu contraseña?'|_}}
+        </span>
+      </button>
+    </div>
+
+    {{ form_close() }}
+</section>
+";s:5:"mtime";i:1607512147;s:6:"markup";s:1820:"<style>
+  select.form-control {
+    width: 100%;
+    height: 55px;
+    border-radius: 4px 0 4px 0;
+}
+.locale {
+    display: block;
+    width: 300px;
+    margin: 20px auto;
+    border-color: gray;
+    color: gray;
+}
+</style>
+<section class="login-container">
+  <div class="mdc-text-field locale">
+    {% component 'localePicker' %}
+  </div>
+  {{ form_ajax('onSignin') }}
+    <div class="mdc-text-field username mdc-text-field--with-leading-icon">
+      <i class="material-icons mdc-text-field__icon" role="none">account_circle</i>
+      <input type="text" class="mdc-text-field__input" id="username-input" name="username" tabindex="1" required>
+      <label class="mdc-floating-label" for="username-input">{{ loginAttributeLabel }}</label>
+      <div class="mdc-line-ripple"></div>
+    </div>
+    <div class="mdc-text-field password">
+      <input type="password" class="mdc-text-field__input" id="password-input" name="password" required minlength="6" tabindex="2">
+      <label class="mdc-floating-label" for="password-input">{{'Contraseña'|_}}</label>
+      <div class="mdc-line-ripple"></div>
+    </div>
+    <div class="button-container">
+    <button class="mdc-button mdc-button--raised mdc-button-outline-width mdc-button-shape-radius20 w-auto next">
+      <div class="mdc-button__ripple"></div>
+      <i class="material-icons mdc-button__icon" aria-hidden="true">favorite</i>
+      <span class="mdc-button__label2">{{'Entra'|_}}</span>
+    </button>
+    </div>
+      <div class="button-container">
+        <button onclick="window.location='/reset-pass'" type="button" class="mdc-button cancel">
+        <span class="mdc-button__label">
+          {{'¿No te acuerdas de tu contraseña?'|_}}
+        </span>
+      </button>
+    </div>
+
+    {{ form_close() }}
+</section>";s:4:"code";N;s:5:"title";s:5:"Login";s:3:"url";s:6:"/login";s:6:"layout";s:9:"app-login";s:11:"description";s:14:"Segmentaciones";s:9:"is_hidden";s:1:"0";s:7:"session";a:3:{s:8:"security";s:5:"guest";s:17:"allowedUserGroups";a:1:{i:0;s:5:"guest";}s:8:"redirect";s:6:"/login";}s:7:"account";a:4:{s:8:"redirect";s:1:"/";s:9:"paramCode";s:4:"code";s:11:"forceSecure";s:1:"0";s:15:"requirePassword";s:1:"0";}s:12:"localePicker";a:0:{}}}

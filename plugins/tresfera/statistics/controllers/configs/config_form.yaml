@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Config
+
+# Model Form Field configuration
+form: $/tresfera/statistics/models/config/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Statistics\Models\Config
+
+# Default redirect location
+defaultRedirect: tresfera/statistics/configs
+
+# Create page
+create:
+    title: Create Config
+    redirect: tresfera/statistics/configs/update/:id
+    redirectClose: tresfera/statistics/configs
+
+# Update page
+update:
+    title: Edit Config
+    redirect: tresfera/statistics/configs
+    redirectClose: tresfera/statistics/configs
+
+# Preview page
+preview:
+    title: Preview Config

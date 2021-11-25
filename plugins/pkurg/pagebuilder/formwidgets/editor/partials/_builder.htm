@@ -1,0 +1,223 @@
+<link href="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/css/grapes.min.css" rel="stylesheet"/>
+<link href="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/css/grapesjs-preset-webpage.min.css" rel="stylesheet"/>
+<link href="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/css/grapes-code-editor.min.css" rel="stylesheet"/>
+<link href="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/css/editor.css?v=2" rel="stylesheet"/>
+<script src="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/grapes.min.js"></script>
+<script src="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/grapesjs-preset-webpage.min.js"></script>
+<script src="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/grapesjs-code-editor.min.js"></script>
+<script src="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/grapesjs-lory-slider.min.js"></script>
+<script src="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/grapesjs-custom-code.min.js?v=2"></script>
+<script src="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/vkbeautify.0.99.00.beta.js"></script>
+<link href="<?=$curdir?>/plugins/pkurg/pagebuilder/formwidgets/editor/assets/builder.css" rel="stylesheet"/>
+
+
+
+<?php $id = substr($this->getId('textarea'), 16) . time(); ?>
+
+ <?php  $editorname = uniqid(); ?>
+ 
+
+<script type="text/javascript">
+
+  function mySave<?=$editorname?>() {
+
+
+    editor<?=$editorname?>.setComponents($('#<?=$id?>').val());
+
+    var text = $('#<?=$id?>').val();
+    text = text.replace(/(?:(?:\r\n|\r|\n)\s*){2}/gm, "");
+    $('#<?=$id?>').val(text);
+
+
+    $("#savecod<?=$id?>").html("Ok");
+
+    function sayHi() {
+      $("#savecod<?=$id?>").html("Apply");
+      var text = $('#<?=$id?>').val();
+      text = text.replace(/(?:(?:\r\n|\r|\n)\s*){2}/gm, "");
+        $('#<?=$id?>').val(text);
+
+      }
+
+      setTimeout(sayHi, 1000);
+
+    }
+
+    function myFunction<?=$editorname?>() {
+      var x = document.getElementById("cod<?=$id?>");
+      var y = document.getElementById("gjs<?=$id?>");
+      var z = document.getElementById("linkcod<?=$id?>");
+
+      if (x.style.display === "block") {
+        x.style.display = "none";
+        z.innerHTML='Builder'
+        $("#savecod<?=$id?>").hide();
+      } else {
+        x.style.display = "block";
+        z.innerHTML='Text Editor'
+        $("#savecod<?=$id?>").show();
+      }
+    }
+  </script>
+
+  <div class="switch-link">
+    <a id="linkcod<?=$id?>" style="text-decoration: none" class="cod-link" href="#"  onclick="myFunction<?=$editorname?>()">Builder</a>
+    <a id="savecod<?=$id?>" style="text-decoration: none" class="cod-link" href="#" onclick="mySave<?=$editorname?>()" >Apply</a>
+  </div>
+  <div style="display: none" class="cod" id="cod<?=$id?>">
+   <textarea  style="display1: none" class="code-area" name="<?=$name?>" id="<?=$id?>" >
+     <?=e($value)?>
+   </textarea>
+ </div>
+
+
+
+ <div id="gjs<?=$id?>">
+
+ </div>
+
+ <script type="text/javascript">
+
+  $("#savecod<?=$id?>").hide();
+
+  var t = <?= json_encode($value); ?>;
+  var editor<?=$editorname?> = grapesjs.init({
+   container : '#gjs<?=$id?>',
+   //fromElement: true,
+   components: t,
+   colorPicker: { appendTo: 'parent', offset: { top: 20, left: -175 } },
+   plugins: ['gjs-preset-webpage', 'grapesjs-lory-slider', 'grapesjs-custom-code'],
+   pluginsOpts: {
+    'gjs-preset-webpage': {
+          // options
+        },
+        'grapesjs-lory-slider': {
+          // options
+        }
+      },
+      commands: {
+       defaults: [
+            //window['@truenorthtechnology/grapesjs-code-editor'].codeCommandFactory(),
+            window['@truenorthtechnology/grapesjs-code-editor'].codeCommandFactory({inlineCss: true}),
+            ],
+          },
+          allowScripts: 1,
+          storageManager: {
+      id: 'gjs-',             // Prefix identifier that will be used inside storing and loading
+      type: 'local',          // Type of the storage
+      autosave: true,         // Store data automatically
+      // autoload: true,         // Autoload stored data on init
+      autoload: false,         // Autoload stored data on init
+      stepsBeforeSave: 1,     // If autosave enabled, indicates how many changes are necessary before store method is triggered
+      storeComponents: true,  // Enable/Disable storing of components in JSON format
+      storeStyles: true,      // Enable/Disable storing of rules in JSON format
+      storeHtml: true,        // Enable/Disable storing of components as HTML string
+      storeCss: true,         // Enable/Disable storing of rules as CSS string
+    },
+     canvas: {
+    styles: [
+<?=$builder_styles?>
+    ],
+    scripts: [
+<?=$builder_scripts?>
+    ]
+   },
+    assetManager: {
+      storageType   : '',
+      storeOnChange  : true,
+      storeAfterUpload  : true,
+      upload: '<?=$curdir?>/storage/app/media',
+      assets      : [ ],
+      uploadFile: function(e) {
+        var files = e.dataTransfer ? e.dataTransfer.files : e.target.files;
+        var formData = new FormData();
+        for(var i in files){
+          formData.append('file-'+i, files[i])
+        }
+        $.ajax({
+          url: '<?=$curdir?>/backend/pkurg/pagebuilder/builderuploader/uploadFiles',
+          type: 'POST',
+          data: formData,
+          contentType:false,
+          crossDomain: true,
+          dataType: 'json',
+          mimeType: "multipart/form-data",
+          processData:false,
+          success: function(result){
+            var myJSON = [];
+            $.each( result['data'], function( key, value ) {
+              myJSON[key] = value;
+            });
+            var images = myJSON;  
+            editor<?= $editorname ?>.AssetManager.add(images);
+          }
+        });
+      },
+    },
+  });
+
+
+
+var CustomBlock = editor<?= $editorname ?>.BlockManager;
+var Editor = editor<?= $editorname ?>;
+
+<?=$customblocks?>
+
+
+
+
+  //add the open-code button to the views panel
+  editor<?= $editorname ?>.Panels.addButton('views',{
+    id: 'open-code',
+      className: 'fa fa-file-code-o ', //I will change the icon to a better icon later if this code works
+      //label: 'Save to server',
+      command: 'open-code',
+      attributes: { title: 'Open Code'},
+    });
+
+
+  editor<?= $editorname ?>.on('update', (some, argument) => {
+
+   var data = '<style type="text/css">' + editor<?= $editorname ?>.getCss() + '</style>' + editor<?= $editorname ?>.getHtml();
+
+
+   function replaceSubStr(str, subStr, replacer)
+   {
+    var newStr = '', n = subStr.length, N = str.length;
+
+    for (var i = 0; i < N; i++)
+      {  var j = i;
+       while (j < i+n && str[j] === subStr[j-i]) j++;
+       if (j === i+n)
+         {  newStr += replacer;
+          i += n-1;
+        }
+        else newStr += str[i];
+      }
+
+      return newStr;
+    }
+
+    data = replaceSubStr(data, ';}', ';}\n' );
+    data = replaceSubStr(data, '{#', '{ #' );
+    data = replaceSubStr(data, '\n\n', '' );
+
+    data = data.replace(/(?:(?:\r\n|\r|\n)\s*){2}/gm, "");
+
+    var xmlData = data
+    xmlData = vkbeautify.xml(xmlData);
+
+
+    document.getElementById('<?=$id?>').value = xmlData;
+
+  });
+
+  var text = $('#<?=$id?>').val();
+  text = vkbeautify.xml(text);
+  text = text.replace(/(?:(?:\r\n|\r|\n)\s*){2}/gm, "");
+  $('#<?=$id?>').val(text);
+
+
+</script>
+
+

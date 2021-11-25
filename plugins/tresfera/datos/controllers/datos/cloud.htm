@@ -1,0 +1,59 @@
+<?php
+$query = new \Tresfera\Statistics\Models\Result();
+$data = $query->getFreeFields();
+
+
+?>
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li class="h3">
+		        <?php 
+		        	if(get('detalles')) {
+						?>
+							<?=get("filterName")?>    	
+						<?php
+								} else {
+						?>
+			    	Datos   	
+			    	<?php    	
+		        	}
+		        ?>
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+<?php Block::endPut() ?>
+<?php echo $this->makePartial("$/tresfera/statistics/controllers/stats/_filter_new.htm"); ?>  
+
+<div class="row">
+<?php
+foreach($data as $title => $d) {
+?>
+<div class="col-md-6">
+    <h3><?=$title?></h3>
+<div id="keywords_<?=str_slug($title)?>">
+
+</div>
+<script>
+$(document).ready(function() { 
+    var word_array_<?=md5($title)?> = [
+        <?php foreach($d as $valor) { ?>
+            {text: "<?=$valor['text']?>", weight: "<?=$valor['weight']?>"},
+        <?php }  ?>
+      ];
+    $('#keywords_<?=str_slug($title)?>').jQCloud(word_array_<?=md5($title)?>, {
+                                                    width: 500,
+                                                    height: 350
+                                                    });
+});
+</script>
+</div>
+<?php
+}
+?>
+</div>

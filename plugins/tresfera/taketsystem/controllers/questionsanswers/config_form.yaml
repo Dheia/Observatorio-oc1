@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Questions Answer
+
+# Model Form Field configuration
+form: $/tresfera/taketsystem/models/questionanswer/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Taketsystem\Models\QuestionAnswer
+
+# Default redirect location
+defaultRedirect: tresfera/taketsystem/questionsanswers
+
+# Create page
+create:
+    title: Create Questions Answer
+    redirect: tresfera/taketsystem/questionsanswers/update/:id
+    redirectClose: tresfera/taketsystem/questionsanswers
+
+# Update page
+update:
+    title: Edit Questions Answer
+    redirect: tresfera/taketsystem/questionsanswers
+    redirectClose: tresfera/taketsystem/questionsanswers
+
+# Preview page
+preview:
+    title: Preview Questions Answer

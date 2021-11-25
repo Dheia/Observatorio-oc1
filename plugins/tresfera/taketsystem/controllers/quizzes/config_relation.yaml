@@ -1,0 +1,22 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+slides:
+    label: Diapositivas
+    form: $/tresfera/taketsystem/models/slide/fields_create.yaml
+    list: $/tresfera/taketsystem/models/slide/quiz_columns.yaml
+    view:
+        list: $/tresfera/taketsystem/models/slide/quiz_columns.yaml
+        toolbarButtons: create|remove
+devices:
+    label: Tablets
+    form: $/tresfera/taketsystem/models/device/quiz_fields.yaml
+    list: $/tresfera/taketsystem/models/device/quiz_columns.yaml
+    manage:
+        showSearch: true
+        recordsPerPage: 10
+    view:
+        list: $/tresfera/taketsystem/models/device/quiz_columns.yaml
+        toolbarButtons: add|remove
+        recordsPerPage: 5

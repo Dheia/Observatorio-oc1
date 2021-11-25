@@ -1,0 +1,12 @@
+list: $/tresfera/organizaciones/models/localizacion/columns.yaml
+modelClass: Tresfera\Organizaciones\Models\Localizacion
+title: Localizaciones
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'tresfera/organizaciones/localizaciones/update/:id'

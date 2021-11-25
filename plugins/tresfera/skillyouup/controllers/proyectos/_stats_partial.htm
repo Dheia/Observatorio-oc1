@@ -1,0 +1,61 @@
+<?php
+    $dimensiones = [
+        "C1" => "Proactividad",
+        "C2" => "Orientacion a resultados",
+        "C3" => "Adaptación al cambio",
+        "C4" => "Gestión del estrés",
+        "C5" => "Trabajo en equipo",
+        "C6" => "Comunicación"
+    ];
+    $competencias = [
+        "C1" => [
+            "Tomando decisiones",
+            "Organizando los roles y tares"
+        ],
+        "C2" => [
+            "Respecto a las estrategias para conseguir el objetivo",
+            "Gestionando la información"
+        ],
+        "C3" => [
+            "Si hablamos de curiosidad y exploración",
+            "Gestionando el cambio ante las novedades"
+        ],
+        "C4" => [
+            "Ante las situaciones de estrés",
+            "Respondiendo emocionalmente ante la frustración"
+        ],
+        "C5" => [
+            "Trabajando en equipo",
+            "Cooperando y ayudando"
+        ],
+        "C6" => [
+            "Comunicándote con tus compañeros",
+            "Escuchando las ideas y consejos de los demás"
+        ]
+    ];
+?>
+
+<div class="row">
+    <?php foreach($dimensiones as $key=>$dimension) {  ?>
+        <div class=" col-md-4">
+            <h3>
+                <img src="<?=$data[$key]['icon'][1]?>" class="icon">
+                <i class="<?=$key?>"><?=number_format($data[$key]['value'],2)?></i>
+                <b class="<?=$key?>"><?=$dimension?></b>
+                <span>Nivel durante el juego: <b class="<?=$key?>"><?=$data[$key]['icon'][0]?></b></span>
+            </h3>
+            <?php foreach($competencias[$key] as $id=>$competencia) { ?> 
+                <h4 class="<?=$key?>"><?=$competencia?></h4>
+                <?=$data[$key]["frases"][$id]?>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</div>
+<style>
+#stats_partial i {
+    position: absolute;
+    top: 58px;
+    font-size: 12px;
+    left: 23px;
+}
+</style>

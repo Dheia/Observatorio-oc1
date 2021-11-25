@@ -1,0 +1,17 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    sector_id:
+        label: Sector
+        type: dropdown
+        span: left
+    section_id:
+        label: Área
+        type: dropdown
+        span: right
+        dependsOn: sector_id
+        emptyOption: No page
+    title:
+        label: Pregunta

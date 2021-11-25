@@ -1,0 +1,80 @@
+<?php
+	$model = new \Tresfera\Statistics\Models\Result();
+    $totalsNPS = $model->getTotalsNPS($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+    if(isset($totalsNPS[0])) {
+?>
+<div class="row">
+	<div class="col-md-12">
+		<h3 style="margin-top: 10px"><i class="icon-arrow-up"></i>NPS <b><?=$totalsNPS[0]->global?></b>
+			<div class="legend">
+				<span><i style="background: -webkit-linear-gradient(#cc3300 0%, #ac3108 100%);"></i>Detractores <b><?=$totalsNPS[0]->percentKo?></b></span>
+				<span><i style="background: -webkit-linear-gradient(#e5a91a 0%, #b78717 100%);"></i>Pasivos <b><?=$totalsNPS[0]->percentMix?></b></span>
+				<span><i style="background: -webkit-linear-gradient(#97b853 0%, #87a844 100%);"></i>Promotores <b><?=$totalsNPS[0]->percentOk?></b></span>
+			</div>
+		</h3>
+	</div>
+	<div class="col-md-12 bar-line-big">
+		<?php if($totalsNPS[0]->percentKo!="0.00%") {
+        ?>
+		<div class="bar-line bar-line-ko" style="width: <?=$totalsNPS[0]->percentKo?>"><div><span><?=$totalsNPS[0]->numKo?></span></div></div>
+        <?php
+        }
+        ?>
+        <?php if($totalsNPS[0]->percentMix!="0.00%") {
+        ?>
+        <div class="bar-line bar-line-mix" style="width: <?=$totalsNPS[0]->percentMix?>"><div><span><?=$totalsNPS[0]->numMix?></span></div></div>
+        <?php
+        }
+        ?>
+        <?php if($totalsNPS[0]->percentOk!="0.00%") {
+        ?>
+        <div class="bar-line bar-line-ok" style="width: <?=$totalsNPS[0]->percentOk?>"><div><span><?=$totalsNPS[0]->numOk?></span></div></div>
+        <?php
+        }
+        ?>
+	</div>
+</div>
+<?php } else { 
+	$model = new \Tresfera\Statistics\Models\Result();
+    $totalsNPS = $model->getTotalsNPS2($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+
+    if(isset($totalsNPS[0])) {
+?>
+
+<div class="row">
+	<div class="col-md-12">
+		<h3 style="margin-top: 10px"><i class="icon-arrow-up"></i><?=get('filterId')?>
+			<div class="legend">
+				<span><i style="background: -webkit-linear-gradient(#cc3300 0%, #ac3108 100%);"></i>Detractores <b><?=$totalsNPS[0]->percentKo?></b></span>
+				<span><i style="background: -webkit-linear-gradient(#e5a91a 0%, #b78717 100%);"></i>Pasivos <b><?=$totalsNPS[0]->percentMix?></b></span>
+				<span><i style="background: -webkit-linear-gradient(#97b853 0%, #87a844 100%);"></i>Promotores <b><?=$totalsNPS[0]->percentOk?></b></span>
+			</div>
+		</h3>
+	</div>
+	<div class="col-md-12 bar-line-big">
+		<?php if($totalsNPS[0]->percentKo!="0.00%") {
+        ?>
+		<div class="bar-line bar-line-ko" style="width: <?=$totalsNPS[0]->percentKo?>"><div><span><?=$totalsNPS[0]->numKo?></span></div></div>
+        <?php
+        }
+        ?>
+        <?php if($totalsNPS[0]->percentMix!="0.00%") {
+        ?>
+        <div class="bar-line bar-line-mix" style="width: <?=$totalsNPS[0]->percentMix?>"><div><span><?=$totalsNPS[0]->numMix?></span></div></div>
+        <?php
+        }
+        ?>
+        <?php if($totalsNPS[0]->percentOk!="0.00%") {
+        ?>
+        <div class="bar-line bar-line-ok" style="width: <?=$totalsNPS[0]->percentOk?>"><div><span><?=$totalsNPS[0]->numOk?></span></div></div>
+        <?php
+        }
+        ?>
+	</div>
+</div>
+
+ 
+<?php 
+	}
+} 
+?>

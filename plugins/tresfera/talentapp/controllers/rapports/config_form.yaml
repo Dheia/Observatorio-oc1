@@ -1,0 +1,10 @@
+name: Rapports
+form: $/tresfera/talentapp/models/rapport/fields.yaml
+modelClass: Tresfera\Talentapp\Models\Rapport
+defaultRedirect: tresfera/talentapp/rapports
+create:
+    redirect: 'tresfera/talentapp/rapports/update/:id'
+    redirectClose: tresfera/talentapp/rapports
+update:
+    redirect: tresfera/talentapp/rapports
+    redirectClose: tresfera/talentapp/rapports

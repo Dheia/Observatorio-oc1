@@ -1,0 +1,98 @@
+<?php
+
+if(isset($record->proyecto->fecha_fin))
+{
+    $d2 = \Carbon\Carbon::parse($record->proyecto->fecha_fin);
+    $fecha_actual = \Carbon\Carbon::now();
+    $diff = $fecha_actual->diffInDays($d2,false);
+}
+else 
+{
+    $diff = false;
+}
+
+
+if($record->estado_informe == 0) {
+    if($record->estado == 2) {
+        if(!$record->proyecto->hasLicencias()) {
+            ?>
+            <button
+                class="btn btn-xs btn-warning pull-left">
+                Sin licencias
+            </button><br><br>
+            <?php
+        } else {
+            ?>
+            <a
+            href="<?=url("/backend/tresfera/talent/administrador/generateRapport/?id=".$record->id)?>"
+            class="btn btn-xs btn-warning pull-left">
+            Generar informe
+        </a><br><br>
+            <?php
+        }
+    ?>
+    
+    
+    <?php
+    }
+} elseif($record->estado_informe == 1) {
+    ?>
+    
+    <a
+        href="#"
+        disabled="disabled"
+        class="btn btn-xs btn-warning pull-left">
+        En cola
+    </a><br><br>
+    <?php
+} elseif($record->estado_informe == 2) {
+    ?>
+    
+    <a
+        href="#"
+        disabled="disabled"
+        class="btn btn-xs btn-warning pull-left">
+        Procesando
+    </a><br><br>
+    <?php
+}
+    else {
+        $rapport = \Tresfera\Talent\Models\Rapport::find($record->rapport_id);
+        if(isset($rapport->id)) {
+    ?>
+    <a
+        href="<?=$rapport->getUrl()?>"
+        target="_blank"
+        class="btn btn-xs btn-warning pull-left">
+        Ver informe
+    </a><br><br>
+    <?php
+    }
+}
+
+?>
+
+<a href="<?=url('/backend/tresfera/talent/evaluaciones/update/'.$record->id)?>" class="btn btn-xs btn-default pull-left">Gestionar</a>
+<br><br>
+<div class="dropdown">
+    <a href="#" data-toggle="dropdown" class="btn btn-xs btn-warning pull-left">Permisos</a>
+
+    <ul class="dropdown-menu" role="menu" data-dropdown-title="Permiso para ver informes">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talent/administrador/onPermisoVerInforme/?id=".$record->id."&permiso=1")?>" class="oc-icon-unlock">Dar permiso para ver informes</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talent/administrador/onPermisoVerInforme/?id=".$record->id."&permiso=0")?>" class="oc-icon-lock">Eliminar permiso para ver informes</a></li>
+    </ul>
+</div>
+<br><br>
+<?php if($diff >= 0) { ?> 
+
+    <div class="dropdown">
+        <a href="#" data-toggle="dropdown" class="btn btn-xs btn-warning pull-left">Enviar Email</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Enviar email">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talent/administrador/onSendEmailActivacion/?id=".$record->id)?>" class="oc-icon-paper-plane-o">Activación</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talent/administrador/onSendEmailRecordatorio/?id=".$record->id)?>" class="oc-icon-paper-plane-o">Recordatorio</a></li>
+        </ul>
+    </div>
+
+ <br><br>
+<?php } ?>

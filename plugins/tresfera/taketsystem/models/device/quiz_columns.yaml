@@ -1,0 +1,23 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+    tienda:
+        label: Tienda
+        relation: shop
+        select: name
+        searchable: true
+    ciudad:
+        label: Ciudad
+        relation: city
+        select: name
+        searchable: true
+    provincia:
+        label: Provincia
+        relation: region
+        select: name
+        searchable: true

@@ -1,0 +1,37 @@
+title = "Pregunta NPS"
+url = "/slides/slide/:code"
+description = "Haremos 1 preguntas con 3 respuestas que servirán para calcular el NPS"
+type = "logica"
+layout = "render"
+
+[taketsystemTemplate]
+==
+
+<!-- Content -->
+<section>
+    <!-- Flex Items , Flex Box themselves -->
+    <div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+    <div class="h-80">
+        <div>
+          <div data-role="pregunta" data-answer-type="smiles" data-question-type="nps" data-type="smiles">
+            <h2>{question name="question_1" label="Pregunta"}¿Recomendaría nuestra tienda a un amigo o familiar?{/question}</h2>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="1" class="smile smile-1">
+	            <span data-type="value">No</span>
+            </div>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="2" class="smile smile-2">
+	            <span data-type="value">¿?</span>
+            </div>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="3" class="smile smile-3">
+	            <span data-type="value">Sí</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+</section>

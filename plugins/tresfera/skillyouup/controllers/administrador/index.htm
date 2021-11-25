@@ -1,0 +1,96 @@
+<?php
+
+use Tresfera\Skillyouup\Classes\UserControl;
+
+
+// FUNCTIONS
+function getCurrentFilters() {
+    $filters = [];
+    foreach (\Session::get('widget', []) as $name => $item) {
+        if (str_contains($name, 'Filter')) {
+            $filter = @unserialize(@base64_decode($item));
+            if ($filter) {
+                array_push($filters, $filter);
+            }
+        }
+    }
+
+    return $filters;
+}
+
+// --------- END FUNCTIONS ----------
+
+
+
+$user = BackendAuth::getUser();
+$rol = UserControl::getRole($user);
+if($rol != 0 && !$user->is_superuser) {
+    ?>
+    <script>window.location.replace("/backend/tresfera/skillyouup/");</script>
+ <?php   
+}
+?>
+
+<div class="control-breadcrumb">
+    <ul>
+        <li><a href="#">Skillyouup360</a></li>
+        <li>Administración</li>
+    </ul>
+</div>
+
+
+<div class="encabezado">
+    <div class="dropdown" style="float:left;">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-plus">Crear</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Crear nuevos clientes, proyectos,...">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url('/backend/tresfera/clients/clients/create')?>" class="oc-icon-plus">Nuevo cliente</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url('/backend/tresfera/skillyouup/proyectos/create')?>" class="oc-icon-plus">Nuevo proyecto</a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown" style="float:left; margin-left: 5px">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-envelope-o">Enviar emails a los seleccionados</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Gestionar informes">
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onSendEmailInformePlayers"
+                    data-request-confirm="<?= e('¿Deseas reenviar el email de activación a todos los seleccionados?') ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                        Informe a los jugadores
+                </a>
+            </li>
+            <li role="presentation">
+                    <a role="menuitem" 
+                        tabindex="-1" 
+                        disabled="disabled"
+                        onclick="$(this).data('request-data', {
+                            checked: $('.control-list').listWidget('getChecked')
+                        })"
+                        data-request="onDownloadRapports"
+                        data-request-confirm="<?= e('¿Deseas descargar los informes?') ?>"
+                        data-trigger-action="enable"
+                        data-trigger=".control-list input[type=checkbox]"
+                        data-trigger-condition="checked"
+                        data-request-success="$(this).prop('disabled', true)" class="oc-icon-cloud-download">
+                        Descargar informes (en ZIP)
+                    </a>
+                </li>
+        </ul>
+    </div>
+
+
+   
+</div>
+<div style="clear: left;"></div>
+<?= $this->makePartial('estadisticas', []) ?>
+<?= $this->listRender() ?>

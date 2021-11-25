@@ -1,0 +1,130 @@
+fields:
+    name:
+        label: Nom
+        span: auto
+        type: text
+tabs:
+    fields:
+        event:
+            label: Esdeveniment
+            options:
+                question: 'Resposta a pregunta'
+                envios: Enviaments
+            span: auto
+            type: radio
+            tab: Esdeveniment
+        conditions:
+            label: Condicions
+            prompt: 'Nueva condicion'
+            span: full
+            type: repeater
+            tab: Condicions
+            form:
+                fields:
+                    quiz:
+                        label: Qüestionari
+                        showSearch: true
+                        span: full
+                        trigger:
+                            action: show
+                            field: ^event
+                            condition: 'value[question]'
+                        type: dropdown
+                    question:
+                        label: Pregunta
+                        showSearch: true
+                        span: auto
+                        type: dropdown
+                        trigger:
+                            action: show
+                            field: ^event
+                            condition: 'value[question]'
+                    answer:
+                        label: Resposta
+                        showSearch: true
+                        span: auto
+                        dependsOn:
+                            - question
+                        type: dropdown
+                        trigger:
+                            action: show
+                            field: ^event
+                            condition: 'value[question]'
+                    status:
+                        label: Estado
+                        options:
+                            send: Enviado
+                            open: Abierto
+                            completed: Completado
+                        showSearch: true
+                        span: auto
+                        type: dropdown
+                        trigger:
+                            action: show
+                            field: ^event
+                            condition: 'value[envios]'
+                    status_on:
+                        label: Hecho
+                        span: auto
+                        placeholder: ''
+                        type: switch
+                        on: 'Sí'
+                        off: 'No'
+                        comment: 'Se ha realizado el estado'
+                        trigger:
+                            action: show
+                            field: ^event
+                            condition: 'value[envios]'
+        actions:
+            label: "Tipus d'acció"
+            options:
+                'Enviar email': email
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: Accions
+        mail_subject:
+            label: Assumpte
+            span: left
+            type: text
+            tab: Accions
+        mail_content:
+            label: 'Missatge'
+            size: ''
+            span: left
+            type: richeditor
+            tab: Accions
+        mail_to:
+            label: Destinataris
+            prompt: 'Nuevo destinatario'
+            span: auto
+            type: repeater
+            tab: Accions
+            form:
+                fields:
+                    email:
+                        label: Email
+                        span: full
+                        type: text
+            trigger:
+                action: show
+                field: event
+                condition: 'value[question]'
+        cuando:
+            label: Tipus
+            options:
+                now: "En el moment que s'activi l'esdeveniment"
+                days: 'Passats els dies especificats'
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: Quan
+        num_dias:
+            label: 'Nombre de dies'
+            span: auto
+            trigger:
+                action: show
+                field: cuando
+                condition: 'value[days]'
+            type: number
+            tab: Quan

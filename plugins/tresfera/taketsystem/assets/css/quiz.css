@@ -1,0 +1,419 @@
+body {
+  overflow: hidden;
+  overflow-y: auto !important;
+}
+.layout-row > div[data-control="formwidget"] {
+  display: block;
+}
+.fancy-layout .form-tabless-fields {
+  padding: 9px 23px;
+}
+div#Form-primaryTabs .nav > li:last-child a {
+  display: block !important;
+}
+.control-breadcrumb {
+	margin-bottom: 0px;
+}
+	div.tab-content > div:first-child {
+	  padding: 15px !important;
+	}	form.layout {
+	  padding: 0 0px;
+	}
+	div#Form-secondaryTabs {
+	  display: none;
+	}
+	
+	
+	#Form-secondaryTabs .tab-content {
+	  width: 100%;
+	  display: flex;
+	  flex: 1;
+	  flex-direction: column;
+	  flex-wrap: nowrap;
+	  align-items: stretch;
+	}
+	#Form-secondaryTabs .tab-content .tab-pane {
+		padding: 0px !important;
+		height: 100%;
+	}
+	#Form-secondaryTabs .tab-pane h3 {
+		  margin-top: 0;
+	}
+	#Form-secondaryTabs ul.nav-tabs {
+		list-style: circle;
+	}
+	#Form-secondaryTabs ul.nav-tabsli { 
+	    padding-left: 1em; 
+	    text-indent: -.7em;
+	}
+	#Form-secondaryTabs ul.nav-tabs > li:before {
+	  background-color: #fff;
+	  display: inline-block;
+	  margin-right: 8px;
+	  font-size: 80%;
+	  padding: 0 5px;
+	  border-radius: 4px;
+	  vertical-align: text-top;
+	  font-weight: bold;
+	  color: #666;
+	}
+	#Form-secondaryTabs ul.nav-tabs > li.active:before,
+	#Form-secondaryTabs ul.nav-tabs > li:hover:before {
+		color: #355B8A;
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(1):before {
+		content: "1";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(2):before {
+		content: "2";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(3):before {
+		content: "3";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(4):before {
+		content: "4";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(5):before {
+		content: "5";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(6):before {
+		content: "6";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(7):before {
+		content: "7";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(8):before {
+		content: "8";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(9):before {
+		content: "9";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(10):before {
+		content: "10";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(11):before {
+		content: "11";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(12):before {
+		content: "12";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(13):before {
+		content: "13";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(14):before {
+		content: "14";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(15):before {
+		content: "15";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(16):before {
+		content: "16";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(17):before {
+		content: "17";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(18):before {
+		content: "18";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(19):before {
+		content: "19";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(20):before {
+		content: "20";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(21):before {
+		content: "21";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(22):before {
+		content: "22";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(23):before {
+		content: "23";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(24):before {
+		content: "24";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(25):before {
+		content: "25";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(26):before {
+		content: "26";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(27):before {
+		content: "27";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(28):before {
+		content: "28";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(29):before {
+		content: "29";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(30):before {
+		content: "30";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(31):before {
+		content: "31";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(32):before {
+		content: "32";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(33):before {
+		content: "33";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(34):before {
+		content: "34";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(35):before {
+		content: "35";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(36):before {
+		content: "36";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(37):before {
+		content: "37";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(38):before {
+		content: "38";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(39):before {
+		content: "39";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(40):before {
+		content: "40";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(41):before {
+		content: "41";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(42):before {
+		content: "42";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(43):before {
+		content: "43";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(44):before {
+		content: "44";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(45):before {
+		content: "45";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(46):before {
+		content: "46";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(47):before {
+		content: "47";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(48):before {
+		content: "48";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(49):before {
+		content: "49";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(50):before {
+		content: "50";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(51):before {
+		content: "51";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(52):before {
+		content: "52";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(53):before {
+		content: "53";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(54):before {
+		content: "54";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(55):before {
+		content: "55";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(56):before {
+		content: "56";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(57):before {
+		content: "57";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(58):before {
+		content: "58";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(59):before {
+		content: "59";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(60):before {
+		content: "60";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(61):before {
+		content: "61";
+	}
+	#Form-secondaryTabs ul.nav-tabs >  li:nth-child(62):before {
+		content: "62";
+	}
+
+/*	#Form-secondaryTabs ul.nav-tabs > li:last-child:before {
+	  content: "\f0fe";
+	  text-decoration: inherit;
+	  display: inline-block;
+	  speak: none;
+	  color: #fff;
+	  font-family: FontAwesome;
+	  font-weight: normal;
+	  font-style: normal;
+	  text-decoration: inherit;
+	  -webkit-font-smoothing: antialiased;
+	  margin-right: 7px;
+	  vertical-align: baseline;
+	  font-size: 125%;
+	  background: none;
+	  padding: 0;
+	}
+	#Form-secondaryTabs ul.nav-tabs > li:last-child {
+		background-color: #5fb6f5;
+		border: none !important;
+	}
+	  */
+	#Form-secondaryTabs ul.nav li {
+	  display: block;
+	  padding: 10px 18px;
+	  
+	    margin-right: 0 ;
+	    background-color: #666;
+	    border-right: none;
+	}
+	#Form-secondaryTabs  ul.nav-tabs > li,
+	#Form-secondaryTabs > div > ul.nav-tabs > li a {
+		 /*transition: all 0.8s ease-in-out 0.8s;*/
+	}
+	#Form-secondaryTabs  ul.nav-tabs > li:last-child {
+		 margin-right: 0 ;
+		 border: 1px solid #b0b0b0;
+		border: none !important;
+	}
+	#Form-secondaryTabs ul.nav li.active,
+	#Form-secondaryTabs ul.nav li:hover {
+	  margin-left: 0px;
+	  position: relative;
+	  background-color: #355B8A;
+	}
+	#Form-secondaryTabs > div > ul.nav-tabs > li a {
+	  background: none;
+	  color: #fff;
+	  display: inline-block;
+	  font-size: 13px;
+	  padding: 0;
+	}
+	/*#Form-secondaryTabs {
+	  position: relative;
+	  margin-left: -20px;
+	  margin-right: -20px;
+	}
+	#Form-secondaryTabs {
+	  position: absolute;
+	  margin-left: -20px;
+	  margin-right: -20px;
+	  margin-top: -30px;
+	}*/
+	
+	/*Container*/
+	#Form-secondaryTabs  > div > ul.nav-tabs {
+		  overflow: visible;
+	}
+	#Form-secondaryTabs {
+	  padding: 0;
+	  margin: 0;
+	  list-style: none;
+	  
+	  -ms-box-orient: horizontal;
+	  display: -webkit-box;
+	  display: -moz-box;
+	  display: -ms-flexbox;
+	  display: -moz-flex;
+	  display: -webkit-flex;
+	  display: flex;
+	  
+	  -webkit-flex-direction: row-reverse; 
+	  flex-direction: row;
+	  
+	  margin-top: -20px;
+	  width: 102%;
+	}
+	/* col 1 */
+	#Form-secondaryTabs  .layout-row.min-size  {
+	    width: 20%;
+	  height: 100%;
+	}
+	/* col 2 */
+	#Form-secondaryTabs .tab-content.layout-row {
+	  width: 100%;
+	  padding: 12px 0 12px 12px;
+	  background: url(../images/ajax_loader_blue_512.gif) no-repeat center center #f2f2f2;
+	  border-left: solid #355B8A 5px;
+	  background-size: 10%;
+	}
+	#Form-secondaryTabs .tab-pane .form-group {
+	  height: 100%;
+	}
+	#Form-secondaryTabs .tab-pane > .form-group iframe {
+	    border: none;
+	    width: 97%;
+	    height: 100%;
+	    overflow: visible;
+	}
+	div#Form-secondaryTabs {
+    display: none;
+    height: calc(100%);
+    overflow: hidden;
+}
+#Form-secondaryTabs .layout-row.min-size {
+	width: 20%;
+	height: calc(100%);
+	overflow: auto;
+}
+.layout-row > div[data-control="formwidget"] > div:nth-child(3) {
+
+	height: calc(100% - 154px ) !important;
+	margin-top: -25px;
+	overflow: hidden;
+	position: absolute;
+	width: 100%;
+}
+div#Form-secondaryTabs {
+	display: none;
+	height: calc(100%);
+	overflow: hidden;
+	padding-top: 20px;
+}
+#layout-canvas {
+	min-height: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.tab-pane.active {
+	overflow: auto;
+	height: calc(100vh - 232px);
+}
+#tabs14454-tab-71553615433406 {
+	display: none;
+	height: 0;
+}
+.tab-content > *:last-child {
+	display: none;
+	height: 0;
+}

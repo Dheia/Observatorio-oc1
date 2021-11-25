@@ -1,0 +1,13 @@
+title: Administrador
+modelClass: Tresfera\Talentapp\Models\Evaluacion
+list: $/tresfera/talentapp/models/evaluacion/columns_admin_csv.yaml
+recordUrl: 'tresfera/talentapp/administrador/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+filter: config_filter.yaml

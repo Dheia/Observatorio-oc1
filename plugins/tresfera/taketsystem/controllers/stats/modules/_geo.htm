@@ -1,0 +1,42 @@
+<?php
+	$model = new \Tresfera\Taketsystem\Models\Result();
+	$totalsCity = $model->getTotalsCities($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+	$total = 0;
+	foreach($totalsCity as $city) {
+		$total += $city->count;
+	}
+	$totalView = 0;
+	$i=0;
+	foreach($totalsCity as $city) {
+		$totalView += $city->count;
+		$i++;
+		if($i>=10) break;
+	}
+?>
+<div data-control="toolbar">
+	    <h3><i class="icon-home"></i>Información geográfica</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<div
+				    class="control-chart"
+				    data-control="chart-pie"
+				    data-size="180"
+					 data-center-text="<?=$total?>">
+				    <ul>
+					    <?
+					    $i=0;
+					    foreach($totalsCity as $city) {
+						    $citycp = Tresfera\Taketsystem\Models\Citycp::find($city->citycp_id);
+					    ?>
+					    	<li><?=$citycp->name?> <span><?=$city->count?></span></li>
+					    <?
+					    	$i++;
+							if($i>=10) break;
+					    }
+					    ?>
+				        <li>Otros <span><?=($total-$totalView)?></span></li>
+				    </ul>
+				</div>
+			</div>
+		</div>
+</div>

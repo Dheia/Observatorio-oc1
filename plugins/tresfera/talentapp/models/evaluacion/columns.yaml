@@ -1,0 +1,34 @@
+columns:
+    name:
+        label: 'tresfera.talentapp::lang.evaluacion.name'
+        type: text
+    email:
+        label: email
+        type: text
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    tipo:
+        label: 'tresfera.talentapp::lang.evaluacion.tipo'
+        type: text
+    estado:
+        label: 'tresfera.talentapp::lang.evaluacion.estado'
+        type: number
+    Superior:
+        label: 'tresfera.talentapp::lang.evaluacion.jefe'
+        type: repeater
+    companero:
+        label: 'tresfera.talentapp::lang.evaluacion.companero'
+        type: repeater
+    colaborador:
+        label: 'tresfera.talentapp::lang.evaluacion.colaborador'
+        type: repeater
+    otro:
+        label: 'tresfera.talentapp::lang.evaluacion.otro'
+        type: repeater
+    _config:
+        label: config
+        type: buttons-evaluaciones

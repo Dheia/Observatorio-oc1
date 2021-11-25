@@ -1,0 +1,18 @@
+<?php if(!$field['hide_title']) { ?>
+    <h3><?=$field['title']?></h3>
+<?php } ?>
+<div
+<?php 
+        $partial = "$/tresfera/taketsystem/slides/_field_css_custom.htm";
+        echo $this->makePartial(
+        $partial,
+            [ 
+            'campo' => $field,
+            'slide' => $slide
+            ]
+        );
+    ?>
+>
+<img
+    src="<?=$field['image']?>">
+</div>

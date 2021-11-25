@@ -1,0 +1,34 @@
+fields:
+    send_at:
+        label: 'Enviar en data'
+        mode: datetime
+        span: auto
+        type: datepicker
+    quiz_id:
+        label: Enquesta
+        showSearch: true
+        span: auto
+        type: dropdown
+    import_file:
+        label: Fitxer
+        mode: file
+        fileTypes:
+            - txt
+            - csv
+        mimeTypes: 'txt,csv'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        context:
+            - update
+            - preview
+        type: fileupload
+    datos:
+        span: full
+        path: datos
+        context:
+            - update
+            - preview
+        type: partial

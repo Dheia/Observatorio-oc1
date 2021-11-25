@@ -1,0 +1,156 @@
+title = "Rankings"
+url = "/rankings"
+layout = "app"
+description = "Segmentaciones"
+is_hidden = 0
+
+[session]
+security = "user"
+redirect = "/login"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+
+[Rankings]
+==
+<?php
+use RainLab\Translate\Classes\Translator;
+public function onStart() {
+    $this['lang'] = Translator::instance()->getLocale();
+    $this['comp'] = get('comp');
+    $max = [
+        "" => 1720+2550,
+        "4" => 1720,
+        "5" => 2550,
+        "6" => 12000,
+        "7" => 8900,
+    ];
+    $this['max'] = $max[$this['comp']];
+
+}
+?>
+==
+{% put head %}
+<link href="{{['assets/app/css/custom-rankings.css' ]|theme}}" rel="stylesheet">
+{% endput %}
+
+<h1>RANKING</h1>
+<div class="my-4">
+    <div class="bg-white rounded p-2 flex leading-normal  me">
+        <div class="w-8 p-5 mr-8">
+            <i class="material-icons mr-1 text-gray-400" aria-hidden="true">star</i>
+        </div>
+        <div class="w-4/5 flex-1">
+            <table class="text-left">
+                <tbody class="bg-transparent flex content-center items-center justify-between" >
+                        {% set i = 1 %}
+                        {% for team in Rankings.teams %}
+                            {% if team.team == user.email %}
+                            <tr class="flex font-bold border-0">
+                                <td class="p-2 w-1/8 rank-number"><p>#{{i}}</p></td>
+                                <td class="p-2 w-1/8 rank-picture"><img src="https://eu.ui-avatars.com/api/?background=27A3A2&color=ffffff&name={{team.name}}&length=3" class="profile-picture"></td>
+                                <td class="p-2 w-3/5 rank-name"><p>{{user.name}} {{user.surname}}</p></td>
+                                {% if team.points > max %}
+                                <td class="p-2 w-1/5 rank-score text-right"><p>{{max|number_format(0)}}</p></td>
+                                {% else %}
+                                <td class="p-2 w-1/5 rank-score text-right"><p>{{team.points|number_format(0)}}</p></td>
+                                {% endif %}
+                            </tr>
+                            {% endif %}
+                        {% set i = i + 1 %}
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    <div class="border border-gray-400 lg:border-l-0 bg-white rounded p-2 flex flex-col justify-between leading-normal">
+    <table class="text-left w-full">
+        <thead class="flex content-center text-lightgrey w-full">
+            <tr class="flex w-full align-middle">
+                <th class="p-2 flex-initial w-1/8"><i class="material-icons mr-1" aria-hidden="true">star</i></th>
+                <th class="p-2 w-4/5">
+                    {% if lang == 'es' %}
+                        {{'Resultados '|_}}
+                        {% if comp == 4 %}
+                            {{'Optimistas'|_}}
+                        {% elseif comp == 5 %}
+                            {{'Humildes'|_}}
+                        {% elseif comp == 6 %}
+                            {{'Empáticas'|_}}
+                        {% elseif comp == 7 %}
+                            {{'Inquietas'|_}}
+                        {% else %}
+                            {{'Global'|_}}
+                        {% endif %}
+                    {% else %}
+                        {% if comp == 4 %}
+                            {{'Optimistas'|_}}
+                        {% elseif comp == 5 %}
+                            {{'Humildes'|_}}
+                        {% elseif comp == 6 %}
+                            {{'Empáticas'|_}}
+                        {% elseif comp == 7 %}
+                            {{'Inquietas'|_}}
+                        {% else %}
+                            {{'Global'|_}}
+                        {% endif %}
+                        {{'Resultados '|_}}
+                    {% endif %}
+                </th>
+                <th class="p-2 w-1/5 text-right">
+                    <div class="mdc-drawer-scrim"></div>
+                    <div  id="demo-menu" class="mdc-menu-surface--anchor">
+                        <button id="menu-button">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface">
+                            <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+                                <li onclick="window.location='/rankings'" class="mdc-list-item" role="menuitem">
+                                    <span class="mdc-list-item__text">{{'Global'|_}}</span>
+                                </li>
+                                <li onclick="window.location='/rankings?comp=4'" class="mdc-list-item" role="menuitem">
+                                    <span class="mdc-list-item__text">{{'Optimistas'|_}} </span>
+                                </li>
+                                <li onclick="window.location='/rankings?comp=5'" class="mdc-list-item" role="menuitem">
+                                    <span class="mdc-list-item__text">{{'Humildes'|_}}</span>
+                                </li>
+                                <li onclick="window.location='/rankings?comp=6'" class="mdc-list-item" role="menuitem">
+                                    <span class="mdc-list-item__text">{{'Empáticas'|_}} </span>
+                                </li>
+                                <li onclick="window.location='/rankings?comp=7'" class="mdc-list-item" role="menuitem">
+                                    <span class="mdc-list-item__text">{{'Inquietas'|_}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </th>
+            </tr>
+        </thead>
+        <tbody class="full-results bg-grey-lighter flex content-center flex-col items-center justify-between overflow-y-scroll w-full" >
+            {% set i = 1 %}
+            {% for team in Rankings.teams %}
+            {% if team.name %}
+            <tr class="flex w-full align-middle">
+                <td class="p-2 w-1/8 rank-number"><p>#{{i}}</p></td>
+                <td class="p-2 w-1/8 rank-picture"><img src="https://eu.ui-avatars.com/api/?background=27A3A2&color=ffffff&name={{team.name}}&length=3" class="profile-picture"></td>
+                <td class="p-2 w-3/5 rank-name"><p>{{team.name}} {{team.surname}}</p></td>
+                {% if team.points > max %}
+                <td class="p-2 w-1/5 rank-score text-right"><p>{{max|number_format(0)}}</p></td>
+                {% else %}
+                    {% if team.points < 0 %}
+                        <td class="p-2 w-1/5 rank-score text-right"><p>0</p></td>
+                    {% else %}
+                        <td class="p-2 w-1/5 rank-score text-right"><p>{{team.points|number_format(0)}}</p></td>
+                    {% endif %}
+                {% endif %}
+            </tr>
+            {% endif %}
+			{% set i = i + 1 %}
+			{% endfor %}
+        </tbody>
+    </table>
+</div>

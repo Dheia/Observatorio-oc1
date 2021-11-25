@@ -1,0 +1,73 @@
+columns:
+    proyecto:
+        label: 'tresfera.talentapp::lang.admin.proyecto'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/export/_proyecto_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    cliente:
+        label: 'tresfera.talentapp::lang.admin.cliente'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/export/_cliente_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    resumen:
+        label: 'tresfera.talentapp::lang.admin.progreso'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/export/_resumen_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    no_contestados:
+        label: 'tresfera.talentapp::lang.admin.evaluaciones_pendientes'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/export/_no_contestados_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    emails:
+        label: 'Emails'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/export/_emails_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    tiempo_restante:
+        label: 'tresfera.talentapp::lang.admin.tiempo_restante'
+        type: partial
+        path: ~/plugins/tresfera/talentapp/models/evaluacion/export/_tiempo_restante_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+
+    proyecto_name:
+        label: 'tresfera.talentapp::lang.admin.proyecto'
+        relation: proyecto
+        select: name
+        searchable: true
+        clickable: false
+        invisible: true
+        cssClass: hidden
+    name:
+        label: 'tresfera.talentapp::lang.admin.nombre_evaluado'
+        type: text
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    username:
+        label: username
+        type: text
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    email:
+        label: email
+        type: text
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden

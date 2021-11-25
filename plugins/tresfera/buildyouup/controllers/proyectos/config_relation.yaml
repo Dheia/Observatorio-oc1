@@ -1,0 +1,17 @@
+gestores:
+    label: Gestor
+    manage:
+        form: $/tresfera/buildyouup/models/gestor/fields.yaml
+        list: $/tresfera/buildyouup/models/gestor/columns.yaml
+    view:
+        list: $/tresfera/buildyouup/models/gestor/columns.yaml
+        toolbarButtons: create|add|delete|remove
+
+equipos:
+    label: Observadores
+    manage:
+        form: $/tresfera/buildyouup/models/equipo/fields.yaml
+        list: $/tresfera/buildyouup/models/equipo/columns.yaml
+    view:
+        list: $/tresfera/buildyouup/models/equipo/columns.yaml
+        toolbarButtons: create|delete

@@ -1,0 +1,6 @@
+plugin:
+    name: 'pkurg.pagebuilder::lang.plugin.name'
+    description: 'pkurg.pagebuilder::lang.plugin.description'
+    author: Vladimir
+    icon: oc-icon-building-o
+    homepage: ''

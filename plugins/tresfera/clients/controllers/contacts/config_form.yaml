@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Contact
+
+# Model Form Field configuration
+form: $/tresfera/clients/models/contact/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Clients\Models\Contact
+
+# Default redirect location
+defaultRedirect: tresfera/clients/contacts
+
+# Create page
+create:
+    title: Create Contact
+    redirect: tresfera/clients/contacts/update/:id
+    redirectClose: tresfera/clients/contacts
+
+# Update page
+update:
+    title: Edit Contact
+    redirect: tresfera/clients/contacts
+    redirectClose: tresfera/clients/contacts
+
+# Preview page
+preview:
+    title: Preview Contact

@@ -1,0 +1,50 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    config[envios]:
+        commentAbove: Colores de envios
+        label: Envíos
+        span: full
+        type: nestedform
+        usePanelStyles: false
+        form:
+            fields:
+                sends:
+                    label: Enviados
+                    type: colorpicker
+                opens:
+                    label: Abiertos
+                    type: colorpicker
+                completeds:
+                    label: Completados
+                    type: colorpicker
+    config[stats]:
+        commentAbove: Colores satisfacción
+        label: Satisfacción
+        span: full
+        usePanelStyles: false
+        type: nestedform
+        form:
+            fields:
+                ko:
+                    label: Insatisfechos
+                    type: colorpicker
+                mix:
+                    label: Neutros
+                    type: colorpicker
+                ok:
+                    label: Satisfechos
+                    type: colorpicker
+    config[segmentaciones]:
+        commentAbove: Colores segmentaciones
+        label: Segmentaciones
+        span: full
+        usePanelStyles: false
+        type: repeater
+        form:
+            fields:
+                color:
+                    label: Color
+                    type: colorpicker

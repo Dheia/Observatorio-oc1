@@ -1,0 +1,10 @@
+name: Rapports
+form: $/tresfera/buildyouup/models/rapport/fields.yaml
+modelClass: Tresfera\Buildyouup\Models\Rapport
+defaultRedirect: tresfera/buildyouup/rapports
+create:
+    redirect: 'tresfera/buildyouup/rapports/update/:id'
+    redirectClose: tresfera/buildyouup/rapports
+update:
+    redirect: tresfera/buildyouup/rapports
+    redirectClose: tresfera/buildyouup/rapports

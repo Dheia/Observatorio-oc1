@@ -1,0 +1,486 @@
+title = "Pregunta IESE"
+url = "/slides/slide/:code"
+layout = "render"
+description = "IESE pregunta"
+is_hidden = 0
+
+[taketsystemTemplate]
+==
+{variable type="text" name="title" label="Título"}{/variable}
+{variable type="text" name="subtitle1" label="Frase 1"}{/variable}
+{variable type="text" name="subtitle2" label="Frase 2"}{/variable}
+{variable type="text" name="subtitle3" label="Frase 3"}{/variable}
+
+{variable type="text" span="auto" name="competencia" label="Competencia"}{/variable}
+{variable type="text" span="auto" name="dimension" label="Dimension"}{/variable}
+
+{variable type="text" name="continueText" default="Continuar" label="Texto botón continuar"}{/variable}
+
+{variable type="text" span="auto" name="numItems" label="Progreso: Pantalla actual"}{/variable}
+{variable type="text" span="auto" name="totalITems" label="Progreso: Total pantallas"}{/variable}
+{variable type="checkbox" span="auto" name="showProgres" label="Mostrar prograso"}{/variable}
+
+{mediafinder name="bg" label="Fondo"}{/mediafinder}
+{variable type="codeeditor" name="css" label="Personalizado"}{/variable}
+--
+<div id="{{slide_id}}" class="main preguntas slide_{{slide_id}}">
+  <div class="row bg">
+    {% if showProgres %}
+
+    <div class="col">
+      <div class="num-progress">
+        {{numItems}}
+      </div>
+      <div class="progress">
+        <div class="percent" style="width: {{ numItems / totalITems * 100 }}%">
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="col">
+      <h1 class="title w-100">{{title}}</h1>
+    </div>
+    <div class="col-25 transparent">
+      <span>
+        {{subtitle1}}
+      </span>
+    </div>
+    <div class="col-25 transparent">
+      <span>
+        {{subtitle2}}
+      </span>
+    </div>
+    <div class="col-25 transparent">
+      <span>
+        {{subtitle3}}
+      </span>
+    </div>
+  </div>
+  <div class="row" id="question">
+    <div class="col">
+      <div data-role="pregunta" 
+           data-question-title="{{title}}"
+           data-answer-type="smiles" 
+           data-question-type="pregunta" 
+           data-question-competencia="{{competencia}}" 
+           data-question-dimension="{{dimension}}" 
+           data-type="icons">
+           
+        <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="1" class="smile circle circle-1">
+          <span data-type="value">Nunca</span>
+        </div>
+        <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="2" class="smile circle circle-2">
+          <span data-type="value">Casi nunca</span>
+        </div>
+        <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="3" class="smile circle circle-3">
+          <span data-type="value">A veces</span>
+        </div>
+        <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="4" class="smile circle circle-4">
+          <span data-type="value">Casi siempre</span>
+        </div>
+        <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="5" class="smile circle circle-5">
+          <span data-type="value">Siempre</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <h3 class="title w-100">{{subtitle}}</h3>
+
+  <div id="continue">
+      <button ng-click="prevStep()" type="submit" class="button goback icon-right ion-chevron-right button-clear button-dark">
+          Volver
+      </button>
+    <button  style="display: none" ng-click="nextStep()" type="submit" class="button icon-right ion-chevron-right button-clear button-dark">
+      Continuar
+    </button>
+  </div>
+
+</div>
+
+<style>
+.slide_{{slide_id}} button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -180px;
+}
+.slide_{{slide_id}} section {
+  position: absolute;
+  width: 1200px;
+  height: 700px;
+}
+{{css}}
+.slide_{{slide_id}} .bg {
+    background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.slide_{{slide_id}}.main {
+    height: 100%;
+    width: 100%;
+}
+.slide_{{slide_id}} .circle {
+  height: 150px;
+    background-size: 100%;
+    background-position: 0;
+}
+.slide_{{slide_id}} .smile span {
+    font-size: 70%;
+    background-color: #fff;
+    text-align: center;
+    list-style: none;
+    line-height: 100%;
+    height: auto;
+    display: block;
+    width: 100%;
+    word-wrap: initial;
+    margin-top: 0;
+}
+.slide_{{slide_id}} #question {
+    position: absolute;
+    top: 64%;
+}
+.slide_{{slide_id}} .circle.circle-1 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn1.png);
+}
+.slide_{{slide_id}} .circle.circle-2 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn2.png);
+}
+.slide_{{slide_id}} .circle.circle-3 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn3.png);
+}
+.slide_{{slide_id}} .circle.circle-4 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn4.png);
+}
+.slide_{{slide_id}} .circle.circle-5 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn5.png);
+}
+.slide_{{slide_id}} .button.button-dark.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 0px 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+.slide_{{slide_id}} button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 165px;
+}
+.slide_{{slide_id}} .button.icon-right:before {
+display: none;
+}
+
+
+.slide_{{slide_id}} div#back {
+    position: absolute;
+}
+.slide_{{slide_id}} .bg {
+    background-position: bottom left;
+    background-size: 100%;
+    position: absolute;
+    height: 50%;
+}
+.slide_{{slide_id}} .row {
+    display: block;
+    width: 100%;
+}
+.slide_{{slide_id}} .col-25 {
+    max-width: 31.1333%;
+    display: inline-block;
+    margin-top: 27px;
+}
+.slide_{{slide_id}} .col-12 {
+  max-width: 11.3333%;
+  display: inline-block;
+}
+.slide_{{slide_id}} h1, .slide_{{slide_id}} .h1 {
+    font-size: 110%;
+    color: #fff;
+}
+.slide_{{slide_id}} .transparent {
+    vertical-align: middle;
+}
+
+.slide_{{slide_id}} .transparent span {
+  padding: 15px 30px;
+  line-height: 100%;
+  font-size: 80%;
+  display: block;
+  color: #fff;
+  font-style: italic;
+  background: rgba(255,255,255,.5);
+  width: 97%;
+}
+.slide_{{slide_id}} .percent {
+    background: rgba(255, 255, 255, 0.6);
+    height: 10px;
+}
+.slide_{{slide_id}} .progress {
+    width: 60%;
+    margin-left: 20%;
+    border: 2px solid #fff;
+    margin-bottom: 25px;
+}
+.slide_{{slide_id}} .num-progress {
+    position: relative;
+    left: -29%;
+    color: #fff;
+    margin-bottom: 11px;
+    margin-top: 23px;
+}
+.slide_{{slide_id}} button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #e3c06a;
+    border-color: #e3c06a;
+}
+.slide_{{slide_id}} body, .ionic-body {
+    font-size: 26px;
+}
+.slide_{{slide_id}} .circle {
+    height: 150px;
+    background-size: 120%;
+    background-position: -10px;
+}
+.slide_{{slide_id}} button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #e3c06a;
+    border-color: #e3c06a;
+    left: 50%;
+    margin-left: -50px;
+}
+.slide_{{slide_id}} h1.title.w-100 {
+    position: static;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 35px;
+    top: 0;
+    width: 240px;
+    left: 480px;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    left: 418px;
+}
+.slide_{{slide_id}}.main {
+    background-position: center;
+    background-size: 100%;
+    background-color: #fff;
+    background: #fff;
+}
+.slide_{{slide_id}} .circle.noselect {
+    background-image: url(//talentapp360.taket.es/storage/app/media/test/btn_active.png);
+}
+.slide_{{slide_id}} .col-25 {
+    max-width: 31.1333% !important;
+    display: inline-block;
+    margin-top: 27px;
+    text-align: center;
+    margin-left: 20px;
+}
+.slide_{{slide_id}} .smile.noselect {
+    background-position-y: -10px;
+}
+.slide_{{slide_id}} .circle.circle-1 {
+    margin-left: 130px;
+}
+.slide_{{slide_id}} .num-progress {
+    position: relative;
+    left: 21%;
+    color: #fff;
+    margin-bottom: 11px;
+    margin-top: 23px;
+}
+.slide_{{slide_id}} .smile span {
+    background: transparent;
+    color: #333;
+    margin-top: -10px;
+    vertical-align: bottom;
+    display: block;
+}
+.slide_{{slide_id}} .transparent {
+  margin-top: 5px;
+}
+.slide_{{slide_id}} .preguntas .smile span {
+  color:  #333 !important;
+}
+@media only screen and (max-width: 600px) {
+  .slide_{{slide_id}} .bg {
+      background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+      background-position: center;
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  .slide_{{slide_id}}   .view-container {
+    height: calc(100% + 60px);
+  }
+  .slide_{{slide_id}}   button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+      margin-top: 40px;
+      position: absolute;
+      margin-left: 0%;
+  }
+  .slide_{{slide_id}} #start button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+      margin-top: 67%;
+      margin-left: 48%;
+      left: -62px;
+  }
+  .slide_{{slide_id}} h1.title.w-100 {
+      position: relative;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 24px;
+      top: 2%;
+      /* left: 520px; */
+      color: #000;
+  }
+  .slide_{{slide_id}} h3.title {
+      position: relative;
+      display: inline;
+      font-size: 19px;
+      font-weight: normal;
+      width: 20%;
+      text-align: center;
+      left: 10%;
+      margin-left: -10%;
+      margin-top: 308px;
+      color: #000;
+  }
+  .slide_{{slide_id}} .bg {
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+  }
+  .slide_{{slide_id}} .progress {
+      width: 80%;
+      margin-left: 10%;
+      margin-bottom: 12px;
+  }
+  .slide_{{slide_id}} .num-progress {
+      position: relative;
+      left: 15%;
+      color: #fff;
+      margin-bottom: 11px;
+      margin-top: 2px;
+      width: calc(100% - 20%);
+      font-size: 15px;
+  }
+  .slide_{{slide_id}} .bg {
+      background-position: bottom left;
+      background-size: cover;
+      position: absolute;
+      height: 60%;
+  }
+  .slide_{{slide_id}} .smile span {
+      background: transparent;
+      color: #333;
+      margin-top: 30px;
+      vertical-align: bottom;
+      display: block;
+      font-size: 13px;
+  }
+  .slide_{{slide_id}} .circle.circle-1 {
+      margin-left: 0px;
+  }
+  .slide_{{slide_id}} .circle {
+      height: 180px;
+      background-size: 210%;
+      background-position: -30px;
+  }
+  .slide_{{slide_id}} .smile {
+      width: 15%;
+      font-size: 200%;
+      height: 175px;
+      background-position-y: 28px;
+  }
+  .slide_{{slide_id}} button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+      margin-left: -150px;
+  }
+  .slide_{{slide_id}} .smile.noselect {
+      background-position-y: 29px;
+  }
+  .slide_{{slide_id}} button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+      bottom: 10px;
+  }
+
+  .slide_{{slide_id}} .col-25.transparent {
+      max-width: 100% !important;
+      display: inline-block;
+      font-size: 18px;
+      margin-top: 10px;
+      text-align: center;
+      margin-left: 20px;
+      width: 94%;
+  }
+  .slide_{{slide_id}} h1.title.w-100 {
+      position: relative;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 19px;
+      top: 2%;
+      color: #fff;
+      left: 0;
+  }
+  .slide_{{slide_id}} .bg {
+      background-position: bottom left;
+      background-size: cover;
+      position: static;
+      height: auto;
+  }
+  .slide_{{slide_id}} .smile span {
+      background: transparent;
+      color: #333;
+      margin-top: 29px;
+      vertical-align: bottom;
+      display: block;
+      font-size: 13px;
+  }
+  .slide_{{slide_id}} .circle {
+      height: 180px;
+      background-size: 210%;
+      background-position: calc(50% - -1px);
+  }
+  .slide_{{slide_id}} button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+      margin-top: 100px;
+      position: relative;
+      margin-left: 16%;
+  }
+  .slide_{{slide_id}} button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+      margin-top: -50px;
+  }
+  .slide_{{slide_id}} #question {
+      position: static;
+  }
+  .slide_{{slide_id}} .circle.noselect {
+      background-image: url(//talentapp360.taket.es/storage/app/media/test/btn_active.png);
+      background-position-y: 50% !important;
+  }
+  .slide_{{slide_id}} button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+      margin-top: -50px;
+      position: relative;
+      margin-left: 0;
+  }
+  .slide_{{slide_id}}.main {
+      background-position: center;
+      background-size: 100%;
+      background-color: #fff;
+      background: #fff;
+      height: 100%;
+      overflow: auto;
+  }
+  .slide_{{slide_id}} button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: -70px !Important;
+  }
+}
+</style>

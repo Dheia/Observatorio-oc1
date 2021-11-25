@@ -1,0 +1,12 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    value:
+        label: Valor
+        type: text
+        span: left
+    order:
+        label: Orden
+        span: right

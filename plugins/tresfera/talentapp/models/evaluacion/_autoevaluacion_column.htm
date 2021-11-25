@@ -1,0 +1,88 @@
+<?php
+
+if(isset($record->proyecto->fecha_fin))
+{
+    $d2 = \Carbon\Carbon::parse($record->proyecto->fecha_fin);
+    $fecha_actual = \Carbon\Carbon::now();
+    $diff = $fecha_actual->diffInDays($d2,false);
+}
+else 
+{
+    $diff = false;
+}
+
+
+if($record->estado_informe == 0) {
+    if($record->estado == 2) {
+    ?>
+    
+    <a
+        href="<?=url("/backend/tresfera/talentapp/administrador/generateRapport/?id=".$record->id)?>"
+        class="btn btn-xs btn-warning pull-left">
+        <?= e(trans('tresfera.talentapp::lang.admin.generar_informe')) ?>
+    </a><br><br>
+    <?php
+    }
+} elseif($record->estado_informe == 1) {
+    ?>
+    
+    <a
+        href="#"
+        disabled="disabled"
+        class="btn btn-xs btn-warning pull-left">
+        <?= e(trans('tresfera.talentapp::lang.admin.en_cola')) ?>
+    </a><br><br>
+    <?php
+} elseif($record->estado_informe == 2) {
+    ?>
+    
+    <a
+        href="#"
+        disabled="disabled"
+        class="btn btn-xs btn-warning pull-left">
+        <?= e(trans('tresfera.talentapp::lang.admin.procesando')) ?>
+    </a><br><br>
+    <?php
+}
+    else {
+        $rapport = \Tresfera\TalentApp\Models\Rapport::find($record->rapport_id);
+        if(isset($rapport->id)) {
+    ?>
+    <a
+        target="_blank"
+        href="<?=$rapport->getUrl()?>"
+        class="btn btn-xs btn-warning pull-left">
+        <?= e(trans('tresfera.talentapp::lang.admin.ver_informe')) ?>
+    </a><br><br>
+    <?php
+    }
+}
+
+?>
+
+<a href="<?=url('/backend/tresfera/talentapp/evaluaciones/update/'.$record->id)?>" class="btn btn-xs btn-default pull-left"><?= e(trans('tresfera.talentapp::lang.admin.gestionar')) ?></a>
+
+<div class="dropdown">
+    <a href="#" data-toggle="dropdown" class="btn btn-xs btn-warning pull-left"><?= e(trans('tresfera.talentapp::lang.admin.permisos')) ?></a>
+
+    <ul class="dropdown-menu" role="menu" data-dropdown-title="<?= e(trans('tresfera.talentapp::lang.admin.permiso_para_ver_informes')) ?>">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talentapp/administrador/onPermisoVerInforme/?id=".$record->id."&permiso=1")?>" class="oc-icon-unlock"><?= e(trans('tresfera.talentapp::lang.admin.dar_permisos')) ?></a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talentapp/administrador/onPermisoVerInforme/?id=".$record->id."&permiso=0")?>" class="oc-icon-lock"><?= e(trans('tresfera.talentapp::lang.admin.quitar_permisos')) ?></a></li>
+    </ul>
+</div>
+<br><br>
+<?php if($diff >= 0) { ?> 
+
+    <div class="dropdown">
+        <a href="#" data-toggle="dropdown" class="btn btn-xs btn-warning pull-left"><?= e(trans('tresfera.talentapp::lang.admin.enviar_email')) ?></a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="<?= e(trans('tresfera.talentapp::lang.admin.enviar_email')) ?>">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talentapp/administrador/onSendEmailActivacion/?id=".$record->id)?>" class="oc-icon-paper-plane-o"><?= e(trans('tresfera.talentapp::lang.admin.activacion')) ?></a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talentapp/administrador/onSendEmailRecordatorio/?id=".$record->id)?>" class="oc-icon-paper-plane-o"><?= e(trans('tresfera.talentapp::lang.admin.recordatorio')) ?></a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talentapp/administrador/onSendEmailActivacionRecordatorio/?id=".$record->id)?>" class="oc-icon-paper-plane-o"><?= e(trans('tresfera.talentapp::lang.admin.activacion_recordatorio')) ?></a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/talentapp/administrador/onSendEmailRecordatorioAsignacion/?id=".$record->id)?>" class="oc-icon-paper-plane-o"><?= e(trans('tresfera.talentapp::lang.admin.asignacion_evaluadoores')) ?></a></li>
+        </ul>
+    </div>
+
+ <br><br>
+<?php } ?>

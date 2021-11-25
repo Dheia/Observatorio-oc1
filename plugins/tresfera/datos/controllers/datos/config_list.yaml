@@ -1,0 +1,48 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# Model List Column configuration
+list: $/tresfera/statistics/models/result/columns.yaml
+
+# Model Class name
+modelClass: Tresfera\Statistics\Models\Result
+
+# List Title
+title: Datos
+
+# Link URL for each record
+#recordUrl: tresfera/taketsystem/stats/dashboard/?
+
+# Message to display if the list is empty
+noRecordsMessage: backend::lang.list.no_records
+
+# Records to display per page
+recordsPerPage: 20
+
+# TENGO QUE HACERLO
+# falta el metodo getChildren() en el modelo
+#showTree: true
+
+# Displays the list column set up button
+#showSetup: true
+
+# Displays the sorting link on each column
+showSorting: true
+
+# Default sorting column
+# defaultSort:
+#     column: created_at
+#     direction: desc
+
+# Display checkboxes next to each record
+# showCheckboxes: true
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: list_toolbar
+
+    # Search widget configuration
+    #search:
+    #    prompt: backend::lang.list.search_prompt

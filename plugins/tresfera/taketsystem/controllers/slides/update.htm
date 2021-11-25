@@ -1,0 +1,225 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('tresfera/taketsystem/slides') ?>">Slides</a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout']) ?>
+	<div class="halfWidth" id="formGood">
+        <div class="layout-row" >
+            <?= $this->formRender() ?>
+        </div>
+
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button
+                    type="submit"
+                    data-request="onSave"
+                    data-request-data="redirect:0"
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-load-indicator="Guardando página..."
+                    class="btn btn-primary">
+                    <u>G</u>uardar
+                </button>
+                <button
+                    type="submit"
+                    data-request="onSave"
+                    data-request-data="redirect:0"
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-load-indicator="Guardando página..."
+                    id="newPage"
+                    class="btn btn-primary">
+                    <u>G</u>uardar y nueva página
+                </button>
+                <a target="_blank" href="<?= Backend::url('revisions', [$this->params[0],"\Tresfera\Taketsystem\Models\Slide"]) ?>" 
+					class="btn btn-default">Revisions</a>
+                <button
+                    type="button"
+                    data-request="onDelete"
+                    data-load-indicator="Borrando página..."
+                    data-request-confirm="Estas seguro de borrar esta página?"
+                    id="deletePage"
+                    class="btn btn-warning">
+                    <u>E</u>liminar página
+                </button>
+
+            </div>
+        </div>
+	</div>
+	<div class="tabletFixed" style="display:none">
+		<div class="layout-row">
+			<div class="tablet">
+            	<iframe id="responseCode" src="<?php echo url('/slide/'.$this->params[0]); ?>">
+				</iframe>
+			</div>
+
+        </div>
+    </div>
+
+    <?= Form::close() ?>
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('tresfera/taketsystem/slides') ?>" class="btn btn-default">Return to slides list</a></p>
+
+<?php endif ?>
+
+<script>
+	var task;
+	
+		$( document ).ready(function() {
+			<?php 
+			if(get("new") == 1) { 
+			?>
+		    $("#newPage").click(function(){
+			    task = 'newPage';
+		    });
+		    <?php 
+		    } 
+		    ?>
+		 //  resize()
+		});
+		/*$( window ).resize(function() {
+		  resize()
+		});*/
+		
+  	$("#deletePage").click(function(){
+	    task = 'delete';
+    });
+	
+	$('form').on('ajaxSuccess', function() {
+		
+		if(task == 'delete') {
+			parent.removeTab();
+		}
+			
+		//Cambiamos el titulo de la pestaña al cambiar el nombre de la página
+		var nameTab = $('#Form-field-Slide-name-placeholderField').val();
+		$('#Form-secondaryTabs', window.parent.document).find("ul.nav-tabs > li.active > a > span > span").html(nameTab);
+		
+		
+		if(task == 'newPage') 
+			parent.newTab();
+			
+		//Actualizamos el render
+	    document.getElementById('responseCode').contentDocument.location.reload(true);
+	})
+	
+	
+	/* Resize */
+	function resize() {
+		/* Resize render 
+		var fullWidth = $("#formGood").parent().width();
+		var goodWidth = fullWidth - $(".tabletFixed").width()
+		
+		 
+		$("#formGood").width(goodWidth + "px");
+		
+		var heigth = '100%'
+		var fullWidth = $(window.parent.window).width();
+		var fullHeight = $(window.parent.window).height();
+		var offsetTop = $(".tab-content.layout-row", window.parent.document).offset().top
+		height = fullHeight - offsetTop
+		console.dir("fullWidth: " + fullWidth)
+		console.dir("fullHeight: " + fullHeight)
+		console.dir("offsetTop: " + offsetTop)
+		console.dir("height: " + height)
+		$('#responseCode', window.parent.document).height((heigth))
+		
+		console.dir($('#responseCode', window.parent.document).height());
+		
+		$(".fancy-layout .control-tabs.primary > .tab-content > .tab-pane.active", window.parent.document).css("padding","0");*/
+		//$("body").css("padding","15px");
+	}
+	
+	 resize()
+</script>
+
+<style>
+	<?php if(get("incrust") == 1) { ?>
+		#Form-primaryTabs .layout-row.min-size {
+    display: block;
+}
+.form-buttons {
+    padding: 10px;
+    font-size: 0;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    background: #f5f5f5;
+    margin-left: 0px;
+}
+#Form > .layout-row.min-size {
+    display: block;
+}
+	.layout > .layout-row.min-size,
+	.layout > .layout-cell.width-120,
+	.control-breadcrumb,
+	#Form-field-Slide-quiz-group {
+		display: none;
+	}
+	.layout > .layout-cell.layout-container {
+		padding: 0;
+	}
+	<?php } ?>
+	.halfWidth {
+		display: table-cell;
+		vertical-align: top;
+	}
+	.tabletFixed {
+		  width: 532px;
+		  position: fixed;
+		  right: 0;
+		  z-index: 1;
+		  top: 15px;
+		  height: 396px;
+	}
+	.field-fileupload .attachment-item {
+	  position: relative;
+	  max-width: 100%;
+	  height: auto !important;
+	    min-height: 60px;
+	}
+	.field-fileupload .no-attachment {
+	  min-height: 50px;
+	}
+	.field-fileupload .no-attachment table td {
+	  height: 49px;
+	}
+	iframe {
+	  width: 866px;
+	  height: 611px;
+	  overflow: hidden;
+	  position: absolute;
+	  border: none;
+	  background: #fff;
+	  -ms-zoom: 0.75;
+	  -moz-transform: scale(0.75);
+	  -moz-transform-origin: 0 0;
+	  -o-transform: scale(0.75);
+	  -o-transform-origin: 0 0;
+	  -webkit-transform: scale(0.5);
+	  -webkit-transform-origin: 0 0;
+	}
+	.tablet {
+		background: no-repeat url(http://devel.taket.es/themes/demo/assets/images/bg_tablet.png);
+		background-position: left top;
+		background-size: 100% auto;
+		width: 512px;
+		height: 387px;
+		position: absolute;
+		padding: 41px;
+		margin-left: 2%;
+	}
+  .layout-cell.layout-sidenav-container {
+    display: none;
+}
+#layout-canvas {
+    min-height: 100%;
+    height: 100%;
+    padding: 10px;
+}
+</style>

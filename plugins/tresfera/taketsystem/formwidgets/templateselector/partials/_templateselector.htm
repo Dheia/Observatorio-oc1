@@ -1,0 +1,46 @@
+<div
+    class="control-campaign-templateselector"
+    data-control="campaign-templateselector"
+    data-data-locker="#<?= $this->getId('input') ?>">
+    <ul>
+        <?php foreach ($pages as $pageName => $page): ?>
+            <li data-value="<?= $pageName ?>">
+                <a href="javascript:;" class="template-box">
+                  <?php if(is_file('/themes/slides/pages/'.$pageName.'.jpg')) { ?>
+                    <img src="<?= URL::to('/themes/slides/pages/'.$pageName.'.jpg') ?>">
+                  <?php } else { ?>
+                    <img src="<?= URL::to('/themes/slides/pages/slides_excelencia/simple.jpg') ?>">
+                    <?php } ?>
+                    <div class="template-selected-icon">
+                        <i class="icon-check"></i>
+                    </div>
+                </a>
+                <h5 class="template-label"><?= $page->title ?></h5>
+                <p class="template-description"><?= $page->description ?></p>
+            </li>
+        <?php endforeach ?>
+        <?php
+        /*
+        <li data-value="-1">
+            <a href="javascript:;" class="template-box">
+                <i class="template-icon icon-envelope-square"></i>
+                <div class="template-selected-icon">
+                    <i class="icon-check"></i>
+                </div>
+            </a>
+            <h5 class="template-label">System layout</h5>
+            <p class="template-description">Send a plain message</p>
+        </li>
+        */
+        ?>
+    </ul>
+
+    <!-- Data locker -->
+    <input
+        type="hidden"
+        id="<?= $this->getId('input') ?>"
+        name="<?= $name ?>"
+        value="<?= $value ?>"
+        class="form-control"
+        autocomplete="off" />
+</div>

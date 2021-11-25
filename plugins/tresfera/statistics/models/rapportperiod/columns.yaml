@@ -1,0 +1,26 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: Nombre
+        searchable: true
+    filters_part:
+        label: Filtros
+        path: $/tresfera/statistics/controllers/rapportsperiod/_field_filters.htm
+        type: partial
+        sortable: false
+    emailstxt:
+        label: Emails
+        path: $/tresfera/statistics/controllers/rapportsperiod/_field_emails.htm
+        type: partial
+        sortable: false
+    datelast_stop:
+        label: Último informe
+        type: datetime
+        format: d-m-Y
+    datenext_stop:
+        label: Siguiente informe
+        type: datetime
+        format: d-m-Y

@@ -1,0 +1,55 @@
+plugin:
+    name: skillyouup
+    description: 'tresfera.skillyouup::lang.plugin.description'
+    author: tresfera
+    icon: oc-icon-circle-o
+    homepage: ''
+permissions:
+    manage_user_alta:
+        tab: 'Skill You Up'
+        label: 'Gestionar usuarios'
+    manage_proyecto:
+        tab: 'Skill You Up'
+        label: 'Gestionar Proyecto (Crear, eliminar, editar, duplicar)'
+    skill_rol_evaluado:
+        tab: 'Skill You Up'
+        label: Evaluado
+    rol_evaluador:
+        tab: 'Skill You Up'
+        label: Evaluador
+    rol_admin:
+        tab: 'Skill You Up'
+        label: Administrador
+    rol_gestor:
+        tab: 'Skill You Up'
+        label: Gestor
+    view_fields_lopd:
+        tab: 'Skill You Up'
+        label: 'Ver campos sensibles'
+    validate_inform:
+        tab: 'Skill You Up'
+        label: 'Validar ver informe'
+    start_evaluacion:
+        tab: 'Skill You Up'
+        label: 'Empezar evaluaciones'
+    panel_administrador:
+        tab: 'Skill You Up'
+        label: 'Visualizar panel de administrador'
+navigation:
+    skillyouup:
+        label: SkillYouUp
+        url: tresfera/skillyouup
+        icon: icon-level-up
+        permissions:
+            - skill_rol_evaluado
+        sideMenu:
+            proyectos:
+                label: Proyectos
+                url: tresfera/skillyouup/proyectos
+                icon: icon-life-bouy
+            administrador:
+                label: Administrador
+                url: tresfera/skillyouup/administrador
+                icon: icon-slack
+                permissions:
+                    - panel_administrador

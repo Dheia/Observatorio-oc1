@@ -1,0 +1,18 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    title:
+        label: Pregunta
+        searchable: true
+    sector:
+        label: Sector
+        relation: sector
+        valueFrom: title
+        searchable: true
+    section:
+        label: Área
+        relation: section
+        valueFrom: title
+        searchable: true

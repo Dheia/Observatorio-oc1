@@ -1,0 +1,52 @@
+title = "Videos"
+url = "/slides/slide/:code"
+layout = "render"
+description = "Inserte un video en una pantalla"
+is_hidden = 0
+type = "videos"
+
+[taketsystemTemplate]
+==
+{variable type="text" name="url" label="URL del video"}{/variable}
+{variable type="text" name="width" label="Ancho del video"}1200{/variable}
+{variable type="checkbox" name="autoplay" label="Autoplay"}{/variable}
+{variable type="checkbox" name="endnext" label="Continuar al finalizar"}{/variable}
+{variable type="checkbox" name="controls" label="Mostrar controles del reproductor"}{/variable}
+
+
+{variable 
+  prompt="Add another section" 
+  tab="Diseño"
+  span="left"
+  type="codeeditor" name="css" label="Personalizado"}{/variable}
+--
+<div id="{{slide_id}}" class="video main bg motivos">
+  <div class="row" id="video">
+    <video width="{{width}}"  
+            {%if autoplay %}autoplay{%endif%}
+            {%if controls %}controls{%endif%}
+            {%if endnext %}data-video-endnext{%endif%}
+            >
+        <source src="{{url}}" type="video/mp4">
+    </video>
+  </div>
+</div>
+<!-- Flex Items , Flex Box themselves -->
+
+<style>
+.video {
+background: #000;
+}
+.video video {
+margin-left: calc(50% - {{width/2}}px);
+} 
+{{css}}
+
+@media (max-width: 460px) {
+  .video video {
+      margin-left: 0%;
+      width: 100% !important;
+  }
+}
+
+</style>

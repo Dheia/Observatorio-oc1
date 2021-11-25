@@ -1,0 +1,13 @@
+.report-widget a {
+	color: #063f68;
+}
+.report-widget a:hover {
+	color: #1795f1;
+}
+.report-widget a [class^="icon-"]:before {
+  font-size: 12vw;
+  text-align: center;
+  width: 100%;
+  border: 2px solid;
+  padding: 17% 0;
+}

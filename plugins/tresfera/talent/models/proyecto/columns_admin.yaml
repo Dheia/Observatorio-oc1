@@ -1,0 +1,27 @@
+columns:
+    client:
+        label: 'tresfera.talent::lang.proyectos.client_id'
+        type: relation
+        nameFrom: name
+
+    name:
+        label: 'tresfera.talent::lang.plugin.name'
+        type: text
+    fecha_inicio:
+        label: 'tresfera.talent::lang.proyectos.finicio'
+        type: text
+    fecha_fin:
+        label: 'tresfera.talent::lang.proyectos.fin'
+        type: text
+    num_licencias:
+        label: 'tresfera.talent::lang.proyectos.nlicencia'
+        type: number
+    description:
+        label: 'tresfera.talent::lang.proyectos.descripcion'
+        type: text
+    estado:
+        label: 'tresfera.talent::lang.proyectos.estado'
+        type: number
+    gestor_id:
+        label: 'tresfera.talent::lang.proyectos.gestor'
+        type: number

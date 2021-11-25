@@ -1,0 +1,72 @@
+<div class="bar bar-header bar-light">
+	<img class="logoBig" cache-src="<?=$logo?>"/>
+</div>
+<!-- Flex Items , Flex Box themselves -->
+<div class="h-20">
+    <div>
+             </div> <!-- Flex Items  -->
+</div>
+<div class="h-80">
+    <div>
+    <?php foreach($langs as $code => $lang) { ?>
+		<h1 class="wellcome <?=$code?>" ng-click="wellcome($event,'<?=$code?>')"><?=$value->getTranslateAttribute('title',$code)?></h1>
+	<?php } ?>
+    </div>
+</div>
+<div class="mano">
+	<img id="hand" cache-src="http://devel.taket.es/themes/slides/assets/css/img/mano/hand.png">
+	<img id="hand2" cache-src="http://devel.taket.es/themes/slides/assets/css/img/mano/hand-1.png">
+	<img id="hand3" cache-src="http://devel.taket.es/themes/slides/assets/css/img/mano/hand-2.png">
+</div>
+<script>
+	$(document).ready(function() {   
+		var duration = 700;
+		var sleep = 500;
+		
+		function animateDivers() {
+			
+		   $("h1.wellcome").each(function(i){
+			   
+			   $(this).delay( i*((duration+sleep)*2) ).animate({"font-size":"250%", "margin-right": "0", "color":"#fff"},duration).animate({"font-size":"200%", "color":"#000"},duration)
+			   console.log($("h1.wellcome").length +"="+ (i+1))
+
+			   if($("h1.wellcome").length == (i+1)) {
+				   console.log($("h1.wellcome").length*(duration*2));
+				   setTimeout(
+					  function() 
+					  {
+						  console.log("Empezamos de nuevo")
+					    //do something special
+					    animateDivers()
+					  }, $("h1.wellcome").length*((duration+sleep)*2));
+			   }
+			       
+			       
+		   })
+		}
+		
+		animateDivers();
+	}); 
+</script>
+<style>
+.mano {
+    position: absolute;
+}    
+#hand {
+    position: absolute;
+    top: -503px;
+    left: -290px;
+}
+#hand2 {
+    position: absolute;
+    opacity: 0;
+    top: -503px;
+    left: -65px;
+}
+#hand3 {
+    position: absolute;
+    opacity: 0;
+    top: -503px;
+    left: -65px;
+}
+</style>

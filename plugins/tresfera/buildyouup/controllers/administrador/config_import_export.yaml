@@ -1,0 +1,19 @@
+# ===================================
+#  Import/Export Behavior Config
+# ===================================
+
+#defaultRedirect: 
+
+#import:
+#    title: Importar Equipos
+#    modelClass: Tresfera\Buildyouup\Models\Equipo
+#    list: $/tresfera/buildyouup/models/evaluacion/columns_admin_csv.yaml
+
+export:
+    title: Exportar Equipos
+    modelClass: Tresfera\Buildyouup\Models\EquipoExport
+#    modelClass: Tresfera\Buildyouup\Models\Equipo
+    list: $/tresfera/buildyouup/models/evaluacion/columns_admin_csv.yaml
+    fileName: evaluaciones.csv
+    redirect: tresfera/buildyouup/administrador
+#    useList: true

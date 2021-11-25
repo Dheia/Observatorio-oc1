@@ -1,0 +1,143 @@
+title = "Retos"
+url = "/evaluacion/:quiz_id/:pag"
+layout = "quiz"
+description = "Segmentaciones"
+is_hidden = 0
+[Render]
+==
+function onStart()
+{
+    $this['pag'] = $this->param('pag');
+}
+==
+<!-- about -->
+{% if Render.logo %}
+<style>
+    .progress-bar {
+        width: 100%;
+        height: 10px;
+        background: #fff;
+        margin-top: 60px;
+    }
+    .progress-bar .progresss {
+        height: 10px;
+        background: #000;
+    }
+</style>
+<div class="navbar navbar-home">
+    <div class="container">
+        <div class="content-left">
+        </div>
+        <div class="content-center">
+            <img class="logo" src={{Render.logo}}>
+        </div>
+        <div class="content-right">
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if Render.max_pag %}
+<div class="progress-bar">
+    <div class="progresss" style="width: {{Render.pag/Render.max_pag*100}}%"></div>
+</div>
+{% endif %}
+{{Render.render|raw}}
+{% put styles %}
+    <style>
+        /* start styles custom */
+        {{Render.css|raw}}
+        /* end styles custom */
+    </style>
+{% endput %}
+{% put scripts %}
+<script>
+
+$(".custom-range").each(function(){
+    var selected = $(this).val();
+    var data = $(this).data("options");
+    console.dir(data);
+    $("#range-literal-"+$(this).data("question-id")).html(data[selected])
+})
+$(".custom-range").on("input",function(){
+    var selected = $(this).val();
+    var data = $(this).data("options");
+    console.dir(data);
+    $("#range-literal-"+$(this).data("question-id")).html(data[selected])
+});
+let url = '';
+$("button[data-question-id]").click(function() {
+    if($(this).data("max-answers")) {
+        $( "[data-click=next]" ).prop( "disabled", true );
+        var num_answers = $(".activated[data-question-id="+$(this).data("question-id")+"]").length;
+        if($(this).hasClass("activated")) {
+            $(this).toggleClass("activated");
+            $(this).parent().find(".subquestion").hide(400);
+
+        } else {
+            if(num_answers < $(this).data("max-answers")) {
+                $(this).toggleClass("activated");
+                $(this).parent().find(".subquestion").show(400);
+            } 
+        }
+        $( "[data-click=next]" ).prop( "disabled", false );
+        
+    }
+});
+$("[data-click]").click(function(){
+    if($(this).data("click") == "next" || $(this).data("click") == "prev") {
+        if($(this).data("click") == "next") {
+            var location = "/evaluacion/{{Render.type}}/{{Render.quiz}}/{{Render.evaluado_id}}/{{Render.pag+1}}"
+            if($(this).data("link-quiz")) {
+                if($(this).data("link-slide")) {
+                    location = "/evaluacion/{{Render.type}}/"+$(this).data("link-quiz")+"/{{Render.evaluado_id}}/"+$(this).data("link-slide")
+                }
+            }
+        } else {
+            var location = "/evaluacion/{{Render.type}}/{{Render.quiz}}/{{Render.evaluado_id}}/{{Render.pag-1}}"
+            if($(this).data("link-quiz")) {
+                if($(this).data("link-slide")) {
+                    location = "/evaluacion/{{Render.type}}/"+$(this).data("link-quiz")+"/{{Render.evaluado_id}}/"+$(this).data("link-slide")
+                }
+            }
+        }
+        if(url) {
+            location = url;
+        }
+        window.location = location
+    }
+    if($(this).data("click") == "close") {
+        try{
+            window.close();
+        }
+        catch (e){
+            console.log("text");
+        }
+    }
+    if($(this).data("max-answers")) {
+        $( "[data-click=next]" ).prop( "disabled", true );
+        var num_answers = $(".activated[data-question-id="+$(this).data("question-id")+"]").length;
+        if($(this).hasClass("activated")) {
+            $(this).toggleClass("activated");
+        } else {
+            if(num_answers < $(this).data("max-answers")) {
+                $(this).toggleClass("activated");
+            } 
+        }
+        $( "[data-click=next]" ).prop( "disabled", false );
+        
+    }
+    url = "";
+    if($(this).data("link-quiz")) {
+        if($(this).data("link-quiz")) {
+            url = "/evaluacion/{{Render.type}}/"+$(this).data("link-quiz")+"/{{Render.evaluado_id}}/"+$(this).data("link-slide")
+        }
+    }
+    if($(this).parent().find(".subquestion").length) {
+        $(this).parent().find(".subquestion").toggle();
+    }
+    
+})
+</script>
+{% endput %}
+

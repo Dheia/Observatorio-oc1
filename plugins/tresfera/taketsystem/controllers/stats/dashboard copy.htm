@@ -1,0 +1,181 @@
+<?php 
+	$model = new \Tresfera\Taketsystem\Models\Result();
+	$totalsObj = $model->getTotals($this->getFilter(),$this->getFilterId());
+	$totals = $totalsObj[0];
+	
+	$totalsAge = $model->getTotalsAge($this->getFilter(),$this->getFilterId());
+	$totalsCity = $model->getTotalsCities($this->getFilter(),$this->getFilterId());
+	$totalsAnswers = $model->getTotalsAnswers($this->getFilter(),$this->getFilterId());
+	
+	
+?>
+
+<div class="row">
+	<div class="col-md-4">
+		<div class="scoreboard">
+		    <div data-control="toolbar">
+			    <h3>Cuestionarios y respuestas</h3>
+			    <!--<div class="row" style="padding: 0;">
+				    <div class="col-md-12">
+					    <h4>El <b><?=$totals->percentOk?></b> de los encuestados está satisfecho
+				    </div>
+			    </div>-->
+			    <div class="row">
+				    <div class="col-md-12">
+				    <div class="scoreboard-item title-value">
+			            <h4>Total</h4>
+			            <p><?=$totals->numQuestions?></p>
+			            <p class="description">preguntas</p>
+			        </div>
+			        <div class="scoreboard-item control-chart" data-control="chart-bar">
+			            <ul>
+			                <li data-color="#95b753">Satisfechos <span><?=$totals->numOk?> (<?=$totals->percentOk?>)</span></li>
+			                <li data-color="#e5a91a">Neutrales <span><?=$totals->numMix?> (<?=$totals->percentMix?>)</span></li>
+			                <li data-color="#cc3300">Insatisfechos <span><?=$totals->numKo?> (<?=$totals->percentKo?>)</span></li>
+			            </ul>
+			        </div>
+				    </div>
+			    </div>
+			    
+				<div class="row">
+					<div class="col-md-12">
+					<div class="scoreboard-item title-value">
+			            <h4>Total</h4>
+			            <p><?=$totals->numQuizz?></p>
+			            <p class="description">encuestas</p>
+			        </div>
+			        <div class="scoreboard-item control-chart" data-control="chart-pie">
+			            <ul>
+			                <li data-color="#95b753">Completadas <span><?=$totals->numQuizz?></span></li>
+			                <li data-color="#e5a91a">Parciales <span><?=$totals->numQuizz?></span></li>
+			                <li data-color="#cc3300">Inacabadas <span><?=$totals->numQuizz?></span></li>
+			            </ul>
+			        </div>
+					</div>
+				</div>
+		        
+		    </div>
+		</div>
+    </div>
+    <div class="col-md-8">
+		    <div data-control="toolbar">
+			    <h3>Preguntas insatisfechos</h3>
+				<div class="row">
+					<div class="col-md-12" data-url="<?=url("backend/tresfera/taketsystem/stats/?detalles=1&group_by=value&filter=question_title")?>">
+						<div
+						    class="control-chart"
+						    data-control="chart-pie"
+						    data-size="180"
+						    data-center-text="<?=$totals->numSex?>"
+						    >
+						    <ul>
+							    <?
+							    foreach($totalsAnswers as $answer) {
+							    ?>
+							    	<li><?=$answer->question_title?> <span><?=$answer->percentKo?> insatisfechos</span></li>
+							    <?
+							    }
+							    ?>
+						        
+						    </ul>
+						</div>
+					</div>
+				</div>
+		</div>
+    </div>
+    
+</div>
+<div class="row">
+	<div class="col-md-4">
+		    <div data-control="toolbar">
+			    <h3>Genero del cliente</h3>
+			    <!--<div class="row" style="padding: 0;">
+				    <div class="col-md-12">
+					    <h4>El <b><?=$totals->percentWomen?></b> de los encuestados son mujeres
+				    </div>
+			    </div>-->
+				<div class="row">
+					<div class="col-md-12">
+						<div
+						    class="control-chart"
+						    data-control="chart-pie"
+						    data-size="150"
+						    data-center-text="<?=$totals->numSex?>">
+						    <ul>
+						        <li>Mujer <span><?=$totals->numWomen?> (<?=$totals->percentWomen?>)</span></li>
+						        <li>Hombre <span><?=$totals->numMen?> (<?=$totals->percentMen?>)</span></li>
+						    </ul>
+						</div>
+					</div>
+				</div>
+		</div>
+    </div>
+	<div class="col-md-4">
+		<div class="">
+		    <div data-control="toolbar">
+			    <h3>Edad del cliente</h3>
+				<div class="row">
+					<div class="col-md-12">
+						<div
+						    class="control-chart"
+						    data-control="chart-pie"
+						    data-size="180"
+						    data-center-text="<?=$totals->numSex?>">
+						    <ul>
+							    <?
+							    foreach($totalsAge as $age) {
+							    ?>
+							    	<li><?=$age->age_range?> <span><?=$age->count?></span></li>
+							    <?
+							    }
+							    ?>
+						        
+						    </ul>
+						</div>
+					</div>
+				</div>
+		        
+		    </div>
+		</div>
+    </div>
+    <div class="col-md-4">
+		    <div data-control="toolbar">
+			    <h3>Información geográfica</h3>
+				<div class="row">
+					<div class="col-md-12">
+						<div
+						    class="control-chart"
+						    data-control="chart-pie"
+						    data-size="180"
+						    data-center-text="<?=$totals->numSex?>">
+						    <ul>
+							    <?
+							    foreach($totalsCity as $city) {
+							    ?>
+							    	<li><?=$city->city->name?> <span><?=$city->count?></span></li>
+							    <?
+							    }
+							    ?>
+						        
+						    </ul>
+						</div>
+					</div>
+				</div>
+		</div>
+    </div>
+</div>
+<script>
+$( document ).ready(function() {
+	$("[data-control=chart-pie]").parent().each(function(){
+		if($(this).data("url")!=undefined) {
+			var url = $(this).data("url")
+	        var scoreboard = $(this).find("tr").each(function(){
+	            var tds = $(this).find("td");
+	            var text = $(tds[1]).html();
+	            var newHtml = '<a href="'+ url +'&filterId='+text+'&filterName='+text+'">'+text+'</a>';
+	            $(tds[1]).html(newHtml)
+	        });  
+	   }
+	})
+})
+</script>

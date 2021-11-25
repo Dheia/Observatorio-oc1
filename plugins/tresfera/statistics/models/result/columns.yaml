@@ -1,0 +1,90 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    shop:
+        label: Tienda
+        relation: shop
+        select: name
+        default: Web
+    free:
+        label: Comentario
+    device:
+        label: Tablet
+        relation: device
+        select: mac
+    citycp:
+        label: Ciudad
+        relation: citycp
+        select: name
+    region:
+        label: Provincia
+        relation: regioncp
+        select: name
+    quiz:
+        label: Encuesta
+        relation: quiz
+        select: title
+    question_value:
+        label: Respuestas
+        select: value
+    question_title:
+        label: Pregunta
+        select: question_title
+    question_id:
+        label: Pregunta
+        select: tresfera_taketsystem_answers.id
+        invisible: true
+    numQuizzs:
+        label: Núm. Encuestas
+        select: count(distinct result_id)
+        default: 0
+    numQuestions:
+        label: Núm. Pregutas
+        select: SUM(if(answer_type = 'smiles', 1, 0))
+        default: 0
+    numOk:
+        label: Núm. Satisfechos
+        select: SUM(if(value_type = 3, 1, 0)) 
+        default: 0
+    num:
+        label: Número
+        select: (SELECT COUNT(*) FROM tresfera_taketsystem_answers as r WHERE r.question_title = tresfera_taketsystem_answers.question_title)
+        default: 0
+    percent:
+        label: Porcentaje
+        select: CONCAT(FORMAT(COUNT(*)/(SELECT COUNT(*) FROM tresfera_taketsystem_answers as r WHERE r.question_title = tresfera_taketsystem_answers.question_title)*100,1),'%')
+        default: 0.0%
+    percentOk:
+        label: %Satisfechos
+        select: CONCAT(FORMAT(SUM(if(value_type = 3, 1, 0))/SUM(if(answer_type = 'smiles', 1, 0))*100,1),'%')
+        default: 0.0%
+    numKo:
+        label: Núm. Insatisfechos
+        select: SUM(if(value_type = 1, 1, 0))
+    percentKo:
+        label: %Insatisfechos
+        select: CONCAT(FORMAT(SUM(if(value_type = 1, 1, 0))/SUM(if(answer_type = 'smiles', 1, 0))*100,1),'%')
+        default: 0.0%
+    numMix:
+        label: Núm. Neutrales
+        select: SUM(if(value_type = 2, 1, 0))
+        default: 0
+    percentMix:
+        label: %Neutrales
+        select: CONCAT(FORMAT(SUM(if(value_type = 2, 1, 0))/SUM(if(answer_type = 'smiles', 1, 0))*100,1),'%')
+        default: 0.0%
+    emails:
+        label: Núm. emails
+        select: SUM(if(question_type = 'email' and value <> '', 1, 0))        
+        default: 0
+    room:
+        label: Habitación
+    email:
+        label: Email
+    created_at:
+        label: Data
+        type: datetime
+        format: d-m-Y H:i:s
+        width: 180px

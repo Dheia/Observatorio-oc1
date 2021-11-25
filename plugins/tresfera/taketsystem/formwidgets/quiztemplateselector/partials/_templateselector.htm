@@ -1,0 +1,46 @@
+<div
+    class="control-campaign-templateselector"
+    data-control="campaign-templateselector"
+    data-data-locker="#<?= $this->getId('input') ?>">
+
+    <?php if($quizzes->count()): ?>
+    <ul>
+        <?php foreach ($quizzes as $quiz): ?>
+            <li data-value="<?= $quiz->id ?>">
+                <a href="javascript:;" class="template-box" data-description="<?= addslashes($quiz->template_description) ?>">
+                    <?php if($quiz->cover){ ?>
+                        <img src="<?= $quiz->cover->getThumb(200, 200, ['mode' => 'crop']); ?>">
+                    <?php }else{ ?>
+                        <i class="template-icon icon-file-o"></i>
+                    <?php } ?>
+                    <div class="template-selected-icon">
+                        <i class="icon-check"></i>
+                    </div>
+                </a>
+                <h5 class="template-label"><?= $quiz->template_name ?></h5>
+            </li>
+        <?php endforeach ?>
+    </ul>
+    <?php else: ?>
+        No se han encontrado plantillas
+    <?php endif ?>
+
+    <!-- Data locker -->
+    <input
+        type="hidden"
+        id="<?= $this->getId('input') ?>"
+        name="<?= $name ?>"
+        value="<?= $value ?>"
+        class="form-control"
+        autocomplete="off" />
+
+    <script>
+        $('.template-box').click(function() {
+            $('#template_hint').html($(this).data('description'));
+        });
+        $( document ).ready(function() {
+            $('.template-box')[0].click();
+        });
+    </script>
+</div>
+

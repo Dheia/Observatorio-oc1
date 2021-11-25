@@ -1,0 +1,14 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+seguimientos:
+    label: Seguimientos
+    manage:
+        form: @/plugins/tresfera/clients/models/seguimiento/fields.yaml
+        list: @/plugins/tresfera/clients/models/seguimiento/columns.yaml
+        showSearch: true
+        recordsPerPage: 10
+    view:
+        list: @/plugins/tresfera/clients/models/seguimiento/columns.yaml
+        toolbarButtons: create|delete

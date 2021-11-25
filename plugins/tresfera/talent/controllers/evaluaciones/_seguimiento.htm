@@ -1,0 +1,69 @@
+<div class="control-list">
+    <table class="table data">
+        <thead>
+            <tr>
+                <th><span>Tipo</span></th>
+                <!--<th><span>Nombre</span></th>
+                <th><span>Email</span></th>-->
+                <th><span>Enviado</span></th>
+                <th><span>Completado</span></th>
+                <th><span></span></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        $stats = $model->getEvaluadores();
+        if(is_array($stats))
+        foreach($stats as $type=>$rows) {
+          if(in_array($type,['numTotal', 'numAnswered'])) continue;
+          foreach($rows as $evaluador) {
+            if(!isset($evaluador['name']))
+              dd($evaluador);
+            ?>
+                <tr>
+                    <td><?=$type?></td>
+                    <!--<td><?=$evaluador['name']?></td>getDateCompletedEvaluador
+                    <td><?=$evaluador['email']?></td>-->
+                    <td><?=$evaluador['send']?$evaluador['send_at']['date']:e(trans('tresfera.talent::lang.proyectos.no_enviado')) ?></td>
+                    <td>
+                      <?php if($type == "autoevaluado") { ?>
+                        <?=$model->isCompletedAutoevaluado()?$model->getDateAutoevaluado():e(trans('tresfera.talent::lang.proyectos.espera')) ?>
+                      <?php } else { ?>
+                        <?=$model->isCompletedEvaluador($evaluador['email'])?$model->getDateCompletedEvaluador($evaluador['email']):e(trans('tresfera.talent::lang.proyectos.espera')) ?>
+                      <?php } ?>
+                    </td>
+                    <td>
+                      <?php if($this->user->email == $evaluador['email']) {
+                              if(!$evaluador['completed']) {
+                                if($evaluador['send']) {
+
+                                ?>
+                                <a
+                                    target="_blank"
+                                    href="<?=$evaluador['url']?>"
+                                    class="btn btn-xs btn-default pull-left">
+                                     <?= e(trans('tresfera.talent::lang.proyectos.empezar')) ?>
+                                </a>
+                                <?php
+                              }
+                              } else {
+                                ?>
+                                <a
+                                    href="#"
+                                    class="btn btn-xs btn-warning pull-left">
+                                     <?= e(trans('tresfera.talent::lang.proyectos.informe')) ?>
+                                </a>
+                                <?php
+                              }
+                        ?>
+
+                      <?php } ?>
+                    </td>
+                </tr>
+            <?php
+          }
+        }
+        ?>
+      </tbody>
+  </table>
+</div>

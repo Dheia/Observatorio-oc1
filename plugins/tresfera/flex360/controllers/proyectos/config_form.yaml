@@ -1,0 +1,10 @@
+name: Proyectos
+form: $/tresfera/flex360/models/proyecto/fields.yaml
+modelClass: Tresfera\Flex360\Models\Proyecto
+defaultRedirect: tresfera/flex360/proyectos
+create:
+    redirect: 'tresfera/flex360/proyectos/update/:id'
+    redirectClose: tresfera/flex360/proyectos
+update:
+    redirect: tresfera/flex360/proyectos
+    redirectClose: tresfera/flex360/proyectos

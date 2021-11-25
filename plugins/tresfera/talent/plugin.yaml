@@ -1,0 +1,32 @@
+plugin:
+    name: Talent
+    description: 'tresfera.talent::lang.plugin.description'
+    author: tresfera
+    icon: oc-icon-turkish-lira
+    homepage: ''
+navigation:
+    talent:
+        label: TalentApp
+        url: tresfera/talent
+        icon: icon-try
+        permissions:
+            - talent.gestor
+            - talent.access
+        sideMenu:
+            proyectos:
+                label: 'tresfera.talent::lang.evaluadores.proyectos'
+                url: tresfera/talent/proyectos
+                icon: icon-th-list
+                permissions:
+                    - talent.gestor
+            side-menu-item:
+                label: 'tresfera.talent::lang.evaluadores.panel_control'
+                url: tresfera/talent/index
+                icon: icon-dashboard
+permissions:
+    talent.access:
+        tab: TalentApp
+        label: 'Acceso al plugin'
+    talent.gestor:
+        tab: TalentApp
+        label: 'Gestor de TalentApp'

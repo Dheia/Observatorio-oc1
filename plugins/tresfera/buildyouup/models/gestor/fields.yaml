@@ -1,0 +1,13 @@
+fields:
+    name:
+        label: Nombre
+        span: auto
+        type: text
+    email:
+        label: Email
+        span: auto
+        type: text
+    password:
+        label: Contraseña
+        span: auto
+        type: text

@@ -1,0 +1,452 @@
+/* font size dinamically */
+body, .ionic-body {
+  font-size: 1.5vw;
+}
+h1, .h1 {
+  font-size: 250%;
+}
+h2, .h2 {
+  font-size: 220%;
+}
+h3, .h3 {
+  font-size: 140%;
+}
+html, body, section {
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    height:100%;
+    width:100%;
+}
+section {
+    display:table;
+}
+section > div {
+    display:table-cell;
+    vertical-align:middle;
+}
+/* Setup */
+form.ng-pristine.ng-valid,
+form.ng-valid.ng-dirty.ng-valid-parse {
+  width: 60%;
+  text-align: center;
+  margin: auto;
+}
+/* Flex Box */
+section {
+    padding: 1em;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    justify-content: space-around;
+}
+/* Flex Items */
+section > div {    
+    display:flex;
+}
+
+section > div.h-10 {
+  height: 10%;
+}
+section > div.h-20 {
+  height: 20%;
+}
+section > div.h-30 {
+  height: 30%;
+}
+section > div.h-40 {
+  height: 40%;
+}
+section > div.h-50 {
+  height: 50%;
+}
+section > div.h-60 {
+  height: 60%;
+}
+section > div.h-70 {
+  height: 70%;
+}
+section > div.h-80 {
+  height: 80%;
+}
+section > div.h-90 {
+  height: 90%;
+}
+section > div.h-100 {
+  height: 100%;
+}
+
+section > div.h-25 {
+  height: 25%;
+}
+section > div.h-50 {
+  height: 50%;
+}
+section > div.h-75 {
+  height: 75%;
+}
+section > div.h-33 {
+  height: 33%;
+}
+section > div.h-66 {
+  height: 66%;
+}
+
+  .button-icon.icon:before {
+      font-size: 200%;
+      line-height: 100%;
+  }
+  .icon-woman {
+    margin-right: 3%;
+  }
+  section.flex-wrap {
+    flex-wrap: wrap;
+  }
+  section.flex-horizontal {
+    flex-direction: row;
+  }
+  section > div.w-10 {
+    width: 10%;
+  }
+  section > div.w-20 {
+    width: 20%;
+  }
+  section > div.w-30 {
+    width: 30%;
+  }
+  section > div.w-40 {
+    width: 40%;
+  }
+  section > div.w-50 {
+    width: 50%;
+  }
+  section > div.w-60 {
+    width: 60%;
+  }
+  section > div.w-70 {
+    width: 70%;
+  }
+  section > div.w-80 {
+    width: 80%;
+  }
+  section > div.w-90 {
+    width: 90%;
+  }
+  section > div.w-100 {
+    width: 100%;
+  }
+  
+  section > div.w-25 {
+    width: 25%;
+  }
+  section > div.w-50 {
+    width: 50%;
+  }
+  section > div.w-75 {
+    width: 75%;
+  }
+  section > div.w-33 {
+    width: 33%;
+  }
+  section > div.w-66 {
+    width: 66%;
+  }
+
+section > div > div {
+  margin: auto;
+  text-align: center;
+  max-height: 100%;
+  width: 100%;
+}
+section > div:first-child p {
+   width: 100%;
+   text-align: center;
+}
+
+
+/* smiles & images */
+.smile {
+    background-image: url(../img/smiles.png);
+    height: 13%;
+    width: 13%;
+    display: inline-block;
+    background-size: 378%;
+    background-repeat: no-repeat;
+    margin-left: 3%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    vertical-align: top;
+    background-position-y: 112%;
+    cursor: pointer;
+}
+.h-80 .smile {
+  margin-top: 5%;
+}
+.smile-1{
+  /*margin-left: 0 !important;*/
+}
+.smile-2{
+  background-position-x: 52%;
+}
+.smile-3{
+  background-position-x: 101%;
+}
+
+.smile.noselect {
+
+/*filter: url('#grayscale');  Versión SVG para IE10, Chrome 17, FF3.5, Safari 5.2 and Opera 11.6 
+-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+-ms-filter: grayscale(100%);
+-o-filter: grayscale(100%);
+filter: grayscale(100%); 
+filter: Gray(); IE4-8 and 9;
+ opacity: 0.2;*/
+
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+-ms-transition: all 0.5s ease;
+-o-transition: all 0.5s ease;
+transition: all 0.5s ease;
+
+    background-position-y: 0%;
+
+}
+.smile span {
+    margin-top: 115%;
+    font-size: 140%;
+    background-color: #fff;
+    text-align: center;
+    list-style: none;
+    line-height: 100%;
+    height: 90px;
+    display: block;
+    width: 100%;
+}
+
+.voto-img {
+  display: inline-block;
+  width: 49%;
+}
+.voto-img.noselect {
+  filter: url('#grayscale');  
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%); 
+  filter: Gray();
+  opacity: 0.3;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+/* preguntas horizontales */
+.pregunta.horizontal h2 {
+    text-align: left;
+    display: inline-block;
+    width: 55%;
+    font-weight: normal;
+    font-size: 185%;
+}
+.pregunta.horizontal .smile {
+    vertical-align: middle;
+    margin-top: -10px;
+    margin-left: 2%;
+    height: 75px;
+    width: 66px;
+    background-size: 345%;
+    background-position-y: 94%;
+}
+.pregunta.horizontal .smile-2 {
+  background-position-x: -84px
+}
+.pregunta.horizontal .smile-3 {
+  background-position-x: -169px;
+}
+.pregunta.horizontal .smile.noselect {
+    background-position-y: 3% !important;
+}
+
+ /* INPUTS */
+ .item-input {
+  margin: 0 auto;
+  width: 60%;
+}
+input[type="text"] {
+  text-align: center;
+}
+
+h1.wellcome {
+    background-repeat: no-repeat;
+    text-align: left;
+    padding-left: 95px;
+    font-size: 200%;
+    line-height: 65px;
+    margin: 1% 10%;
+    text-transform: uppercase;
+}
+h1.wellcome.ES {
+  background-image: url(../img/es.png);
+}
+h1.wellcome.CA {
+  background-image: url(../img/ca.png);
+}
+h1.wellcome.EN {
+  background-image: url(../img/en.png);
+}
+h1.wellcome.FR {
+  background-image: url(../img/fr.png);
+}
+h1.wellcome.DE {
+  background-image: url(../img/de.png);
+}
+h1.wellcome.RU {
+  background-image: url(../img/ru.png);
+}
+
+.bar.bar-light {
+  height: 22%;
+  background-image: url(../img/bg_header.png) !important;
+  background-color: transparent !important;
+  background-size: 100%;
+  background-position: 0% 12%;
+}
+img.logoBig {
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+    max-height: 100%;
+}
+
+/* adornos */
+.dotted {
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
+}
+section.full-image {
+  background-size: 100%;
+  padding: 0;
+  background-size: cover;
+}
+.button-icon.icon.ion-woman {
+  margin-right: 13%
+}
+.button-icon.icon.ion-man:before,
+.button-icon.icon.ion-woman:before {
+    font-size: 1500%;
+    color: #375080;
+}
+.bar-footer {
+    height: 80px;
+    border: none;
+    background: none;
+}
+.button-bar-vertical {
+    margin: 0px 35%;
+    flex-direction: column;
+    margin-top: 23px;
+}
+.item-radio{
+    margin: 0 auto;
+    width: 30%;
+}
+
+.button-bar-vertical > .button {
+  border-width: 1px 1px 0px 1px;
+    width: 130px;
+    font-size: 150%;
+    height: 50px;
+    line-height: 50px;
+}
+.item-radio .item-content {
+    padding-right: 40px;
+}
+.item-radio .radio-icon {
+    top: -9px;
+    font-size: 32px;
+}
+.button-bar-vertical > .button:first-child {
+    border-radius: 2px 2px 0px 0px;
+}
+.button-bar > .button:last-child {
+    border-right-width: 1px;
+    border-radius: 0px 0px 2px 2px;
+    border-width: 1px;
+}
+section.flex-horizontal > div > div {
+    margin: 20% auto 0 0;
+}
+.bar-footer .button:last-child {
+    position: absolute;
+    top: 5px;
+    right: 4%;
+    bottom: 5px;
+    font-size: 190%;
+    line-height: 25px;
+    width: 247px;
+    color: #375080;
+    font-weight: bold;
+}
+.bar-footer .button:last-child:before {
+  padding-left: 10px;
+}
+section.questions h1,
+h1.titulo {
+    background-color: #375080;
+    position: absolute;
+    top: 22%;
+    width: 100%;
+    left: 0;
+    padding: 1.2% 0 1.5%;
+    color: #fff;
+    text-align: center;
+}
+.item-input textarea {
+    height: 160px;
+}
+
+  input[type="text"], input[type="email"], input[type="number"], textarea {
+      font-size: 200%;
+      line-height: 100%;
+      text-align: center;
+  }
+  .item-radio {
+      margin: 0 auto;
+      width: 30%;
+      font-size: 123%;
+  }
+  .item-radio .radio-icon {
+      color: #375080;
+      right: -4px;
+  }
+
+  .icon-disabled:before {
+    color: #bababa !important;;
+  }
+  
+.voto-img img {
+    width: 80%;
+}
+.button-icon.icon.ion-man:before, .button-icon.icon.ion-woman:before {
+    font-size: 1150%;
+    color: #375080;
+}
+.ion-man.icon-disabled .item-radio .item-content,
+.ion-woman.icon-disabled .item-radio .item-content {
+    padding-right: 20px;
+}
+.bar-footer {
+    height: 80px;
+    border: none;
+    background: none;
+    width: 50%;
+    margin-left: 50%;
+}
+section > div > div.logo, section > div > div.logo2, section > div > div.logo3 {
+    display: none;
+}

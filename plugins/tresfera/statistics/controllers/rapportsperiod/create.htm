@@ -1,0 +1,77 @@
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li><a href="<?=url("backend/tresfera/statistics/stats/dashboard")?>">Informe</a></li>
+		        <li class="h3">
+		      		Programación de informes  	
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+<?php Block::endPut() ?>
+<?php echo $this->makePartial("filter_new"); ?>  
+<div class="row" style="display: table; height: 100%;margin:0px 0 0 -35px">
+	<div class="col-md-8" style="margin:20px 0 0 -35px;display: table-cell;float: none;">
+		<iframe
+			style="	width: 100%;
+			height: 100%;
+			border: 0;" 
+			src="<?= Backend::url('tresfera/statistics/stats/rapport') ?>"></iframe>
+	</div>
+	<div class="col-md-4" style="    display: table-cell;float: none;vertical-align: top;padding-top: 25px;">
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button
+                    type="submit"
+                    data-request="onSave"
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-load-indicator="Creating rapport..."
+                    class="btn btn-primary">
+                    Programar
+                </button>
+                <button
+                    type="button"
+                    data-request="onSave"
+                    data-request-data="close:1"
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="Creating rapport..."
+                    class="btn btn-default">
+                    Programar y cerrar
+                </button>
+                <span class="btn-text">
+                    o <a href="<?= Backend::url('tresfera/statistics/rapports') ?>">Cancelar</a>
+                </span>
+            </div>
+        </div>
+
+    <?= Form::close() ?>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('tresfera/statistics/rapports') ?>" class="btn btn-default">Return to rapports list</a></p>
+
+<?php endif ?>
+	</div>
+</div>
+<style>
+	.control-breadcrumb {
+		margin-bottom: 0px;
+	}
+	div#filterExample {
+	    margin-top: 0px;
+	    margin-bottom: 0px;
+	}
+</style>

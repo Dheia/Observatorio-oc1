@@ -1,0 +1,80 @@
+title = "Retos"
+url = "/cofidis/app"
+layout = "app"
+description = "Segmentaciones"
+is_hidden = 0
+
+[session]
+security = "user"
+redirect = "cofidis/login"
+
+[Progreso]
+==
+<style>
+.status {
+margin: 0;
+margin-top: 30px;
+float: right;
+}
+</style>
+<div class="container">
+    <h1><img style="margin-top: 0;width: 150px;vertical-align: middle;margin-right: 20px;margin-bottom: 0;" src="/storage/app/media/cofidis/1.1. Logo.png">Tus Retos </h1>
+      <div class="flex content-start flex-wrap">
+            <div class="p-2 competence-card completed md:w-1/2 md:min-w-0 min-w-full md:min-h-100 h-auto">
+                <button class="competence-button w-1/3" onclick="window.location='/cofidis/app/competencia1'">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Aprendizaje ágil</h3>
+                    {% if Progreso.lastpag.pag == 31 %}
+                    <div class="status m-4"><p class="competence">Resultados</p></div>
+                    {% elseif Progreso.lastpag.pag is not defined %}
+                    <div class="status m-4"><p class="competence">Empezar</p></div>
+                    {% else %}
+                    <div class="status m-4"><p class="competence">Continuar</p></div>
+                    {% endif %}
+                </button>
+                
+                <div class="meter mt-2">
+                    <span style="width: {{Progreso.lastpag.pag/31*100}}%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card md:w-1/2 md:min-w-0 min-w-full">
+                <button disabled class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Pasión y Energía</h3>
+                    <div class="status m-4"><p class="competence">Cerrado</p></div>
+                    
+                </button>
+                <div class="meter m-2">
+                    <span style="width: 0%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card md:w-1/2 md:min-w-0 min-w-full">
+                <button disabled class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Cliente en el centro</h3>
+                    <div class="status m-4"><p class="competence">Cerrado</p></div>
+                    
+                </button>
+                <div class="meter m-2">
+                    <span style="width: 0%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card md:w-1/2 md:min-w-0 min-w-full">
+                <button disabled class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Trabajo en co-construcción</h3>
+                    <div class="status m-4"><p class="competence">Cerrado</p></div>
+                    
+                </button>
+                <div class="meter m-2">
+                    <span style="width: 0%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card md:w-1/2 md:min-w-0 min-w-full">
+                <button disabled class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Rigor</h3>
+                    <div class="status m-4"><p class="competence">Cerrado</p></div>
+                    
+                </button>
+                <div class="meter m-2">
+                    <span style="width: 0%"></span>
+                </div>
+            </div>
+      </div>
+    </div>

@@ -1,0 +1,101 @@
+<?php
+
+/*
+Estados de un proyecto:
+0 - Pendiente
+1 - Activo
+2 - Finalizado
+*/
+
+use Tresfera\Talentapp\Classes\UserControl;
+
+$user = BackendAuth::getUser();
+$rol = UserControl::getRole($user);
+if($rol == 0) {
+ ?>
+    <script>window.location.replace("https://talentapp360.taket.es/backend/tresfera/talentapp/administrador");</script>
+ <?php   
+}
+?>
+
+<style>
+a {
+    cursor: pointer;
+}
+.text-center {
+    text-align: center;
+}
+.title-value h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #666666;
+    margin: 0;
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: #313131;
+}
+.profile-pic {
+    position: relative;
+    display: inline-block;
+
+
+}
+
+.profile-pic:hover .edit {
+    display: block;
+}
+
+.edit_img:hover {
+    transition:all .3s ease-in-out;
+    filter: blur(3px);
+}
+
+.edit {
+    padding-top: 7px;
+    padding-right: 7px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+}
+
+.edit a {
+    color: #000;
+}
+
+</style>
+
+<?php
+    if($user->activated_at == null) {
+        ?>
+        <script>
+            location.href='<?=url("/backend/tresfera/talentapp/index/rgpd")?>'
+        </script>
+        <?php
+    }
+?>
+
+<div class="control-breadcrumb">
+  <ul>
+      <li><a href="<?= Backend::url('tresfera/talentapp') ?>">TalentApp 360</a></li>
+      <li></li>
+  </ul>
+</div>
+
+
+
+<?php
+
+//echo $this->makePartial('administrador', ['user' => $user]);
+//echo $this->makePartial('empresa', ['user' => $user]);
+//echo $this->makePartial('gestor', ['user' => $user]);
+//echo $this->makePartial('evaluado', ['user' => $user]);
+
+
+
+if($rol == 5) echo $this->makePartial('empresa', ['user' => $user]);
+elseif($rol == 4) echo $this->makePartial('gestor', ['user' => $user]);
+else echo $this->makePartial('evaluado', ['user' => $user]);
+//if($rol == "Evaluador") echo $this->makePartial('evaluador', ['user' => $user]);
+
+?>

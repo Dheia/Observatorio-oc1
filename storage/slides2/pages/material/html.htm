@@ -1,0 +1,15 @@
+title = "Html code"
+url = "/slides/material/:code"
+description = "Para introducir cualquier tipo de elemento a través de codigo html"
+type = "material"
+layout = "material"
+
+[taketsystemTemplate]
+==
+{variable type="text" name="continueText" default="Continuar" label="Texto botón continuar"}{/variable}
+{variable type="text" name="backText" default="Volver" label="Texto botón volver"}{/variable}
+
+{variable type="codeeditor" tab="Datos" name="html" label="Html"}{/variable}
+{variable type="codeeditor" tab="Diseño" name="css" label="Personalizado"}{/variable}
+--
+{{html}}

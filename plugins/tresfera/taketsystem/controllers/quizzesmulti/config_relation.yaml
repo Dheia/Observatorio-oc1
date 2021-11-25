@@ -1,0 +1,11 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+quizzes:
+    label: Cuestionarios
+    form: $/tresfera/taketsystem/models/quiz/fields.yaml
+    list: $/tresfera/taketsystem/models/quiz/columns.yaml
+    view:
+        list: $/tresfera/taketsystem/models/quiz/columns.yaml
+        toolbarButtons: add|remove

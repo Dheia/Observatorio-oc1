@@ -1,0 +1,38 @@
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout fancy-layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+
+    <?= Form::close() ?>
+
+<div class="layout-cell width-300 form-sidebar control-scrollpanel">
+	<div class="layout-relative">
+		<div class="layout-absolute">
+			<div class="control-scrollbar drag-scrollbar vertical">
+				<div class="padded-container">
+					<div class="callout callout-info fade in  no-subheader">
+						<div class="header">
+							<i class="icon-info-circle"></i>
+							<h3>Instrucciones</h3>
+						</div>
+						<div class="content">
+							<p id="template_hint">
+								
+							</p>    
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('tresfera/paypercall/campaigns') ?>" class="btn btn-default">Return to campaigns list</a></p>
+
+<?php endif ?>

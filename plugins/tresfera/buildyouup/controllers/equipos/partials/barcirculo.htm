@@ -1,0 +1,10 @@
+<div class="elemento redondas {{class}}"
+    style="left: {{left}}px;top: {{top}}px;">
+<span class="numero">
+    {{value|number_format(2)}}
+</span>
+{% for i in 1..value %}
+    <div class="redonda"></div>
+{% endfor %}
+
+</div>

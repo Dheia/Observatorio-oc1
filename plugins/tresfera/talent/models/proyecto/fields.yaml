@@ -1,0 +1,55 @@
+fields:
+    name:
+        label: 'tresfera.talent::lang.proyectos.name'
+        span: auto
+        type: text
+    client_id:
+        label: Cliente
+        span: auto
+        type: dropdown
+    num_licencias:
+        label: 'tresfera.talent::lang.proyectos.licencias'
+        comment: 'tresfera.talent::lang.proyectos.licencias_comment'
+        span: left
+        type: text
+    lang:
+        label: 'tresfera.talent::lang.proyectos.lang'
+        type: dropdown
+        span: right
+        options:
+            es: Español
+            en: Inglés
+    fecha_inicio:
+        label: 'tresfera.talent::lang.proyectos.finicio'
+        mode: datetime
+        span: left
+        type: datepicker
+        span: auto
+    fecha_fin:
+        label: 'tresfera.talent::lang.proyectos.fin'
+        mode: datetime
+        span: auto
+        type: datepicker
+    description:
+        label: 'tresfera.talent::lang.proyectos.descripcion'
+        size: ''
+        span: full
+        type: textarea
+tabs:
+    fields:
+        gestores:
+            span: full
+            path: plugins/tresfera/talent/controllers/proyectos/relation_gestores
+            context:
+                - update
+                - preview
+            type: partial
+            tab: Gestores
+        evaluaciones:
+            span: full
+            path: plugins/tresfera/talent/controllers/proyectos/relation_evaluaciones
+            context:
+                - update
+                - preview
+            type: partial
+            tab: Evaluaciones

@@ -1,0 +1,37 @@
+section.questions h1, h1.titulo {
+    background-color: #161616;
+}
+.bar-footer .button:last-child {
+    color: #e31a38;
+}
+.button-icon.icon.ion-man:before, .button-icon.icon.ion-woman:before {
+    color: #e31a38;
+}
+.item-radio .radio-icon {
+    color: #e31a38;
+}
+.item-radio, .item.item-input, .item.item-textarea, textarea {
+	border-color: #e31a38;
+}
+.item-radio .item-content {
+    font-weight: bold;
+}
+h3 {
+	font-size: 160%;
+	font-weight: bold;
+}
+
+.bar.bar-header.bar-light {
+    background: #e2001a !important;
+}
+
+.seguir {
+	color: #161616;
+}
+.h-100.dotted {
+    background: none;
+}
+.full-image h1 {
+	font-size: : 300% !important;
+    margin-top: -205px;
+}

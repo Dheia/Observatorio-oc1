@@ -1,0 +1,38 @@
+columns:
+    id:
+        label: id
+        type: number
+        invisible: true
+    created_at:
+        label: created_at
+        type: datetime
+        invisible: true
+    updated_at:
+        label: updated_at
+        type: datetime
+        invisible: true
+    deleted_at:
+        label: deleted_at
+        type: datetime
+        invisible: true
+    email:
+        label: email
+        type: text
+    club:
+        label: club
+        type: text
+    enviado:
+        label: enviado
+        type: text
+    completado:
+        label: completado
+        type: text
+    envio_id:
+        label: envio_id
+        type: number
+    enviar_at:
+        label: enviar_at
+        type: text
+    apertura_at:
+        label: apertura_at
+        type: text

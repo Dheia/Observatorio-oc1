@@ -1,0 +1,138 @@
+<?php 
+	$cuestionarios = \Tresfera\Statistics\Models\Result::getCuestionarios();
+	$config = \Tresfera\Statistics\Models\Config::find(1);
+?>
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li class="h3">
+		        <?php 
+		        	if(get('detalles')) {
+			    ?>
+			    	<?=get("filterName")?>    	
+			    <?php
+		        	} else {
+			    ?>
+			    	Estadísticas   	
+			    <?php    	
+		        	}
+		        ?>
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+<?php Block::endPut() ?>
+<div class="row" style="margin-right: -20px;">
+	<div class="col-md-2 filter-stats">
+		<?php echo $this->makePartial("filter_new"); ?>  
+	</div>
+	<div class="col-md-10 body-stats">
+		<?php echo $this->makePartial("modules/nps"); ?>
+		<div class="row general">
+			<div class="col-md-5">
+				<?php echo $this->makePartial("modules/cuestionarios"); ?>   
+			</div>
+			<div class="col-md-7">
+				<!--<div id="chartdiv" style="width: 100%; height: 310px; background-color: #FFFFFF;" ></div>-->
+				<?php 
+					if(get('detalles')) {
+						echo $this->makePartial("modules/generales");
+					} else {
+						$user = BackendAuth::getUser();
+						
+						if($user->client_id == 216) {
+							echo $this->makePartial("modules/generales");
+							echo $this->makePartial("modules/generales_excellence");
+
+						} else {
+							echo $this->makePartial("modules/generales");
+						}  	
+					}
+				?>
+			
+			</div>
+		</div>
+		<?php echo $this->makePartial("modules/segmentaciones"); ?>
+	</div>
+</div>
+
+
+
+
+
+<style>
+	.body-stats {
+		height: calc( 100vh - 129px);
+		overflow: hidden;
+		overflow-y: auto;
+		margin-top: -20px;
+		margin-left: 0px;
+		padding-right: 15px;
+		padding: 30px;
+		padding-top: 12px;
+	}
+	.control-breadcrumb li:before {
+		display: none;
+	}
+	.control-breadcrumb {
+		margin: -20px -20px 20px -20px;
+		background-color: #000000;
+	}
+	.control-breadcrumb {
+		padding: 10px;
+	}
+	.control-filter >.filter-scope {
+		width: 100%;
+	}
+	.body-stats {
+		height: calc( 100vh - 140px);
+	}
+	.body-stats {
+		height: calc( 100vh - 129px);
+		overflow: hidden;
+		overflow-y: auto;
+		margin-top: -20px;
+		margin-left: 0px;
+	}
+	body {
+		overflow: hidden;
+	}
+	div#filterExample {
+		margin-top: -20px;
+		height: calc( 100vh - 128px);
+		overflow: auto;
+		padding-bottom: 30px;
+	}
+	.control-filter {
+		color: #fff;
+		background-color: #444444;
+		margin: -21px -20px 17px -20px;
+	}
+	.generales .bar-line {
+		min-width: 70px;
+	}
+	::-webkit-scrollbar{width:5px; margin-right: 10px;}::-webkit-scrollbar-track{background:#cccccc;border-radius:0px}::-webkit-scrollbar-thumb{background:#e77318;border-radius:0px}
+	<?php if(isset($config->config) and isset($config->config['stats'])) { ?>
+		<?php if(isset($config->config['stats']['ok']) and $config->config['stats']['ok']) { ?>
+		.bar-line-ok, .value_type_3 .bar-line, .legend-ok {
+			background: <?=$config->config['stats']['ok']?>;
+		}
+		<?php } ?>
+		<?php if(isset($config->config['stats']['mix']) and $config->config['stats']['mix']) { ?>
+		.bar-line-mix, .value_type_2 .bar-line, .legend-mix {
+			background: <?=$config->config['stats']['mix']?>;
+		}
+		<?php } ?>
+		<?php if(isset($config->config['stats']['ko']) and $config->config['stats']['ko']) { ?>
+		.bar-line-ko, .value_type_1 .bar-line, .legend-ko {
+			background: <?=$config->config['stats']['ko']?>;
+		}
+		<?php } ?>
+	<?php } ?>
+
+	
+</style>

@@ -1,0 +1,13 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+import:
+    title: Importar contactos
+    modelClass: Tresfera\Clients\Models\Contact
+    list: $/tresfera/clients/models/contact/columns.yaml
+
+export:
+    title: Exportar contactos
+    modelClass: Tresfera\Clients\Models\ContactExport
+    list: $/tresfera/clients/models/contact/columns.yaml

@@ -1,0 +1,60 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    title:
+        label: Título
+        required: true
+    client:
+        label: Cliente
+        type: relation
+        context: create
+        span: left
+    user:
+        label: Usuario
+        type: relation
+        nameFrom: email
+        span: right
+        context: create
+    date_start:
+        label: Inicio publicación
+        type: datepicker
+        mode: date
+        span: left
+        context: create
+    date_end:
+        label: Fin de la publicación
+        type: datepicker
+        mode: date
+        span: right
+        context: create
+    toolbar:
+        type: partial
+        path: post_toolbar
+        context: update
+        cssClass: collapse-visible
+tabs:
+    stretch: true
+    fields:
+        client:
+            label: Cliente
+            type: relation
+            tab: General
+            context: update
+        user:
+            label: Usuario
+            type: relation
+            nameFrom: email
+            tab: General
+            context: update
+        devices:
+            tab: Tablets
+            type: partial
+            path: $/tresfera/taketsystem/controllers/devices/_list_quiz.htm
+            context: update
+        slides:
+            type: partial
+            path: $/tresfera/taketsystem/controllers/slides/_list_quiz.htm
+            tab: Diapositivas
+            context: update

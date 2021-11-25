@@ -1,0 +1,224 @@
+<?php
+
+use Tresfera\Talentapp\Classes\UserControl;
+
+
+// FUNCTIONS
+function getCurrentFilters() {
+    $filters = [];
+    foreach (\Session::get('widget', []) as $name => $item) {
+        if (str_contains($name, 'Filter')) {
+            $filter = @unserialize(@base64_decode($item));
+            if ($filter) {
+                array_push($filters, $filter);
+            }
+        }
+    }
+
+    return $filters;
+}
+
+// --------- END FUNCTIONS ----------
+
+
+
+$user = BackendAuth::getUser();
+$rol = UserControl::getRole($user);
+if($rol != 0) {
+    ?>
+    <script>window.location.replace("https://talentapp360.taket.es/backend/tresfera/talentapp/");</script>
+ <?php   
+}
+?>
+
+<div class="control-breadcrumb">
+    <ul>
+        <li><a href="#">TalentApp360</a></li>
+        <li><?= e(trans('tresfera.talentapp::lang.admin.panel_de_control')) ?></li>
+    </ul>
+</div>
+
+
+<div class="encabezado">
+    <div class="dropdown" style="float:left;">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-plus"><?= e(trans('tresfera.talentapp::lang.admin.crear')) ?></a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="<?= e(trans('tresfera.talentapp::lang.admin.crear_clientes_proyectos')) ?>">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url('/backend/tresfera/clients/clients/create')?>" class="oc-icon-plus"><?= e(trans('tresfera.talentapp::lang.admin.nuevo_cliente')) ?></a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url('/backend/tresfera/talentapp/proyectos/create')?>" class="oc-icon-plus"><?= e(trans('tresfera.talentapp::lang.admin.nuevo_proyecto')) ?></a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown" style="float:left; margin-left: 5px">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-file-text"><?= e(trans('tresfera.talentapp::lang.admin.informes')) ?></a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="<?= e(trans('tresfera.talentapp::lang.admin.gestionar_informes')) ?>">
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onGenerateRapports"
+                    data-request-confirm="<?= e('Estas seguro?') ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                    <?= e(trans('tresfera.talentapp::lang.admin.generar_informe')) ?>
+                </a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onDownloadRapports"
+                    data-request-confirm="<?= e(trans('tresfera.talentapp::lang.admin.deseas_descargar_informes')) ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-cloud-download">
+                    <?= e(trans('tresfera.talentapp::lang.admin.descargar_informes')) ?>
+                </a>
+            </li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="oc-icon-paper-plane"><?= e(trans('tresfera.talentapp::lang.admin.enviar_informe')) ?></a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown" style="float:left; margin-left: 5px">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-envelope-o"><?= e(trans('tresfera.talentapp::lang.admin.enviar_emails')) ?></a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="<?= e(trans('tresfera.talentapp::lang.admin.gestionar_informes')) ?>">
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onSendEmailActivacion"
+                    data-request-confirm="<?= e(trans('tresfera.talentapp::lang.admin.activacion_pregunta')) ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                    <?= e(trans('tresfera.talentapp::lang.admin.activacion')) ?>
+                </a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onSendEmailRecordatorio"
+                    data-request-confirm="<?= e(trans('tresfera.talentapp::lang.admin.recordatorio_pregunta')) ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                    <?= e(trans('tresfera.talentapp::lang.admin.recordatorio')) ?>
+                </a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onSendEmailActivacionRecordatorio"
+                    data-request-confirm="<?= e(trans('tresfera.talentapp::lang.admin.activacion_recordatorio_pregunta')) ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                    <?= e(trans('tresfera.talentapp::lang.admin.activacion_recordatorio')) ?>
+                </a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked')
+                    })"
+                    data-request="onSendEmailRecordatorioAsignacion"
+                    data-request-confirm="<?= e(trans('tresfera.talentapp::lang.admin.reenviar_email_recordatorio_pregunta')) ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                    <?= e(trans('tresfera.talentapp::lang.admin.recordatorio_asignacion_evaluadores')) ?>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="dropdown" style="float:left; margin-left: 5px">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-lock"><?= e(trans('tresfera.talentapp::lang.admin.permisos')) ?></a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="<?= e(trans('tresfera.talentapp::lang.admin.permisos_evaluado')) ?>">
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked'),
+                        permiso: 1
+                    })"
+                    data-request="onPermisoVerInforme"
+                    data-request-confirm="<?= e(trans('tresfera.talentapp::lang.admin.dar_permiso_pregunta')) ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                    <?= e(trans('tresfera.talentapp::lang.admin.dar_permisos')) ?>
+                </a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" 
+                    tabindex="-1" 
+                    disabled="disabled"
+                    onclick="$(this).data('request-data', {
+                        checked: $('.control-list').listWidget('getChecked'),
+                        permiso: 0
+                    })"
+                    data-request="onPermisoVerInforme"
+                    data-request-confirm="<?= e(trans('tresfera.talentapp::lang.admin.eliminar_permiso_pregunta')) ?>"
+                    data-trigger-action="enable"
+                    data-trigger=".control-list input[type=checkbox]"
+                    data-trigger-condition="checked"
+                    data-request-success="$(this).prop('disabled', true)" class="oc-icon-list-alt">
+                    <?= e(trans('tresfera.talentapp::lang.admin.quitar_permisos')) ?>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <a
+        style="float:left; margin-left: 5px"
+        data-request="onDownloadDatosBrutos"
+        data-request-confirm="<?= e(trans('tresfera.talentapp::lang.admin.deseas_descargar_datos_brutos')) ?>"
+        class="btn btn-primary oc-icon-cloud-download">
+        <?= e(trans('tresfera.talentapp::lang.admin.descargar_datos_brutos')) ?>
+    </a>
+
+    <div style="float:right; margin-right:20px;">
+        <a class="btn btn-default oc-icon-cloud-upload" href="<?=url('/backend/tresfera/talentapp/administrador/importar')?>">
+            <?= e(trans('tresfera.talentapp::lang.admin.importar')) ?>
+        </a>
+        <a class="btn btn-default oc-icon-server" href="<?=url('/backend/tresfera/talentapp/administrador_csv')?>">
+            <?= e(trans('tresfera.talentapp::lang.admin.preparar_para_exportar')) ?>
+        </a>
+    </div>
+</div>
+<div style="clear: left;"></div>
+<?= $this->makePartial('estadisticas', []) ?>
+<?= $this->listRender() ?>

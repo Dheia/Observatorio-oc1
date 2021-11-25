@@ -1,0 +1,36 @@
+<!-- Content -->
+<section class="questions"  class="questions">
+<div class="bar bar-header bar-light">
+	  <img class="logoBig" cache-src="<?=$logo?>"/>
+	</div>
+	<div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+<div class="h-50">
+    <div>
+		<?php 
+		if(isset($question)) { ?>
+        <div data-role="pregunta" 
+	           data-question-type="multiquiz" 
+		       data-answer-type="sondeo"
+			   data-max-answers="<?=(1)?>" 
+			   data-question-title="<?=$question->title?>" 
+			   data-question-id="<?=$question->getId()?>">
+            <h1><?=$question->getTranslateAttribute('title',$lang)?></h1>
+            <h3 style="    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 67px;">Para iniciar su cuestionario pulse el botón escanear y acerque su acreditación</h3>
+	        <button class="button button-block button-positive btn-scan" ng-click="startScan()">
+				Escanear
+			</button>
+      	</div>
+      	<?php
+      	}
+      	?>
+	</div>
+</div>
+<div class="bar bar-footer">
+    <button style="display: none" ng-click="nextStep(500)" type="submit" id="button-nextStep" class="button icon-right ion-chevron-right button-clear button-dark"><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.continue')?></button>
+</div>  
+</section>

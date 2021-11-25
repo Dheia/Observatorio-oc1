@@ -1,0 +1,54 @@
+plugin:
+    name: 'tresfera.organizaciones::lang.plugin.name'
+    description: 'tresfera.organizaciones::lang.plugin.description'
+    author: Tresfera
+    icon: oc-icon-bank
+    homepage: ''
+navigation:
+    organizaciones:
+        label: 'tresfera.organizaciones::lang.plugin.name'
+        url: tresfera/organizaciones/empresas
+        icon: icon-sitemap
+        permissions:
+            - organizaciones.manage
+        sideMenu:
+            empresas:
+                label: 'tresfera.organizaciones::lang.plugin.empresas.title'
+                url: tresfera/organizaciones/empresas
+                icon: icon-empire
+                permissions:
+                    - organizaciones.manage
+            localizaciones:
+                label: 'tresfera.organizaciones::lang.plugin.localizaciones.title'
+                url: tresfera/organizaciones/localizaciones
+                icon: icon-thumb-tack
+                permissions:
+                    - organizaciones.manage
+            departamentos:
+                label: 'tresfera.organizaciones::lang.plugin.departamento.title'
+                url: tresfera/organizaciones/departamentos
+                icon: icon-sitemap
+                permissions:
+                    - organizaciones.manage
+            familia-puestos:
+                label: 'tresfera.organizaciones::lang.plugin.familia_puestos.title'
+                url: tresfera/organizaciones/familiapuestos
+                icon: icon-sitemap
+                permissions:
+                    - organizaciones.manage
+            puestos:
+                label: 'tresfera.organizaciones::lang.plugin.puesto.title'
+                url: tresfera/organizaciones/puestos
+                icon: icon-sitemap
+                permissions:
+                    - organizaciones.manage
+            personas:
+                label: 'tresfera.organizaciones::lang.plugin.persona.title'
+                url: tresfera/organizaciones/personas
+                icon: icon-user
+                permissions:
+                    - organizaciones.manage
+permissions:
+    organizaciones.manage:
+        tab: 'tresfera.organizaciones::lang.plugin.name'
+        label: 'Gestionar organizaciones'

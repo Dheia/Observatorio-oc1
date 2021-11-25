@@ -1,0 +1,99 @@
+<div class="control-breadcrumb">
+        <ul>
+                <li><a href="<?= Backend::url('tresfera/talentapp') ?>">TalentApp</a></li>
+                <li><a href="<?= Backend::url('tresfera/talentapp/proyectos') ?>">Proyectos</a></li>
+            <li>Nombre del Proyecto</li>
+        </ul>
+    </div>
+
+    <div class="row">
+            <div class="col-xs-6 text-left">
+                <a href="/backend/tresfera/talentapp/proyectos/crear_evaluacion/3" type="button" class="btn btn-primary oc-icon-plus">Nueva Evaluación</a>
+            </div>
+        
+            <div class="col-xs-6 text-right">
+                <a id="gestionar_proyecto" href="/backend/tresfera/talentapp/proyectos/gestion/3" type="button" class="btn btn-primary oc-icon-universal-access">Gestionar Proyecto</a>
+                <a href="/backend/tresfera/talentapp/proyectos/update/3" type="button" class="btn btn-primary oc-icon-pencil">Modificar Proyecto</a>
+            </div>
+        </div>
+            
+            <br/>
+    
+    <br/>
+    
+    <div class="control-list">
+            <table class="table data ">
+                <thead>
+                    <tr class="rowlink detalles_evaluacion">
+                        <th><span>Persona Evaluada</span></th>
+                        <th class="text-center"><span>Tipo de Evaluación</span></th>
+                        <th class="text-center"><span>Número de Evaluadores</span></th>
+                        <th><span>Resumen</span></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr class="rowlink detalles_evaluacion">
+                            <td>
+                                    Javier Costa
+                                </td>
+                                <td class="text-center">
+                                    90
+                                </td>
+                                <td class="text-center">
+                                    300
+                                </td>
+                                <td>
+                                    <div class="scoreboard-item title-value" data-control="goal-meter" data-value="25">
+                                        <h4>HAN RESPONDIDO</h4>
+                                        <p>25%</p>
+                                        <p class="description">100 personas</p>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                        <div>
+                                            <<span class="over oc-icon-pencil"></span>
+                                            <span id_evaluacion="1" class="trash over oc-icon-trash"></span>
+                                        </div>
+                                        
+                                    </td>
+                        </tr>
+                        <tr>
+                                <td>
+                                        Mariana Serra
+                                    </td>
+                                    <td class="text-center">
+                                        90
+                                    </td>
+                                    <td class="text-center">
+                                        500
+                                    </td>
+                                    <td>
+                                    <div class="scoreboard-item title-value" data-control="goal-meter" data-value="10">
+                                        <h4>HAN RESPONDIDO</h4>
+                                        <p>10%</p>
+                                        <p class="description">50 personas</p>
+                                    </div>
+                                    </td>
+                                    <td class="text-right">
+                                            <div>
+                                                <span class="over oc-icon-pencil"></span>
+                                                <span id_evaluacion="1" class="trash over oc-icon-trash"></span>
+                                            </div>
+                                            
+                                        </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+

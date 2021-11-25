@@ -1,0 +1,37 @@
+<div  class="select select_<?=$campo['tag']?>"
+        <?php 
+            $partial = "$/tresfera/taketsystem/slides/_field_css_custom.htm";
+            echo $this->makePartial(
+            $partial,
+                [ 
+                'campo' => $campo,
+                'slide' => $slide
+                ]
+            );
+        ?>
+        >
+        <?php if(!$campo['hide_title']) { ?>
+            <h3><?=$campo['title']?></h3>
+        <?php }  ?>
+        <select  
+            ng-modal="selectValue"
+            {% if obligatorio[segmentacion] %}
+            data-require=1
+            {% endif %}
+            data-answer-type="sondeo"
+            voto data-voto="1" 
+            data-question-title="<?=$campo['title']?>" 
+            data-question="<?=$campo['tag']?>" 
+            data-question-id="<?=$campo['tag']?>"
+            data-question-type="select" 
+            data-value-type="sondeo sondeo_<?=$campo['tag']?>" >
+            <?php if($campo['hide_title']) { ?><option value=""><?=$campo['title']?></option><?php }  ?>
+            <?php 
+                foreach($campo['segmentacion'] as $answer) {
+            ?>
+                <option value="<?=$answer['code']?>"><?=$answer['title']?></option>
+            <?php
+                }
+            ?>
+        </select>
+</div>

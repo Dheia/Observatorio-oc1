@@ -1,0 +1,19 @@
+<?php 
+
+if($campo['width'] or $campo['height'] or $campo['top'] or $campo['left']) { ?> 
+    style="
+        position: absolute;
+<?php if($campo['width']) { ?>
+    width: <?=$campo['width']?>;
+<?php } ?>
+<?php if($campo['height']) { ?>
+    height: <?=$campo['height']?>;
+<?php } ?>
+<?php if($campo['top']) { ?>
+    top: <?=$campo['top']?>;
+<?php } ?>
+<?php if($campo['left']) { ?>
+    left: <?=$campo['left']?>;
+<?php } ?>
+"    
+<?php } ?>

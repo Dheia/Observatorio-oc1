@@ -1,0 +1,176 @@
+<?php
+namespace Gerard\Comunicacion\Classes\Jobs;
+
+use Queue;
+
+// Models
+use Gerard\Comunicacion\Models\SignalsFailed;
+use Gerard\Comunicacion\Models\SignalsExecuted;
+use Gerard\Comunicacion\Models\API as APIModel;
+use Gerard\Comunicacion\Models\Par;
+use Gerard\Comunicacion\Models\Signal;
+use Gerard\Comunicacion\Models\Log;
+
+// Controllers
+use Gerard\Comunicacion\Controllers\API;
+
+// Classes
+use Gerard\Comunicacion\Classes\Comunicacion\Binance3fera;
+
+class CloseOrder
+{
+    public function fire($job, $data)
+    {
+      try {
+        if ($job->attempts() > 10) {
+          $job->delete();
+        }
+        
+        $api_id = $data['api']['id'];
+        $signal_id = $data['signal']['id'];
+        $signalExecuted_id = $data['signalExecuted']['id'];
+        $precio_mercado = $data['precio_mercado'];
+        $api = APIModel::find($api_id);
+        $signal = Signal::find($signal_id);
+        $signalExecuted = SignalsExecuted::find($signalExecuted_id);
+        
+        if($signalExecuted->estado >= 3) 
+        {
+          $job->delete();
+          exit;
+        }
+
+        // Parámetros de la orden
+        $params['symbol'] = $signal->par->par;
+        $params['side'] = "SELL"; // BUY / SELL
+        $params['type'] = "MARKET"; // Order Types: LIMIT / MARKET / STOP_LOSS / STOP_LOSS_LIMIT / TAKE_PROFIT / TAKE_PROFIT_LIMIT / LIMIT_MAKER
+        $params['quantity'] = $signalExecuted->qty_sell;
+
+        $res = API::jobsManage('newOrder', $api, $params);
+        
+        $entrada = '<p>
+                      <span class="text-warning">[Close Order]</span>
+                      <br/>
+                      <small>Orden de venta (API "'.$api->id.'")</small>
+                    </p>
+                    <p><b>Parámetros</b></p>
+                    Symbol: ' . $params['symbol'] . '<br/>
+                    Side: ' . $params['side'] . '<br/>
+                    Type: ' . $params['type'] . '<br/>
+                    Quantity: ' . $params['quantity'] . '<br/><br/>
+                    <p><b>Señal</b></p>
+                    ID: ' . $signal->id . '<br/>
+                    Precio de compra: ' . $signal->precio. '<br/><br/>
+                    <p><b>Señal Ejecutada</b></p>
+                    ID: ' . $signalExecuted_id . '<br/>
+                    ClientOrderID: ' . $signalExecuted->order_identify. '<br/>
+                    Precio comprado: ' . $signalExecuted->precio_compra;
+
+        $respuesta = "";
+
+        if( $res['ok'] )
+        {
+          // Calculamos precio medio ponderado de venta, comisión y cantidad
+          $commission = 0;
+          $cantidades = 0;
+          $precio_venta = 0;
+          if( isset($res['respuesta']) && isset($res['respuesta']['fills']))
+          {
+            foreach( $res['respuesta']['fills'] as $fill )
+            {
+              $commission += $fill['commission'];
+              $precio_venta += $fill['price']*$fill['qty'];
+              $cantidades += $fill['qty'];
+            }
+            if($cantidades != 0) $precio_venta = $precio_venta/$cantidades;
+            else $precio_venta = $res['respuesta']['price'];
+          }
+          else $precio_venta = $res['respuesta']['price'];
+          if($precio_venta == 0 || $precio_venta == "")
+          {
+              $precio_venta = Binance3fera::getPrecioActual($signal->par->par);
+          }
+
+          $respuesta = '<p>
+                          <span class="text-success">[OK]</span>
+                          <br/>
+                          <small>Venta realizada con éxito</small>
+                        </p>
+                        Precio venta ponderado: ' . $precio_venta . '<br/>
+                        Cantidad vendida: ' . $cantidades . '<br/>
+                        Comisión: ' . $commission . '<br/>
+                        Comisión Validada: ' . $res['qty'] . '<br/>
+                        Detalles respuesta: <br/><i>' . json_encode($res['respuesta']) .'</i>';
+        }
+        else
+        {
+          $respuesta = '<p>
+                          <span class="text-danger">[ERROR]</span>
+                          <br/>
+                          <small>Venta NO realizada</small>
+                        </p>' . $res['error'];
+        }
+
+        $log = new Log();
+        $log->api_id = $api->id;
+        $log->signal_id = $signal->id;
+        $log->precio_mercado = $precio_mercado;
+        $log->entrada = $entrada;
+        $log->respuesta = $respuesta;
+        $log->save();
+
+        if( $res['ok'] ) // Operacion cerrada correctamente
+        {
+          $decimales = explode(".", $signalExecuted->precio_compra);
+          $decimales = strlen($decimales[1]);
+          $precio_venta = round( $precio_venta, $decimales );
+          $signalExecuted->precio_venta = number_format( $precio_venta, $decimales );
+          $signalExecuted->qty_sell = $res['qty'];
+          $signalExecuted->estado = 3;
+          $signalExecuted->save();
+
+          $signalExecuted->descontarTMSY();
+
+          $n_signals = SignalsExecuted::where("signal_id",$signal->id)->where("estado","<",3)->count();
+          if($n_signals == 0 && $signal->ejecutada != 2)
+          {
+              $signal->ejecutada = 2;
+              $signal->save();
+          }
+
+        }
+        else
+        {
+          if( isset($res['qty']) && $res['qty'] < $signalExecuted->qty_sell )
+          {
+              $signalExecuted->qty_sell = $res['qty'];
+          }
+          else
+          {
+            if( strpos($signalExecuted->qty_sell, '.') === false )
+            {
+              if( $signalExecuted->qty_sell > 0) $signalExecuted->qty_sell = $signalExecuted->qty_sell-1;
+            }
+            else
+            {
+              $signalExecuted->qty_sell = substr($signalExecuted->qty_sell, 0, -1);
+            }
+          }
+          
+          if( $signalExecuted->qty_sell == 0 ) $signalExecuted->estado = 3;
+          $signalExecuted->save();
+        }
+
+        $job->delete();
+      } catch (Exception $e) {
+        $job->delete();
+      }
+    }
+
+    public function failed($data)
+    {
+      echo "esto no va :(\n";
+    }
+
+}
+?>

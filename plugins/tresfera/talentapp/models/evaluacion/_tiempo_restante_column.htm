@@ -1,0 +1,19 @@
+<?php
+if(isset($record->proyecto->fecha_fin))
+{
+    $d2 = \Carbon\Carbon::parse($record->proyecto->fecha_fin);
+    $fecha_actual = \Carbon\Carbon::now();
+    $diff = $fecha_actual->diffInDays($d2,false);
+    ?>
+
+    <?php if($diff < 0) { ?> 
+        <p class="<?='text-success'?>">
+            <?= e(trans('tresfera.talentapp::lang.admin.finalizado')) ?>
+        </p>
+    <?php } else { ?> 
+        
+        <p class="<?=($diff < 5) ? 'text-danger' : ''?>">
+            <?=trans('tresfera.talentapp::lang.admin.finaliza_en') .$diff.trans('tresfera.talentapp::lang.admin.dias')?>
+        </p>
+    <?php } 
+}

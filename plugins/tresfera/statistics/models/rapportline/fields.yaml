@@ -1,0 +1,41 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    datelast_start:
+      label: Fecha a comparar de inicio
+      type: datepicker
+      mode: date
+      span: left
+    datelast_stop:
+      label: Fecha a comparar final
+      type: datepicker
+      mode: date
+      span: right
+
+
+    datenext_start:
+      label: Fecha de inicio
+      type: datepicker
+      mode: date
+      span: left
+    datenext_stop:
+      label: Fecha final
+      type: datepicker
+      mode: date
+      span: right
+
+    date_send:
+      label: Fecha de envio
+      type: datepicker
+      mode: date
+      span: left
+    generated:
+      label: Generado
+      type: checkbox
+      span: left
+    send:
+      label: Enviado
+      type: checkbox
+      span: left

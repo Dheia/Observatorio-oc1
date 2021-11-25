@@ -1,0 +1,22 @@
+columns:
+    send_at:
+        label: "S'envia"
+        type: datetime
+        searchable: true
+        format: d-m-Y h:i:s 
+    datos:
+        label: Total
+        relation: datos
+        useRelationCount: true
+    sends:
+        label: Enviats
+        relation: sends
+        useRelationCount: true
+    opened:
+        label: Oberts
+        relation: opened
+        useRelationCount: true
+    completed:
+        label: Completats
+        relation: completed
+        useRelationCount: true

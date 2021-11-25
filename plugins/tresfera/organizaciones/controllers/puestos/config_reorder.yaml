@@ -1,0 +1,13 @@
+# Reorder Title
+title: Reorder
+
+# Attribute name
+nameFrom: name
+
+# Model Class name
+modelClass: Tresfera\Organizaciones\Models\Puesto
+
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: reorder_toolbar

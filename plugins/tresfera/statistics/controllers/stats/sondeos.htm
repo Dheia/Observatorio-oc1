@@ -1,0 +1,35 @@
+<?php 
+	$cuestionarios = \Tresfera\Statistics\Models\Result::getCuestionarios();
+?>
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li><a href="<?=url("backend/tresfera/statistics/stats/dashboard")?>">Sondeos</a></li>
+		        <li class="h3">
+		        <?php 
+		        	if(get('detalles')) {
+			    ?>
+			    	<?=get("filterName")?>    	
+			    <?php
+		        	} else {
+			    ?>
+			    	Visió general   	
+			    <?php    	
+		        	}
+		        ?>
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+<?php Block::endPut() ?>
+<?php echo $this->makePartial("filter_new"); ?>  
+<div class="row">
+	<div class="col-md-12">
+		<?php echo $this->makePartial("modules/sondeos"); ?>   
+    </div>
+<style>
+</style>

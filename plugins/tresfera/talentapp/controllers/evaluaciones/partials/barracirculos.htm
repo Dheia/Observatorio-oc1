@@ -1,0 +1,36 @@
+<div 
+class="elemento"
+style="left: {{left}}px;top: {{top}}px;">
+
+
+    {% for i in 1..10 %}
+        {% if i*10 > value_1 %}
+            <img class="bola bola-vacia" src="https://talentapp360.taket.es/storage/app/media/informe/elementos/Bola_Impacto_Transparente.png">
+        {% else %}
+            <img class="bola bola-llena" src="https://talentapp360.taket.es/storage/app/media/informe/elementos/Bola_Impacto_Rellena.png">
+        {% endif %}
+    {% endfor %}
+    <div class="numero2">
+        {{value_1|number_format(0)}}%
+    </div>
+</div>
+
+<div 
+class="elemento"
+style="left: {{left}}px;top: {{top + 45}}px;">
+
+    {% if value_2 == 0 %}
+        <span style="color: #a77077; font-size: 30px; display: block; margin-left: 110px; margin-top: -35px;">
+            NO VALORADO
+        </span>
+    {% endif %}
+    {% for i in 1..10 %}
+        {% if i*10> value_2 %}
+        {% else %}
+            <img class="bola bola-rallada" src="https://talentapp360.taket.es/storage/app/media/informe/elementos/Bola_Impacto_Borde.png">
+        {% endif %}
+    {% endfor %}
+    <div class="numero2 numero3">
+        {{value_2|number_format(0)}}%
+    </div>
+</div>

@@ -1,0 +1,98 @@
+title = "Taket"
+url = "/"
+layout = "base"
+description = "Segmentaciones"
+is_hidden = 0
+==
+function onStart()
+{
+    $quiz = \Tresfera\Taketsystem\Models\Quiz::where("md5",get('id'))->first();
+    $this['styles'] = $quiz->getStyles();
+}
+==
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+  <link href="{{ [
+      'assets/css/ionic.app.css',
+      'assets/css/style.css',
+      'assets/lib/jquery-bar-rating/themes/fontawesome-stars.css',
+      'assets/lib/tinycolorpicker/tinycolorpicker.css',
+      'assets/lib/popup/jquery.simple-popup.min.css',
+    ]|theme }}" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+    
+    <script src="{{ [
+      'assets/lib/jquery/jquery.min.js',
+      'assets/lib/ionic/js/ionic.bundle.min.js',
+      'assets/lib/ionic-service-core/ionic-core.js',
+      'assets/lib/jquery-bar-rating/jquery.barrating.min.js',
+      'assets/lib/jquery-resizable/jquery-resizable.js',
+      'assets/lib/jquery-resizable/jquery-resizableTableColumns.js',
+      'assets/lib/drawable/jqscribble.extrabrushes.js',
+      'assets/lib/drawable/jquery.jqscribble.js',
+      'assets/lib/sorter/zepto.min.js',
+      'assets/lib/sorter/zepto.dragswap.js',
+      'assets/lib/tinycolorpicker/jquery.tinycolorpicker.js',
+      'assets/lib/popup/jquery.simple-popup.min.js',
+      'assets/js/app.js',
+      'assets/js/controllers.js',
+      'assets/js/controllers/resizabletable.js',
+      'assets/js/controllers/sortable.js',
+      'assets/js/controllers/tinycolorpicker.js',
+      'assets/js/controllers/drawable.js',
+      'assets/js/controllers/draggable.js',
+      'assets/js/controllers/popup.js',
+      'assets/js/controllers/bag.js',
+      'assets/js/controllers/actions.js',
+      'assets/js/controllers/show.js',
+      'assets/js/services.js',
+      'assets/lib/jquery/outerHTML-2.1.0-min.js',
+      'assets/js//taketsystem.js'
+  ]|theme }}"></script>
+  <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  
+  </head>
+  <body ng-app="starter" class="platform-android" ng-controller="MyCtrl">
+      <ion-nav-view 
+              hide-nav-bar="true" 
+              has-header="false" 
+              animation="no-animation"
+              scroll="false">
+        <section class="home-container">
+        </section>
+      </ion-nav-view>
+      <style>
+        {{styles|raw}}
+      </style> 
+      <script>
+       /* function callScope(step) {
+          angular.element(document.querySelector('.button.icon-right.ion-chevron-right.button-clear.button-dark'))
+                  .scope().goTo(step);
+        }
+        window.addEventListener("message", function(event) {
+          callScope(event.data);
+        }, false);*/
+      </script>
+      <style>
+      .fade-in-out.ng-enter, .fade-in-out .ng-enter {
+        -webkit-animation: fadeIn 0.3s !important;
+        -moz-animation: fadeIn 0.3s !important;
+        animation: fadeIn 0.3s !important;
+        position: absolute !important; 
+      }
+      .fade-in-out.ng-leave, .fade-in-out .ng-leave {
+        -webkit-animation: fadeOut 0.3s !important;
+        -moz-animation: fadeOut 0.3s !important;
+        animation: fadeOut 0.3s !important;
+        position: absolute !important; 
+      }
+  </style>
+  </body>
+</html>

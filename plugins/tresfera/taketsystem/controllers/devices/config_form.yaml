@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Device
+
+# Model Form Field configuration
+form: $/tresfera/taketsystem/models/device/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Taketsystem\Models\Device
+
+# Default redirect location
+defaultRedirect: tresfera/taketsystem/devices
+
+# Create page
+create:
+    title: Create Device
+    redirect: tresfera/taketsystem/devices/update/:id
+    redirectClose: tresfera/taketsystem/devices
+
+# Update page
+update:
+    title: Edit Device
+    redirect: tresfera/taketsystem/devices
+    redirectClose: tresfera/taketsystem/devices
+
+# Preview page
+preview:
+    title: Preview Device

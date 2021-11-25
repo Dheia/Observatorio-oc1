@@ -1,0 +1,48 @@
+<?php
+	$model = new \Tresfera\Taketsystem\Models\Result();
+    $totalsObj = $model->getTotals($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+    
+	$totals = $totalsObj[0];
+?>
+<div class="scoreboard">
+	<div data-control="">
+		<h3><i class="icon-smile-o"></i>Cuestionarios</h3>
+		<!--<div class="row" style="padding: 0;">
+		    <div class="col-md-12">
+			    <h4>El <b><?=$totals->percentOk?></b> de los encuestados está satisfecho
+		    </div>
+		</div>-->
+		<div class="row">
+		    <div class="col-md-12">
+		    <div class="scoreboard-item title-value">
+		        <h4>Total</h4>
+		        <p><?=$totals->numQuestions?></p>
+		        <p class="description">preguntas</p>
+		    </div>
+		    <div class="scoreboard-item control-chart" data-control="chart-bar">
+		        <ul>
+		            <li data-color="#95b753">Satisfechos <span><?=$totals->numOk?> (<?=$totals->percentOk?>)</span></li>
+		            <li data-color="#e5a91a">Neutrales <span><?=$totals->numMix?> (<?=$totals->percentMix?>)</span></li>
+		            <li data-color="#cc3300">Insatisfechos <span><?=$totals->numKo?> (<?=$totals->percentKo?>)</span></li>
+		        </ul>
+		    </div>
+		    </div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+			<div class="scoreboard-item title-value">
+		        <h4>Total</h4>
+		        <p><?=$totals->numQuizz?></p>
+		        <p class="description">encuestas</p>
+		    </div>
+		    <div class="scoreboard-item control-chart" data-control="chart-pie">
+		        <ul>
+		            <li data-color="#95b753">Completadas <span><?=$totals->numQuizz?></span></li>
+		            <li data-color="#e5a91a">Parciales <span><?=$totals->numQuizz?></span></li>
+		            <li data-color="#cc3300">Inacabadas <span><?=$totals->numQuizz?></span></li>
+		        </ul>
+		    </div>
+			</div>
+		</div>
+	</div>
+</div>

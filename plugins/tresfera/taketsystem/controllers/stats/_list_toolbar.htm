@@ -1,0 +1,15 @@
+<?php
+	$groupBy = $this->getGroupBy();
+	
+?>
+<div data-control="toolbar">
+    <label>Escoger dimensión</label>
+    <select data-request="onChangeDimension" name="group_by" class="form-control custom-select">
+	    <option <?php if($groupBy == "device_id") echo "selected=selected" ?> value="device_id">Tablet</option>
+	    <option <?php if($groupBy == "city_id") echo "selected=selected" ?> value="city_id">Ciudad</option>
+	    <option <?php if($groupBy == "region_id") echo "selected=selected" ?> value="region_id">Provincia</option>
+	    <option <?php if($groupBy == "question_title") echo "selected=selected" ?> value="question_title">Pregunta</option>    
+	    <option <?php if($groupBy == "shop_id") echo "selected=selected" ?> value="shop_id">Tienda</option>    
+	    <option <?php if($groupBy == "quiz_id") echo "selected=selected" ?> value="quiz_id">Encuesta</option>    
+    </select>    
+</div>

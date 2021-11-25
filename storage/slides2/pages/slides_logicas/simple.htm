@@ -1,0 +1,29 @@
+title = "Portada simple"
+url = "/slides/slide/:code"
+description = "Logo de la empresa o imagen, 2 llamads a la acción una principal y más destacada y otra secundaria"
+type = "portada"
+layout = "render"
+
+[taketsystemTemplate]
+==
+
+<!-- Content -->
+<section>
+    <!-- Flex Items , Flex Box themselves -->
+    <div class="h-30">
+        <div>
+          <img class="logoBig" src="{fileupload name="banner_image" label="Imágen de bienvenida" imageWidth="660" imageHeight="180"}http://placehold.it/440x120{/fileupload}"/>
+        </div> <!-- Flex Items  -->
+    </div>
+    <div class="h-50">
+        <div>
+          <h1 style="font-size: 380%;">{text name="title" label="Título"}Tu opinión nos importa{/text}</h1>
+          <h2 style="color: #cc3300;">{text name="subtitle" label="Subtítulo"}¿Tienes 10 segundos?{/text}</h2>
+        </div>
+    </div>
+    <div class="h-20">
+        <div>
+	        <button class="button" ng-click="nextStep()">Empezar</button>
+        </div><!-- Flex Items  -->
+    </div>
+</section>

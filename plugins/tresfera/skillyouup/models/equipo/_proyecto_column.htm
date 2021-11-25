@@ -1,0 +1,10 @@
+<?php
+    if( isset($record->proyecto->name) )
+    {
+?>
+<p>
+    <a class="link" href="/backend/tresfera/skillyouup/proyectos/update/<?=$record->proyecto->id?>" title="<?=$record->proyecto->name?>"><?=$record->proyecto->name?></a>
+</p>
+<p><?=$record->name?></p>
+
+<?php } ?>

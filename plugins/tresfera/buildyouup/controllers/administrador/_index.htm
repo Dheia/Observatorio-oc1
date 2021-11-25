@@ -1,0 +1,74 @@
+<?php
+
+
+// FUNCTIONS
+function getCurrentFilters() {
+    $filters = [];
+    foreach (\Session::get('widget', []) as $name => $item) {
+        if (str_contains($name, 'Filter')) {
+            $filter = @unserialize(@base64_decode($item));
+            if ($filter) {
+                array_push($filters, $filter);
+            }
+        }
+    }
+
+    return $filters;
+}
+
+// --------- END FUNCTIONS ----------
+
+    $user = BackendAuth::getUser();
+
+?>
+
+<div class="control-breadcrumb">
+    <ul>
+        <li><a href="#">Buildyouup</a></li>
+        <li>Administración</li>
+    </ul>
+</div>
+
+
+<div class="encabezado">
+    <div class="dropdown" style="float:left;">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-plus">Crear</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Crear nuevos clientes, proyectos,...">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url('/backend/tresfera/clients/clients/create')?>" class="oc-icon-plus">Nuevo cliente</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url('/backend/tresfera/buildyouup/proyectos/create')?>" class="oc-icon-plus">Nuevo proyecto</a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown" style="float:left; margin-left: 5px">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary oc-icon-file-text">Informes</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Gestionar informes">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="oc-icon-list-alt">Generar informe</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="oc-icon-eye">Ver informe</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="oc-icon-paper-plane">Enviar informe</a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown" style="float:left; margin-left: 5px">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary icon-envelope-o">Enviar emails a los seleccionados</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Gestionar informes">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="oc-icon-list-alt">Activación</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="oc-icon-eye">Recordatorio</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" class="oc-icon-paper-plane">Activación+Recordatorio</a></li>
+        </ul>
+    </div>
+
+    <div style="float:right; margin-right:20px;">
+        <a class="btn btn-default oc-icon-cloud-upload" href="<?=url('/backend/tresfera/buildyouup/administrador/importar')?>">
+            Importar
+        </a>
+        <a class="btn btn-default oc-icon-server" href="<?=url('/backend/tresfera/buildyouup/administrador_csv')?>">
+            Preparar para Exportar
+        </a>
+    </div>
+</div>
+<div style="clear: left;"></div>
+<?= $this->makePartial('estadisticas', []) ?>
+<?= $this->listRender() ?>

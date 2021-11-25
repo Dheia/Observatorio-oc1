@@ -1,0 +1,58 @@
+description = "APP"
+==
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cofidis - Progreso</title>
+  <link rel="shortcut icon" href="https://material.io/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" type="text/css" href="{{['assets/app2/bundle-home.css','assets/app/css/custom-app.css' ]|theme}}">
+</head>
+<body>
+    <header>
+        <nav class="grey darken-1">
+            <div class="container">
+            <div class="nav-wrapper">
+           <!-- <span class="page-title brand-logo">{{ this.page.title }}</span> -->
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right">
+                <li>
+                <img src="{{'assets/app/images/mdpi/User.png'|theme}}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                </li>
+            </ul>
+            </div>
+        </div>
+        </nav>
+    </header>
+    <ul class="sidenav white-text" id="mobile-demo">
+        <div class="section">
+            
+            <li><h4>Vibran las competencias</h4></li>
+            <li class="white-text"><a href="sass.html">Progreso</a></li>
+            <li class="white-text"><a href="sass.html">Ranking</a></li>
+            <li class="white-text"><a href="sass.html">Configuración</a></li>
+        </div> 
+    </ul>
+  {% page %}
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="https://v2.zopim.com/?2G2b32wuLbFyYV8UnDauCqBoD1n6hDek";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+</script>
+  <script src="{{ [
+    '@jquery',
+    '@framework',
+    '@framework.extras',
+    'assets/app/js/materialize.js','assets/app/js/init.js']|theme }}"></script>
+
+    {% scripts %}
+  </body>
+</html>

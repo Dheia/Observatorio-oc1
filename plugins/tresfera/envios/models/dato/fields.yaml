@@ -1,0 +1,50 @@
+fields:
+    nom:
+        label: nom
+        span: auto
+        type: text
+    club:
+        label: Club
+        span: auto
+        type: text
+    email:
+        label: Email
+        span: auto
+        type: text
+    mobil:
+        label: mobil
+        span: auto
+        type: text
+    id_usuari:
+        label: id_usuari
+        span: auto
+        type: text
+    es_home:
+        label: es_home
+        span: auto
+        type: text
+    edat:
+        label: edat
+        span: auto
+        type: text
+    antiguetat:
+        label: antiguetat
+        span: auto
+        type: text
+    servei:
+        label: servei
+        span: auto
+        type: text
+    es_familiar:
+        label: es_familiar
+        span: auto
+        type: text
+    es_quota_parcial:
+        label: es_quota_parcial
+        span: auto
+        type: text
+    accessos_mes:
+        label: accessos_mes
+        span: auto
+        type: text
+    

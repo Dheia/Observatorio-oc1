@@ -1,0 +1,19 @@
+columns:
+    id:
+        label: id
+        type: number
+    evaluacion_id:
+        label: evaluacion_id
+        type: number
+    data:
+        label: data
+        type: text
+    generated_at:
+        label: generated_at
+        type: text
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime

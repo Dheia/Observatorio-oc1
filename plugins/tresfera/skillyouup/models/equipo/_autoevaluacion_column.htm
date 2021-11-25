@@ -1,0 +1,16 @@
+
+<a href="<?=url('/backend/tresfera/skillyouup/equipos/update/'.$record->id)?>" class="btn btn-xs btn-default pull-left">Gestionar</a>
+
+<br><br>
+<?php if(false) { ?> 
+
+    <div class="dropdown">
+        <a href="#" data-toggle="dropdown" class="btn btn-xs btn-warning pull-left">Enviar Email</a>
+    
+        <ul class="dropdown-menu" role="menu" data-dropdown-title="Enviar email">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="<?=url("/backend/tresfera/skillyouup/administrador/onSendEmailActivacion/?id=".$record->id)?>" class="oc-icon-paper-plane-o">Activación</a></li>
+        </ul>
+    </div>
+
+ <br><br>
+<?php } ?>

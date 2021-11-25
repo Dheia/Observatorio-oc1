@@ -1,0 +1,57 @@
+<!-- Content -->
+<section class="questions"  class="questions">
+<div class="bar bar-header bar-light">
+	  <img class="logoBig" cache-src="<?=$logo?>"/>
+	</div>
+	<div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+<div class="h-50">
+    <div>
+		<?php 
+		if(isset($question)) { ?>
+        <div data-role="pregunta" 
+	           data-question-type="multiquiz" 
+		       data-answer-type="sondeo"
+			   data-max-answers="<?=(1)?>" 
+			   data-question-title="<?=$question->title?>" 
+			   data-question-id="<?=$question->getId()?>">
+            <h1><?=$question->getTranslateAttribute('title',$lang)?></h1>
+        <?php 
+            	foreach($answers as $answer) {
+	            	
+	        ?>
+	            <div  class="voto-img">
+		           <?php if(($answer->icon)) { 
+		           ?>
+		            <img voto data-voto="1" 
+					    data-value="<?=$answer->id?>" 
+						data-value-type="sondeo" ng-click="voto($event)" cache-src="<?=url($answer->icon->getPath())?>"/>
+						<span><?=$answer->getTranslateAttribute('title',$lang)?></span>
+					<?php } else { ?>
+						<button voto data-voto="1" 
+						    data-value="<?=$answer->id?>" 
+							data-value-type="sondeo" ng-click="voto($event)" type="submit" class="button button-dark">
+								<?=$answer->getTranslateAttribute('title',$lang)?>
+						</button>
+					<?php } ?>
+	            </div>	
+	        <?php
+            	}
+            ?>
+      	</div>
+      	<?php
+      	}
+      	?>
+	</div>
+</div>
+<div class="bar bar-footer">
+    <button style="display: none" ng-click="nextStep(500)" type="submit" id="button-nextStep" class="button icon-right ion-chevron-right button-clear button-dark"><?=Lang::get('tresfera.taketsystem::lang.'.$lang.'.slides.continue')?></button>
+</div>  
+<style>
+.voto-img {
+	width: <?=(100/($answers->count()?$answers->count():1)-4)?>%;
+}	
+</style>
+</section>

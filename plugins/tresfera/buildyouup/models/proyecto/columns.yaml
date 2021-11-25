@@ -1,0 +1,34 @@
+columns:
+    id:
+        label: ID
+        type: number
+    client_id:
+        label: 'tresfera.buildyouup::lang.proyectos.client_id'
+        type: number
+    name:
+        label: 'tresfera.buildyouup::lang.plugin.name'
+        type: text
+    email:
+        label: 'tresfera.buildyouup::lang.proyectos.email'
+        type: text
+    tipo:
+        label: 'tresfera.buildyouup::lang.proyectos.tipo'
+        type: number
+    fecha_inicio:
+        label: 'tresfera.buildyouup::lang.proyectos.finicio'
+        type: text
+    fecha_fin:
+        label: 'tresfera.buildyouup::lang.proyectos.fin'
+        type: text
+    num_licencias:
+        label: 'tresfera.buildyouup::lang.proyectos.nlicencia'
+        type: number
+    description:
+        label: 'tresfera.buildyouup::lang.proyectos.descripcion'
+        type: text
+    estado:
+        label: 'tresfera.buildyouup::lang.proyectos.estado'
+        type: number
+    gestor_id:
+        label: 'tresfera.buildyouup::lang.proyectos.gestor'
+        type: number

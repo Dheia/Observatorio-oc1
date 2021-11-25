@@ -1,0 +1,125 @@
+<?php
+	$groupBy = $this->getGroupBy();
+	$dateRange = $this->getDateRange();
+	
+	$cuestionarios = \Tresfera\Statistics\Models\Result::getCuestionarios();
+	$filter_cuestionario = $this->getCuestionario();
+	$actual_link = "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	
+?>
+<form action="<?=$actual_link?>" name="basic_filter" method="post">
+<div class="row">
+	<div class="col-md-4">
+	    <!--<label>Cuestionario</label>
+		<select onChange="document.basic_filter.submit()" name="cuestionario" class="form-control custom-select">
+			<option selected=selected value = "Tots">Tots</option>
+			<?php
+				foreach($cuestionarios as $cuestionario) {
+			?>
+			<option <?php if($cuestionario->id == $filter_cuestionario) echo "selected=selected" ?> value="<?=$cuestionario->id?>"><?=$cuestionario->title?></option>
+			<?php
+				}
+			?> 
+		 
+	    </select>-->
+	</div>
+	<div class="col-md-8">
+	    <label>Periodo</label>
+	    <input type="hidden" id="dateRange" name="dateRange" value="<?=json_encode($dateRange)?>">
+	    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+		    <i class="icon-calendar"></i>
+		    <span></span> <b class="caret"></b>
+		</div>
+	</div>
+	<!--<div class="col-md-2">
+		<a
+			target="_blank"
+	        href="<?= Backend::url('tresfera/statistics/stats/rapport') ?>"
+	        class="btn btn-primary oc-icon-print"
+		    style="margin-top: 21px; padding: 7px 16px;">
+		        Informe
+    	</a>
+	</div>-->
+</div>
+</form>
+
+<script>
+
+
+$(function() {
+ 
+    $('#reportrange span').html(moment('<?=$dateRange["start"]?>').format('DD-MM-YYYY') + ' - ' + moment('<?=$dateRange["end"]?>').format('DD-MM-YYYY'));
+ 
+    $('#reportrange').daterangepicker({
+        format: 'DD/MM/YYYY',
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment(),
+        minDate: '01/01/2012',
+        maxDate: moment(),
+       // dateLimit: { days: 60 },
+        showDropdowns: true,
+        showWeekNumbers: false,
+        timePicker: false,
+        timePickerIncrement: 1,
+        timePicker12Hour: true,
+        ranges: {
+           'Hoy': [moment(), moment()],
+           'Ayer': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Últimos 7 dias': [moment().subtract(6, 'days'), moment()],
+           'Últimos 30 dias': [moment().subtract(29, 'days'), moment()],
+           'Este mes': [moment().startOf('month'), moment().endOf('month')],
+           'Último mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        opens: 'left',
+        drops: 'down',
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-primary',
+        cancelClass: 'btn-default',
+        separator: ' a ',
+        locale: {
+            applyLabel: 'Enviar',
+            cancelLabel: 'Cancelar',
+            fromLabel: 'De',
+            toLabel: 'a',
+            customRangeLabel: 'Personalizado',
+            daysOfWeek: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi','Sa'],
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Augosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            firstDay: 1
+        }
+    }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+        $('#reportrange span').html(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY'));
+        var date = {
+					start: start.toISOString(),
+					end: end.toISOString()
+					}
+	    console.dir(date);
+	    console.dir(JSON.stringify(date));
+	    $("#dateRange").val(JSON.stringify(date));
+		document.basic_filter.submit();
+        
+    });
+    
+    $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+	    var date = {
+					start: picker.startDate.toISOString(),
+					end: picker.endDate.toISOString()
+					}
+	    console.dir(date);
+	    console.dir(JSON.stringify(date));
+	    $("#dateRange").val(JSON.stringify(date));
+		document.basic_filter.submit();
+	});
+ 
+});
+</script>
+<style>
+.control-breadcrumb label {
+  display: block;
+  color: #fff;
+}
+.control-breadcrumb .custom-select.select2-container .select2-choice {
+  height: 32px;
+  line-height: 32px;
+ }
+</style>

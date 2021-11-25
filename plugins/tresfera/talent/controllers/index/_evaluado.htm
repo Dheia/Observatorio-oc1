@@ -1,0 +1,237 @@
+<?php
+
+use Tresfera\Talent\Models\Proyecto;
+use Tresfera\Talent\Models\Evaluacion;
+use Tresfera\Talent\Models\Evaluacion_Evaluador;
+use Tresfera\Talent360\Classes\UserControl;
+
+$fecha_actual = new DateTime( date("Y/m/d") );
+
+
+$n_evaluaciones_finalizadas = Evaluacion::join('tresfera_talent_proyecto', 'tresfera_talent_proyecto.id', '=', 'tresfera_talent_evaluacion.proyecto_id')
+                                        ->where('tresfera_talent_evaluacion.user_id', $user->id)
+                                        ->where("tresfera_talent_proyecto.fecha_fin", "<=", \Carbon\Carbon::now())
+                                        ->count();
+
+$n_evaluaciones_en_curso = Evaluacion::where('tresfera_talent_evaluacion.user_id', $user->id)
+                                        ->join('tresfera_talent_proyecto', 'tresfera_talent_proyecto.id', '=', 'tresfera_talent_evaluacion.proyecto_id')
+                                        ->where("tresfera_talent_proyecto.fecha_fin", ">", \Carbon\Carbon::now())
+                                        ->count();
+
+$n_evaluaciones_completadas = Evaluacion::where('user_id', $user->id)->where('estado',2)->count();
+$n_evaluaciones_no_completadas = Evaluacion::where('user_id', $user->id)->where('estado',1)->count();
+
+$evaluaciones_open = Evaluacion::join('tresfera_talent_proyecto', 'tresfera_talent_proyecto.id', '=', 'tresfera_talent_evaluacion.proyecto_id')
+                                    ->where('tresfera_talent_evaluacion.user_id', $user->id)
+                                    ->where('tresfera_talent_evaluacion.estado', 1)
+                                    ->where("tresfera_talent_proyecto.fecha_fin", ">", \Carbon\Carbon::now())
+                                    ->select("tresfera_talent_evaluacion.*")
+                                    ->get();
+
+$evaluaciones_close = Evaluacion::join('tresfera_talent_proyecto', 'tresfera_talent_proyecto.id', '=', 'tresfera_talent_evaluacion.proyecto_id')
+                                    ->where('tresfera_talent_evaluacion.user_id', $user->id)
+                                    ->where(function($q) {
+                                        $q->where('tresfera_talent_evaluacion.estado', 2)
+                                          ->orWhere("tresfera_talent_proyecto.fecha_fin", "<=", \Carbon\Carbon::now());
+                                    })                                    
+                                    ->select("tresfera_talent_evaluacion.*")
+                                    ->get();
+
+
+
+?>
+
+
+<div id="estadisticas">
+    <h4 class="mt ml" style="float:left">Estadísticas Generales</h4>
+    <!--<h4 class="mt mr" style="float:right">Estadísticas Emails</h4>-->
+    
+    <div style="clear: left;">
+        <div class="scoreboard" style="float:left">
+            <div class="" data-control="toolbar">
+    
+                <div class="scoreboard-item title-value">
+                    <h4><b>Evaluaciones Finalizadas</b></h4>
+                    <div class="scoreboard-item control-chart" data-control="chart-pie">
+                            <ul>
+                                <li data-color="#e5a91a">Evaluaciones en Curso <span><?=$n_evaluaciones_en_curso?></span></li>
+                                <li data-color="#95b753">Evaluaciones Finalizadas <span><?=$n_evaluaciones_finalizadas?></span></li>
+                            </ul>
+                        </div>
+                </div>
+                <div class="scoreboard-item title-value">
+                    <h4><b>Evaluaciones Completadas</b></h4>
+                    <div class="scoreboard-item control-chart" data-control="chart-pie">
+                            <ul>
+                                <li data-color="#e5a91a">Evaluaciones No Completadas <span><?=$n_evaluaciones_no_completadas?></span></li>
+                                <li data-color="#95b753">Evaluaciones Completadas <span><?=$n_evaluaciones_completadas?></span></li>
+                            </ul>
+                        </div>
+                </div>
+    
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+<div style="clear: left;">
+<h4><?= e(trans('tresfera.talent::lang.evaluadores.ev_evaluado')) ?></h4>
+
+<?php
+muestraEvaluaciones($evaluaciones_open,$this->user);
+
+?>
+
+<br/>
+
+<h4><?= e(trans('tresfera.talent::lang.evaluadores.ev_finalizadas')) ?></h4>
+
+<?php
+muestraEvaluaciones($evaluaciones_close,$this->user, true);
+?>
+</div>
+
+<?php
+
+function muestraEvaluaciones($evaluaciones, $user, $finalizadas = false)
+{
+    $fecha_actual = new DateTime( date("Y/m/d") );
+?>
+
+    <div class="control-list">
+        <table class="table data">
+            <thead>
+                <tr>
+                    <th class="active sort-desc"><span><?= e(trans('tresfera.talent::lang.evaluadores.ev_project')) ?></span></th>
+                    <th><span><?= e(trans('tresfera.talent::lang.evaluacion.estado')) ?></span></th>
+                    <th><span><?= e(trans('tresfera.talent::lang.evaluadores.ev_tiemporestante')) ?></span></th>
+                    <th><span><?= e(trans('tresfera.talent::lang.evaluacion.evaluacion')) ?></span></th>
+                       
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if(count($evaluaciones)>0)
+                {
+                    foreach($evaluaciones as $index=>$evaluacion)
+                    {
+                        $proyecto = Proyecto::where('id', $evaluacion->proyecto_id)->first();
+                        if(!isset($proyecto->id)) continue;
+                        ?>
+                        <tr>
+                            <td>
+                            <?=$proyecto->name?>
+                            </td>
+                            
+                            <td>
+                            <?php
+                                //  ----------- ESTADO DE LA EVALUACION -----------
+                                if($evaluacion->estado == 1 && !$evaluacion->isCompleted())
+                                {
+                                    echo '<p class="text-success">En curso</p>';
+                                }
+                                else if($evaluacion->estado == 2 || $evaluacion->isCompleted())
+                                {
+                                    echo '<p class="text-danger">Completada</p>';
+                                }
+                             ?>
+                            </td>
+                            <td>
+                                <?php
+                                //  ----------- TIEMPO RESTANTE -----------
+                                if(isset($proyecto->fecha_fin))
+                                {
+                                    $d2 = \Carbon\Carbon::parse($proyecto->fecha_fin);
+                                    $fecha_actual = \Carbon\Carbon::now();
+                                    $diff = $fecha_actual->diffInDays($d2,false);
+                                    ?>
+                                
+                                    <?php if($diff < 0) { ?> 
+                                        <p class="<?='text-success'?>">
+                                            <?= e(trans('tresfera.talent::lang.evaluadores.finalizado')) ?>
+                                        </p>
+                                    <?php } else { ?> 
+                                        
+                                        <p class="<?=($diff < 5) ? 'text-danger' : ''?>">
+                                            <?=e(trans('tresfera.talent::lang.evaluadores.finaliza_en')) . " " . $diff . e(trans('tresfera.talent::lang.evaluadores.dias'));?>
+                                        </p>
+                                    <?php } 
+                                }
+                                ?>
+                                    
+                            </td>
+                            <?php
+                            if($evaluacion->estado == 1 && !$evaluacion->isCompleted())
+                            {
+                            ?>
+                            <td>
+                                <a
+                                    href="<?=$evaluacion->getUrl()?>"
+                                    target="_blank"
+                                    class="btn btn-secondary btn-sm">
+                                    Cuestionario
+                                </a>
+                            </td>
+                            <?php
+                            } elseif(($evaluacion->estado == 2 || $evaluacion->isCompleted()) 
+                                        AND is_array($evaluacion->params['permissions'])
+                                        AND in_array("view_report",$evaluacion->params['permissions'])) { 
+                                if(!isset($evaluacion->rapport->id)) {
+                                    ?>
+                                    <td>
+                                        <a
+                                            href="/backend/talent/index/onGenerateRapport?id=<?=$evaluacion->id?>"
+                                            class="btn btn-secondary btn-sm">
+                                            Generar Informe
+                                        </a>
+                                    </td>
+                                    <?php
+                                } else {
+                            ?>
+                            <td>
+                                <?php  if(!$evaluacion->proyecto->hasLicencias()) { ?>
+                                   <!-- <button
+                                        class="btn btn-secondary btn-sm">
+                                        Sin licencias
+                                    </button>-->
+                                    <?php
+                                } else {
+                                    ?>
+                                    <a
+                                        href="<?=$evaluacion->rapport->getUrl()?>"
+                                        target="_blank"
+                                        class="btn btn-primary btn-sm">
+                                        Ver informe
+                                    </a>
+                                    <?php
+                                } ?>
+                                    
+                                </td>
+                            <?php 
+                                }
+                            }
+                            ?>
+
+                        </tr>
+                        <?php
+                    }
+                }
+                else
+                {
+                    ?>
+                    <tr class="no-data">
+                        <td colspan="100" class="nolink">
+                            <p class="no-data">
+                                <?= e(trans('tresfera.talent::lang.evaluadores.ev_noev')) ?>    
+                            </p>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                    ?>
+            </tbody>
+        </table>
+    </div>
+<?php
+}

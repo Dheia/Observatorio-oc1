@@ -1,0 +1,76 @@
+<?php 
+	$cuestionarios = \Tresfera\Statistics\Models\Result::getCuestionarios();
+?>
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li><a href="<?=url("backend/tresfera/statistics/stats/dashboard")?>">Análisis</a></li>
+		        <li class="h3">
+		        <?php 
+		        	if(get('detalles')) {
+			    ?>
+			    	<?=get("filterName")?>    	
+			    <?php
+		        	} else {
+			    ?>
+			    	Resultados   	
+			    <?php    	
+		        	}
+		        ?>
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+<?php Block::endPut() ?>
+<?php echo $this->makePartial("filter_new"); ?>  
+<?php echo $this->makePartial("modules/nps"); ?>
+<?php if(count($cuestionarios)==1) { ?>
+<!--<div class="padded-container container-flush">
+                <div class="callout fade in callout-info no-icon no-subheader">
+                    <button type="button" class="close" data-request="onHideBackendHint" data-request-data="name: 'mja_mail_hint'" data-dismiss="callout" aria-hidden="true">×</button>
+                        <div class="content">
+                            <p>Actualmente no hay ningún cuestionario programado. Debe crearlo para empezar a recopilar información de sus clientes.</p>
+			                    <a class="btn btn-warning" href="<?= Backend::url('tresfera/taketsystem/quizzes/create') ?>">Crear cuestionario</a>
+			                
+    </div>
+</div>-->
+<?php } ?>
+<div class="row">
+    <div class="col-md-12">
+	    <!--<div id="chartdiv" style="width: 100%; height: 310px; background-color: #FFFFFF;" ></div>-->
+	    <?php 
+        	if(get('detalles')) {
+				if(get('filter')=='citycp_name'||get('filter')=='shop_id') {
+					echo $this->makePartial("modules/generales");
+				} else {
+					echo $this->makePartial("modules/barstats");
+				}
+        	} else {
+	    ?>
+	    	
+    <?php
+    					echo $this->makePartial("modules/nps_logico");
+    ?>
+      
+      
+	    <?php    	
+        	}
+        ?>
+	   
+    </div>
+</div>
+<?php
+					echo $this->makePartial("modules/segmentaciones");
+
+?>
+
+<style>
+.col-md-4 .bar-line {
+    float: none;
+    padding: 7px;
+}
+</style>

@@ -1,0 +1,48 @@
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout  fancy-layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+		
+    <?= Form::close() ?>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('tresfera/taketsystem/campaigns') ?>" class="btn btn-default">Return to campaigns list</a></p>
+
+<?php endif ?>
+<script>
+	$( document ).ready(function() {
+		var iframe = $('iframe');
+		$(iframe).on("load", function () {
+		    // do something once the iframe is loaded
+		    $(this).contents().find("[data-request=onSave]").click(function(){
+				console.log("click hecho!")
+			});	
+		});
+		
+	});
+	function newTab() {
+		$('#Form-primaryTabs').ocTab('addTab', 'Nueva página', '<div style="min-height: 422px;" class="form-group  partial-field span-full  layout-relative " data-field-name="slide.new" id="Form-field-Quiz-slide.new-group"><iframe id="responseCode" src="<?= Backend::url("tresfera/taketsystem/slides/create/?incrust=1&quizz_id=".$this->params[0]) ?>"></iframe></div>',null,'layout-cell');
+	}
+	function removeTab() {
+		$('#Form-primaryTabs').ocTab('closeTab', '.nav-tabs > li.active') 
+	}
+	
+	
+</script>
+<style>
+	body {
+		 /* overflow: hidden;*/
+		 
+	}
+	div.tab-content > div:first-child {
+	  padding: 15px !important;
+	}
+	html, body {
+	  height: 99%;
+	}
+</style>

@@ -1,0 +1,18 @@
+plugin:
+    name: 'tresfera.envios::lang.plugin.name'
+    description: 'tresfera.envios::lang.plugin.description'
+    author: Tresfera
+    icon: oc-icon-envelope-o
+    homepage: ''
+navigation:
+    envios:
+        label: Envíos
+        url: tresfera/envios/envios
+        icon: icon-envelope-o
+        permissions:
+            - 'envios:acceso'
+        order: '100'
+permissions:
+    'envios:acceso':
+        tab: Enviaments
+        label: 'Acceso al plugin'

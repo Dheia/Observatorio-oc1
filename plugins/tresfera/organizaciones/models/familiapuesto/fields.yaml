@@ -1,0 +1,18 @@
+fields:
+    name:
+        label: Nombre
+        span: auto
+        type: text
+    empresa_id:
+        label: Empresa
+        showSearch: true
+        span: auto
+        type: dropdown
+    personas:
+        span: full
+        path: $/tresfera/organizaciones/controllers/familiapuestos/_relation_puestos.htm
+        hidden: 0
+        context:
+            - update
+            - preview
+        type: partial

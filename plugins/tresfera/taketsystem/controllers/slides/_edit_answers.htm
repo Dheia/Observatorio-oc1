@@ -1,0 +1,83 @@
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="popup">&times;</button>
+        <h4 class="modal-title">Modificar respuesta</h4>
+    </div>
+
+    <?php if (!$this->fatalError): ?>
+
+        <div class="modal-body">
+
+	        <form method="POST" action="http://devel.taket.es/backend/tresfera/taketsystem/slides/update/<?=$slide_id?>" accept-charset="UTF-8" class="layout">
+		        <div class="form-group  widget-field " data-field-name="name" id="Form-field-Slide-name-group">
+			        <label for="type">
+				        Tipo de respuesta           
+			        </label>
+			        <select id="type" name="type" class="form-control custom-select select2-offscreen" title="
+	                Tipo            " tabindex="-1">
+	                    <option <?php if($value->type == 3) echo "selected=selected"; ?> value="3">
+	                    	Satisfecho            
+	                    </option>
+	                    <option <?php if($value->type == 2) echo "selected=selected"; ?> value="2">
+	                    	Neutro            
+	                    </option>
+	                    <option <?php if($value->type == 1) echo "selected=selected"; ?> value="1">
+	                    	Insatisfecho            
+	                    </option>
+	            	</select>
+	            </div>
+		        <?php foreach($langs as $code => $lang) { ?>
+		        	<div class="form-group  widget-field " data-field-name="name" id="Form-field-Slide-name-group">
+				    	<label for="Form-field-Slide-syntax_data-q1">
+			                <?=$lang?>           
+		                </label>
+				         <input
+					        type="text"
+					        name="RLTranslate[<?=$code?>]"
+					        id="RLTranslate_<?=$code?>"
+					        value="<?=$value->getTranslateAttribute('title',$code)?>"
+					        class="form-control"
+					        autocomplete="off"
+					        maxlength="255"
+					    />
+				    </div>
+			    <?php } ?>
+		        <button 
+					data-request="onSaveAnswer"
+					data-request-data="slide_id: '<?=$slide_id?>', question_id: '<?=$question_id?>', answer_id: '<?=$answer_id?>', field_id: '<?=$field_id?>'"
+					class="btn btn-primary"
+					data-dismiss="popup">Guardar</button>
+	        </form>
+	        
+	        
+	        
+          
+
+        </div>
+        <div class="modal-footer">
+            
+        </div>
+
+    <?php else: ?>
+
+        <div class="modal-body">
+            <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+        </div>
+        <div class="modal-footer">
+            <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="popup">
+                <?= e(trans('backend::lang.form.close')) ?>
+            </button>
+        </div>
+
+    <?php endif ?>
+
+    <script>
+        setTimeout(
+            function(){ $('#createForm input.form-control:first').focus() },
+            310
+        )
+    </script>
+

@@ -1,0 +1,37 @@
+title = "Enunciado - 2 preguntas - 2 respuestas "
+url = "/slides/slide/:code"
+description = "Haremos 2 preguntas con 2 respuestas sobre enunciado principal"
+type = "investigacion"
+layout = "render"
+
+[taketsystemTemplate]
+==
+
+<!-- Content -->
+<!-- Content -->
+<section>
+    <!-- Flex Items , Flex Box themselves -->
+    <div class="h-10">
+        <div>
+          <h1 class="bg-black">{text name="enunciado" label="Enunciado"}Como valoras al consultor que te ha atendido:{/text}</h1>
+        </div> <!-- Flex Items  -->
+    </div>
+    <div class="h-40">
+        <div>
+          <div data-role="pregunta" data-type="bool">
+            <h2>{text name="question_1" label="Primera pregunta"}trato y amabilidad{/text}</h2>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="2" class="smile smile-3"></div>
+          </div>
+        </div>
+    </div>
+    <div class="h-40">
+        <div>
+          <div data-role="pregunta" data-type="bool">
+            <h2>{text name="question_2" label="Segunda pregunta"}respuestas claras y concisas{/text}</h2>
+            <div voto ng-click="voto($event)" data-voto="2" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="2" data-value="2" class="smile smile-3"></div>
+          </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,16 @@
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input {
+    border-bottom-color: rgba(255,255,255,.42);
+}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__icon {
+    color: #918598;
+}
+input:-internal-autofill-selected {
+    background-color: #918598 !important; 
+}
+
+.mdc-button--raised, .mdc-button-outline-width { 
+    width: 100% !important;
+}
+button.mdc-button.cancel.mdc-ripple-upgraded {
+    margin-top: 20px;
+}

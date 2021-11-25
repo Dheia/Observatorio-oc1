@@ -1,0 +1,35 @@
+<?php
+if(count($answers)) {
+?>
+<label>
+Respuestas
+</label>
+<div class="row">
+	
+<?php
+$icons = [
+	1 => 'icon-frown-o',
+	2 => 'icon-meh-o',
+	3 => 'icon-smile-o'
+];
+		if(!isset($slide_id)) $slide_id = $this->model->id;
+		
+	foreach($answers as $answer) {
+		
+		?>
+		<div class="col-md-4 answer-smiles">
+			    <a
+			        href="javascript:;"
+			        data-handler="onEditAnswer"
+					data-control="popup"
+					data-request-data="answer_id: '<?= $answer->id ?>', field_id: '<?= $field_id ?>', slide_id: '<?=$slide_id?>'">
+			        <i class="ico-square <?=$icons[$answer->type]?>"></i>
+					<?=$answer->title?>
+			    </a>
+			
+		</div>
+		<?php
+	}
+}
+?>
+</div>

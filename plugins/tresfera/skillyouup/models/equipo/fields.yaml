@@ -1,0 +1,58 @@
+fields:
+    evaluado_details_section:
+        label: 'tresfera.skillyouup::lang.evaluadores.ev_evaluado'
+        type: section
+        comment: 'tresfera.skillyouup::lang.evaluadores.ev_datos'
+        span: left
+    _url:
+        span: right
+        type: partial
+        path: $/tresfera/skillyouup/controllers/equipos/_url.htm
+    name:
+        label: 'tresfera.skillyouup::lang.proyectos.name'
+        span: left
+    lang:
+        label: 'tresfera.skillyouup::lang.proyectos.lang'
+        type: dropdown
+        span: left
+        options:
+            0: 'tresfera.skillyouup::lang.proyectos.mantener'
+            es: 'tresfera.skillyouup::lang.proyectos.esp'
+            en: 'tresfera.skillyouup::lang.proyectos.eng'
+    
+#        trigger:
+#            action: hide
+#            field: tipo[autoevaluacion]
+#            condition: checked
+
+
+tabs:
+    fields:
+        stats_partial:
+            span: full
+            type: partial
+            path: seguimiento
+            tab: 'tresfera.skillyouup::lang.evaluacion.seguimiento'
+       
+        players:
+            prompt: Jugador
+            span: full
+            type: repeater
+            tab: Jugadores
+            form:
+              fields:
+                name:
+                  label: 'tresfera.skillyouup::lang.proyectos.name'
+                  span: auto
+                email:
+                  label: 'tresfera.skillyouup::lang.proyectos.email'
+                  span: auto
+                lang:
+                    label: 'tresfera.skillyouup::lang.proyectos.lang'
+                    type: dropdown
+                    span: left
+                    options:
+                        0: 'tresfera.skillyouup::lang.proyectos.mantener'
+                        es: 'tresfera.skillyouup::lang.proyectos.esp'
+                        en: 'tresfera.skillyouup::lang.proyectos.eng'
+        

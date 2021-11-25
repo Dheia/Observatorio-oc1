@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Segmentacion
+
+# Model Form Field configuration
+form: $/tresfera/taketsystem/models/segmentacion/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Taketsystem\Models\Segmentacion
+
+# Default redirect location
+defaultRedirect: tresfera/taketsystem/segmentaciones
+
+# Create page
+create:
+    title: Create Segmentacion
+    redirect: tresfera/taketsystem/segmentaciones/update/:id
+    redirectClose: tresfera/taketsystem/segmentaciones
+
+# Update page
+update:
+    title: Edit Segmentacion
+    redirect: tresfera/taketsystem/segmentaciones
+    redirectClose: tresfera/taketsystem/segmentaciones
+
+# Preview page
+preview:
+    title: Preview Segmentacion

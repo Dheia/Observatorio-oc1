@@ -1,0 +1,504 @@
+title = "Impacto y clima IESE English"
+url = "/slides/slide/:code"
+layout = "render"
+description = "Impacto y clima"
+is_hidden = 0
+
+[taketsystemTemplate]
+==
+{variable type="text" name="title" label="Título"}{/variable}
+
+{variable type="text" name="continueText" default="Continuar" label="Texto botón continuar"}{/variable}
+
+{variable type="text" span="auto" name="numItems" label="Progreso: Pantalla actual"}{/variable}
+{variable type="text" span="auto" name="totalITems" label="Progreso: Total pantallas"}{/variable}
+{variable type="checkbox" span="auto" name="showProgres" label="Mostrar progreso"}{/variable}
+
+
+{repeater name="questions" prompt="Añadir otra pregunta"}
+{variable type="text" name="question" label="Motivo"}{/variable}
+{variable type="text" span="auto" name="categoria" label="Categoria"}{/variable}
+{variable type="checkbox" span="auto" name="noAnalizable" label="No analizable"}{/variable}
+{/repeater}
+
+{mediafinder name="bg" label="Fondo"}{/mediafinder}
+{variable type="codeeditor" name="css" label="Personalizado"}{/variable}
+--
+<div id="{{slide_id}}" class="main bg motivos">
+  <div class="row">
+    {% if showProgres %}
+
+    <div class="col">
+      <div class="num-progress">
+        {{numItems}}
+      </div>
+      <div class="progress">
+        <div class="percent" style="width: {{ numItems / totalITems * 100 }}%">
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="col">
+      <h1 class="title w-100">{{title}}</h1>
+    </div>
+  </div>
+  <div class="row" id="question">
+    <div class="col">
+      {% for question in questions %}
+      <div class="h-10">
+        <div>
+          <div  data-role="pregunta" 
+                data-answer-type="icons" 
+                data-question-categoria="{{question.categoria}}" 
+                data-question-title="{{question.question}}" 
+                data-no-analizable="{{question.noAnalizable}}" 
+                data-question-type="motivo" 
+                class="pregunta horizontal">
+            <h2>{{question.question}}</h2>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="1" class="smile circle circle-1">
+              <span data-type="value">Never</span>
+            </div>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="2" class="smile circle circle-2">
+              <span data-type="value">Hardly ever</span>
+            </div>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="3" class="smile circle circle-3">
+              <span data-type="value">Sometimes</span>
+            </div>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="4" class="smile circle circle-4">
+              <span data-type="value">Often</span>
+            </div>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="5" class="smile circle circle-5">
+              <span data-type="value">Always</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%endfor%}
+
+    </div>
+  </div>
+
+  <div id="continue">
+    <button ng-click="prevStep()" type="submit" class="button goback icon-right ion-chevron-right button-clear button-dark">
+            Back
+        </button>
+    <button style="display: none" ng-click="nextStep()" type="submit" class="button icon-right ion-chevron-right button-clear button-dark">
+      Continue
+    </button>
+  </div>
+
+</div>
+
+<style>
+button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -180px;
+}
+section {
+  position: absolute;
+  width: 1200px;
+  height: 700px;
+}
+{{css}}
+.bg {
+    background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.main {
+    height: 100%;
+    width: 100%;
+}
+.circle {
+  height: 150px;
+    background-size: 100%;
+    background-position: 0;
+}
+.smile span {
+    font-size: 70%;
+    background-color: #fff;
+    text-align: center;
+    list-style: none;
+    line-height: 100%;
+    height: auto;
+    display: block;
+    width: 100%;
+    word-wrap: initial;
+    margin-top: 0;
+}
+#question {
+    position: absolute;
+    top: 64%;
+}
+.circle.circle-1 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn1.png);
+}
+.circle.circle-2 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn2.png);
+}
+.circle.circle-3 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn3.png);
+}
+.circle.circle-4 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn4.png);
+}
+.circle.circle-5 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn5.png);
+}
+.button.button-dark.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 0px 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 165px;
+}
+.button.icon-right:before {
+display: none;
+}
+
+
+div#back {
+    position: absolute;
+}
+.bg {
+    background-position: bottom left;
+    background-size: 100%;
+}
+.row {
+    display: block;
+    width: 100%;
+    position: absolute;
+}
+.col-25 {
+    max-width: 31.3333%;
+    display: inline-block;
+    margin-top: 27px;
+}
+.pregunta.horizontal h2 {
+    text-align: left;
+    display: inline-block;
+    width: 45%;
+    font-weight: normal;
+    font-size: 19px;
+}
+.col-12 {
+  max-width: 11.3333%;
+  display: inline-block;
+}
+h1, .h1 {
+    font-size: 110%;
+    color: #fff;
+}
+.transparent {
+    vertical-align: middle;
+}
+
+.transparent span {
+  padding: 15px 30px;
+  line-height: 100%;
+  font-size: 80%;
+  display: block;
+  color: #fff;
+  font-style: italic;
+  background: rgba(255,255,255,.5);
+  width: 97%;
+}
+.percent {
+    background: rgba(255, 255, 255, 0.6);
+    height: 10px;
+}
+.progress {
+    width: 60%;
+    margin-left: 20%;
+    border: 2px solid #fff;
+    margin-bottom: 25px;
+}
+.num-progress {
+    position: relative;
+    left: -29%;
+    color: #fff;
+    margin-bottom: 11px;
+    margin-top: 23px;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #e3c06a;
+    border-color: #e3c06a;
+}
+body, .ionic-body {
+    font-size: 26px;
+}
+.circle {
+    height: 150px;
+    background-size: 120%;
+    background-position: -10px;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #e3c06a;
+    border-color: #e3c06a;
+    left: 50%;
+    margin-left: -40px;
+}
+#question {
+    position: absolute;
+    top: 37%;
+}
+.pregunta.horizontal h2 {
+    color: #fff;
+}
+.pregunta.horizontal .smile {
+    vertical-align: middle;
+    margin-top: -10px;
+    margin-left: 2%;@media only screen and (max-width: 600px) {
+  .bg {
+      background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+      background-position: center;
+      background-size: 100%;
+      background-repeat: no-repeat;
+  }
+  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 0%;
+}
+#start button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 67%;
+    margin-left: 48%;
+    left: -62px;
+}
+h1.title.w-100 {
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 24px;
+    top: 2%;
+    /* left: 520px; */
+    color: #000;
+}
+h3.title {
+    position: relative;
+    display: inline;
+    font-size: 19px;
+    font-weight: normal;
+    width: 20%;
+    text-align: center;
+    left: 10%;
+    margin-left: -10%;
+    margin-top: 308px;
+    color: #000;
+}
+}
+    height: 75px;
+    width: 66px;
+    background-size: 145%;
+    background-position-y: -7px;
+}
+.smile span {
+  display: none;
+
+     background: transparent;
+    color: #fff;
+
+     margin-top: -30px;
+    vertical-align: bottom;
+}
+#question > .col > *:first-child span {
+    display: block;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #fff;
+    border-color: #fff;
+    left: 67%;
+    margin-left: -40px;
+    bottom: 80px;
+}
+.circle.noselect {
+    background-image: url(//talentapp360.taket.es/storage/app/media/test/btn_active.png);
+}.col-25 {
+    max-width: 31.1333%;
+    display: inline-block;
+    margin-top: 27px;
+    text-align: center;
+    margin-left: 20px;
+}
+.smile.noselect {
+    background-position-y: -10px;
+}
+.h-10 {
+    padding-left: 90px;
+}
+
+@media only screen and (max-width: 600px) {
+    .motivos.bg {
+      background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+  }
+  .view-container {
+    height: calc(100% + 60px);
+}
+  .motivos button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 0%;
+}
+.motivos #start button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 67%;
+    margin-left: 48%;
+    left: -62px;
+}
+.motivos h1.title.w-100 {
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 24px;
+    top: 2%;
+    /* left: 520px; */
+    color: #000;
+}
+.motivos h3.title {
+    position: relative;
+    display: inline;
+    font-size: 19px;
+    font-weight: normal;
+    width: 20%;
+    text-align: center;
+    left: 10%;
+    margin-left: -10%;
+    margin-top: 308px;
+    color: #000;
+}
+.motivos .progress {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 12px;
+}
+.motivos .num-progress {
+    position: relative;
+    left: 15%;
+    color: #fff;
+    margin-bottom: 11px;
+    margin-top: 2px;
+}
+.motivos h1.title.w-100 {
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 18px;
+    top: 0%;
+    left: 0;
+    color: #fff;
+}
+.motivos.bg {
+    background-image: url(//talentapp360.taket.es/storage/app/media//test/DeepinScreenshot_20181114121128.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.motivos .row {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+.motivos #question {
+    position: relative;
+    top: 0;
+}
+
+
+.motivos .h-10 {
+    padding-left: 0;
+}
+.motivos .pregunta.horizontal h2 {
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+}
+.motivos .smile span {
+    display: none;
+    background: transparent;
+    color: #fff;
+    margin-top: -10px;
+    vertical-align: bottom;
+    font-size: 13px;
+    display: none !important;
+}
+.motivos .pregunta.horizontal .smile {
+    vertical-align: middle;
+    margin-top: -8px;
+    width: 16%;
+    background-size: 175%;
+    background-position-y: -27px;
+    background-position-x: -13px;
+    margin-bottom: 15px;
+}
+.motivos button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    bottom: 10px;
+}
+.motivos .pregunta.horizontal .smile.noselect {
+    background-position-y: -26px !important;
+}
+.motivos button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -40px;
+}
+.motivos #question {
+    position: relative;
+    top: 0;
+}
+.motivos .row {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+.motivos button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin: 0;
+    margin-left: 5px;
+}
+.motivos div#continue {
+    width: 100%;
+    margin-left: -40%;
+    position: relative;
+    margin-top: 30px;
+}
+.motivos button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: 40px !important;
+    position: relative;
+}
+.motivos button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -80px !important;
+}
+.motivos.bg {
+    height: auto !important;
+    width: 100%;
+    min-height: 100%;
+}
+}
+
+</style>

@@ -1,0 +1,11 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+puestos:
+    label: Invoice Line Item
+    view:
+        list: $/tresfera/organizaciones/models/puesto/columns.yaml
+        toolbarButtons: add|remove
+    manage:
+        form: $/tresfera/organizaciones/models/puesto/fields.yaml
+        recordsPerPage: 10

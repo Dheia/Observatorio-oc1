@@ -1,0 +1,144 @@
+fields:
+    evaluado_details_section:
+        label: 'tresfera.talentapp::lang.evaluadores.ev_evaluado'
+        type: section
+        comment: 'tresfera.talentapp::lang.evaluadores.ev_datos'
+        span: left
+    name:
+        label: 'tresfera.talentapp::lang.proyectos.name'
+        span: left
+    email:
+        label: 'tresfera.talentapp::lang.proyectos.email'
+        span: left
+    lang:
+        label: 'tresfera.talentapp::lang.proyectos.lang'
+        type: dropdown
+        span: left
+        options:
+            0: 'tresfera.talentapp::lang.proyectos.mantener'
+            es: 'tresfera.talentapp::lang.proyectos.esp'
+            en: 'tresfera.talentapp::lang.proyectos.eng'
+    evaluados_details_section:
+        label: 'tresfera.talentapp::lang.evaluadores.ev_evaluador'
+        type: section
+        comment: 'tresfera.talentapp::lang.evaluacion.comentario_eva'
+        span: rigth
+#    tipo[autoevaluacion]:
+#        label: 'tresfera.talentapp::lang.evaluacion.autoevaluacion'
+#        comment: 'tresfera.talentapp::lang.evaluacion.pregunta_autoevaluacion'
+#        span: rigth
+#        type: checkbox
+    tipo:
+        options:
+            autoevaluacion: ['tresfera.talentapp::lang.evaluacion.autoevaluacion', tresfera.talentapp::lang.evaluacion.pregunta_autoevaluacion]
+            jefe: ['tresfera.talentapp::lang.evaluacion.jefe', tresfera.talentapp::lang.evaluacion.pregunta_jefe]
+            companero: ['tresfera.talentapp::lang.evaluacion.companero', tresfera.talentapp::lang.evaluacion.pregunta_companeros]
+            colaborador: ['tresfera.talentapp::lang.evaluacion.colaborador', tresfera.talentapp::lang.evaluacion.pregunta_colaborador]
+            otro: ['tresfera.talentapp::lang.evaluacion.otro', tresfera.talentapp::lang.evaluacion.pregunta_otros]
+        span: rigth
+        type: checkboxlist
+#        trigger:
+#            action: hide
+#            field: tipo[autoevaluacion]
+#            condition: checked
+
+
+tabs:
+    fields:
+        stats_partial:
+            span: full
+            type: partial
+            path: seguimiento
+            tab: 'tresfera.talentapp::lang.evaluacion.seguimiento'
+        params[permissions]:
+            options:
+                change_tipo: Tipos de evaluadores
+                change_evaluadores: Evaluadores
+                view_report: Ver informe
+            span: rigth
+            type: checkboxlist
+            tab: 'tresfera.talentapp::lang.evaluacion.permisos'
+        jefe:
+            prompt: 'tresfera.talentapp::lang.evaluacion.add_jefe'
+            span: full
+            type: repeater
+            tab: 'tresfera.talentapp::lang.evaluacion.jefe'
+            form:
+              fields:
+                name:
+                  label: 'tresfera.talentapp::lang.proyectos.name'
+                  span: auto
+                email:
+                  label: 'tresfera.talentapp::lang.proyectos.email'
+                  span: auto
+                lang:
+                    label: 'tresfera.talentapp::lang.proyectos.lang'
+                    type: dropdown
+                    span: left
+                    options:
+                        0: 'tresfera.talentapp::lang.proyectos.mantener'
+                        es: 'tresfera.talentapp::lang.proyectos.esp'
+                        en: 'tresfera.talentapp::lang.proyectos.eng'
+        companero:
+            prompt: 'tresfera.talentapp::lang.evaluacion.add_compa'
+            span: full
+            type: repeater
+            tab: 'tresfera.talentapp::lang.evaluacion.companero'
+            form:
+              fields:
+                name:
+                  label: 'tresfera.talentapp::lang.proyectos.name'
+                  span: auto
+                email:
+                  label: 'tresfera.talentapp::lang.proyectos.email'
+                  span: auto
+                lang:
+                    label: 'tresfera.talentapp::lang.proyectos.lang'
+                    type: dropdown
+                    span: left
+                    options:
+                        0: 'tresfera.talentapp::lang.proyectos.mantener'
+                        es: 'tresfera.talentapp::lang.proyectos.esp'
+                        en: 'tresfera.talentapp::lang.proyectos.eng'
+        colaborador:
+            prompt: 'tresfera.talentapp::lang.evaluacion.add_cola'
+            span: full
+            type: repeater
+            tab: 'tresfera.talentapp::lang.evaluacion.colaborador'
+            form:
+              fields:
+                name:
+                  label: 'tresfera.talentapp::lang.proyectos.name'
+                  span: auto
+                email:
+                  label: 'tresfera.talentapp::lang.proyectos.email'
+                  span: auto
+                lang:
+                    label: 'tresfera.talentapp::lang.proyectos.lang'
+                    type: dropdown
+                    span: left
+                    options:
+                        0: 'tresfera.talentapp::lang.proyectos.mantener'
+                        es: 'tresfera.talentapp::lang.proyectos.esp'
+                        en: 'tresfera.talentapp::lang.proyectos.eng'
+        otro:
+            prompt: 'tresfera.talentapp::lang.evaluacion.add_otro'
+            span: auto
+            type: repeater
+            tab: 'tresfera.talentapp::lang.evaluacion.otro'
+            form:
+              fields:
+                name:
+                  label: 'tresfera.talentapp::lang.proyectos.name'
+                  span: auto
+                email:
+                  label: 'tresfera.talentapp::lang.proyectos.email'
+                  span: auto
+                lang:
+                    label: 'tresfera.talentapp::lang.proyectos.lang'
+                    type: dropdown
+                    span: left
+                    options:
+                        0: 'tresfera.talentapp::lang.proyectos.mantener'
+                        es: 'tresfera.talentapp::lang.proyectos.esp'
+                        en: 'tresfera.talentapp::lang.proyectos.eng'

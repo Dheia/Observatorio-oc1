@@ -1,0 +1,23 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+    quiz:
+        label: Encuesta
+        relation: quiz
+        select: title
+        searchable: true
+    name:
+        label: Nombre
+        searchable: true
+    type:
+        label: Tipo
+        relation: type
+        select: name
+        searchable: true
+    order:
+        label: Orden

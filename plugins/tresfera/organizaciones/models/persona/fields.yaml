@@ -1,0 +1,33 @@
+fields:
+    name:
+        label: Nombre
+        span: storm
+        cssClass: col-md-3
+        type: text
+    parent_id:
+        label: Responsable
+        showSearch: true
+        cssClass: col-md-3
+        span: storm
+        type: dropdown
+    puesto_id:
+        label: Puesto
+        showSearch: true
+        cssClass: col-md-3
+        span: storm
+        type: dropdown
+    empresa_id:
+        label: Empresa
+        showSearch: true
+        cssClass: col-md-3
+        span: storm
+        type: dropdown
+    subordinados:
+        label: Subordinados
+        span: full
+        path: $/tresfera/organizaciones/controllers/personas/_relation_subordinados.htm
+        hidden: 0
+        context:
+            - update
+            - preview
+        type: partial

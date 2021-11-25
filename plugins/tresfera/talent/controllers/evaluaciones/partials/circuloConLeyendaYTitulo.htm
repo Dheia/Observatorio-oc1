@@ -1,0 +1,29 @@
+<div class="elemento titulo6 {{class}}" style="top: {{top-(size/2)+30}}px;left: {{left-(size/2)+(size/16)}}px">
+    <div>{{ titulo }}</div>
+</div>
+<div class="resultados {{class}}">
+    {% if value_text_1 %}
+    <div class="elemento" style="top: {{top+(size/2)+32}}px;left: {{left+(size/2) + 45}}px">
+        {{ value_text_1|number_format(2) }}
+    </div>
+    {% endif %}
+    <div class="elemento" style="top: {{top+(size/2)+20+32}}px;left: {{left+(size/2) + 45}}px">
+        {{ value_text_2|number_format(2) }}
+    </div>
+    <div class="elemento" style="top: {{top+(size/2)+40+32}}px;left: {{left+(size/2) + 45}}px">
+        {{ value_text_3|number_format(2) }}
+    </div>
+</div>
+{{ partial({
+    file: 'circulo',
+    class: class,
+    name: name,
+    top: top,
+    left: left,
+    size: size,
+    value1: value1,
+    value2: value2,
+    value3: value3,
+    value4: value4,
+   }) 
+}}

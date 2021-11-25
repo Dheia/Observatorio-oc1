@@ -1,0 +1,53 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    type:
+        label: Tipo
+        type: dropdown
+        span: left
+        options:
+            question: Pregunta
+            welcome: Bienvenida
+            farewell: Despedida
+            phrases: Frases
+            nps: NPS
+            sondeo: Sondeo
+    num_answers:
+        label: Núm. Respuestas
+        span: right
+        default: 1
+        trigger:
+            action: show
+            field: type
+            condition: value[question], value[nps]
+    sector_id:
+        label: Sector
+        type: dropdown
+        span: left
+        trigger:
+            action: show
+            field: type
+            condition: value[question], value[nps]
+    section_id:
+        label: Área
+        type: dropdown
+        span: right
+        dependsOn: sector_id
+        emptyOption: No page
+        trigger:
+            action: show
+            field: type
+            condition: value[question]
+    title:
+        label: Pregunta
+    answers:
+        label: Respuestas
+        type: partial
+        context: update
+        path: $/tresfera/taketsystem/controllers/questions/_list_answers.htm
+        trigger:
+            action: show
+            field: type
+            condition: value[question], value[nps]

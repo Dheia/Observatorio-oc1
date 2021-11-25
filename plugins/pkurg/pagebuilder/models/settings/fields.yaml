@@ -1,0 +1,62 @@
+tabs:
+    fields:    
+        section_title:
+            label: 'Manage Page Builder settings'
+            tab: 'General'
+            span: full
+            type: section
+        show_page:
+            tab: 'General'
+            label: Use builder for Page
+            type: switch        
+            on: on
+            off: off        
+        show_content:
+            tab: 'General'
+            label: Use builder for Content
+            type: switch        
+            on: on
+            off: off
+        show_partial:
+            tab: 'General'
+            label: Use builder for Partial
+            type: switch        
+            on: on
+            off: off    
+        show_layout:
+            tab: 'General'
+            label: Use builder for Layout
+            type: switch        
+            on: on
+            off: off
+        savelocal:
+            tab: 'General'
+            label: Save uploaded files to the Media Library
+            type: checkbox                    
+        customblocks:
+            tab: 'General'
+            label: Custom Block Code
+            type: codeeditor
+            size: giant
+            comment: 
+        content:
+            tab: 'General'
+            type: partial
+            path: $/pkurg/pagebuilder/partials/codeblock.htm       
+        builder_styles:
+            tab: 'Builder Canvas Assets'
+            label: Styles
+            type: codeeditor
+            language: php
+        builder_scripts:
+            tab: 'Builder Canvas Assets'
+            label: Scripts
+            type: codeeditor
+            language: php
+        contenta:
+            tab: 'Builder Canvas Assets'
+            type: partial
+            path: $/pkurg/pagebuilder/partials/forasset.htm           
+            
+            
+            

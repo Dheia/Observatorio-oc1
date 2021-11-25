@@ -1,0 +1,55 @@
+<?php
+	$model = new \Tresfera\Statistics\Models\Result();
+	$totalsCity = $model->getTotalsRegion($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+	$total = 0;
+
+if(isset($totalsCity[0]) && count($totalsCity) > 1) {
+
+    foreach($totalsCity as $city) {
+      $total += $city->count;
+    }
+    $totalView = 0;
+    $i=0;
+    foreach($totalsCity as $city) {
+      $totalView += $city->count;
+      $i++;
+      if($i>=10) break;
+    }
+  ?>
+  <div data-control="toolbar">
+        <h3><i class="icon-home"></i>Información geográfica</h3>
+      <div class="row">
+        <div class="col-md-12">
+          <div
+              class="control-chart"
+              data-control="chart-pie"
+              data-size="120"
+             data-center-text="<?=$total?>">
+              <ul>
+                <?
+                $i=0;
+                foreach($totalsCity as $city) {
+                 // $citycp = Tresfera\Devices\Models\Citycp::find($city->citycp_id);
+                 // if(isset($citycp)) {
+                ?>
+                <?php if($city->city) { ?>
+                  <li><?=$city->city?> <span><?=$city->count?></span></li>
+
+                <?php } else { ?>
+                  <li>Desconocido <span><?=$city->count?></span></li>
+                <?php } ?>
+                <?
+                  $i++;
+                if($i>=10) break;
+               // }
+                }
+                ?>
+                <?php if($i >= 10) { ?>
+                  <li>Otros <span><?=($total-$totalView)?></span></li>
+                <?php } ?>
+              </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+<?php } ?>

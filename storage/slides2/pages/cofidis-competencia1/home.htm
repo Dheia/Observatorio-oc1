@@ -1,0 +1,31 @@
+title = "competencia1"
+url = "/cofidis/app/competencia1"
+layout = "app"
+is_hidden = 0
+
+[Progreso]
+==
+{% put main %}p-0{% endput %}
+<iframe src="/cofidis/competencia1/{{Progreso.currentpag}}"></iframe>
+<style>
+    .mdc-top-app-bar {
+    background: transparent;
+}
+.mdc-top-app-bar__title {
+    display: none;
+}
+@media (max-width: 870px) {
+    .main-content {
+        padding-top: 0;
+        height: 100%;
+        margin: 0;
+    }
+    .p-0 {
+        margin-top: 0 !important;
+    }
+    
+}
+.p-0 {
+    padding: 0 !important;
+}
+</style>

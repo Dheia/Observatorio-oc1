@@ -1,0 +1,66 @@
+title = "Pag1"
+url = "/cofidis/competencia1/pag14"
+layout = "cofidis"
+is_hidden = 0
+==
+<h3 class="header center">Las respuestas correctas son...</h3>
+<div class="answers answers-img answers-results">
+    <button class="foo-button mdc-button mdc-button--outlined success2">
+      <div class="answertext">Equivocarse es de <b>sabios</b>.</div><img src="/storage/app/media/cofidis/sabio.png">
+    </button>
+    <button class="foo-button mdc-button mdc-button--outlined success2">
+      <div>El error es una <b>fuente</b> de aprendizaje.</div><img src="/storage/app/media/cofidis/fuente.png">
+    </button>
+    <button class="foo-button mdc-button mdc-button--outlined success2">
+      <div>La única persona que no se equivoca nunca es la que no hace <b>nada</b>.</div><img src="/storage/app/media/cofidis/nadar.png">
+    </button>
+    <button class="foo-button mdc-button mdc-button--outlined success2">
+      <div>Reconocer los errores es el primer paso para evitar <b>repetirlos</b>.</div><img src="/storage/app/media/cofidis/repetir.png">
+    </button>
+    <button class="foo-button mdc-button mdc-button--outlined success2">
+      <div>El problema no es cometer un error sino perder la <b>oportunidad</b> de reconocerlo, aceptarlo, analizarlo y aprender rápidamente del mismo.</div><img src="/storage/app/media/cofidis/oportunidad.png">
+      
+    </button>
+</div>
+ <h3 class="acertado">
+    {% if Progreso.answersOk(['cofidis-competencia1-pag8','cofidis-competencia1-pag9','cofidis-competencia1-pag10','cofidis-competencia1-pag11','cofidis-competencia1-pag12']) %}
+    ¡Has acertado {{Progreso.answersOk(['cofidis-competencia1-pag8','cofidis-competencia1-pag9','cofidis-competencia1-pag10','cofidis-competencia1-pag11','cofidis-competencia1-pag12'])}}/5!
+    {% else %}
+    Oooooh! Esta vez no has acertado ninguna.
+    {% endif %} 
+    </h3>
+<div class="row center">
+  <a href="pag15?finish=true" 
+      id="download-button" 
+      class="btn-large waves-effect waves-light orange">
+      CONTINUAR
+    </a>
+</div>
+<style>
+.topbar {
+  width: {{ 14*100/31 }}%;
+}
+
+@media only screen and (min-width: 993px)
+{
+  .container {
+      width: 40%;
+  }
+  .success2 img {
+    float: left;
+    height: 80px;
+    margin-left: 0 !important;
+}
+.success2 div {
+    margin-left: 0;
+    width: 321px;
+}
+.answers .mdc-button {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+.container {
+    width: 470px;
+}
+}
+</style>

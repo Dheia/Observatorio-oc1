@@ -1,0 +1,130 @@
+[
+    {
+        "name": "szymach/c-pchart",
+        "version": "v3.0.7",
+        "version_normalized": "3.0.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/szymach/c-pchart.git",
+            "reference": "cff756ac9cb87671b4833c5935c1c7bd12947db0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/szymach/c-pchart/zipball/cff756ac9cb87671b4833c5935c1c7bd12947db0",
+            "reference": "cff756ac9cb87671b4833c5935c1c7bd12947db0",
+            "shasum": ""
+        },
+        "require": {
+            "ext-gd": "*",
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "codeception/codeception": "^2.4",
+            "phpunit/phpunit": "^4.8|^7.1",
+            "squizlabs/php_codesniffer": "^2.8|^3.3"
+        },
+        "time": "2018-11-22T11:28:00+00:00",
+        "type": "project",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0.x-dev",
+                "2.0": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "CpChart\\": "src/"
+            },
+            "files": [
+                "constants.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0-only"
+        ],
+        "authors": [
+            {
+                "name": "Jean-Damien Pogolotti",
+                "homepage": "http://www.pchart.net",
+                "role": "Creator of the original pChart library"
+            },
+            {
+                "name": "Piotr Szymaszek",
+                "homepage": "https://github.com/szymach",
+                "role": "Developer of the CpChart wrapper package"
+            }
+        ],
+        "description": "Port of \"pChart\" library into PHP 5+",
+        "homepage": "https://github.com/szymach/c-pchart",
+        "keywords": [
+            "CpChart",
+            "c-pChart",
+            "charts",
+            "pchart",
+            "statistics"
+        ]
+    },
+    {
+        "name": "zanysoft/laravel-zip",
+        "version": "1.0.3",
+        "version_normalized": "1.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zanysoft/laravel-zip.git",
+            "reference": "466663746c92154c48a2d490efc6724f9f6e9652"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zanysoft/laravel-zip/zipball/466663746c92154c48a2d490efc6724f9f6e9652",
+            "reference": "466663746c92154c48a2d490efc6724f9f6e9652",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.6.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.0|^5.0",
+            "scrutinizer/ocular": "^1.0"
+        },
+        "time": "2017-10-10T03:22:41+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "ZanySoft\\Zip\\ZipServiceProvider"
+                ],
+                "aliases": {
+                    "Zip": "ZanySoft\\Zip\\ZipFacade"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "ZanySoft\\Zip\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Zany Soft",
+                "email": "info@zanysoft.co",
+                "homepage": "http://www.zanysoft.co"
+            }
+        ],
+        "description": "ZipArchive toolbox",
+        "homepage": "http://www.zanysoft.co",
+        "keywords": [
+            "merge",
+            "multiple",
+            "unzip",
+            "zip",
+            "ziparchive"
+        ]
+    }
+]

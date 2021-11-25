@@ -1,0 +1,296 @@
+<style>
+.over:hover {
+    color: black !important;
+}
+</style>
+
+<div class="control-breadcrumb">
+    <ul>
+        <li><a href="<?= Backend::url('tresfera/talentapp') ?>">TalentApp</a></li>
+        <li>Proyectos</li>
+    </ul>
+</div>
+
+
+
+
+
+<div class="scoreboard">
+    <div class="row" data-control="toolbar">
+
+        <div class="col-xs-6">
+                <h4>Bienvenido 'Usuario Administrador'</h4>
+                <br/>
+            <a href="/backend/tresfera/talentapp/proyectos/create" type="button" class="btn btn-primary oc-icon-plus">Nuevo Proyecto</a>
+            <a href="#" type="button" class="btn btn-success oc-icon-plus">Añadir Cliente</a>
+        </div>
+
+       
+        <div class="col-xs-6 text-right">
+            
+
+
+                <div class="scoreboard">
+                        <div class="" data-control="toolbar">
+                    
+                            <div class="scoreboard-item title-value">
+                                <h4>Proyectos</h4>
+                                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                        <ul>
+                                            <li data-color="#95b753">En curso <span>84</span></li>
+                                            <li data-color="#e5a91a">Pendientes <span>12</span></li>
+                                            <li data-color="#cc3300">Finalizados <span>18</span></li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    
+                            <div class="scoreboard-item title-value">
+                                <h4>Evaluaciones</h4>
+                                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                        <ul>
+                                            <li data-color="#95b753">En curso <span>84</span></li>
+                                            <li data-color="#cc3300">Finalizados <span>18</span></li>
+                                        </ul>
+                                    </div>
+                            </div>
+                    
+                            <div class="scoreboard-item title-value">
+                                <h4>Núm. Clientes</h4>
+                                <p>100</p>
+                            </div>
+                    
+                        </div>
+                    </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<h4>Proyectos Activos</h4>
+  
+  <div class="control-list">
+      <table class="table data">
+          <thead>
+              <tr>
+                  <th class="active sort-asc"><span>Empresa</span></th>
+                  <th class="active sort-asc"><span>Proyecto</span></th>
+                  <th><a href="/">Fecha Inicio</a></th>
+                  <th><a href="/">Fecha Fin</a></th>
+                  <th><a href="/">Nº Licencias</a></th>
+                  <th><a href="/">Descripción</a></th>
+                  <th><a href="/">Gestor</a></th>
+                  <th><a href="/">Estado</a></th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+  
+              <tr class="rowlink detalles_proyecto">
+                  <td>
+                      Nombre de la Empresa
+                  </td>
+                  <td>
+                        Nombre del Proyecto
+                 </td>
+                  <td>
+                    2/12/2018
+                </td>
+                <td>
+                    2/03/2019
+                </td>
+                <td>
+                    200
+                </td>
+                <td>
+                    Este es un proyecto en el que evaluaremos la gente del departamento de ventas
+                </td>
+                <td>
+                    Jaime Gestor
+                </td>
+                <td class="nolink" width="200px">
+                  <span class="list-badge badge-success"><i class="icon-check"></i></span> Activo
+                </td>
+                <td>
+                        <div>
+                            <a href="#"><span class="over oc-icon-pencil"></span></a>
+                            <span id_proyecto="3" class="trash over oc-icon-trash"></span>
+                        </div>
+                    </td>
+              </tr>
+              <tr class="rowlink detalles_proyecto">
+                    <td>
+                            Nombre de la Empresa
+                    </td>
+                  <td>
+                      Nombre del Proyecto
+                  </td>
+                  <td>
+                    3/03/2019
+                </td>
+                <td>
+                    15/08/2019
+                </td>
+                <td>
+                    1000
+                </td>
+                <td>
+                    Este es un proyecto en el que evaluaremos la gente del departamento de recursos humanos
+                </td>
+                <td>
+                    Rosa Y Z
+                </td>
+                <td>
+                  <span class="list-badge badge-success"><i class="icon-check"></i></span> Activo
+                </td>
+                <td>
+                        <div>
+                            <a href="#"><span class="over oc-icon-pencil"></span></a>
+                            <span id_proyecto="3" class="trash over oc-icon-trash"></span>
+                        </div>
+                    </td>
+              </tr>
+  
+          </tbody>
+      </table>
+  </div>
+  
+  <br/>
+  <h4>Proyectos Inactivos</h4>
+  
+  <div class="control-list">
+      <table class="table data">
+          <thead>
+              <tr>
+                  <th class="active sort-asc"><span>Empresa</span></th>
+                  <th class="active sort-asc"><span>Proyecto</span></th>
+                  <th><a href="/">Fecha Inicio</a></th>
+                  <th><a href="/">Fecha Fin</a></th>
+                  <th><a href="/">Nº Licencias</a></th>
+                  <th><a href="/">Descripción</a></th>
+                  <th><a href="/">Gestor</a></th>
+                  <th><a href="/">Estado</a></th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+  
+              <tr class="rowlink">
+                    <td>
+                            Nombre de la Empresa
+                        </td>
+                  <td>
+                      Nombre del Proyecto
+                  </td>
+                  <td>
+                    2/12/2018
+                </td>
+                <td>
+                    2/03/2019
+                </td>
+                <td>
+                    200
+                </td>
+                <td>
+                    Este es un proyecto en el que evaluaremos la gente del departamento de ventas
+                </td>
+                <td>
+                    Jaime X Y
+                </td>
+                <td class="nolink" width="200px">
+                  <div class="activar" onmouseover="addButton(this)" id_proyecto="3"><span class="list-badge badge-warning"><i class="icon-exclamation"></i></span> Pendiente</div>
+                </td>
+                <td>
+                        <div>
+                            <a href="#"><span class="over oc-icon-pencil"></span></a>
+                            <span id_proyecto="3" class="trash over oc-icon-trash"></span>
+                        </div>
+                    </td>
+              </tr>
+              <tr class="rowlink">
+                    <td>
+                            Nombre de la Empresa
+                        </td>
+                  <td>
+                      Nombre del Proyecto
+                  </td>
+                  <td>
+                    3/03/2019
+                </td>
+                <td>
+                    15/08/2019
+                </td>
+                <td>
+                    1000
+                </td>
+                <td>
+                    Este es un proyecto en el que evaluaremos la gente del departamento de recursos humanos
+                </td>
+                <td>
+                    Rosa Y Z
+                </td>
+                <td>                
+                    <span class="list-badge badge-info"><i class="icon-info"></i></span> Finalizado
+                </td>
+                <td>
+                    <div>
+                        <a href="#"><span class="over oc-icon-pencil"></span></a>
+                        <span id_proyecto="3" class="trash over oc-icon-trash"></span>
+                    </div>
+                </td>
+              </tr>
+  
+          </tbody>
+      </table>
+  </div>
+
+  <script>
+        var tmp;
+        
+        function removeButton(x)
+        {
+            var element = $(x);
+            var padre = element.parent();
+        
+            padre.removeClass("column-button nolink");
+            padre.html(tmp);
+         
+        }
+        
+        function addButton(x)
+        {
+            var element = $(x);
+            var padre = element.parent();
+        
+            padre.addClass("column-button nolink");
+            tmp = padre.html();
+            padre.html('<button class="btn btn-secondary btn-sm" onclick="activarProyecto()" onmouseout="removeButton(this)">Activar Proyecto</button>');
+        }
+        
+        function activarProyecto()
+        {
+            alert("Proyecto Activado")
+        }
+        
+          $(document).ready(function() {
+        
+              $('.trash').on('click', function(){
+                  var id_proyecto = $(this).attr('id_proyecto');
+                  var nombre_proyecto = $('#'+id_proyecto).attr('name');
+        
+                  $.request("onDeleteProject", {
+                    data:
+                      {
+                        id_proyecto,
+                        nombre_proyecto
+                      }
+                  });
+        
+                  $('#'+id_proyecto).remove();
+              });
+        
+        
+          });
+        
+        </script>

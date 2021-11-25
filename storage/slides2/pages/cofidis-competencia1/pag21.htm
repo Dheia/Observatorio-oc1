@@ -1,0 +1,91 @@
+title = "Pag21"
+url = "/cofidis/competencia1/pag21"
+layout = "cofidis"
+is_hidden = 0
+==
+<div class="row center">
+      <img class="img_entrevista" style=" width: 100px;" src="/storage/app/media/cofidis/14.0 Cuestionario.png">
+  </div>
+  <h4 class="h4_entrevista">Entrevista 1</h4
+  <div class="row center">
+      <h5>¿Cómo reaccionas ante situaciones de cambio que impliquen incertidumbre?</h5>
+      <div class="range" data-peso="50" data-question="¿Cómo reaccionas ante situaciones de cambio que impliquen incertidumbre?">
+        <input type="range" list="question1" max="5" min="1">
+        <div class="values">
+          <div class="value">Me agobio</div>
+          <div class="value">Me pongo nervioso</div>
+          <div class="value"></div>
+          <div class="value">Me adapto sin más</div>
+          <div class="value">Me estimula</div>
+        </div>
+      </div>
+      <h5>¿Cuánto tardas en aceptar las novedades y adaptarte?</h5>
+      <div class="range" data-peso="50" data-question="¿Cuánto tardas en aceptar las novedades y adaptarte?">
+        <input type="range" list="question1" max="5" min="1">
+        <div class="values">
+          <div class="value">Mucho</div>
+          <div class="value">Necesito mi tiempo</div>
+          <div class="value"></div>
+          <div class="value">Le doy alguna vuelta</div>
+          <div class="value">Soy rápido/a</div>
+        </div>
+      </div>
+      <h5>¿Qué haces para conseguirlo?</h5>
+      <div class="range" data-peso="50" data-question="¿Qué haces para conseguirlo?">
+        <input type="range" list="question1" max="5" min="1">
+        <div class="values">
+          <div class="value">Nada</div>
+          <div class="value">Esperar a acostumbrarme</div>
+          <div class="value"></div>
+          <div class="value">Busco más información</div>
+          <div class="value">Lo consigo fácilmente</div>
+        </div>
+      </div>
+      <h5>¿Qué es lo que más te molesta de tener que tomar decisiones sin disponer de toda la información?</h5>
+      <div class="range" data-peso="50" data-question="¿Qué es lo que más te molesta de tener que tomar decisiones sin disponer de toda la información?">
+        <input type="range" list="question1" max="5" min="1">
+        <div class="values">
+          <div class="value">No puedo decidir así</div>
+          <div class="value">Me cuesta decidir sin información</div>
+          <div class="value"></div>
+          <div class="value">Me molesta la posibilidad de error</div>
+          <div class="value">No me molesta</div>
+        </div>
+      </div>
+  </div>
+  <div class="row center">
+      <button 
+      id="download-button" 
+      class="btn-large waves-effect waves-light orange">
+      CONTINUAR
+    </button>
+  </div>
+  
+<style>
+.topbar {
+  width: {{ 21*100/31 }}%;
+}
+</style>
+<script>
+    $("#download-button").click(function(){
+      var sendData = [];
+      $("[data-question]").each(function(){
+        var value = $(this).find(".value")[$(this).find("input").val()].innerHTML;
+        var data = {
+            value: value,
+            question: $(this).data("question"),
+            points: 50,
+            peso: $(this).data("peso"),
+
+        };
+        if(data.value)
+          sendData.push(data);
+      })
+      $.request('onSaveAnswers', {
+          data: sendData,
+          success: function(data) {
+            window.location = "pag22?finish=true";
+          }
+      })
+    })
+</script>

@@ -1,0 +1,73 @@
+==
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="icon" href="images/favicon.png">
+	<title>{{title}}</title>
+
+    <script src="https://kit.fontawesome.com/1e9f3e1104.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="{{'assets/css/bootstrap.min.css'|theme}}">
+	<link rel="stylesheet" href="{{'assets/css/lightbox.css'|theme}}">
+	<link rel="stylesheet" href="{{'assets/css/owl.carousel.min.css'|theme}}">
+	<link rel="stylesheet" href="{{'assets/css/owl.theme.default.min.css'|theme}}">
+	<link rel="stylesheet" href="{{'assets/css/animsition.css'|theme}}">
+	<link rel="stylesheet" href="{{'assets/css/style.css'|theme}}">
+	<link rel="stylesheet" href="{{'assets/css/custom_quiz.css?v=20'|theme}}">
+	<link rel="stylesheet" href="{{'assets/css/custom_quiz_mobile.css'|theme}}">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+	<script src="{{'assets/js/jquery.min.js'|theme }}"></script>
+	{% styles %}
+	<style>
+		.owl-theme .owl-nav [class*=owl-] {
+			color: #FFF;
+			font-size: 44px;
+			margin: 5px;
+			padding: 4px 7px;
+			background: #090808;
+			display: inline-block;
+			cursor: pointer;
+			border-radius: 3px;
+		}
+		.owl-prev {
+			float: left;
+		}
+		.owl-next {
+			float: right;
+		}
+		html {
+			background-size: cover;
+			background-repeat: no-repeat;
+			height: 100vh;
+			background-size: initial;
+			background-position: top center;
+		}
+		body {
+			height: calc(100vh - 66px) !important;
+		}
+	</style>
+</head>
+<body class="animsition {% placeholder classbody %}" >
+	<!-- sidebar -->
+	<div class="side-overlay"></div>
+	<!-- end sidebar -->
+	
+	{% page %}
+	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	{% framework %}
+	{% framework extras %}
+	<script src="{{'assets/js/bootstrap.min.js'|theme }}"></script>
+	<script src="{{'assets/js/lightbox.js'|theme }}"></script>
+	<script src="{{'assets/js/animsition.min.js'|theme }}"></script>
+	<script src="{{'assets/js/animsition-custom.js'|theme }}"></script>
+	<script src="{{'assets/js/jquery.big-slide.js'|theme }}"></script>
+	<script src="{{'assets/js/owl.carousel.min.js'|theme }}"></script>
+	<script src="{{'assets/js/main.js?v=14'|theme }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+	{% scripts %}
+</body>
+</html>

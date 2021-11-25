@@ -1,0 +1,9 @@
+<?php
+use Tresfera\Clients\Models\Client;
+use Tresfera\Talent\Models\Proyecto;
+
+$proyecto = Proyecto::find($record->proyecto_id);
+$cliente = Client::find($proyecto->client_id);
+?>
+
+<?=$cliente->name?>

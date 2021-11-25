@@ -1,0 +1,109 @@
+1.0.1:
+    - 'First version of Taketsystem'
+    - create_regions_table.php
+    - create_cities_table.php
+    - create_clients_table.php
+    - create_shops_table.php
+    - create_devices_table.php
+    - create_device_logs_table.php
+    - create_quiz_types_table.php
+    - create_quizzes_table.php
+    - create_quiz_devices_table.php
+    - create_slide_types_table.php
+    - create_slides_table.php
+    - create_answers_table.php
+    - create_results_table.php
+    - users_add_client.php
+    - seeders/SlideTypesSeeder.php
+    - seeders/QuizTypesSeeder.php
+    - seeders/UserGroupsSeeder.php
+1.0.2:
+    - 'Updated table tresfera_taketsystem_results'
+    - builder_table_update_tresfera_taketsystem_results_2.php
+1.0.3:
+    - 'Updated table tresfera_taketsystem_results'
+    - builder_table_update_tresfera_taketsystem_results_3.php
+1.0.4:
+    - 'Updated table tresfera_taketsystem_results'
+    - builder_table_update_tresfera_taketsystem_results_4.php
+1.0.5:
+    - 'Updated table tresfera_taketsystem_results'
+    - builder_table_update_tresfera_taketsystem_results_5.php
+1.0.6:
+    - 'Updated table tresfera_taketsystem_answers'
+    - builder_table_update_tresfera_taketsystem_answers_2.php
+1.0.7:
+    - 'Updated table tresfera_taketsystem_results'
+    - builder_table_update_tresfera_taketsystem_results_6.php
+1.0.8:
+    - SlideTypes
+    - seeder108.php
+1.0.9:
+    - 'Updated table tresfera_taketsystem_quizzes'
+    - builder_table_update_tresfera_taketsystem_quizzes_8.php
+1.0.10:
+    - 'Updated table tresfera_taketsystem_quizzes'
+    - builder_table_update_tresfera_taketsystem_quizzes_9.php
+1.0.11:
+    - 'Updated table tresfera_taketsystem_slides'
+    - builder_table_update_tresfera_taketsystem_slides.php
+1.0.12:
+    - 'Updated table tresfera_taketsystem_slides'
+    - builder_table_update_tresfera_taketsystem_slides_2.php
+1.0.13:
+    - 'Updated table tresfera_taketsystem_slides'
+    - builder_table_update_tresfera_taketsystem_slides_3.php
+1.0.14:
+    - 'Updated table tresfera_taketsystem_slides'
+    - builder_table_update_tresfera_taketsystem_slides_4.php
+1.0.15:
+    - 'Updated table tresfera_taketsystem_answers'
+    - builder_table_update_tresfera_taketsystem_answers_3.php
+1.0.16:
+    - 'Updated table tresfera_taketsystem_results'
+    - builder_table_update_tresfera_taketsystem_results_7.php
+1.0.17:
+    - 'Created table tresfera_taketsystem_progreso'
+    - builder_table_create_tresfera_taketsystem_progreso.php
+1.0.18:
+    - 'Updated table tresfera_taketsystem_progreso'
+    - builder_table_update_tresfera_taketsystem_progreso.php
+1.0.19:
+    - 'Updated table tresfera_taketsystem_progreso'
+    - builder_table_update_tresfera_taketsystem_progreso_2.php
+1.0.20:
+    - 'Updated table tresfera_taketsystem_progreso'
+    - builder_table_update_tresfera_taketsystem_progresos.php
+1.0.21:
+    - 'Created table tresfera_taketsystem_progresos_answers'
+    - builder_table_create_tresfera_taketsystem_progresos_answers.php
+1.0.22:
+    - 'Updated table tresfera_taketsystem_progresos_answers'
+    - builder_table_update_tresfera_taketsystem_progresos_answers.php
+1.0.23:
+    - 'Updated table tresfera_taketsystem_progresos_answers'
+    - builder_table_update_tresfera_taketsystem_progresos_answers_2.php
+1.0.24:
+    - 'Updated table tresfera_taketsystem_progresos_answers'
+    - builder_table_update_tresfera_taketsystem_progresos_answers_3.php
+1.0.25:
+    - 'Updated table tresfera_taketsystem_progresos_answers'
+    - builder_table_update_tresfera_taketsystem_progresos_answers_4.php
+1.0.26:
+    - 'Updated table tresfera_taketsystem_progresos_answers'
+    - builder_table_update_tresfera_taketsystem_progresos_answers_5.php
+1.0.27:
+    - 'Created table tresfera_taketsystem_timming'
+    - builder_table_create_tresfera_taketsystem_timming.php
+1.0.28:
+    - 'Updated table tresfera_taketsystem_results'
+    - builder_table_update_tresfera_taketsystem_results_8.php
+1.0.29:
+    - 'Updated table tresfera_taketsystem_results'
+    - builder_table_update_tresfera_taketsystem_results_9.php
+1.0.30:
+    - 'Updated table tresfera_taketsystem_results'
+    - builder_table_update_tresfera_taketsystem_results_10.php
+1.0.31:
+    - 'Updated table tresfera_taketsystem_progresos_answers'
+    - builder_table_update_tresfera_taketsystem_progresos_answers_6.php

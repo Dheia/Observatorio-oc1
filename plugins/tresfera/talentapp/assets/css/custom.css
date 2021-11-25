@@ -1,0 +1,57 @@
+.encabezado {
+    margin-left: 20px;
+}
+
+.mt {
+    margin-top: 20px;
+}
+
+.mt-2 {
+    margin-top: 40px;
+}
+.ml {
+    margin-left: 20px;
+}
+.ml-2 {
+    margin-left: 40px;
+}
+.mr {
+    margin-right: 20px;
+}
+.mr-2 {
+    margin-right: 40px;
+}
+.link {    
+    color: rgb(69, 105, 182) !important;
+}
+
+.link:hover {
+    font-weight: bold;
+}
+
+#Form-relationEvaluacionesManageForm-field-Evaluacion-tipo-autoevaluacion-group {
+    display: inline-block !important;
+    width: 50%;
+    padding-left: 20px;
+}
+
+/*Iconos menu*/
+/*v1: imagen todo el menu*/
+#layout-mainmenu i.icon-try {
+    background: url(https://talentapp360.taket.es/plugins/tresfera/talent/assets/Logo%20TalentApp_Blanco.png);
+    background-size: cover;
+    display: inline;
+}
+#layout-mainmenu .oc-icon-try:before, #layout-mainmenu .icon-try:before {
+    opacity: 0;
+    width: 33px;
+}
+#layout-mainmenu i.icon-clipboard {
+    background: url(https://talentapp360.taket.es/plugins/tresfera/talentapp/assets/Logo%20TalentApp360_Ciirculo.png);
+    background-size: cover;
+    display: inline;
+}
+#layout-mainmenu .oc-icon-clipboard:before, #layout-mainmenu .icon-clipboard:before {
+    opacity: 0;
+}
+/*v2: solo el icono*/

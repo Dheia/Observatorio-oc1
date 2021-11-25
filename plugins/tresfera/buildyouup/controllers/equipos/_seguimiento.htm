@@ -1,0 +1,44 @@
+<div class="control-list">
+    <table class="table data">
+        <thead>
+            <tr>
+                <th><span>Nombre</span></th>
+                <th><span>Completado</span></th>
+                <th><span></span></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        $stats = $model->getPlayers();
+        if(is_array($stats))
+        foreach($stats as $type=>$evaluador) {
+            ?>
+                <tr>
+                    <td><?=$evaluador['name']?></td>
+                    <td>
+                      Total: <?php echo $model->countAnswereds($evaluador['name']); ?><br>
+                      <?php foreach($model->listPlayersAnswereds($evaluador['name']) as $observador) { ?>
+                        <?=$observador->value?> (<?=$observador->num?>)<br>
+                      <?php } ?>
+                    </td>
+                    <td>
+                        <a
+                          href="<?='https://buildyouup.taket.es/rapport/buildyouup/?id='.$model->id.'&player='.urlencode($evaluador['name'])?>"
+                          target="_blank"
+                          class="btn btn-xs btn-warning pull-left">
+                            <?= e(trans('tresfera.buildyouup::lang.proyectos.informe')) ?>
+                        </a>
+                        <br><br>
+                        <a
+                          href="<?='/backend/tresfera/buildyouup/equipos/onSendEmailInformePlayer?id='.$model->id.'&player='.urlencode($evaluador['name'])?>"
+                          class="btn btn-xs btn-warning pull-left">
+                            Enviar informe
+                        </a>
+                    </td>
+                </tr>
+        <?php
+          }
+        ?>
+      </tbody>
+  </table>
+</div>

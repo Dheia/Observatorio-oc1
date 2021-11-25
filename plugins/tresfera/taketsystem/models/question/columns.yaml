@@ -1,0 +1,27 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    title:
+        label: Pregunta
+        searchable: true
+    sector:
+        label: Sector
+        relation: sector
+        valueFrom: title
+        searchable: true
+    section:
+        label: Área
+        relation: section
+        valueFrom: title
+        searchable: true
+    num_answers:
+        label: Respuestas máximas
+    countAnswers:
+        label: Respuestas
+        sortable: no
+    countTranslate:
+        label: Traducciones
+        type: partial
+        path: $/tresfera/taketsystem/controllers/questions/_count_langs.htm

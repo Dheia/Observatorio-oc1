@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Client
+
+# Model Form Field configuration
+form: $/tresfera/clients/models/client/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Clients\Models\Client
+
+# Default redirect location
+defaultRedirect: tresfera/clients/clients
+
+# Create page
+create:
+    title: Crear Cliente
+    redirect: tresfera/clients/clients/update/:id
+    redirectClose: tresfera/clients/clients
+
+# Update page
+update:
+    title: Editar Cliente
+    redirect: tresfera/clients/clients
+    redirectClose: tresfera/clients/clients
+
+# Preview page
+preview:
+    title: Preview Cliente

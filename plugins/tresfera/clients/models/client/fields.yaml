@@ -1,0 +1,121 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Nombre
+        span: left
+        required: true
+    sector_id:
+        label: Sector
+        type: dropdown
+        placeholder: Selecciona un sector
+        span: right
+tabs:
+    fields:
+        state_id:
+            label: Estado
+            tab: Facturación
+            type: radio
+            options:
+                0: Inactivo
+                1: Activo
+        persona_contacto:
+            label: Persona de contacto
+            tab: Contacto
+            required: true
+        telefono:
+            label: Teléfono
+            span: left
+            tab: Contacto
+        telefono_alt:
+            label: Teléfono Alternativo
+            span: right
+            tab: Contacto
+        email:
+            label: Email
+            span: left
+            tab: Contacto
+            required: true
+        email_alt:
+            label: Email Alternativo
+            span: right
+            tab: Contacto
+        web:
+            label: Web
+            tab: Contacto
+        cif:
+            label: CIF
+            span: right
+            tab: Facturación
+        nombre_fiscal:
+            label: Nombre fiscal
+            span: left
+            tab: Facturación
+        cif:
+            label: CIF
+            span: right
+            tab: Facturación
+        nombre_fiscal:
+            label: Nombre fiscal
+            span: left
+            tab: Facturación
+        cif:
+            label: CIF
+            span: right
+            tab: Facturación
+        direccion:
+            label: Dirección
+            span: left
+            tab: Facturación
+        cp:
+            label: CP
+            span: right
+            tab: Facturación
+        region_id:
+            label: Provincia
+            span: left
+            type: dropdown
+            placeholder: Selecciona una provincia
+            tab: Facturación
+        city_id:
+            label: Ciudad
+            span: right
+            type: dropdown
+            dependsOn: region_id
+            placeholder: Selecciona una ciudad
+            tab: Facturación
+        cc:
+            label: Núm. Cuenta
+            tab: Facturación
+        forma_pago:
+            label: Forma de pago
+            span: left
+            tab: Facturación
+            type: radio
+            options:
+                1: Mensual
+                3: Trimestral
+                6: Semenstral
+                12: Anual
+        condiciones_comerciales:
+            label: Condiciones comerciales
+            type: textarea
+            span: right
+            tab: Facturación
+      #  devices:
+      #      tab: Dispositivos
+      #      type: partial
+      #      context: update
+      #      path: $/tresfera/clients/controllers/clients/_list_devices.htm
+      #  shops:
+      #      tab: Ubicaciones
+      #      type: partial
+      #      context: update
+      #      path: $/tresfera/clients/controllers/clients/_list_shops.htm
+      #  users:
+      #      tab: Usuarios
+      #      type: partial
+      #      context: update
+      #      path: $/tresfera/clients/controllers/clients/_list_users.htm

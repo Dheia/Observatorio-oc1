@@ -1,0 +1,71 @@
+<?php 
+
+use Mja\Mail\Models\Email;
+use Mja\Mail\Models\EmailOpens;
+
+$evaluadores = $record->getEvaluadores();
+if(is_array($evaluadores))
+{
+    ?>
+    A: <?=count($evaluadores["autoevaluado"])?> | J: <?=count($evaluadores["jefe"])?> | Comp: <?=count($evaluadores["companero"])?>
+    | Col: <?=count($evaluadores["colaborador"])?> | O: <?=count($evaluadores["otro"])?>
+    <br>
+    <?php if(count($evaluadores["jefe"]) == 1 || 
+            count($evaluadores["colaborador"]) == 1 || 
+            count($evaluadores["companero"]) == 1 || 
+            count($evaluadores["otro"]) == 1) { ?>
+    <b><span class="text-danger icon-exclamation-triangle"></span><span class="text-danger"> Problema de privacidad</span></b>
+    
+    <br>
+    <?php } ?>
+    <?php 
+    foreach($evaluadores as $tipo=>$values) 
+    { 
+        if(is_array($values)) {
+            foreach($values as $evaluador) 
+            {
+                if( ( $tipo == "autoevaluado" && !$record->isCompletedAutoevaluado() )
+                        || ( $tipo != "autoevaluado" && !$record->isCompletedEvaluador($evaluador['email']))    
+                    ) 
+                {
+                    if($tipo == "autoevaluado") 
+                    {
+                        if(!$evaluador['email'] || !isset($evaluador['send_at']) || !isset($evaluador['send_at']['date']))               
+                            $email = Email::whereIn("code", ['talentapp.require.aprovacion','talentapp.require.aprovacion_en'])
+                                    ->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+                                    ->whereRaw(\DB::raw("DATE(date) = DATE('".$record->created_at."')"))
+                                    ->first();
+                        else
+                            $email = Email::whereIn("code", ['talentapp.require.aprovacion','talentapp.require.aprovacion_en'])
+                                        ->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+                                        ->whereRaw(\DB::raw("DATE(date) = DATE('".$evaluador['send_at']['date']."')"))
+                                        ->first();
+                            
+
+                    } else {
+                        if(!$evaluador['email'] || !isset($evaluador['send_at']) || !isset($evaluador['send_at']['date'])) continue;
+                        $email = Email::whereIn("code", ['talentapp.require.aprovacion','talentapp.require.aprovacion_en','talentapp.require.answer.evaluado_en','talentapp.require.answer.evaluador','talentapp.require.answer.evaluador_en'])
+                                    ->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+                                    ->whereRaw(\DB::raw("DATE(date) = DATE('".$evaluador['send_at']['date']."')"))
+                                    ->first();
+                    // echo $record->id." ".$evaluador['send_at']['date']."<br>";
+                    }
+                    
+
+                    if( isset($email->id) )
+                    {
+                        if($email->getTimesOpenedAttribute() > 0) echo '<b><span class="text-success oc-icon-eye" title="'.(trans("tresfera.talentapp::lang.admin.email_leido")).'"></span></b> ';
+                        else echo '<b><span class="text-warning oc-icon-eye-slash" title="'.(trans("tresfera.talentapp::lang.admin.email_no_leido")).'"></span></b> ';
+                    } else {
+                        echo '<b><span class="text-danger oc-icon-bolt" title="'.(trans("tresfera.talentapp::lang.admin.email_no_enviado")).'"></span></b> ';
+                    }
+                    echo $tipo.": ".$evaluador['email']."<br/>";
+
+                }
+
+            }
+
+            
+        }
+    } 
+}?>

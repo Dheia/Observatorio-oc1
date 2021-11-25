@@ -1,0 +1,40 @@
+scopes:
+    proyecto:
+        label: Proyecto
+        modelClass: Tresfera\Talentapp\Models\Proyecto
+        conditions: tresfera_talentapp_evaluacion.proyecto_id in (:filtered)
+        nameFrom: name
+    cliente:
+        label: Cliente
+        modelClass: Tresfera\Clients\Models\Client
+        conditions: tresfera_talentapp_evaluacion.client_id in (:filtered)
+        nameFrom: name
+    evaluado:
+        label: Evaluado
+        modelClass: Tresfera\Talentapp\Models\Evaluacion
+        conditions: tresfera_talentapp_evaluacion.id in (:filtered) 
+        nameFrom: email
+    type:
+        label: 'tresfera.talentapp::lang.proyectos.type'
+        type: group
+        scope: type
+        options:
+            normal: 'tresfera.talentapp::lang.proyectos.normal'
+            edu: 'tresfera.talentapp::lang.proyectos.edu'
+    estado:
+        label: Estado
+        type: group
+        conditions: tresfera_talentapp_evaluacion.estado in (:filtered)
+        options:
+            2: Completados
+            1: No completados
+    
+    estado_informe:
+        label: Estado informe
+        type: group
+        conditions: tresfera_talentapp_evaluacion.estado_informe in (:filtered) 
+        options:
+            3: Completados
+            2: Procesando
+            1: En cola
+            -1: Error

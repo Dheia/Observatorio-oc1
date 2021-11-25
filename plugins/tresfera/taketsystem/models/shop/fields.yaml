@@ -1,0 +1,22 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+    name:
+        label: Nombre
+    secret:
+        label: Secret
+    city:
+        label: Ciudad
+        type: recordfinder
+        list: $/tresfera/taketsystem/models/city/columns.yaml
+        prompt: Haz click en %s para buscar una ciudad
+        nameFrom: name
+    postcode:
+        label: Código postal
+    address:
+        label: Dirección

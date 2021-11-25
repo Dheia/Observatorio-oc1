@@ -1,0 +1,26 @@
+<?php 
+
+use Mja\Mail\Models\Email;
+use Mja\Mail\Models\EmailOpens;
+
+$evaluadores = $record->getPlayers();
+if(is_array($evaluadores))
+{
+    foreach($evaluadores as $tipo=>$values) 
+    { 
+        if(is_array($values)) {
+            foreach($values as $evaluador) 
+            {
+                if( ( !$record->isCompletedPlayer($evaluador))    
+                    ) 
+                {
+                    
+
+                }
+
+            }
+
+            
+        }
+    } 
+}?>

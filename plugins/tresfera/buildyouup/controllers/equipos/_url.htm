@@ -1,0 +1,15 @@
+<?php
+    $url = $model->getUrl();         
+?>
+<div style="padding: 20px">
+    <div class="control-breadcrumb">
+        <ul>
+            <li><a href="#">Cuestionario</a></li>
+            <li><a href="<?=url($url)?>" target="_blank">Visitar</a></li>
+        </ul>
+    </div>
+</div>
+<textarea 
+ style="width: 100%;margin-top: -40px;"
+ rows="2" disabled=disabled><?=url($url)?></textarea>
+

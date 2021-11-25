@@ -1,0 +1,248 @@
+fields:
+    title:
+        label: Título
+        required: true
+        span: left
+        placeholder: 'Escribe el título del cuestionario'
+        containerAttributes:
+            data-toggle: tooltip
+            title: 'Nombre con el que identificaremos este cuestionario'
+        type: text
+    toolbar:
+        type: partial
+        path: post_toolbar
+        span: right
+        cssClass: collapse-visible
+tabs:
+    fields:
+        type:
+            tab: 'Módelo de cuestionario'
+            label: 'Cuestionarios prediseñados y editables'
+            type: relation
+            span: left
+            context: create
+            containerAttributes:
+                data-toggle: tooltip
+                title: 'Selecciona el tipo de plantilla prediseñadas y editables para crear tu cuestionario'
+        template:
+            label: 'Tipo de plantilla'
+            type: Tresfera\Taketsystem\FormWidgets\QuizTemplateSelector
+            context: create
+            tab: 'Módelo de cuestionario'
+            dependsOn: type
+        qr:
+            type: partial
+            path: $/tresfera/taketsystem/controllers/quizzes/_qr.htm
+            tab: Multicanalidad
+            context: update
+            span: right
+        url:
+            label: Url
+            commentAbove: 'Enlace para poder compartir la encuesta'
+            context: update
+            tab: Multicanalidad
+            disabled: true
+            span: left
+            type: text
+        url_demo:
+            label: 'Url demo'
+            commentAbove: 'Enlace para poder compartir la encuesta sin guardar resultados'
+            context: update
+            tab: Multicanalidad
+            disabled: true
+            span: left
+            type: text
+        date_start:
+            label: 'Inicio publicación'
+            type: datepicker
+            mode: date
+            span: left
+            tab: Publicación
+            containerAttributes:
+                data-toggle: tooltip
+                title: 'Fecha en la que empezará tu cuestionario'
+        date_end:
+            label: 'Fin de la publicación'
+            type: datepicker
+            mode: date
+            span: right
+            tab: Publicación
+            containerAttributes:
+                data-toggle: tooltip
+                title: 'Fecha en la que tu cuestionario dejará de publicarse'
+        langs:
+            label: '¿En qué idiomas quieres realizar el cuestionario?'
+            type: checkboxlist
+            span: left
+            tab: Publicación
+        desc:
+            label: Descripción
+            commentAbove: 'Especifica una frase para mostrar en la cabecera de tu cuestioanio'
+            span: left
+            tab: Publicación
+            type: text
+        is_template:
+            label: '¿Usar como plantilla?'
+            type: switch
+            tab: Plantilla
+            context: update
+        template_name:
+            label: Nombre
+            tab: Plantilla
+            context: update
+            trigger:
+                action: show
+                field: is_template
+                condition: checked
+            type: text
+        template_description:
+            label: Descripción
+            type: textarea
+            tab: Plantilla
+            context: update
+            trigger:
+                action: show
+                field: is_template
+                condition: checked
+        cover:
+            label: Portada
+            type: fileupload
+            mode: image
+            imageHeight: 260
+            imageWidth: 260
+            fileTypes: 'jpg,jpeg,png'
+            tab: Plantilla
+            context: update
+            trigger:
+                action: show
+                field: is_template
+                condition: 'checkedis_template:'
+        cuestionario:
+            label: 'Estilo del cuestionario'
+            span: auto
+            type: section
+            comment: 'Indica el diseño base del cuestionario'
+            tab: Personalización
+        iframe:
+            label: 'Estilo del marco'
+            span: right
+            type: section
+            comment: 'Especifica el diseño que tendrá el marco que contendrá el cuestionario'
+            tab: Personalización
+        logo:
+            label: 'Logo del cuestionario'
+            mode: image
+            imageWidth: 360
+            imageHeight: 180
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: left
+            type: fileupload
+            tab: Personalización
+        dessign_bg:
+            label: 'Fondo del marco'
+            mode: image
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: auto
+            type: fileupload
+            tab: Personalización
+        dessign_radius_color:
+            label: 'Color de la sombra'
+            span: right
+            type: colorpicker
+            tab: Personalización
+        style_header_bg:
+            label: 'Fondo cabecera'
+            context: update
+            tab: Personalización
+            span: left
+            type: colorpicker
+        dessign_background:
+            label: 'Color de fondo'
+            span: right
+            type: colorpicker
+            tab: Personalización
+        style_title_bg:
+            label: 'Fondo del título'
+            context: update
+            tab: Personalización
+            span: left
+            type: colorpicker
+        dessign_radius:
+            label: 'Número de pixeles del borde redondo'
+            span: right
+            type: number
+            tab: Personalización
+        style_title_text:
+            label: 'Color del título'
+            span: left
+            context: update
+            type: colorpicker
+            tab: Personalización
+        dessign_width:
+            label: 'Ancho del cuestionario'
+            span: right
+            type: number
+            default: 1200
+            tab: Personalización
+        style_button_bg:
+            label: 'Fondo de los botones'
+            span: left
+            context: update
+            type: colorpicker
+            tab: Personalización
+        dessign_heigth:
+            label: 'Alto del cuestionario'
+            span: right
+            type: number
+            default: 680
+            tab: Personalización
+        style_button_text:
+            label: 'Color de los botones'
+            span: left
+            context: update
+            type: colorpicker
+            tab: Personalización
+        advanced:
+            label: 'Código personalizado'
+            span: full
+            type: section
+            comment: 'Necesario conocer css para poder usar este apartado'
+            tab: Personalización
+        custom_css:
+            label: 'CSS personalizado'
+            size: huge
+            language: css
+            span: full
+            type: codeeditor
+            tab: Personalización
+        devices:
+            type: partial
+            path: $/tresfera/taketsystem/controllers/devices/_list_quiz.htm
+            tab: Dispositivos
+            containerAttributes:
+                data-toggle: tooltip
+                title: 'Dispositivos en los que se mostrará el cuestionario'
+        client:
+            label: Cliente
+            type: relation
+            emptyOption: 'Sin cliente'
+            span: left
+            tab: General
+        md5:
+            label: MD5
+            span: right
+            type: text
+            tab: General
+        slides:
+            type: partial
+            path: $/tresfera/taketsystem/controllers/quizzes/_list_slides.htm
+            tab: 'Configuración de pantallas'
+            containerAttributes:
+                data-toggle: tooltip
+                title: 'Organización de los elementos que tendrá el cuestionario'

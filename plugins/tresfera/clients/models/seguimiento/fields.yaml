@@ -1,0 +1,27 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+        hidden: true
+    tipo:
+        label: Tipo de historial
+        type: dropdown
+        options:
+            call: Llamada
+            visita: Visita
+    date:
+        label: Fecha y hora de contacto
+        span: full
+        type: datepicker
+        
+    cause:
+        label: Observaciones
+        type: textarea
+    
+        
+    
+        

@@ -1,0 +1,109 @@
+columns:
+    id:
+        label: ID
+        type: text
+        invisible: false
+        searchable: true
+        clickable: false
+        sortable: true
+    proyecto:
+        label: Proyecto
+        type: partial
+        path: ~/plugins/tresfera/talent/models/evaluacion/_proyecto_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    cliente:
+        label: Cliente
+        type: partial
+        path: ~/plugins/tresfera/talent/models/evaluacion/_cliente_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    estado:
+        label: Estado
+        type: partial
+        path: ~/plugins/tresfera/talent/models/evaluacion/_estado_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+
+    autoevaluacion:
+        label: Autoevaluación
+        type: partial
+        path: ~/plugins/tresfera/talent/models/evaluacion/_autoevaluacion_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+    tiempo_restante:
+        label: 'Tiempo Restante'
+        type: partial
+        path: ~/plugins/tresfera/talent/models/evaluacion/_tiempo_restante_column.htm
+        searchable: false
+        clickable: false
+        sortable: false
+
+    proyecto_name:
+        label: Proyecto
+        relation: proyecto
+        select: name
+        searchable: true
+        clickable: false
+        invisible: true
+        cssClass: hidden
+    cuestionario_evaluado_id:
+        label: cuestionario_evaluado_id
+        type: number
+        searchable: false
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    cuestionario_evaluador_id:
+        label: cuestionario_evaluador_id
+        type: number
+        searchable: false
+        invisible: true
+        clickable: false
+        cssClass: hidden
+
+    name:
+        label: Nombre Evaluado
+        type: text
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    username:
+        label: username
+        type: text
+        searchable: false
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    email:
+        label: email
+        type: text
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    user_id:
+        label: user_id
+        type: number
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    stats:
+        label: user_id
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden
+    client_id:
+        label: client_id
+        type: number
+        searchable: true
+        invisible: true
+        clickable: false
+        cssClass: hidden

@@ -1,0 +1,20 @@
+columns:
+    name:
+        label: 'tresfera.talent::lang.evaluacion.name'
+        type: text
+    email:
+        label: email
+        type: text
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    _config:
+        label: config
+        type: buttons_evaluaciones
+    _link:
+        label: "Enlace cuestionario"
+        type: partial
+        path: $/tresfera/talent/models/evaluacion/_getlink.htm

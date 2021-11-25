@@ -1,0 +1,33 @@
+fields:
+    evaluado_details_section:
+        label: 'tresfera.talent::lang.evaluadores.ev_evaluado'
+        type: section
+        comment: 'tresfera.talent::lang.evaluadores.ev_datos'
+        span: full
+    name:
+        label: 'tresfera.talent::lang.proyectos.name'
+        span: full
+    email:
+        label: 'tresfera.talent::lang.proyectos.email'
+        span: full
+    lang:
+        label: 'tresfera.talent::lang.proyectos.lang'
+        type: dropdown
+        span: full
+        options:
+            0: 'tresfera.talent::lang.proyectos.mantener'
+            es: 'tresfera.talent::lang.proyectos.esp'
+            en: 'tresfera.talent::lang.proyectos.eng'
+tabs:
+    fields:
+#        stats_partial:
+#            span: full
+#            type: partial
+#            path: seguimiento
+#            tab: 'tresfera.talent::lang.evaluacion.seguimiento'
+        params[permissions]:
+            options:
+                view_report: Ver informe
+            span: rigth
+            type: checkboxlist
+            tab: 'tresfera.talent::lang.evaluacion.permisos'

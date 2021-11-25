@@ -1,0 +1,129 @@
+title = "Pag2"
+url = "/cofidis/competencia2/pag2"
+layout = "cofidis"
+is_hidden = 0
+==
+<div class="avatar">
+<img src="/storage/app/media/cofidis/competencia2/2.3 Foto.png"><span style="color: #FFFFFF">Anamiga</span>
+</div>
+<div class="chat">
+	 	<ul>
+	 	
+	 	<li class="you">
+        ¿Cómoooo?
+      </li>
+      
+      <li class="you">
+        ¿MEDIA maratón? ¿En serio me estás proponiendo eso?
+      </li>
+	 	    
+	 	
+			<li class="me">
+        Sí, completamente. Siempre he querido hacer algo épico.
+      </li>
+      
+      <li class="you">
+      Es imposible. Mucho esfuerzo y no creo que podamos. Tú estás loco. Yo paso.
+      </li>
+      
+      <li class="me">
+      Vaaaa.
+      </li>
+      
+      <li class="me">
+      Tener un reto es estimulante. Nos imaginas entrando a meta?
+      </li>
+      
+      <li class="">
+      Sí, sí... <img src="/storage/app/media/cofidis/competencia2/2.4 Ambulancia.png"> <img src="/storage/app/media/cofidis/competencia2/2.5 Muerte.png">
+      </li>
+      
+      <li class="me">
+        Sé que podemos, sólo hay que proponérselo e ir a por ello.
+      </li>
+			
+		</ul>
+		<div class="body">
+    </div>
+    <div class="bg-typed">
+      <div class="typed"></div>
+    </div>
+	</div>
+      <div class="row center fixed-bottom">
+        <a href="pag3?finish=true" 
+            id="download-button" 
+            class="btn-large waves-effect waves-light orange">
+            CONTINUAR
+          </a>
+      </div>
+      <style>
+.topbar {
+  width: {{ 2*100/31 }}%;
+}
+</style>
+
+<script>
+$( document ).ready(function() {
+    var strings = [];
+      var elements = $(" .chat ul li");
+      console.dir(elements)
+      var i = 0;
+      $("body").on('DOMSubtreeModified', ".chat .typed", function() {
+        console.log($(this)[0].scrollHeight)
+        $(this).scrollTop($(this)[0].scrollHeight);
+
+      });
+      function run(num) {
+          if(elements[num] == undefined) return;
+          if($(elements[num]).hasClass("me")) {
+              var options = {
+                  strings: [""],
+                  typeSpeed: 40,
+                  onComplete: function(self) { 
+                      
+                      $(".typed").html("");
+                      $(".typed-cursor").remove();
+                      if(strings[num]) {
+                        $(".chat .body").append("<div class='me'><div>"+strings[num]+"</div></div>");
+                        var $container = $('.chat .body'),
+                        $scrollTo = $('.chat .body div').last();
+  
+                        $container.scrollTop(
+                            $scrollTo.offset().top - $container.offset().top + $container.scrollTop()
+                        );
+                      }
+
+                      if(i>num)
+                          run(num+1)
+                  }
+              }
+              setTimeout(function(){
+                var typed = new Typed(".typed", options);
+              }, 2000);
+              
+          } else {
+              if(i>num)
+                  setTimeout(function(){
+                      $(".chat .body").append("<div class='you'><div>"+strings[num]+"</div></div>");
+                      var $container = $('.chat .body'),
+                      $scrollTo = $('.chat .body div').last();
+
+                      $container.scrollTop(
+                          $scrollTo.offset().top - $container.offset().top + $container.scrollTop()
+                      );
+                      run(num+1)
+                  }, 2000);
+                  
+          }
+          
+      }
+
+      $(".chat ul li").each(function(){
+          strings[i] = $(this).html();
+          i++;
+      })
+      
+      run(0);
+});
+      
+</script>

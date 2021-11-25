@@ -1,0 +1,131 @@
+<div id="slide_<?=$slide->id?>" class="slide_<?=$slide->id?> main bg selects">
+    <div class="row" id="question">
+        <?php 
+        foreach($data as $campo) { 
+            if(!isset($campo['type'])) continue;
+        
+            $partial = "$/tresfera/taketsystem/slides/fields/_".$campo['type'].".htm";
+            echo $this->makePartial(
+            $partial,
+              [
+                'field' => $campo,
+                'slide' => $slide,
+                'lang' => $lang
+              ]
+            );
+        }
+        ?>
+    </div>
+    <div id="continue">
+      <button ng-click="prevStep()" type="submit" class="button goback icon-right ion-chevron-right button-clear button-dark">
+        <?php if(isset($data['back']) and $data['back']) { ?> 
+            <?=$data['backText']?>
+        <?php } else { ?> 
+            <?php if($lang == 'ES') {
+            ?>Volver<?php
+            } elseif($lang == 'EN') {
+            ?>Back<?php
+            }
+            ?>
+        <?php } ?>
+      </button>
+      <button  ng-click="respuestas()" type="submit" class="button icon-right ion-chevron-right button-clear button-dark">
+        <?php if(isset($data['continue']) and $data['continue']) { ?> 
+            <?=$data['continueText']?>
+        <?php } else { ?> 
+            <?php if($lang == 'ES') {
+            ?>Continuar<?php
+            } elseif($lang == 'EN') {
+            ?>Continue<?php
+            }
+            ?>
+        <?php } ?>
+      </button>
+    </div>
+</div>
+
+<style>
+.alert {
+    display: none;
+}
+    button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -180px;
+}
+
+.slide_<?=$slide->id?> {
+    <?php if(isset($data['bg'])) { ?> 
+     background-image: url('//talentapp360.taket.es/storage/app/media/<?=$data['bg']?>');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    <?php } ?>
+    position: absolute;
+    width: 1200px;
+    height: 700px;
+}
+input {
+    background: transparent;
+    font-size: 12px !important;
+    text-align: left !important;
+}
+.button.icon-right:before {
+display: none;
+}
+button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -180px;
+}
+.button.button-dark.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 0px 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 165px;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #ffffff;
+    border-color: #ffffff;
+    left: 50%;
+    margin-left: -40px;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -10px;
+}
+button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -160px;
+}
+button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    bottom: 40px;
+}
+textarea {
+    font-size: 12px;
+    text-align: left;
+    padding: 0 !important;
+    background: transparent;
+}
+<?php if(isset($data['css'])) { ?> 
+    <?=$data['css']?>
+    <?php } ?>
+
+</style>

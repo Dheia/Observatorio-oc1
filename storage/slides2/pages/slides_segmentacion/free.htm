@@ -1,0 +1,41 @@
+title = "Campo libre y agradecimiento"
+url = "/slides/slide/:code"
+description = "Solicitaremos un campo de texto y agradeceremos la encuesta"
+type = "segmentacion"
+layout = "render"
+
+[taketsystemTemplate]
+==
+<!-- Content -->
+<section>
+	<div class="h-30">
+        <div>
+	        <img class="logoBig" src="{fileupload name="banner_image" label="Imágen de bienvenida" imageWidth="180" imageHeight="120"}http://placehold.it/180x120{/fileupload}"/>
+        </div>
+	</div>
+    <div class="h-30">
+        <div>
+          <div data-role="pregunta">
+            <h2>{text name="campo" label="Campo libre"}Número de habitación{/text}</h2>
+            <div class="list">
+			  <label class="item item-input">
+			    <input data-question="1" type="text" name="libre"/>
+			  </label>
+			</div>
+          </div>
+        </div>
+    </div>
+    <div class="h-30">
+        <div>
+          <div data-role="pregunta">
+            <h1>{text name="gracias" label="Agradecimiento"}¡Muchas gracias!{/text}</h1>
+            <h2>{text name="gracias2" label="Frase de agradecimiento"}Su opinión nos permitirá mejorar{/text}</h12>
+          </div>
+        </div>
+    </div>
+    <div class="h-10">
+        <div>
+	  		<button ng-click="respuestas()" type="submit" class="button button-block button-positive">Acabar</button>
+        </div>
+    </div>
+</section>

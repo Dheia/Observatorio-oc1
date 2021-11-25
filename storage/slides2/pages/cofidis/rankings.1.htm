@@ -1,0 +1,45 @@
+title = "Rankings"
+url = "/cofidis/rankings1"
+layout = "app"
+description = "Segmentaciones"
+is_hidden = 0
+
+[session]
+security = "user"
+redirect = "cofidis/login"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+
+[Rankings]
+==
+{% put head %}
+    <link href="{{['assets/app/css/custom-rankings.css' ]|theme}}" rel="stylesheet">
+{% endput %}
+
+<div class="container p-5">
+	<h1 class="mb-8">Rankings</h1>
+	<table class="text-left w-full">
+		<thead class="bg-black flex content-center text-white w-full">
+			<tr class="flex w-full mb-4">
+				<th class="p-4 w-1/8"> </th>
+				<th class="p-4 w-1/8"> </th>
+				<th class="p-4 w-1/4">Teamname</th>
+				<th class="p-4 w-1/4">Score</th>
+			</tr>
+		</thead>
+		<tbody class="bg-grey-light flex content-center flex-col items-center justify-between overflow-y-scroll w-full" >
+		    {% set i = 1 %}
+			{% for team in Rankings.teams %}
+			<tr class="flex w-full mb-4">
+				<td class="p-4 w-1/8 rank-number">#{{i}}</td>
+                <td class="p-4 w-1/8 rank-picture"><img src="https://eu.ui-avatars.com/api/?background=0D8ABC&color=fff&name={{team.team}}" class="profile-picture"></td>
+                <td class="p-4 w-1/4 rank-name">{{team.team}}</td>
+				<td class="p-4 w-1/4 rank-score">{{team.points}}</td>
+			</tr>
+			{% set i = i + 1 %}
+			{% endfor %}
+		</tbody>
+	</table>
+</div>

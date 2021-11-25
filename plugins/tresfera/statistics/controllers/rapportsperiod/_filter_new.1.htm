@@ -1,0 +1,203 @@
+<?php
+$model = $this->vars['formModel'];
+
+$groupBy = $this->getGroupBy();
+$dateRange = $this->getDateRange();
+
+$quizzes = \Tresfera\Statistics\Models\Result::getCuestionarios()->lists("title","id");
+$sexs = ['1'=>'Hombre','2'=>'Mujer'];
+$ages = [
+			'15'=>'Menos de 20',
+			'25'=>'20 - 29',
+			'35'=>'30 - 39',
+			'45'=>'40 - 49',
+			'55'=>'50 - 59',
+			'65'=>'60 - 69',
+			'75'=>'70 - 79',
+			'85'=>'Más de 80',
+			'0'=>'No especificado',
+		];
+$geoO = \Tresfera\Statistics\Models\Result::getGeo();
+$geo =array();
+if(is_object($geoO))
+ $geo = $geoO->lists("citycp_name","citycp_id");
+
+
+$sondeos0 = \Tresfera\Statistics\Models\Result::getSondeosFilter();
+
+ $sondeos = array();
+if(is_object($sondeos0)) {
+	$sondeos_list = $sondeos0->get();
+	foreach($sondeos_list as $sondeo) {
+		$value = $sondeo->value;
+		if($sondeo->value) {
+			$answerSondeo = \Tresfera\TaketSystem\Models\QuizMulti::find($sondeo->value);
+			if(isset($answerSondeo->title))
+				$value = $answerSondeo->title;
+		}
+		$sondeos[$sondeo->value] = $value;
+	}
+	//$sondeos = $sondeos0->lists("question_title","value");
+	//dd($sondeos);
+}
+
+
+
+//dd($sondeos0->lists("question_title","value"));
+
+$shop = \Tresfera\Statistics\Models\Result::getTiendas()->lists("name","id");
+$hour = [6=>8,7=>9,8=>10,9=>11,10=>12,11=>13,12=>14,13=>15,14=>16,15=>17,16=>18,17=>19,18=>20,19=>21,20=>22,21=>23];
+
+$data = [
+	'quizzes' 	=> $quizzes,
+	'sex' 		=> $sexs,
+	'age' 		=> $ages,
+	'geo' 		=> $geo,
+	'shop'		=> $shop,
+	'hour' 		=> $hour,
+	'sondeo' 	=> $sondeos,
+];
+
+$filter_cuestionario = $this->getCuestionario();
+$filters = $this->vars['formModel']->filters;
+$actual_link = "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+foreach($data as $k=>$d) {
+  if(!isset($filters[$k])) $filters[$k] = [];
+}
+
+foreach($filters as $key=>$filter) {
+	if(isset($model->filters[$key])) {
+		if(count($filters[$key]) == 0)
+		$filters[$key] = $model->filters[$key];
+	}
+}
+
+//Updateamos filtro en session
+$numSession = "Taket.statistics.filters";
+$session = \Session::get($numSession);
+
+$filters2 = $this->getFilters();
+
+foreach($filters as $key => $filter) {
+
+			$session[$key] = $filter;
+}
+
+\Session::put($numSession, $session);
+  
+?>
+	<div id="filterExample" class="control-filter" data-control="filterwidget"
+			data-update-handler="onFilterUpdate"
+			data-options-handler="onFilterGetOptions">
+
+	    <!-- Group -->
+	    <a href="javascript:;" class="filter-scope <?=count($filters['quizzes'])?'active':''?>" data-scope-name="quizzes">
+	        <span class="filter-label">Cuestionarios:</span>
+	        <span class="filter-setting"><?=count($filters['quizzes'])?count($filters['quizzes']):'Tots'?></span>
+	    </a>
+      <?php
+        //sondeos personalizados
+        $user = BackendAuth::getUser();
+        if($user->client_id) {
+            $client = \Tresfera\Clients\Models\Client::find($user->client_id);
+            $segmentaciones = \Tresfera\Taketsystem\Models\Segmentacion::with("values")->where("client_id",$client->id)->where("is_filter",1)->get();
+            if(count($segmentaciones)) {
+              foreach($segmentaciones as $segmentacion) {
+                  $slug = str_slug($segmentacion->name);
+                  $data[$slug] = [];
+                  
+                  foreach($segmentacion->values as $value) {
+                    $data[$slug][str_replace("'","\'",$value->value)] = $value->value;
+				  }
+				  if(isset($filters[$slug])) {
+                  ?>
+                  <a href="javascript:;" class="filter-scope <?=count($filters[$slug])?'active':''?>" data-scope-name="<?=$slug?>">
+                      <span class="filter-label"><?=$segmentacion->name?>:</span>
+                      <span class="filter-setting"><?=count($filters[$slug])?count($filters[$slug]):'Tots'?></span>
+                  </a>
+				<?php
+				  }
+              }
+//dd($data);
+            }
+        }
+      ?>
+	    <!-- Group -->
+   <?php 
+    if(!isset($client) OR (isset($client) AND $client->id <= 204)) {  ?>
+	    <a href="javascript:;" class="filter-scope <?=count($filters['sex'])?'active':''?>" data-scope-name="sex">
+	        <span class="filter-label">Genero:</span>
+	        <span class="filter-setting"><?=count($filters['sex'])?count($filters['sex']):'Tots'?></span>
+	    </a>
+
+	    <!-- Group -->
+	    <a href="javascript:;" class="filter-scope <?=count($filters['age'])?'active':''?>" data-scope-name="age">
+	        <span class="filter-label">Edad:</span>
+	        <span class="filter-setting"><?=count($filters['age'])?count($filters['age']):'Tots'?></span>
+	    </a>
+
+	    <!-- Group -->
+	    <a href="javascript:;" class="filter-scope <?=count($filters['geo'])?'active':''?>" data-scope-name="geo">
+	        <span class="filter-label">Zonas:</span>
+	        <span class="filter-setting"><?=count($filters['geo'])?count($filters['geo']):'Tots'?></span>
+	    </a>
+
+		<!-- Group -->
+	    <a href="javascript:;" class="filter-scope <?=count($filters['hour'])?'active':''?>" data-scope-name="hour">
+	        <span class="filter-label">Horas:</span>
+	        <span class="filter-setting"><?=count($filters['hour'])?count($filters['hour']):'Tots'?></span>
+	    </a>
+
+	    <!-- Group -->
+	    <a href="javascript:;" class="filter-scope <?=count($filters['shop'])?'active':''?>" data-scope-name="shop">
+	        <span class="filter-label">Tiendas:</span>
+	        <span class="filter-setting"><?=count($filters['shop'])?count($filters['shop']):'Tots'?></span>
+	    </a>
+
+	    <!-- Group -->
+	    <a href="javascript:;" class="filter-scope <?=count($filters['sondeo'])?'active':''?>" data-scope-name="sondeo">
+	        <span class="filter-label">Sondeos:</span>
+	        <span class="filter-setting"><?=count($filters['sondeo'])?count($filters['sondeo']):'Tots'?></span>
+	    </a>
+  <?php } ?>
+      
+    
+			<a style="float: right;display: inline-block;margin-top: 8px;margin-right: 15px;" class="btn btn-warning icon-trash-o" href="<?="//".$_SERVER['HTTP_HOST']."/backend/tresfera/statistics/stats/cleanFilters"?>">
+				Restaurar
+			</a>
+	</div>
+<script>
+    $('#filterExample').data('filterScopes', {
+	    <?php foreach($data as $key => $values) { ?>
+        '<?=$key?>': {
+            available: [
+	            <?php foreach($values as $id => $value) {
+					if(!$id) continue;
+					if(!isset($filters[$key])) continue;
+					
+		        ?>
+		            <?php if(!in_array($id,array_pluck($filters[$key], 'id'))) { ?>
+		            { id: '<?=$id?>', name: '<?=str_replace("'","\'", $value)?>' },
+		            <?php } ?>
+	            <?php } ?>
+            ],
+            active: [
+	            <?php foreach($values as $id => $value) {
+					if(!$id) continue;
+					if(!isset($filters[$key])) continue;
+		        ?>
+		            <?php
+		            foreach($filters[$key] as $f)
+		            	if($id == $f['id']) { ?>
+							{ id: '<?=$id?>', name: '<?=str_replace("'","\'", $value)?>' },
+						<?php } ?>
+	            <?php } ?>
+            ]
+        },
+        <?php } ?>
+    })
+</script>
+<style>
+
+</style>

@@ -1,0 +1,10 @@
+name: Evaluaciones
+form: $/tresfera/talentapp/models/evaluacion/fields.yaml
+modelClass: Tresfera\Talentapp\Models\Evaluacion
+defaultRedirect: tresfera/talentapp/
+create:
+    redirect: 'tresfera/talentapp/evaluaciones/update/:id'
+    redirectClose: tresfera/talentapp/
+update:
+    redirect: tresfera/talentapp/evaluaciones
+    redirectClose: tresfera/talentapp/

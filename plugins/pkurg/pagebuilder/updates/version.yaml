@@ -1,0 +1,44 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - update
+1.0.3:
+    - import fix
+1.0.4:
+    - fix
+1.0.5:
+    - adds panel
+1.0.6:
+    - Adds Frontend content builder component    
+1.0.7:
+    - Custom Block
+1.0.8:
+    - fix Builder Not Appearing
+1.0.9:
+    - fix php echo
+1.1.0:
+    - Added the ability to store uploaded files in the Media Library
+1.1.1:
+    - Uploaded image name fix
+1.1.2:
+    - Frontend Bulder fix
+1.1.3:
+    - no load js scripts fix
+1.1.4:
+    - fix
+1.1.5:
+    - update page after edit in Frontend    
+1.1.6:
+    - update
+1.1.7:
+    - update    
+1.1.8:
+    - Adds Editor var 
+1.1.9:
+    - fix
+1.2.0:
+    - Same id for new pages fix    
+1.2.1:
+    - Added the ability to connect styles and scripts to the Builder canvas
+1.2.2:
+    - Added the ability to save page data to partial

@@ -1,0 +1,27 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+scopes:
+    city:
+        # Filter name
+        label: Ciudad
+
+        # Model Class name
+        modelClass: Tresfera\Taketsystem\Models\City
+
+        # Model attribute to display for the name
+        nameFrom: name
+
+        conditions: city_id in (:filtered)
+    
+    region:
+        # Filter name
+        label: Provincia
+
+        # Model Class name
+        modelClass: Tresfera\Taketsystem\Models\Region
+
+        # Model attribute to display for the name
+        nameFrom: name
+
+        conditions: region_id in (:filtered)

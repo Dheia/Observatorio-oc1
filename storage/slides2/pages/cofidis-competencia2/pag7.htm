@@ -1,0 +1,63 @@
+title = "Pag7"
+url = "/cofidis/competencia2/pag7"
+layout = "cofidis"
+is_hidden = 0
+==
+<h3 class="center2">Las respuestas correctas son...</h3>
+<div class="answers answers-img answers-results">
+    <button class="foo-button mdc-button mdc-button--outlined success2">
+      <img class="imgsuccess" src="/storage/app/media/cofidis/competencia2/3.2 Imagen.png">
+    </button>
+    <button class="foo-button mdc-button mdc-button--outlined success2">
+      <img class="imgsuccess" src="/storage/app/media/cofidis/competencia2/3.6 Imagen.png">
+    </button>
+    <button class="foo-button mdc-button mdc-button--outlined success2">
+      <img class="imgsuccess" src="/storage/app/media/cofidis/competencia2/3.10 Imagen.png">
+    </button>
+    
+</div>
+ <h3 class="acertado">¡Has acertado {{Progreso.answersOk(['cofidis-competencia1-pag8','cofidis-competencia1-pag9','cofidis-competencia1-pag10','cofidis-competencia1-pag11','cofidis-competencia1-pag12'])}}/5!</h3>
+<div class="row center">
+  <a href="pag15?finish=true" 
+      id="download-button" 
+      class="btn-large waves-effect waves-light orange">
+      CONTINUAR
+    </a>
+</div>
+<style>
+.topbar {
+  width: {{ 16*100/31 }}%;
+}
+@media (max-width: 479px) {
+  .answers-img button {
+      width: 300px !important;
+      margin-left: calc(50% - 150px);
+  }
+  .answers-img button img {
+    width: 80%;
+    margin-top: 12px;
+    margin-left: 10%;
+}
+  button div {
+    font-size: 10px;
+    line-height: 120%;
+    text-align: center;
+  }
+  
+  .answers-results button div {
+    display: block;
+    width: calc(100%);
+  }
+}
+@media only screen and (min-width: 993px)
+{
+  .container {
+      width: 40%;
+  }
+  .answers .mdc-button {
+    max-width: 520px;
+    margin-bottom: 10px;
+}
+}
+</style>
+</style>

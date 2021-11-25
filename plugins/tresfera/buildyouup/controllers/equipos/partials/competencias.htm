@@ -1,0 +1,146 @@
+<div class="resultados {{class}}">
+    {% if value_evaluadores %}
+    <div class="elemento" style="top: 480px;left: 470px">
+        {{ value_evaluadores|number_format(2) }}
+    </div>
+    {% endif %}
+    <div class="elemento" style="top: 505px;left: 470px">
+        {{ value_auto|number_format(2) }}
+    </div>
+    <div class="elemento" style="top: 527px;left: 470px">
+        {{ value_total|number_format(2) }}
+    </div>
+</div>
+{% if value_evaluadores is not defined %}
+{% set top_px = 600 %}
+{% else %}
+{% set top_px = 647 %}
+{% endif %}
+{{ partial({
+    file: 'circulo',
+    class: class,
+    name: 'general',
+    top: top_px,
+    left: 247,
+    size: 345,
+    value1: value1,
+    value2: value2,
+    value3: value3,
+    value4: value4,
+   }) 
+}}
+{{ partial({
+    file: 'circuloConLeyenda',
+    class: class,
+    top: 416,
+    name: 'estrategica',
+    left: 1016,
+    size: 210,
+    value1: estrategica_value_1,
+    value2: estrategica_value_2,
+    value3: estrategica_value_3,
+    value4: estrategica_value_4,
+    value_text_1: estrategica_evaluadores,
+    value_text_2: estrategica_autoevaluador,
+    value_text_3: estrategica_total,
+   }) 
+}}
+{{ partial({
+    file: 'circuloConLeyenda',
+    class: class,
+    name: 'organizacion',
+    top: 416,
+    left: 1356,
+    size: 210,
+    value1: organizacion_value_1,
+    value2: organizacion_value_2,
+    value3: organizacion_value_3,
+    value4: organizacion_value_4,
+    value_text_1: organizacion_evaluadores,
+    value_text_2: organizacion_autoevaluador,
+    value_text_3: organizacion_total,
+   }) 
+}}
+{{ partial({
+    file: 'circuloConLeyenda',
+    class: class,
+    top: 782 + topFix,
+    name: 'networking',
+    left: 1016,
+    size: 210,
+    value1: networking_value_1,
+    value2: networking_value_2,
+    value3: networking_value_3,
+    value4: networking_value_4,
+    value_text_1: networking_evaluadores,
+    value_text_2: networking_autoevaluador,
+    value_text_3: networking_total,
+   }) 
+}}
+{{ partial({
+    file: 'circuloConLeyenda',
+    class: class,
+    name: 'cliente',
+    top: 782 + topFix,
+    left: 1356,
+    size: 210,
+    value1: cliente_value_1,
+    value2: cliente_value_2,
+    value3: cliente_value_3,
+    value4: cliente_value_4,
+    value_text_1: cliente_evaluadores,
+    value_text_2: cliente_autoevaluador,
+    value_text_3: cliente_total,
+   }) 
+}}
+{{ partial({
+    file: 'barcirculo',
+    class: class,
+    name: 'edad',
+    top: 962,
+    left: 259,
+    value: edad
+   }) 
+}}
+
+{{ partial({
+    file: 'barcirculo',
+    class: class,
+    name: 'sector',
+    top: 982,
+    left: 259,
+    value: sector,
+   }) 
+}}
+
+{{ partial({
+    file: 'barcirculo',
+    class: class,
+    name: 'genero',
+    top: 1002,
+    left: 259,
+    value: genero,
+   }) 
+}}
+
+{{ partial({
+    file: 'barcirculo',
+    class: class,
+    name: 'area',
+    top: 962,
+    left: 459,
+    value: area,
+   }) 
+}}
+
+
+{{ partial({
+    file: 'barcirculo',
+    class: class,
+    name: 'area',
+    top: 982,
+    left: 459,
+    value: funcion,
+   }) 
+}}
+

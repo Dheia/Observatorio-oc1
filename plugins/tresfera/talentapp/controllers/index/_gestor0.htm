@@ -1,0 +1,204 @@
+<style>
+.profile-pic {
+    position: relative;
+    display: inline-block;
+
+
+}
+
+.profile-pic:hover .edit {
+    display: block;
+}
+
+.edit_img:hover {
+    transition:all .3s ease-in-out;
+    filter: blur(3px);
+}
+
+.edit {
+    padding-top: 7px;
+    padding-right: 7px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+}
+
+.edit a {
+    color: #000;
+}
+</style>
+
+    <?php
+        use Tresfera\Talentapp\Models\Proyecto;
+        use Tresfera\Talentapp\Models\Evaluacion;
+        use Tresfera\Talentapp\Classes\UserControl;
+        use Tresfera\Talentapp\Models\Gestor;
+
+        $proyectos_activos = Gestor::join("tresfera_talentapp_proyecto", 'tresfera_talentapp_proyecto_good.id', '=', 'tresfera_talentapp_proyectos_gestores.proyecto_id')->where('tresfera_talentapp_proyectos_gestores.user_id',$user->id)->where('estado',1)->get();
+        $proyectos_inactivos = Gestor::join("tresfera_talentapp_proyecto", 'tresfera_talentapp_proyecto_good.id', '=', 'tresfera_talentapp_proyectos_gestores.proyecto_id')->where('tresfera_talentapp_proyectos_gestores.user_id',$user->id)->where('estado','<>',1)->orderBy('estado', 'asc')->get();
+
+        $proyectos_en_curso = count($proyectos_activos);
+        $proyectos_pendients = Gestor::join("tresfera_talentapp_proyecto", 'tresfera_talentapp_proyecto_good.id', '=', 'tresfera_talentapp_proyectos_gestores.proyecto_id')->where('tresfera_talentapp_proyectos_gestores.user_id',$user->id)->where('estado', 0)->count();
+        $proyectos_finalizados = Gestor::join("tresfera_talentapp_proyecto", 'tresfera_talentapp_proyecto_good.id', '=', 'tresfera_talentapp_proyectos_gestores.proyecto_id')->where('tresfera_talentapp_proyectos_gestores.user_id',$user->id)->where('estado', 2)->count();
+
+        $evaluaciones_en_curso = Evaluacion::join('tresfera_talentapp_proyecto', 'tresfera_talentapp_proyecto_good.id', '=', 'proyecto_id')
+                                                ->where('tresfera_talentapp_proyecto_good.gestor_id','=', $user->id)
+                                                ->where('tresfera_talentapp_evaluacion.estado', '=', 1)
+                                                ->count();
+
+        $evaluaciones_finalizadas = Evaluacion::join('tresfera_talentapp_proyecto', 'tresfera_talentapp_proyecto_good.id', '=', 'proyecto_id')
+                                            ->where('tresfera_talentapp_proyecto_good.gestor_id','=', $user->id)
+                                            ->where('tresfera_talentapp_evaluacion.estado', '=', 2)
+                                            ->count();
+
+
+
+        function muestraProyectos($proyectos)
+        {
+        ?>
+            <div class="control-list">
+                <table class="table data" data-control="rowlink">
+                    <thead>
+                        <tr>
+                            <th class="active sort-desc"><span>Proyecto</span></th>
+                            <th><span>Fecha Inicio</span></th>
+                            <th><span>Fecha Fin</span></th>
+                            <th><span>Nº Licencias</span></th>
+                            <th><span>Descripción</span></th>
+                            <th><span>Estado</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach($proyectos as $index=>$proyectoGestor)
+                        {
+                          $proyecto = Proyecto::find($proyectoGestor->proyecto_id);
+                            ?>
+                            <tr id="<?=$proyecto->id?>" name="<?=$proyecto->name?>">
+                                <td>
+                                    <a href="<?=url("/backend/tresfera/talentapp/proyectos/update/".$proyecto->id)?>"><?=$proyecto->name?></a>
+                                </td>
+                                <td>
+                                    <?=$proyecto->fecha_inicio?>
+                                </td>
+                                <td>
+                                    <?=$proyecto->fecha_fin?>
+                                </td>
+                                <td>
+                                    <?=$proyecto->num_licencias?>
+                                </td>
+                                <td>
+                                    <?=$proyecto->description?>
+                                </td>
+                                <td class="nolink" width="200px">
+                                <?php
+                                    if($proyecto->estado == 0) echo '<div class="activar" id_proyecto="'.$proyecto->id.'"><span class="list-badge badge-warning"><i class="icon-exclamation"></i></span> Pendiente</div>';
+                                    else if($proyecto->estado == 1) echo '<span class="list-badge badge-success"><i class="icon-check"></i></span> Activo';
+                                    else if($proyecto->estado == 2) echo '<span class="list-badge badge-info"><i class="icon-info"></i></span> Finalizado';
+                                ?>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php
+        }
+
+        function muestraListaVacia()
+        {
+            ?>
+            <div class="control-list">
+                <table class="table data">
+                    <thead>
+                        <tr>
+                            <th><span>Proyecto</span></th>
+                            <th><span>Fecha Inicio</span></th>
+                            <th><span>Fecha Fin</span></th>
+                            <th><span>Nº Licencias</span></th>
+                            <th><span>Descripción</span></th>
+                            <th><span>Estado</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="no-data">
+                            <td colspan="100" class="nolink">
+                                <p class="no-data">
+                                    No hay proyectos para mostrar.
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <?php
+        }
+
+        ?>
+
+        <div class="row">
+            <div class="col-xs-8">
+            <h4>Bienvenido '<?=$user->first_name?>'</h4>
+
+            <br/>
+            <div class="scoreboard">
+                    <div class="" data-control="toolbar">
+
+                        <div class="scoreboard-item title-value">
+                            <h4>Proyectos</h4>
+                            <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                    <ul>
+                                        <li data-color="#95b753">En curso <span><?=$proyectos_en_curso?></span></li>
+                                        <li data-color="#e5a91a">Pendientes <span><?=$proyectos_pendients?></span></li>
+                                        <li data-color="#cc3300">Finalizados <span><?=$proyectos_finalizados?></span></li>
+                                    </ul>
+                                </div>
+                        </div>
+
+                        <div class="scoreboard-item title-value">
+                            <h4>Evaluaciones</h4>
+                            <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                    <ul>
+                                        <li data-color="#95b753">En curso <span><?=$evaluaciones_en_curso?></span></li>
+                                        <li data-color="#cc3300">Finalizados <span><?=$evaluaciones_finalizadas?></span></li>
+                                    </ul>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-4">
+
+            <div class="profile-pic" style="border:solid 1px #BDBDBD; border-radius:15px">
+            <a href="#"><img class="edit_img" style="border-radius:15px" src="https://d500.epimg.net/cincodias/imagenes/2015/05/08/pyme/1431098283_691735_1431098420_noticia_normal.jpg" width="400" height="150"/></a>
+            <div class="edit"><i class="icon-pencil"></i></div>
+            </div>
+
+            </div>
+        </div>
+
+
+        <h4>Proyectos Activos</h4>
+
+        <?php
+
+        if(count($proyectos_activos)==0) muestraListaVacia();
+        else muestraProyectos($proyectos_activos);
+
+        ?>
+
+        <br/>
+
+        <h4>Proyectos Inactivos</h4>
+
+        <?php
+
+        if(count($proyectos_inactivos)==0) muestraListaVacia();
+        else muestraProyectos($proyectos_inactivos);
+
+        ?>

@@ -1,0 +1,32 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Slide
+
+# Model Form Field configuration
+form: $/tresfera/taketsystem/models/result/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Taketsystem\Models\Result
+
+# Default redirect location
+defaultRedirect: tresfera/taketsystem/results
+
+# Create page
+create:
+    title: Create Slide
+    redirect: tresfera/taketsystem/results/update/:id
+    redirectClose: tresfera/taketsystem/results
+    form: $/tresfera/taketsystem/models/result/fields_create.yaml
+
+# Update page
+update:
+    title: Edit Slide
+    redirect: tresfera/taketsystem/results
+    redirectClose: tresfera/taketsystem/results
+
+# Preview page
+preview:
+    title: Preview Slide

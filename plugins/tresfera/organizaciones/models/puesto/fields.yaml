@@ -1,0 +1,32 @@
+fields:
+    name:
+        label: Nombre
+        span: storm
+        cssClass: col-md-3
+        type: text
+    parent_id:
+        label: Responsable
+        showSearch: true
+        cssClass: col-md-3
+        span: storm
+        type: dropdown
+    familia_puesto_id:
+        label: Familia puesto
+        showSearch: true
+        cssClass: col-md-3
+        span: storm
+        type: dropdown
+    empresa_id:
+        label: Empresa
+        showSearch: true
+        cssClass: col-md-3
+        span: storm
+        type: dropdown
+    personas:
+        span: full
+        path: $/tresfera/organizaciones/controllers/departamentos/_relation_personas.htm
+        hidden: 0
+        context:
+            - update
+            - preview
+        type: partial

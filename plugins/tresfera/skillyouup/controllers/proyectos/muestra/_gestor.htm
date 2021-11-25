@@ -1,0 +1,156 @@
+<style>
+        .profile-pic {
+          position: relative;
+          display: inline-block;
+            
+            
+        }
+        
+        .profile-pic:hover .edit {
+          display: block;
+        }
+        
+        .edit_img:hover {
+            transition:all .3s ease-in-out;
+            filter: blur(3px);
+        }
+        
+        .edit {
+          padding-top: 7px;
+          padding-right: 7px;
+          position: absolute;
+          right: 0;
+          top: 0;
+          display: none;
+        }
+        
+        .edit a {
+          color: #000;
+        }
+        </style>
+        
+        
+        
+        
+        <div class="control-breadcrumb">
+                <ul>
+                    <li><a href="<?= Backend::url('tresfera/skillyouup') ?>">Skillyouup</a></li>
+                    <li>Proyectos</li>
+                </ul>
+            </div>
+          
+          
+        
+          <div class="row">
+            <div class="col-xs-8">
+              <h4>Bienvenido 'Usuario Gestor'</h4>
+        
+              <br/>
+              <div class="scoreboard">
+                    <div class="" data-control="toolbar">
+                
+                        <div class="scoreboard-item title-value">
+                            <h4>Proyectos</h4>
+                            
+        
+                            <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                    <ul>
+                                        <li data-color="#95b753">En curso <span>84</span></li>
+                                        <li data-color="#e5a91a">Pendientes <span>12</span></li>
+                                        <li data-color="#cc3300">Finalizados <span>18</span></li>
+                                    </ul>
+                                </div>
+                        </div>
+                
+                        <div class="scoreboard-item title-value">
+                            <h4>Equipos</h4>
+                            <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                    <ul>
+                                        <li data-color="#95b753">En curso <span>84</span></li>
+                                        <li data-color="#cc3300">Finalizados <span>18</span></li>
+                                    </ul>
+                                </div>
+                        </div>
+
+                
+                    </div>
+                </div>
+        
+        
+            </div>
+            <div class="col-xs-4">
+          
+            <div class="profile-pic" style="border:solid 1px #BDBDBD; border-radius:15px">
+              <a href="#"><img class="edit_img" style="border-radius:15px" src="https://d500.epimg.net/cincodias/imagenes/2015/05/08/pyme/1431098283_691735_1431098420_noticia_normal.jpg" width="400" height="150"/></a>
+              <div class="edit"><i class="icon-pencil"></i></div>
+            </div>
+          
+            </div>
+          </div>
+          
+        
+        
+        <br/>
+        
+          <h4>Proyectos</h4>
+          
+          <div class="control-list">
+              <table class="table data">
+                  <thead>
+                      <tr>
+                          <th class="active sort-asc"><span>Proyecto</span></th>
+                          <th><a href="/">Fecha Inicio</a></th>
+                          <th><a href="/">Fecha Fin</a></th>
+                          <th><a href="/">Nº Licencias</a></th>
+                          <th><a href="/">Descripción</a></th>
+                          <th><a href="/">Estado</a></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+          
+                      <tr class="rowlink">
+                          <td>
+                              Nombre del Proyecto
+                          </td>
+                          <td>
+                            2/12/2018
+                        </td>
+                        <td>
+                            2/03/2019
+                        </td>
+                        <td>
+                            200
+                        </td>
+                        <td>
+                            Este es un proyecto en el que evaluaremos la gente del departamento de ventas
+                        </td>
+
+                        <td>
+                          <span class="list-badge badge-success"><i class="icon-check"></i></span>Aprobado
+                        </td>
+                      </tr>
+                      <tr class="rowlink">
+                          <td>
+                              Nombre del Proyecto
+                          </td>
+                          <td>
+                            3/03/2019
+                        </td>
+                        <td>
+                            15/08/2019
+                        </td>
+                        <td>
+                            1000
+                        </td>
+                        <td>
+                            Este es un proyecto en el que evaluaremos la gente del departamento de recursos humanos
+                        </td>
+                        <td>
+                          <span class="list-badge badge-success"><i class="icon-check"></i></span>Aprobado
+                        </td>
+                      </tr>
+          
+                  </tbody>
+              </table>
+          </div>
+          

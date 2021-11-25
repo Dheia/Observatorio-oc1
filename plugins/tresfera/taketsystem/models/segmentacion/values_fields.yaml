@@ -1,0 +1,52 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    value:
+        label: Valor
+        type: textarea
+        span: storm
+        cssClass: col-sm-6
+    value_type:
+        label: Etiqueta
+        type: text
+        span: storm
+        cssClass: col-sm-3
+    order:
+        label: Orden
+        span: storm
+        cssClass: col-sm-3
+    puntos:
+        label: Puntos
+        span: storm
+        cssClass: col-sm-3
+    num_next_steps:
+        label: Saltar N pantallas
+        span: storm
+        cssClass: col-sm-3
+        type: number
+        default: 0
+    data_color:
+        label: Color en datos
+        type: colorpicker
+        span: storm
+        cssClass: col-sm-12
+    image:
+        label: Imágen
+        type: fileupload
+        mode: image
+        span: storm
+        cssClass: col-sm-4
+    image_ca:
+        label: Imágen (Cat)
+        type: fileupload
+        mode: image
+        span: storm
+        cssClass: col-sm-4
+    image_en:
+        label: Imágen (Eng)
+        type: fileupload
+        mode: image
+        span: storm
+        cssClass: col-sm-4

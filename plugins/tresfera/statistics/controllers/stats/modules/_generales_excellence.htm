@@ -1,0 +1,53 @@
+<?php
+	$faker = Faker\Factory::create();
+	$model = new \Tresfera\Statistics\Models\Result();
+  $totalsGeneral = $model->getTotalsGeneralNumericos($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+if(isset($totalsGeneral) && count($totalsGeneral)) {
+?>
+<div data-control="">
+			    <h3><i class="icon-bar-chart"></i>Valoraciones generales</h3>
+				<div class="row">
+					<div class="col-md-12" data-url="<?=url("backend/tresfera/statistics/stats/dashboardDetail/?detalles=1&group_by=value&filter=question_title")?>">
+						<div class="control-chart" data-control="" data-size="180" data-center-text="101">
+						    <div class="chart-legend" style="width: 100%;">
+							   <table style="width: 100%;">
+							      <tbody>
+								      <?php 
+                      $old = "";
+								      if(isset($totalsGeneral))
+								      foreach($totalsGeneral as $general) { 
+                        
+									      if(get('filter')=='citycp_id'||get('filter')=='shop_id') {
+										      $url = 'backend/tresfera/statistics/stats/dashboard/?detalles=1&multipleFilter=1&amp;group_by=value&amp;filter=question&amp;filterId='.$general->question_title.'&amp;filterName='.$general->question_title;
+									      } else {
+										      $url = 'backend/tresfera/statistics/stats/dashboard/?detalles=1&amp;group_by=value&amp;filter=question&amp;filterId='.$general->question_title.'&amp;filterName='.$general->title;
+									      }
+								      ?>
+                      <?php if($general->question_title != $old) { ?>
+                       <tr>
+							            <td colspan="3">
+                         	<h4>
+                            <?=$general->question_title?>  
+                            </h4>
+                          </td>
+							         </tr>
+                      <?php } ?>
+								     <tr>
+							            <td class="indicator"><i style="background-color: <?=$faker->hexcolor?>;"></i></td>
+							            <td style="width: 70%;"><a href="<?php echo url($url); ?>"><?=$general->question?></a></td>
+							            <td class="value">
+								          <?=$general->media?>  
+                          </td>
+							         </tr>
+							         <?php
+                        $old = $general->question_title;
+							         }
+							         ?>
+							      </tbody>
+							   </table>
+							</div>
+						</div>						
+					</div>
+				</div>
+		</div>
+<?php } ?>

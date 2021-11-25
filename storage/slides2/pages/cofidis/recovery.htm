@@ -1,0 +1,16 @@
+title = "Login"
+url = "/cofidis/reset-pass"
+layout = "app-login"
+description = "Segmentaciones"
+is_hidden = 0
+
+[session]
+security = "guest"
+allowedUserGroups[] = "guest"
+redirect = "cofidis/home"
+
+[resetPassword]
+==
+<section class="login-container">
+  {% component 'resetPassword' %}
+</section>

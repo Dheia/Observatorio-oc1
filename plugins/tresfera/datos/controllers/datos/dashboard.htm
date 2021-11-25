@@ -1,0 +1,141 @@
+<?php 
+ //buscamos el elemento con mas valores
+ $max = 0;
+ $max_key = 0;
+	
+$data = [];
+$user = \BackendAuth::getUser();
+
+
+
+//buscamos los campos en los resultados que no tengan 
+$query = new \Tresfera\Statistics\Models\Result();
+$keysOrder = $query->getDataFields();
+$cuestionario = $this->getCuestionario();
+
+//Creamos la sentencia SQL para poder sacar los datos sin tratar
+$query = new \Tresfera\Statistics\Models\Result();
+$date = $this->getDateRange();
+
+$data = $query->getDataCSV($date);
+foreach($data as $id=>$d) {
+	foreach($d as $key=>$value) {
+		$keyGood = explode("::",$key);
+		if($keyGood[0] != $key) {
+			$data[$id][$keyGood[0]] = $data[$id][$key];
+			unset($data[$id][$key]);
+		}
+	}
+}
+$keysOrder = ['result'=>'result','fecha'=>'fecha'] + $keysOrder;
+$filters = $this->getFilters();
+if(isset($filters['quizzes'])) {
+	$etiquetas = [];
+	foreach($filters['quizzes'] as $quiz) {
+	
+	}
+}
+$csv_fields = [];
+if(count($data)) {
+	$max = 0;
+  foreach($data as $key=>$value) {
+		$max = max(count($value),$max);
+		if($max == count($value))
+			$max_key = $key;
+	}
+	
+	$keys = array_keys(($data[$max_key]));
+	foreach ($data as $id => $result) { //filas
+		foreach($keysOrder as $col=>$name) { //columnas
+			if(isset($result[$col])) {
+				$csv_fields[$id][$col] = implode("<br>", $result[$col]);
+			}
+			else {
+				$csv_fields[$id][$col] = "";
+			}
+		}
+  }
+}
+?>
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li class="h3">
+		        <?php 
+		        	if(get('detalles')) {
+						?>
+							<?=get("filterName")?>    	
+						<?php
+								} else {
+						?>
+			    	Datos   	
+			    	<?php    	
+		        	}
+		        ?>
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+
+
+<?php Block::endPut() ?>
+<?php echo $this->makePartial("$/tresfera/statistics/controllers/stats/_filter_new.htm"); ?>  
+<div class="control-list" style="margin: -17px -19px;width: calc(100% + 38px);">
+    <table class="table data">
+        <thead>
+            <tr>
+							<?php
+							foreach($keysOrder as $key=>$titulo) {
+							?>
+							<th><span><?=$titulo?></span></th>
+							<?php
+							}
+							?>
+            </tr>
+        </thead>
+        <tbody>
+						<?php
+						$i=0;
+            if(isset($csv_fields)) {
+							foreach($csv_fields as $id=>$row) {
+  						$i++;
+						?>
+					<tr>
+						<?php
+								foreach($keysOrder as $key=>$titulo) {
+						?>
+						<td><span><?=isset($row[$key])?str_replace("::".$key,"",$row[$key]):""?></span></td>
+						<?php
+							}
+						?>
+					</tr>
+						<?php
+						}
+					}
+						?>
+        </tbody>
+    </table>
+</div>
+<style>
+</style>
+<script>
+    $('.control-list').dragScroll();
+</script>
+<style>
+    .control-list {
+        width: 100%; overflow: hidden;
+    }
+    .control-list table {
+        height: 50px;
+    }
+
+</style>
+<style>
+		.control-breadcrumb {
+			padding: 10px;
+		}
+</style>

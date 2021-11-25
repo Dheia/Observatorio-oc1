@@ -1,0 +1,240 @@
+<?php
+$tiendas = \Tresfera\Statistics\Models\Result::getTiendas();
+$filter_cuestionario = $this->getCuestionario();
+$filter_tiendas = $this->getTopTiendas();
+
+$metricas = \Tresfera\Statistics\Models\Result::getMetricas();
+$filter_metricas = $this->getMetricas();
+
+$title="";
+foreach($metricas as $metrica) {
+	if($metrica['id'] == $filter_metricas)
+		$title = $metrica['name'];	
+}
+
+?>
+<?php Block::put('breadcrumb') ?>
+    <div class="row">
+		<div class="col-md-6">
+		    <ul>
+		        <li><a href="<?=url("backend/tresfera/statistics/stats/ranking")?>">Ranking</a></li>
+		        <li class="h3">
+		        <?php 
+		        	if($title) {
+			    ?>
+			    	<?=$title?>    	
+			    <?php
+		        	} else {
+			    ?>
+			    	Visió general   	
+			    <?php    	
+		        	}
+		        ?>
+		        </li>
+		    </ul>
+		</div>
+		<div class="col-md-6">
+			<?php echo $this->makePartial("filter"); ?>  
+		</div>
+	</div>
+<?php Block::endPut() ?>
+
+
+<form action="<?=url("backend/tresfera/statistics/stats/ranking")?>" method="post">
+<div class="row">
+	<div class="col-md-5">
+		<label>Métricas a comparar</label>
+		<select data-request="" name="metrica" class="form-control custom-select" >
+			<?php
+				foreach($metricas as $metrica) {
+			?>
+			<option <?php if($metrica['id'] == $filter_metricas) echo "selected=selected" ?> value="<?=$metrica['id']?>"><?=$metrica['name']?></option>
+			<?php
+				}
+			?> 
+	    </select>
+    </div>
+	<div class="col-md-5">
+		<label>Puntos de venta a comparar</label>
+		<select data-request="" name="topTiendas" class="form-control custom-select">
+			<option value="5|DESC" <?php if($filter_tiendas == "5|DESC") echo "selected=selected" ?>>5 Mejores</option>
+			<option value="10|DESC" <?php if($filter_tiendas == "10|DESC") echo "selected=selected" ?>>10 Mejores</option>
+			<option value="20|DESC" <?php if($filter_tiendas == "20|DESC") echo "selected=selected" ?>>20 Mejores</option>
+			<option value="5|ASC" <?php if($filter_tiendas == "5|ASC") echo "selected=selected" ?>>5 Peores</option>
+			<option value="10|ASC" <?php if($filter_tiendas == "10|ASC") echo "selected=selected" ?>>10 Peores</option>
+			<option value="20|ASC" <?php if($filter_tiendas == "20|ASC") echo "selected=selected" ?>>20 Peores</option>
+	    </select>
+    </div>
+    <div class="col-md-2">
+	    <button
+	    			style="margin-top: 26px;"
+                    type="submit"
+                    data-load-indicator="Comparando..."
+                    class="btn btn-primary btn-lg btn-block">
+                    Comparar
+                </button>
+    </div>
+</div>
+</form>
+<div class="row">
+    <div class="col-md-12">
+	    <h3><i class="icon-area-chart"></i>Comparativa</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+	    <div id="chartdiv" style="width: 100%; height: 410px; background-color: #FFFFFF;" ></div>
+    </div>
+</div>
+
+<style>
+	#chartdiv {
+		background: transparent !important;
+	}
+</style>
+<script type="text/javascript">
+	AmCharts.makeChart("chartdiv",
+		{
+			"type": "serial",
+			"categoryField": "category",
+			"startDuration": 1,
+			"categoryAxis": {
+				"gridPosition": "start"
+			},
+			"chartCursor": {},
+			"chartScrollbar": {},
+			"trendLines": [],
+			"graphs": [
+				{
+					"fillAlphas": 1,
+					"id": "AmGraph-1",
+					"title": "Tiendas",
+					"type": "column",
+					"valueField": "value"
+				}
+			],
+			"guides": [],
+			"valueAxes": [
+				{
+					"id": "ValueAxis-1",
+					"title": "Axis title"
+				}
+			],
+			"allLabels": [],
+			"balloon": {},
+			"titles": [
+				{
+					"id": "Title-1",
+					"size": 0,
+					"text": "Chart Title"
+				}
+			],
+			"dataLoader": {
+			    "url": "<?=url("backend/tresfera/statistics/stats/getRankingData")?>",
+			    "format": "json"
+			  }
+		}
+		/*{
+			"type": "serial",
+			"path": "http://www.amcharts.com/lib/3/",
+			"categoryField": "date",
+			"dataDateFormat": "YYYY-MM-DD",
+			"plotAreaFillColors": "#F9F9F9",
+			"backgroundColor": "#F9F9F9",
+			"categoryAxis": {
+				"parseDates": true
+			},
+			"chartCursor": {},
+			"chartScrollbar": {},
+			"trendLines": [],
+			"graphs": [
+				{
+					"id": "AmGraph-global",
+					"title": "Tiendas",
+					"valueField": "column-1",
+					"type": "column",
+				}
+			],
+			"guides": [],
+			"valueAxes": [
+				{
+					"id": "ValueAxis-1",
+					"title": "Axis title",
+					"titleFontSize": 0
+				}
+			],
+			"allLabels": [],
+			"balloon": {},
+			"legend": {
+				"useGraphSettings": true
+			},
+			/*"dataLoader": {
+			    "url": "<?=url("backend/tresfera/taketsystem/stats/getRankingData")?>",
+			    "format": "json"
+			  },
+			  
+			"dataProvider": [
+				{
+					"category": "category 1",
+					"column-1": 8
+				},
+				{
+					"category": "category 2",
+					"column-1": 16
+				},
+				{
+					"category": "category 3",
+					"column-1": 2
+				},
+				{
+					"category": "category 4",
+					"column-1": 7
+				},
+				{
+					"category": "category 5",
+					"column-1": 5
+				},
+				{
+					"category": "category 6",
+					"column-1": 9
+				},
+				{
+					"category": "category 7",
+					"column-1": 4
+				},
+				{
+					"category": "category 8",
+					"column-1": 15
+				},
+				{
+					"category": "category 9",
+					"column-1": 12
+				},
+				{
+					"category": "category 10",
+					"column-1": 17
+				},
+				{
+					"category": "category 11",
+					"column-1": 18
+				},
+				{
+					"category": "category 12",
+					"column-1": 21
+				},
+				{
+					"category": "category 13",
+					"column-1": 24
+				},
+				{
+					"category": "category 14",
+					"column-1": 23
+				},
+				{
+					"category": "category 15",
+					"column-1": 24
+				}
+			]
+		}*/
+	);
+</script>

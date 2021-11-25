@@ -1,0 +1,12 @@
+list: $/tresfera/talent/models/evaluacion/columns.yaml
+modelClass: Tresfera\Talent\Models\Evaluacion
+title: Evaluaciones
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'tresfera/talent/evaluaciones/update/:id'

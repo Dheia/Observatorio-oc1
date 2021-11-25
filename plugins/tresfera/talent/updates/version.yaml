@@ -1,0 +1,41 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table tresfera_talentapp_proyecto'
+    - builder_table_create_tresfera_talent_proyecto.php
+1.0.3:
+    - 'Created table tresfera_talentapp_evaluacion'
+    - builder_table_create_tresfera_talentapp_evaluacion.php
+1.0.4:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion.php
+1.0.5:
+    - 'Created table tresfera_talentapp_proyectos_gestores'
+    - builder_table_create_tresfera_talentapp_proyectos_gestores.php
+1.0.6:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_2.php
+1.0.7:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto.php
+1.0.8:
+    - 'Created table tresfera_talentapp_rapports'
+    - builder_table_create_tresfera_talentapp_rapports.php
+1.0.9:
+    - 'Created table tresfera_talentapp_results'
+    - builder_table_create_tresfera_talentapp_results.php
+1.0.10:
+    - 'Created table tresfera_talentapp_answers'
+    - builder_table_create_tresfera_talent_answers.php
+1.0.11:
+    - 'Updated table tresfera_talent_answers'
+    - builder_table_update_tresfera_talent_answers.php
+1.0.12:
+    - 'Created table tresfera_talent_gestores'
+    - builder_table_create_tresfera_talent_gestores.php
+1.0.13:
+    - 'Updated table tresfera_talent_proyectos_gestores'
+    - builder_table_update_tresfera_talent_proyectos_gestores.php
+1.0.14:
+    - 'Updated table tresfera_talent_gestores'
+    - builder_table_update_tresfera_talent_gestores.php

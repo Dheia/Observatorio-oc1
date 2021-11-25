@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Rapport
+
+# Model Form Field configuration
+form: $/tresfera/statistics/models/rapport/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Statistics\Models\Rapport
+
+# Default redirect location
+defaultRedirect: tresfera/statistics/rapports
+
+# Create page
+create:
+    title: Create Rapport
+    redirect: tresfera/statistics/rapports/update/:id
+    redirectClose: tresfera/statistics/rapports
+
+# Update page
+update:
+    title: Edit Rapport
+    redirect: tresfera/statistics/rapports
+    redirectClose: tresfera/statistics/rapports
+
+# Preview page
+preview:
+    title: Preview Rapport

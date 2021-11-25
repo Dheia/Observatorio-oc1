@@ -1,0 +1,279 @@
+<?php
+
+use Tresfera\Skillyouup\Models\Proyecto;
+use Tresfera\Skillyouup\Models\Equipo;
+use Tresfera\Skillyouup\Models\Equipo_Evaluador;
+use Tresfera\Skillyouup\Classes\UserControl;
+
+$fecha_actual = new DateTime( date("Y/m/d") );
+
+
+
+$evaluaciones_en_curso = Equipo::where('user_id', $user->id)->where('estado',1)->get();
+$evaluaciones_finalizadas = Equipo::where('user_id', $user->id)->where('estado',2)->get();
+
+
+
+$estadisticas = [];
+$proyectos_en_curso = Proyecto::join('tresfera_skillyouup_evaluacion', 'tresfera_skillyouup_proyecto.id', '=', 'tresfera_skillyouup_evaluacion.proyecto_id')
+                                ->where('tresfera_skillyouup_evaluacion.user_id', $user->id)
+                                ->where("tresfera_skillyouup_proyecto.fecha_fin", ">", \Carbon\Carbon::now())->get();
+$estadisticas['proyectos_en_curso'] = count($proyectos_en_curso); 
+
+$proyectos_finalizados = Proyecto::join('tresfera_skillyouup_evaluacion', 'tresfera_skillyouup_proyecto.id', '=', 'tresfera_skillyouup_evaluacion.proyecto_id')
+                                    ->where('tresfera_skillyouup_evaluacion.user_id', $user->id)
+                                    ->where("tresfera_skillyouup_proyecto.fecha_fin", "<=", \Carbon\Carbon::now())->get();
+$estadisticas['proyectos_finalizados'] = count($proyectos_finalizados); 
+/*
+$evaluaciones_activas = Equipo::where('user_id', $user->id)->where('estado',1);
+$estadisticas['evaluaciones_activas'] = count($evaluaciones_activas);
+$evaluaciones_finalizadas =  Equipo::where('user_id', $user->id)->where('estado',2);
+$estadisticas['evaluaciones_finalizadas'] = count($evaluaciones_finalizadas);
+*/
+$evaluaciones = Equipo::where("user_id", $user->id)->get();
+
+$estadisticas['evaluaciones_pendientes'] = 0;
+$estadisticas['evaluaciones_completadas'] = 0;
+
+foreach($evaluaciones as $eval)
+{
+    $estadisticas['evaluaciones_pendientes'] += $eval->getPendientes();
+    $estadisticas['evaluaciones_completadas'] += $eval->getContestadas();
+}
+
+
+?>
+
+
+<div id="estadisticas">
+    <h4 class="mt ml" style="float:left">Estadísticas Generales</h4>
+    <!--<h4 class="mt mr" style="float:right">Estadísticas Emails</h4>-->
+    
+    <div style="clear: left;">
+        <div class="scoreboard" style="float:left">
+            <div class="" data-control="toolbar">
+    
+                <div class="scoreboard-item title-value">
+                    <h4><b>Proyectos</b></h4>
+                    <div class="scoreboard-item control-chart" data-control="chart-pie">
+                            <ul>
+                                <li data-color="#e5a91a"><?= e(trans('tresfera.skillyouup::lang.proyectos.en_curso')) ?> <span><?=$estadisticas['proyectos_en_curso']?></span></li>
+                                <li data-color="#95b753"><?= e(trans('tresfera.skillyouup::lang.proyectos.finalizados')) ?> <span><?=$estadisticas['proyectos_finalizados']?></span></li>
+                            </ul>
+                        </div>
+                </div>
+    
+    
+                <div class="scoreboard-item title-value">
+                    <h4><b>Respuestas</b></h4>
+                    <div class="scoreboard-item control-chart" data-control="chart-pie">
+                            <ul>
+                                <li data-color="#e5a91a">Equipos Respondidas <span><?=$estadisticas['evaluaciones_completadas']?></span></li>
+                                <li data-color="#95b753">Equipos No Respondidas <span><?=$estadisticas['evaluaciones_pendientes']?></span></li>
+                            </ul>
+                        </div>
+                </div>
+    
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+<div style="clear: left;">
+<h4><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_evaluado')) ?></h4>
+
+<?php
+muestraEquipos($evaluaciones_en_curso,$this->user);
+
+?>
+
+<br/>
+
+<h4><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_finalizadas')) ?></h4>
+
+<?php
+muestraEquipos($evaluaciones_finalizadas,$this->user);
+?>
+</div>
+
+<?php
+
+function muestraEquipos($evaluaciones, $user)
+{
+    $fecha_actual = new DateTime( date("Y/m/d") );
+?>
+
+    <div class="control-list">
+        <table class="table data">
+            <thead>
+                <tr>
+                    <th class="active sort-desc"><span><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_project')) ?></span></th>
+                    <th><span><?= e(trans('tresfera.skillyouup::lang.evaluadores.progreso')) ?></span></th>
+                    <th><span><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_autoevaluaciones')) ?></span></th>
+                    <th><span><?= e(trans('tresfera.skillyouup::lang.proyectos.fin')) ?></span></th>
+                    <th><span><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_tiemporestante')) ?></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if(count($evaluaciones)>0)
+                {
+                    foreach($evaluaciones as $index=>$evaluacion)
+                    {
+                        $proyecto = Proyecto::where('id', $evaluacion->proyecto_id)->first();
+                        if(!isset($proyecto->id)) continue;
+                        $st = $evaluacion->getStats();
+                        ?>
+                        <tr>
+                            <td>
+                            <?=$proyecto->name?>
+                            </td>
+                            <td>
+                                <?php
+                                //  ----------- PROGRESO -----------
+                                $ev_completadas = $evaluacion->getContestadas();
+                                $ev_total = $evaluacion->getNumEvaluadores();
+                                $ev_pendientes = $evaluacion->getPendientes();
+                                if($ev_total)
+                                    $participacion = round($ev_completadas*100/($ev_total),1);
+                                else
+                                    $participacion = 0;
+                                ?>
+                                <ul>
+                                <li data-color="#e5a91a"><b><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_totales')) ?> <span><?=$ev_total?></span></b></li>
+                                </ul>
+                                <div class="scoreboard">
+                                    <div data-control="toolbar">
+                                
+                                        <div class="scoreboard-item title-value" data-control="goal-meter" data-value="<?=$participacion?>">
+                                            <h4><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_participacion')) ?></h4>
+                                            <p><?=$participacion?>%</p>
+                                            <p class="description"><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_autoevaluaciones')) ?></p>
+                                        </div>
+                                        
+                                        <div class="scoreboard-item control-chart" data-control="chart-bar">
+                                                
+                                            <ul>
+                                                <li data-color="#95b753"><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_completadas')) ?> <span><?=$ev_completadas?></span></li>
+                                                <li data-color="#cc3300"><?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_pendientes')) ?> <span><?=$ev_pendientes?></span></li>
+                                            </ul>
+                                        </div>
+                                
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                            <?php 
+                            if($user->email == $evaluacion->email && $evaluacion->estado >= 2) 
+                            {
+                                if(!$evaluacion->stats['autoevaluado'][$user->email]['completed']) 
+                                {
+                                if($evaluacion->stats['autoevaluado'][$user->email]['send']) 
+                                {
+                                ?>
+                                <a
+                                    target="_blank"
+                                    href="<?=$evaluacion->stats['autoevaluado'][$user->email]['url']?>"
+                                    class="btn btn-xs btn-default pull-left">
+                                    <?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_empezar')) ?>
+                                </a><br><br>
+                                <?php
+                                    }
+                                } else {
+                                ?>
+                                <a
+                                    href="#"
+                                    class="btn btn-xs btn-warning pull-left">
+                                    <?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_informe')) ?>
+                                </a>
+                                <?php
+                                }
+                                ?>
+                        <?php } ?>
+                            <?php if($evaluacion->estado < 2 ) { ?>
+                                <a
+                                    target="_blank"
+                                    href="<?=$evaluacion->stats['autoevaluado'][$user->email]['url']?>"
+                                    class="btn btn-xs btn-default pull-left">
+                                    <?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_auto')) ?>
+                                </a><br><br>
+                            <?php }  ?>
+                            <?php if(is_array($evaluacion->params['permissions']) and in_array("change_evaluadores",$evaluacion->params['permissions'])) { ?>
+                                <a href="<?=url('/backend/tresfera/skillyouup/evaluaciones/update/'.$evaluacion->id)?>" class="btn btn-xs btn-default pull-left"><?= e(trans('tresfera.skillyouup::lang.evaluadores.gest_eva')) ?></a>
+                            <?php } ?>
+
+                            <?php 
+                            if(is_array($evaluacion->params['permissions']) and in_array("view_report",$evaluacion->params['permissions'])) 
+                            {
+                                if($evaluacion->estado_informe == 3)
+                                {
+                                    $rapport = \Tresfera\Skillyouup\Models\Rapport::find($evaluacion->rapport_id);
+                                    if(isset($rapport->id)) 
+                                    {
+                                    ?>
+                                        <a
+                                            href="<?=$rapport->getUrl()?>"
+                                            class="btn btn-xs btn-warning pull-left">
+                                            Ver informe
+                                        </a>
+                                        <br><br>
+                                <?php 
+                                    }
+                                }
+                            }
+                            ?>
+                            
+                            </td>
+                            <td>
+                            <?php
+                            //  ----------- FECHA FIN -----------
+                                echo $proyecto->fecha_fin; ?>
+                            </td>
+                            <td>
+                                <?php
+                                //  ----------- TIEMPO RESTANTE -----------
+                                if(isset($proyecto->fecha_fin))
+                                {
+                                    $d2 = \Carbon\Carbon::parse($proyecto->fecha_fin);
+                                    $fecha_actual = \Carbon\Carbon::now();
+                                    $diff = $fecha_actual->diffInDays($d2,false);
+                                    ?>
+                                
+                                    <?php if($diff < 0) { ?> 
+                                        <p class="<?='text-success'?>">
+                                            <?= e(trans('tresfera.skillyouup::lang.evaluadores.finalizado')) ?>
+                                        </p>
+                                    <?php } else { ?> 
+                                        
+                                        <p class="<?=($diff < 5) ? 'text-danger' : ''?>">
+                                            <?=e(trans('tresfera.skillyouup::lang.evaluadores.finaliza_en')) . " " . $diff . e(trans('tresfera.skillyouup::lang.evaluadores.dias'));?>
+                                        </p>
+                                    <?php } 
+                                }
+                                ?>
+                                    
+                            </td>
+
+                        </tr>
+                        <?php
+                    }
+                }
+                else
+                {
+                    ?>
+                    <tr class="no-data">
+                        <td colspan="100" class="nolink">
+                            <p class="no-data">
+                                <?= e(trans('tresfera.skillyouup::lang.evaluadores.ev_noev')) ?>    
+                            </p>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                    ?>
+            </tbody>
+        </table>
+    </div>
+<?php
+}

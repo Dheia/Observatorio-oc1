@@ -1,0 +1,18 @@
+1637748433a:1:{s:18:"front/recovery.htm";a:12:{s:8:"fileName";s:18:"front/recovery.htm";s:7:"content";s:289:"title = "Login"
+url = "/reset-pass"
+layout = "app-login"
+description = "Segmentaciones"
+is_hidden = 0
+
+[session]
+security = "guest"
+allowedUserGroups[] = "guest"
+redirect = ""
+
+[resetPassword]
+==
+<section class="login-container">
+  {% component 'resetPassword' %}
+</section>";s:5:"mtime";i:1607512147;s:6:"markup";s:80:"<section class="login-container">
+  {% component 'resetPassword' %}
+</section>";s:4:"code";N;s:5:"title";s:5:"Login";s:3:"url";s:11:"/reset-pass";s:6:"layout";s:9:"app-login";s:11:"description";s:14:"Segmentaciones";s:9:"is_hidden";s:1:"0";s:7:"session";a:3:{s:8:"security";s:5:"guest";s:17:"allowedUserGroups";a:1:{i:0;s:5:"guest";}s:8:"redirect";s:0:"";}s:13:"resetPassword";a:0:{}}}

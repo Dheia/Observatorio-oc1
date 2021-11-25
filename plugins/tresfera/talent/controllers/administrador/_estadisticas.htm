@@ -1,0 +1,45 @@
+<?php
+use Tresfera\Talent\Models\Evaluacion;
+use Tresfera\Talent\Models\Proyecto;
+
+use Mja\Mail\Models\Email;
+use Mja\Mail\Models\EmailOpens;
+
+
+$estadisticas = Proyecto::getEstadisticas("tresfera_talent-Administrador-Filter-listFilter");
+
+?>
+<div id="estadisticas">
+<h4 class="mt ml" style="float:left">Estadísticas Generales</h4>
+<!--<h4 class="mt mr" style="float:right">Estadísticas Emails</h4>-->
+
+<div style="clear: left;">
+    <div class="scoreboard" style="float:left">
+        <div class="" data-control="toolbar">
+
+            <div class="scoreboard-item title-value">
+                <h4><b>Proyectos</b></h4>
+                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                        <ul>
+                            <li data-color="#e5a91a">En curso <span><?=$estadisticas['proyectos_en_curso']?></span></li>
+                            <li data-color="#95b753">Finalizados <span><?=$estadisticas['proyectos_finalizados']?></span></li>
+                        </ul>
+                    </div>
+            </div>
+
+            <div class="scoreboard-item title-value">
+                <h4><b>Evaluados</b></h4>
+                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                        <ul>
+                            <li data-color="#e5a91a">Activos <span><?=$estadisticas['evaluados_activos']?></span></li>
+                            <li data-color="#95b753">Finalizados <span><?=$estadisticas['evaluados_finalizadas']?></span></li>
+                        </ul>
+                    </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+</div>

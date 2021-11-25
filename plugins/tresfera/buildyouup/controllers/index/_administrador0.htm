@@ -1,0 +1,258 @@
+<style>
+.over:hover {
+    color: black !important;
+    cursor: pointer;
+}
+</style>
+
+<?php
+use Tresfera\Buildyouup\Models\Proyecto;
+use Tresfera\Buildyouup\Models\Equipo;
+use Tresfera\Buildyouup\Classes\UserControl;
+
+$proyectos_activos = Proyecto::where('estado',1)->get();
+$proyectos_inactivos = Proyecto::where('estado','<>',1)->orderBy('estado', 'asc')->get();
+
+
+function muestraProyectos($proyectos)
+{
+?>
+    <div class="control-list">
+        <table class="table data" data-control="rowlink">
+            <thead>
+                <tr>
+                    <th class="active sort-desc"><span>Empresa</span></th>
+                    <th><span>Proyecto</span></th>
+                    <th><span>Fecha Inicio</span></th>
+                    <th><span>Fecha Fin</span></th>
+                    <th><span>Nº Licencias</span></th>
+                    <th><span>Descripción</span></th>
+                    <th><span>Gestor</span></th>
+                    <th><span>Estado</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach($proyectos as $index=>$proyecto)
+                {
+                    ?>
+                    <tr id="<?=$proyecto->id?>" name="<?=$proyecto->name?>">
+                        <td>
+                            <a href="/backend/tresfera/buildyouup/proyectos/p/<?=$proyecto->id?>"><?=UserControl::getFirstName($proyecto->client_id)?></a>
+                        </td>
+                        <td>
+                            <?=$proyecto->name?>
+                        </td>
+                        <td>
+                            <?=$proyecto->fecha_inicio?>
+                        </td>
+                        <td>
+                            <?=$proyecto->fecha_fin?>
+                        </td>
+                        <td>
+                            <?=$proyecto->num_licencias?>
+                        </td>
+                        <td>
+                            <?=$proyecto->description?>
+                        </td>
+                        <td>
+                            <?=UserControl::getFullName($proyecto->gestor_id)?>
+                        </td>
+                        <td class="nolink" width="200px">
+                          <?php
+                              if($proyecto->estado == 0) echo '<div class="activar" onmouseover="addButton(this)" id_proyecto="'.$proyecto->id.'"><span class="list-badge badge-warning"><i class="icon-exclamation"></i></span> Pendiente</div>';
+                              else if($proyecto->estado == 1) echo '<span class="list-badge badge-success"><i class="icon-check"></i></span> Activo';
+                              else if($proyecto->estado == 2) echo '<span class="list-badge badge-info"><i class="icon-info"></i></span> Finalizado';
+                          ?>
+                        </td>
+                        <td class="nolink">
+                            <div>
+                                <a href="/backend/tresfera/buildyouup/proyectos/update/<?=$proyecto->id?>"><span class="over oc-icon-pencil"></span></a>
+                                <span id_proyecto="<?=$proyecto->id?>" class="trash over oc-icon-trash"></span>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+<?php
+}
+
+function muestraListaVacia()
+{
+    ?>
+    <div class="control-list">
+        <table class="table data">
+            <thead>
+                <tr>
+                    <th><span>Empresa</span></th>
+                    <th><span>Proyecto</span></th>
+                    <th><span>Fecha Inicio</span></th>
+                    <th><span>Fecha Fin</span></th>
+                    <th><span>Nº Licencias</span></th>
+                    <th><span>Descripción</span></th>
+                    <th><span>Gestor</span></th>
+                    <th><span>Estado</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="no-data">
+                    <td colspan="100" class="nolink">
+                        <p class="no-data">
+                            No hay proyectos para mostrar.
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <?php
+}
+
+?>
+
+
+<div class="scoreboard">
+    <div class="row" data-control="toolbar">
+
+        <div class="col-xs-6">
+                <h4>Bienvenido '<?=$user->first_name?>'</h4>
+                <br/>
+                <a href="/backend/tresfera/buildyouup/proyectos/create" type="button" class="btn btn-primary oc-icon-plus">Nuevo Proyecto</a>
+            <a href="/backend/tresfera/clients/clients/create" type="button" class="btn btn-success oc-icon-plus">Añadir Cliente</a>
+        </div>
+
+
+        <?php
+        $proyectos_en_curso = Proyecto::where('estado', 1)->count();
+        $proyectos_pendients = Proyecto::where('estado', 0)->count();
+        $proyectos_finalizados = Proyecto::where('estado', 2)->count();
+        $evaluaciones_en_curso = Equipo::where('estado', 1)->count();
+        $evaluaciones_finalizadas = Equipo::where('estado', 2)->count();
+        $num_clientes = count ( UserControl::getEmpresas() );
+        ?>
+        <div class="col-xs-6 text-right">
+
+                <div class="scoreboard">
+                        <div class="" data-control="toolbar">
+
+                            <div class="scoreboard-item title-value">
+                                <h4 class="text-left">Proyectos</h4>
+                                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                        <ul>
+                                            <li data-color="#95b753">En curso <span><?=$proyectos_en_curso?></span></li>
+                                            <li data-color="#e5a91a">Pendientes <span><?=$proyectos_pendients?></span></li>
+                                            <li data-color="#cc3300">Finalizados <span><?=$proyectos_finalizados?></span></li>
+                                        </ul>
+                                    </div>
+                            </div>
+
+                            <div class="scoreboard-item title-value">
+                                <h4 class="text-left">Equipos</h4>
+                                <div class="scoreboard-item control-chart" data-control="chart-pie">
+                                        <ul>
+                                            <li data-color="#95b753">En curso <span><?=$evaluaciones_en_curso?></span></li>
+                                            <li data-color="#cc3300">Finalizados <span><?=$evaluaciones_finalizadas?></span></li>
+                                        </ul>
+                                    </div>
+                            </div>
+
+                            <div class="scoreboard-item title-value text-center">
+                                <h4>Núm. Clientes</h4>
+                                <p><?=$num_clientes?></p>
+                            </div>
+
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>
+
+
+
+<h4>Proyectos Activos</h4>
+
+<?php
+
+if(count($proyectos_activos)==0) muestraListaVacia();
+else muestraProyectos($proyectos_activos);
+
+?>
+
+  <br/>
+
+  <h4>Proyectos Inactivos</h4>
+
+<?php
+
+if(count($proyectos_inactivos)==0) muestraListaVacia();
+else muestraProyectos($proyectos_inactivos);
+
+?>
+
+
+<script>
+var tmp;
+
+function removeButton(x)
+{
+    var element = $(x);
+    var padre = element.parent();
+
+    padre.removeClass("column-button nolink");
+    padre.html(tmp);
+
+}
+
+function addButton(x)
+{
+    var element = $(x);
+    var padre = element.parent();
+
+    id_proyecto = element.attr('id_proyecto');
+    padre.addClass("column-button nolink");
+    tmp = padre.html();
+    padre.html('<button class="btn btn-secondary btn-sm" id_proyecto="'+id_proyecto+'" onclick="activarProyecto(this)" onmouseout="removeButton(this)">Activar Proyecto</button>');
+}
+
+function activarProyecto(x)
+{
+    var element = $(x);
+    id_proyecto = element.attr('id_proyecto');
+    $.request("onActivateProject", {
+        data:
+        {
+            id_proyecto
+        }
+    });
+}
+
+  $(document).ready(function() {
+
+      $('.trash').on('click', function(){
+          var id_proyecto = $(this).attr('id_proyecto');
+          var nombre_proyecto = $('#'+id_proyecto).attr('name');
+
+          if( confirm("¿Estás seguro de eliminar este proyecto?") )
+          {
+            $.request("onDeleteProject", {
+                data:
+                {
+                    id_proyecto,
+                    nombre_proyecto
+                }
+            });
+
+            $('#'+id_proyecto).remove();
+          }
+      });
+
+
+  });
+
+</script>

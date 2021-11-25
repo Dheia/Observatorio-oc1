@@ -1,0 +1,11 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+values:
+    label: Valores
+    form: $/tresfera/taketsystem/models/segmentacion/values_fields.yaml
+    list: $/tresfera/taketsystem/models/segmentacion/values_columns.yaml
+    view:
+        list: $/tresfera/taketsystem/models/segmentacion/values_columns.yaml
+        toolbarButtons: create|remove

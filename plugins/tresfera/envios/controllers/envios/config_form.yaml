@@ -1,0 +1,10 @@
+name: Enviaments
+form: $/tresfera/envios/models/envio/fields.yaml
+modelClass: Tresfera\Envios\Models\Envio
+defaultRedirect: tresfera/envios/envios
+create:
+    redirect: 'tresfera/envios/envios/update/:id'
+    redirectClose: tresfera/envios/envios
+update:
+    redirect: tresfera/envios/envios
+    redirectClose: tresfera/envios/envios

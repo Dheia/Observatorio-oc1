@@ -1,0 +1,106 @@
+fields:
+    name:
+        label: 'tresfera.buildyouup::lang.proyectos.name'
+        span: auto
+        type: text
+    client_id:
+        label: Cliente
+        span: auto
+        type: dropdown
+tabs:
+    fields:
+        _stats:
+            span: full
+            path: plugins/tresfera/buildyouup/controllers/proyectos/stats
+            context:
+                - update
+                - preview
+            type: partial
+            tab: Estadísticas
+        num_licencias:
+            label: 'tresfera.buildyouup::lang.proyectos.licencias'
+            span: left
+            type: text
+            tab: General
+        lang:
+            label: 'tresfera.buildyouup::lang.proyectos.lang'
+            type: dropdown
+            span: right
+            options:
+                es: Español
+                en: Inglés
+            tab: General
+        fecha_inicio:
+            label: 'tresfera.buildyouup::lang.proyectos.finicio'
+            mode: datetime
+            span: left
+            required: 1
+            type: datepicker
+            tab: General
+        fecha_fin:
+            label: 'tresfera.buildyouup::lang.proyectos.fin'
+            mode: datetime
+            span: auto
+            required: 1
+            type: datepicker
+            tab: General
+        description:
+            label: 'tresfera.buildyouup::lang.proyectos.descripcion'
+            size: ''
+            span: full
+            tab: General
+            type: textarea
+        gestores:
+            span: full
+            path: plugins/tresfera/buildyouup/controllers/proyectos/relation_gestores
+            context:
+                - update
+                - preview
+            type: partial
+            tab: Gestores
+        evaluaciones:
+            span: full
+            path: plugins/tresfera/buildyouup/controllers/proyectos/relation_evaluaciones
+            context:
+                - update
+                - preview
+            type: partial
+            tab: Observadores
+        logo:
+            label: Logo
+            type: fileupload
+            mode: image
+            imageHeight: 260
+            imageWidth: 260
+            tab: Personalización
+            thumbOptions:
+                mode: crop
+                offset:
+                    - 0
+                    - 0
+                quality: 90
+                sharpen: 0
+                interlace: false
+                extension: auto
+        notificaciones:
+            label: Notificaciones
+            span: full
+            type: section
+            tab: Notificaciones
+        email:
+            label: 'Email de notificaciones'
+            span: auto
+            type: text
+            comment: 'Si no introduces ningún email se notificará directamente al correo asignado al cliente'
+            tab: Notificaciones
+        periodicidad:
+            label: Periodicidad
+            options:
+                none: 'No enviar'
+                diario: Diario
+                semanal: Semanal
+                mensual: Mensual
+            span: auto
+            tab: Notificaciones
+            type: balloon-selector
+            comment: 'Selecciona la frecuencia con la que quieres recibir informes sobre el proyecto. Si no seleccionas ninguna opción los informes no se enviarán.'

@@ -1,0 +1,106 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+fields:
+    id:
+        label: ID
+        disabled: true
+        hidden: true        
+#top        
+    name:
+        label: Nombre de Contacto
+        span: left
+    dni:
+        label: Empresa
+        span: right
+    sector_id:
+            label: Sector
+            type: dropdown
+            span: left
+            placeholder: Seleccione el sector
+    
+    npv:
+        label: Número punto de venta
+        span: right
+tabs:
+    fields:        
+#Tab Contacto        
+        source:
+            label: Fuente de seguimiento
+            type: dropdown
+            tab: Contacto
+            options:
+                comercial: comercial
+                fuente1: fuente1
+                fuente2: fuente2    
+        email:
+            label: E-mail
+            span: left
+            tab: Contacto
+        telf:
+            label: Teléfono
+            span: right
+            type: number
+            tab: Contacto
+        email_alt:
+            label: E-mail alternativo
+            span: left
+            tab: Contacto
+        telf_alt:
+            label: Teléfono alterntivo
+            span: right
+            type: number
+            tab: Contacto
+        fax:
+            label: Fax
+            span: left
+            type: number
+            tab: Contacto
+        direc:
+            label: Dirección
+            span: full
+            tab: Localización
+        date:
+            type: datepicker
+            mode: date
+            span: right
+            label: Fecha
+            tab: Contacto
+        region_id:
+            label: Provincia
+            span: left
+            dependsOn: region_id
+            type: dropdown
+            placeholder: Selecciona una provincia
+            tab: Localización
+        city_id:
+            label: Ciudad
+            span: right
+            type: dropdown
+            dependsOn: region_id
+            placeholder: Selecciona una ciudad
+            tab: Localización  
+        maps:
+            tab: GoogleMaps
+            type: partial
+            context: update
+            path: $/tresfera/clients/controllers/contacts/_googlemaps.htm
+      #/Tab seguimiento
+#        date:
+#            label: Fecha y hora de Contacto
+#            span: full
+#            type: datepicker
+#            tab: Seguimiento
+#        cause:
+#            label: Motivo del Contacto
+#            type: textarea
+#            tab: Seguimiento
+        observ:
+            label: Observaciones
+            type: textarea
+            tab: Obervaciones 
+        users:
+            tab: Seguimiento
+            type: partial
+            context: update
+            path: $/tresfera/clients/controllers/contacts/_list_seguimientos.htm

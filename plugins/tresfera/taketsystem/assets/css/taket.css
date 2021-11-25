@@ -1,0 +1,67 @@
+.sidenav-tree {
+  width: 230px;
+  background: #34495e;
+}
+
+.control-breadcrumb li.h3 {
+	display: block;
+}
+
+.control-breadcrumb li.h3 {
+	color: #fff;
+	font-size: 36px;
+}
+
+.control-breadcrumb .form-control {
+  height: 34px;
+}
+
+.fancy-layout .form-tabless-fields,
+.fancy-layout .control-tabs.primary > div > ul.nav-tabs, 
+.fancy-layout.control-tabs.primary > div > ul.nav-tabs {
+  background: #7f8c8d;
+}
+
+.fancy-layout .form-buttons .btn {
+  font-size: 22px;
+}
+.btn[class^="oc-icon-"]:before, .btn[class*=" oc-icon-"]:before {
+  line-height: 22px;
+  position: relative;
+}
+.fancy-layout .form-buttons {
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  padding-top: 2px;
+  padding-bottom: 5px;
+  margin-top: 11px;
+  float: right;
+}
+.layout-row > div[data-control="formwidget"] > div:nth-child(3) {
+  display: block;
+  height: 83%;
+}
+.subfield {
+    padding-left: 21px;
+}
+.verticalalign-field {
+	padding-top: 33px;
+}
+.control-filter {
+    color: #fff;
+    background-color: #7d8f9e;
+    margin: -21px -20px 17px -20px;
+}
+body.slim-container .control-filter  {
+    margin: 0px 0px 0px 0px;
+}
+.control-filter a {
+    color: #fff !important;
+}
+.control-filter > .filter-scope:hover .filter-label {
+    color: #fff !important;
+}#Form-primaryTabs ul.nav.nav-tabs li {
+    display: inline-block !important;
+}div#filterExample {
+    margin-top: -20px;
+}

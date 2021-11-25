@@ -1,0 +1,227 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table tresfera_talentapp_cuestionario'
+    - builder_table_create_tresfera_talentapp_cuestionario.php
+1.0.3:
+    - 'Drop table tresfera_talentapp_cuestionario'
+    - builder_table_delete_tresfera_talentapp_cuestionario.php
+1.0.4:
+    - 'Created table tresfera_talentapp_proyecto'
+    - builder_table_create_tresfera_talentapp_proyecto.php
+1.0.5:
+    - 'Created table tresfera_talentapp_proyecto'
+    - builder_table_create_tresfera_talentapp360_proyecto2.php
+1.0.6:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto.php
+1.0.7:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_2.php
+1.0.8:
+    - 'Created table tresfera_talentapp_evaluacion'
+    - builder_table_create_tresfera_talentapp_evaluacion.php
+1.0.9:
+    - 'Created table tresfera_talentapp_cuestionario'
+    - builder_table_create_tresfera_talentapp_cuestionario_2.php
+1.0.10:
+    - 'Created table tresfera_talentapp_respuestas'
+    - builder_table_create_tresfera_talentapp_respuestas.php
+1.0.11:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_3.php
+1.0.12:
+    - 'Created table tresfera_talentapp_user_empresa'
+    - builder_table_create_tresfera_talentapp_user_empresa.php
+1.0.13:
+    - 'Created table tresfera_talentapp_user_gestor'
+    - builder_table_create_tresfera_talentapp_user_gestor.php
+1.0.14:
+    - 'Created table tresfera_talentapp_user_evaluado'
+    - builder_table_create_tresfera_talentapp_user_evaluado.php
+1.0.15:
+    - 'Created table tresfera_talentapp_user_evaluador'
+    - builder_table_create_tresfera_talentapp_user_evaluador.php
+1.0.16:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion.php
+1.0.17:
+    - 'Updated table tresfera_talentapp_respuestas'
+    - builder_table_update_tresfera_talentapp_respuestas.php
+1.0.18:
+    - 'Updated table tresfera_talentapp_cuestionario'
+    - builder_table_update_tresfera_talentapp_cuestionario.php
+1.0.19:
+    - 'Drop table tresfera_talentapp_user_empresa'
+    - builder_table_delete_tresfera_talentapp_user_empresa.php
+1.0.20:
+    - 'Drop table tresfera_talentapp_user_evaluado'
+    - builder_table_delete_tresfera_talentapp_user_evaluado.php
+1.0.21:
+    - 'Drop table tresfera_talentapp_user_evaluador'
+    - builder_table_delete_tresfera_talentapp_user_evaluador.php
+1.0.22:
+    - 'Drop table tresfera_talentapp_user_gestor'
+    - builder_table_delete_tresfera_talentapp_user_gestor.php
+1.0.23:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_2.php
+1.0.24:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_3.php
+1.0.25:
+    - 'Updated table tresfera_talentapp_respuestas'
+    - builder_table_update_tresfera_talentapp_respuestas_2.php
+1.0.26:
+    - 'Updated table tresfera_talentapp_evaluacion_evaluador'
+    - builder_table_update_tresfera_talentapp_evaluacion_evaluador.php
+1.0.27:
+    - 'Updated table tresfera_talentapp_evaluacion_evaluador'
+    - builder_table_update_tresfera_talentapp_evaluacion_evaluador_2.php
+1.0.28:
+    - 'Updated table tresfera_talentapp_evaluacion_evaluador'
+    - builder_table_update_tresfera_talentapp_evaluacion_evaluador_3.php
+1.0.29:
+    - 'Updated table tresfera_talentapp_evaluacion_evaluador'
+    - builder_table_update_tresfera_talentapp_evaluacion_evaluador_4.php
+1.0.30:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_4.php
+1.0.31:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_5.php
+1.0.32:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_4.php
+1.0.33:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_6.php
+1.0.34:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_7.php
+1.0.35:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_8.php
+1.0.36:
+    - 'Updated table tresfera_talentapp_evaluacion_evaluador'
+    - builder_table_update_tresfera_talentapp_evaluacion_evaluador_5.php
+1.0.37:
+    - 'Updated table tresfera_talentapp_evaluacion_evaluador'
+    - builder_table_update_tresfera_talentapp_evaluacion_evaluador_6.php
+1.0.38:
+    - 'Updated table tresfera_talentapp_evaluacion_evaluador'
+    - builder_table_update_tresfera_talentapp_evaluacion_evaluador_7.php
+1.0.39:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_5.php
+1.0.40:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_6.php
+1.0.41:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_7.php
+1.0.43:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_8.php
+1.0.44:
+    - 'Created table tresfera_talentapp_proyectos_gestores'
+    - builder_table_create_tresfera_talentapp_proyectos_gestores.php
+1.0.45:
+    - 'Updated table tresfera_talentapp_proyectos_gestores'
+    - builder_table_update_tresfera_talentapp_proyectos_gestores.php
+1.0.46:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_9.php
+1.0.47:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_10.php
+1.0.48:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_11.php
+1.0.49:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_12.php
+1.0.50:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_13.php
+1.0.51:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_14.php
+1.0.52:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_15.php
+1.0.53:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_9.php
+1.0.54:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_16.php
+1.0.55:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_17.php
+1.0.56:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_18.php
+1.0.57:
+    - 'Created table tresfera_talentapp_rapports'
+    - builder_table_create_tresfera_talentapp_rapports.php
+1.0.58:
+    - 'Updated table tresfera_talentapp_rapports'
+    - builder_table_update_tresfera_talentapp_rapports.php
+1.0.59:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_talentapp_evaluacion_19.php
+1.0.60:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_10.php
+1.0.61:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_skillyouup_proyecto11.php
+1.0.62:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_buildyouup_proyecto11.php
+1.0.63:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_12.php
+1.0.64:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_13.php
+1.0.65:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_14.php
+1.0.66:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_15.php
+1.0.67:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_skillyouup_proyecto16.php
+1.0.68:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_talentapp_proyecto_17.php
+1.0.69:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_skillyouup_proyecto18.php
+1.0.70:
+    - 'Updated table tresfera_talentapp_proyecto'
+    - builder_table_update_tresfera_skillyouup_proyecto19.php
+1.0.71:
+    - 'Updated table tresfera_talentapp_evaluacion'
+    - builder_table_update_tresfera_skillyouup_equipo.php
+1.0.72:
+    - 'Updated table tresfera_talentapp_equipo'
+    - builder_table_update_tresfera_skillyouup_equipo_2.php
+1.0.73:
+    - results
+    - migration1073.php
+1.0.74:
+    - answers
+    - migration1074.php
+1.0.75:
+    - 'Updated table tresfera_talentapp_results'
+    - builder_table_update_tresfera_buildyouup_results.php
+1.0.76:
+    - 'Updated table tresfera_talentapp_answers'
+    - builder_table_update_tresfera_buildyouup_answers.php
+1.0.77:
+    - 'Updated table tresfera_buildyouup_equipo'
+    - builder_table_update_tresfera_buildyouup_equipo_2.php

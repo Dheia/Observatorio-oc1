@@ -1,0 +1,12 @@
+title: Proyectos
+modelClass: Tresfera\Talent\Models\Proyecto
+list: $/tresfera/talent/models/proyecto/columns.yaml
+recordUrl: 'tresfera/talent/proyectos/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

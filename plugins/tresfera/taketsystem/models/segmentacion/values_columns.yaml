@@ -1,0 +1,14 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    value:
+        label: Valor
+        searchable: true
+    puntos:
+        label: Puntos
+        searchable: true
+    order:
+        label: Orden
+        searchable: true

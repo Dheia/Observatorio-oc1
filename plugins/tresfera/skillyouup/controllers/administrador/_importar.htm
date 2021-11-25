@@ -1,0 +1,318 @@
+<?php
+use Tresfera\Skillyouup\Models\Proyecto;
+use Tresfera\Skillyouup\Models\Equipo;
+use Tresfera\Clients\Models\Client;
+use Backend\Models\User;
+?>
+
+<h2>Importar Proyectos desde fichero .CSV</h2>
+
+<?php
+
+function error($msg = "")
+{
+    ?>
+    <div class="callout fade in callout-danger no-icon" data-dismiss="callout">
+            <div class="header">
+                <h3>Se ha producido un error</h3>
+                <ul>
+                    <li><?=$msg?></li>
+                </ul>
+            </div>
+        </div>
+    <?php
+}
+
+function success($msg = "")
+{
+    ?>
+    <div class="callout fade in callout-info no-icon" data-dismiss="callout">
+            <div class="header">
+                <h3>Done!</h3>
+                <ul>
+                    <li><?=$msg?></li>
+                </ul>
+            </div>
+        </div>
+    <?php
+}
+
+function csv_to_array($filename='', $delimiter=';')
+{
+    if(!file_exists($filename) || !is_readable($filename))
+        return FALSE;
+
+    $header = NULL;
+    $data = array();
+    $data["proyecto"] = [];
+    $data["evaluaciones"] = [];
+    $leer_datos_user = false;
+    $i = 0;
+
+    if (($handle = fopen($filename, 'r')) !== FALSE)
+    {
+        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
+        {
+            if(!$header)
+            {
+                $header = $row;
+            }
+            else
+            {
+                $campo = explode(",", $row[0]);
+                
+                $nombre_campo = strtolower(trim($campo[0]));
+                if( $nombre_campo == "nombre proyecto" ||
+                    $nombre_campo == "fecha inicio" ||
+                    $nombre_campo == "fecha fin" ||
+                    $nombre_campo == "idioma proyecto" ||
+                    $nombre_campo == "licencias" ||
+                    $nombre_campo == "email gestor"
+                  )
+                {
+                    $data["proyecto"][ $nombre_campo ] = $campo[1];
+                }
+
+                if($leer_datos_user)
+                {
+                    $data["evaluaciones"][$i]["autoevaluacion"] = [];
+                    $data["evaluaciones"][$i]["permisos"] = [];
+
+                    if( isset($campo[0]) ) $data["evaluaciones"][$i]["name"] = $campo[0];
+                    if( isset($campo[1]) ) $data["evaluaciones"][$i]["email"] = $campo[1];
+                    if( isset($campo[2]) ) $data["evaluaciones"][$i]["lang"] = $campo[2];
+                    if( isset($campo[3]) ) $data["evaluaciones"][$i]["solo_autoevaluacion"] = $campo[3];
+                    if( isset($campo[4]) ) $data["evaluaciones"][$i]["autoevaluacion"]["superior"] = $campo[4];
+                    if( isset($campo[5]) ) $data["evaluaciones"][$i]["autoevaluacion"]["colega"] = $campo[5];
+                    if( isset($campo[6]) ) $data["evaluaciones"][$i]["autoevaluacion"]["colaborador"] = $campo[6];
+                    if( isset($campo[7]) ) $data["evaluaciones"][$i]["autoevaluacion"]["otros"] = $campo[7];
+                    if( isset($campo[8]) ) $data["evaluaciones"][$i]["permisos"]["rol_evaluadores"] = $campo[8];
+                    if( isset($campo[9]) ) $data["evaluaciones"][$i]["permisos"]["evaluadores"] = $campo[9];
+
+                    $i++;
+                }
+                else if( $nombre_campo == "nombre y apellidos" )
+                {
+                    $leer_datos_user = true;
+                }
+
+            }
+        }
+        fclose($handle);
+    }
+    return $data;
+}
+
+
+
+function saveProyecto($data, $client_id)
+{
+    try {
+        $proyecto = new Proyecto();
+
+        $proyecto->client_id = $client_id;
+        if( isset($data["nombre proyecto"]) ) $proyecto->name = $data["nombre proyecto"];
+        
+        if( isset($data["fecha inicio"]) )
+        {
+            $fecha_inicio = \Carbon\Carbon::createFromFormat('d/m/Y',$data["fecha inicio"]);
+            $proyecto->fecha_inicio = $fecha_inicio;
+        } 
+        if( isset($data["fecha fin"]) )
+        {
+        $fecha_fin = \Carbon\Carbon::createFromFormat('d/m/Y',$data["fecha fin"]);
+        $proyecto->fecha_fin = $fecha_fin;
+        } 
+
+        if( isset($data["idioma proyecto"]) && strtolower($data["idioma proyecto"]) == "es") $proyecto->lang = "es";
+        else if( isset($data["idioma proyecto"]) && strtolower($data["idioma proyecto"]) == "en") $proyecto->lang = "en";
+        else $proyecto->lang = "es";
+
+        if( isset($data["licencias"]) ) $proyecto->num_licencias = $data["licencias"];
+
+        $gestor = User::whereRaw(\DB::raw("LOWER(email) = ". strtolower($data["email gestor"])));
+        if(isset($gestor->id)) $proyecto->gestor_id = $gestor->id;
+
+        $proyecto->save();
+        return $proyecto->id;
+    } catch(\Exception $e) {
+        //echo $e->getMessage();
+        return false;
+    }
+
+}
+
+function saveEquipos($evaluaciones, $proyecto_id)
+{
+    try {
+        foreach($evaluaciones as $eval)
+        {
+            $evaluacion = new Evaluacion();
+            $evaluacion->proyecto_id = $proyecto_id;
+
+            if( isset($eval['name']) ) $evaluacion->name = $eval['name'];
+            if( isset($eval['email']) ) $evaluacion->email = $eval['email'];
+
+            if( strtolower($eval['lang']) == "es") $evaluacion->lang = "es";
+            else if( strtolower($eval['lang']) == "en") $evaluacion->lang = "en";
+            else $evaluacion->lang = strtolower($eval['lang']);
+
+            if( isset($eval["solo_autoevaluacion"]) && strtolower(trim($eval["solo_autoevaluacion"])) == "si" )
+            {
+                $evaluacion->tipo = [ "autoevaluacion" ];
+            }
+            else
+            {
+                $tmp = [];
+                if( isset($eval["autoevaluacion"]["superior"]) && strtolower(trim($eval["autoevaluacion"]["superior"])) == "si" )
+                {
+                    array_push($tmp, "jefe");
+                } 
+                if( isset($eval["autoevaluacion"]["colega"]) && strtolower(trim($eval["autoevaluacion"]["colega"])) == "si" )
+                {
+                    array_push($tmp, "companero");
+                } 
+                if( isset($eval["autoevaluacion"]["colaborador"]) && strtolower(trim($eval["autoevaluacion"]["colaborador"])) == "si" )
+                {
+                    array_push($tmp, "colaborador");
+                } 
+                if( isset($eval["autoevaluacion"]["otros"]) && strtolower(trim($eval["autoevaluacion"]["otros"])) == "si" )
+                {
+                    array_push($tmp, "otro");
+                } 
+                $evaluacion->tipo = $tmp;
+            }
+
+            $tmp = [];
+            if( isset($eval["permisos"]["rol_evaluadores"]) && strtolower($eval["permisos"]["rol_evaluadores"]) == "si" )
+            {
+                array_push($tmp, "change_tipo");                
+            }
+            if( isset($eval["permisos"]["evaluadores"]) && strtolower($eval["permisos"]["evaluadores"]) == "si" )
+            {
+                array_push($tmp, "change_evaluadores");                
+            }
+
+            if(empty($tmp)) $tmp = "0";
+            
+            $evaluacion->params = [ "permissions" => $tmp ];
+
+
+            
+            $evaluacion->save();
+
+
+
+        }
+
+        return true;
+
+    } catch(\Exception $e) {
+        echo $e->getMessage();
+        return false;
+    }
+
+}
+
+
+// AL ENVIAR EL FORMULARIO
+if(isset($_POST) && !empty($_POST))
+{
+    if( \Input::has('sel_client') && \Input::has('import_file') ) 
+    {
+        $client_id = \Input::get('sel_client');
+        $import_file = \Input::file('import_file');
+        $data = csv_to_array($import_file);
+        
+        $fname = $_FILES['import_file']['name'];
+        echo '<b><i>Archivo: '.$fname.'</i></b><br/>';
+
+        $proyecto_id = saveProyecto($data["proyecto"], $client_id);
+        if($proyecto_id) 
+        {
+            success("Proyecto creado con éxito.");
+            if(isset($data["evaluaciones"]))
+            {
+                if( saveEquipos($data["evaluaciones"], $proyecto_id) )
+                {
+                    success("Equipos creadas con éxito.");
+                }
+                else
+                {
+                    error("Ha ocurrido un error al almacenar las evaluaciones.");
+                }
+            }
+            else
+            {
+                error("El proyecto ha sido añadido pero no se han encontrado datos para las evaluaciones.");
+            }
+        }
+        else
+        {
+            error("No se ha podido guardar el proyecto.");
+        }
+    }
+    else
+    {
+        $msg_error = "No se ha detectado el cliente o el fichero .csv";
+        error($msg_error);
+    }
+}
+
+
+$clientes = Client::all();
+ 
+?>
+
+
+<br/>
+<?= Form::open(['files' => true, 'id' => 'form_import']) ?>
+
+
+<div class="form-group dropdown-field span-full">
+    <label>Selecciona un cliente</label>
+    <select id="sel_client" name="sel_client" class="form-control custom-select">
+        <option selected="selected" value="null" disabled>Selecciona un cliente</option>
+        <?php
+        foreach($clientes as $client)
+        {
+            ?>
+            <option value="<?=$client->id?>"><?=$client->name?></option>
+            <?php
+        }
+        ?>
+    </select>
+</div>
+
+
+<i>Selecciona el archivo que deseas importar: <input type="file" id="import_file" name="import_file" /></i>
+<br/>
+
+<button
+    type="button"
+    class="btn btn-default oc-icon-cloud-upload"
+    name="importar_csv"
+    id="importar_csv">
+    Importar
+</button>
+<?= Form::close() ?>
+
+
+<script>
+
+$(document).ready( function () {
+    $('#importar_csv').on('click', function() {
+        var client = $('#sel_client').val();
+        
+        var nombre_fichero = $('#import_file').val();
+        var extension = nombre_fichero.split(".");
+        extension = extension[extension.length-1];
+        
+        //alert(client)
+        if(client == null) alert("Debes seleccionar un cliente.")
+        else if(nombre_fichero == "" || extension.toLowerCase() != "csv") alert("Debes seleccionar un archivo CSV (*.csv)");
+        else $('#form_import').submit();
+    });
+});
+
+</script>

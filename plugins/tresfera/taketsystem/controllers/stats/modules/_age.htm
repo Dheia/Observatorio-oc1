@@ -1,0 +1,33 @@
+<?php
+	$model = new \Tresfera\Taketsystem\Models\Result();
+	$totalsAge = $model->getTotalsAge($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+	$total = 0;
+	foreach($totalsAge as $age) {
+		$total += $age->count;
+	}
+?>
+<div class="">
+    <div data-control="">
+	    <h3><i class="icon-users"></i>Edad clientes</h3>
+		<div class="row">
+			<div class="col-md-12">
+				<div
+				    class="control-chart"
+				    data-control="chart-pie"
+				    data-size="180"
+				    data-center-text="<?=$total?>">
+				    <ul>
+					    <?
+					    foreach($totalsAge as $age) {
+					    ?>
+					    	<li><?=$age->age_range?> <span><?=$age->count?></span></li>
+					    <?
+					    }
+					    ?>
+				        
+				    </ul>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

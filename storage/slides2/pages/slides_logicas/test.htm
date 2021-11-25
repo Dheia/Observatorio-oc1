@@ -1,0 +1,29 @@
+title = "N preguntas 2"
+url = "/slides/slide/:code"
+description = "Encuesta lógica en la que las preguntas se basan en las repuestas"
+type = "logica"
+layout = "render"
+
+[taketsystemTemplate]
+==
+<section data-slide-type="logica">
+    <div class="h-20">
+        <div>
+	        <h1>{text name="enunciado" label="Enunciado"}En general... ¿Qué valoración nos hace de...?{/text}</h1>
+        </div> <!-- Flex Items  -->
+    </div>
+    {repeater name="questions" prompt="Añadir otro sector"}
+    <div class="h-10">
+        <div>
+          <div data-role="pregunta" data-answer-type="smiles" data-question-type="general" class="pregunta horizontal">
+            <h2>{question name="question" label="Pregunta global"}Atención y calidad de servicio{/question}</h2>
+          </div>
+        </div>
+    </div>
+    {/repeater}
+
+    <div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+</section>

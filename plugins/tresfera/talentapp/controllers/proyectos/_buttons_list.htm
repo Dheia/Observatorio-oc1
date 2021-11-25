@@ -1,0 +1,32 @@
+<a 
+href="<?= Backend::url('tresfera/talentapp/proyectos/update', $record->id) ?>" 
+    class="btn btn-default btn-xs">
+    Editar
+</a>
+<?php if($record->estado_informe < 2) { ?>
+    <a 
+    href="<?= Backend::url('tresfera/talentapp/proyectos/generateRapport', $record->id) ?>" 
+        class="btn btn-default btn-xs">
+        Generar informe
+    </a>
+<?php } elseif($record->estado_informe == 2) { ?>
+    <a 
+    href="<?= Backend::url('tresfera/talentapp/proyectos/generateRapport', $record->id) ?>" 
+        class="btn btn-default btn-xs">
+        Generando
+    </a>
+<?php } elseif($record->estado_informe == 3) { 
+    ?>
+    <a  
+        target="_blank"
+        href="<?=$record->rapport->getUrl()?>" 
+        class="btn btn-default btn-xs">
+        Ver informe
+    </a><br>
+    <a 
+    href="<?= Backend::url('tresfera/talentapp/proyectos/generateRapport', $record->id) ?>" 
+        class="btn btn-default btn-xs">
+        Volver a generar
+    </a>
+<?php } 
+

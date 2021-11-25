@@ -1,0 +1,113 @@
+title = "Pag19"
+url = "/cofidis/competencia2/pag19"
+layout = "cofidis"
+is_hidden = 0
+==
+<div class="avatar">
+<img src="/storage/app/media/cofidis/2.3 Foto.png"><span style="color: #FFF;">AitanaFriky</span>
+</div>
+<div class="chat">
+	 	<ul>
+      <li class="me">
+        Yo, aprendiendo un montón. Que entre la gestión de la obra y tener que informar, escuchar opiniones, contestar preguntas y dar explicaciones de todo a todo tipo de vecinos, me estoy haciendo de lo más popular. ¡Qué paciencia!
+      </li>
+			<li class="you">
+        Y además, seguro que cada cual lo ve distinto ¿no? están los curiosos, los puntillosos, los desconfiados, los discretos… los que protestan por todo y los que no se quejan de nada.
+      </li>
+			<li class="you">
+        ¿Cómo haces para responder a todas las exigencias?
+      </li>
+      <li class="me">
+        No sé. Y encima hoy me dicen que también hay que cambiar la cabina del ascensor y arreglar una fuga del cuarto de contadores. Más dinero y más tiempo, ¡verás la que se va a montar!
+      </li>
+			<li class="you">
+        Bueno, si no hay más remedio. Tú no tienes la culpa…
+      </li>
+      <li class="me">
+        Ya, pero a la gente no le gustan los imprevistos, empezando por mi misma, tanto cambio e incertidumbre me tienen <img src="/storage/app/media/cofidis/13.0 Emoticon.png"><img src="/storage/app/media/cofidis/13.0 Emoticon.png">
+      </li>
+		</ul>
+		<div class="body">
+    </div>
+    <div class="bg-typed">
+      <div class="typed"></div>
+    </div>
+	</div>
+      <div class="row center fixed-bottom">
+        <a href="pag20?finish=true" 
+            id="download-button" 
+            class="btn-large waves-effect waves-light orange">
+            CONTINUAR
+          </a>
+      </div>
+      <style>
+.topbar {
+  width: {{ 19*100/31 }}%;
+}
+</style>
+
+<script>
+$( document ).ready(function() {
+    var strings = [];
+      var elements = $(" .chat ul li");
+      console.dir(elements)
+      var i = 0;
+      $("body").on('DOMSubtreeModified', ".chat .typed", function() {
+        console.log($(this)[0].scrollHeight)
+        $(this).scrollTop($(this)[0].scrollHeight);
+
+      });
+      function run(num) {
+          if(elements[num] == undefined) return;
+          if($(elements[num]).hasClass("me")) {
+              var options = {
+                  strings: [""],
+                  typeSpeed: 50,
+                  onComplete: function(self) { 
+                      
+                      $(".typed").html("");
+                      $(".typed-cursor").remove();
+                      if(strings[num]) {
+                        $(".chat .body").append("<div class='me'><div>"+strings[num]+"</div></div>");
+                        var $container = $('.chat .body'),
+                        $scrollTo = $('.chat .body div').last();
+  
+                        $container.scrollTop(
+                            $scrollTo.offset().top - $container.offset().top + $container.scrollTop()
+                        );
+                      }
+
+                      if(i>num)
+                          run(num+1)
+                  }
+              }
+              setTimeout(function(){
+                var typed = new Typed(".typed", options);
+              }, 2000);
+              
+          } else {
+              if(i>num)
+                  setTimeout(function(){
+                      $(".chat .body").append("<div class='you'><div>"+strings[num]+"</div></div>");
+                      var $container = $('.chat .body'),
+                      $scrollTo = $('.chat .body div').last();
+
+                      $container.scrollTop(
+                          $scrollTo.offset().top - $container.offset().top + $container.scrollTop()
+                      );
+                      run(num+1)
+                  }, 2000);
+                  
+          }
+          
+      }
+
+      $(".chat ul li").each(function(){
+          strings[i] = $(this).html();
+          i++;
+      })
+      
+      run(0);
+});
+      
+</script>

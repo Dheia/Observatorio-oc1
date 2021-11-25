@@ -1,0 +1,11 @@
+name: Proyectos
+modelClass: Tresfera\Buildyouup\Models\Proyecto
+form: $/tresfera/buildyouup/models/proyecto/fields.yaml
+defaultRedirect: tresfera/buildyouup
+create:
+    redirect: 'tresfera/buildyouup/proyectos/update/:id'
+    redirectClose: tresfera/buildyouup
+update:
+    redirect: 'tresfera/buildyouup/proyectos/update/:id'
+    redirectClose: tresfera/buildyouup
+preview: {  }

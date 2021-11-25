@@ -1,0 +1,214 @@
+title = "Pag1"
+url = "/cofidis/competencia2/pag14"
+layout = "cofidis"
+is_hidden = 0
+==
+<div class="drags">
+    <div>
+        <div 
+          id="navaja" data-peso="50" class="draggable" data-answer-correct=2 data-points-correct=150 data-points-incorrect="-50"
+          style="background-image: url('/storage/app/media/cofidis/competencia2/9.1 Escalador.png')">
+        </div>
+        <div 
+          id="camaleon" data-peso="50" class="draggable" data-answer-correct=3 data-points-correct=150 data-points-incorrect="-50"
+          style="background-image: url('/storage/app/media/cofidis/competencia2/9.2 Montaña.png')">
+        </div>
+        <div 
+          id="apertura" data-peso="50" class="draggable" data-answer-correct=4 data-points-correct=150 data-points-incorrect="-50"
+          style="background-image: url('/storage/app/media/cofidis/competencia2/9.3 Superación.png')">
+        </div>
+        <div 
+          id="incertidumbre" data-peso="50" class="draggable" data-answer-correct=5 data-points-correct=150 data-points-incorrect="-50"
+          style="background-image: url('/storage/app/media/cofidis/competencia2/9.4 Rendimiento.png')">
+        </div>
+    </div>
+  </div>
+  <div style="clear:both;"></div>
+
+  <div id="drop1" class="droppable" data-value="1">Arrastrar icono aquí</div>
+  <div class="desc">"Siempre parece imposible, hasta que se hace."</div>
+  <div id="drop2" class="droppable" data-value="2">Arrastrar icono aquí</div>
+  <div class="desc">"Insistir, persistir, resistir, y nunca desistir."</div>
+  <div id="drop3" class="droppable" data-value="3">Arrastrar icono aquí</div>
+  <div class="desc">“Conseguir el éxito no es hacer más, es hacer mejor.”</div>
+  <div id="drop4" class="droppable" data-value="4">Arrastrar icono aquí</div>
+  <div class="desc">“Cuanto más grande es el reto, mayor es la oportunidad.”</div>
+  <div id="drop5" class="droppable" data-value="5">Arrastrar icono aquí</div>
+  <div class="desc">“Si deseas algo que nunca has tenido, deberás hacer algo que nunca has hecho.”</div>
+  <div id="drop6" class="droppable" data-value="6">Arrastrar icono aquí</div>
+  <div class="desc">"No he fracasado, he encoontrado diez mil maneras en las que esto no funciona."</div>
+
+  <div class="row center">
+      <button 
+      id="download-button" 
+      class="btn-large waves-effect waves-light orange">
+      CONTINUAR
+    </button>
+  </div>
+  
+<style>
+.drags { 
+  height: 90px;
+}
+.topbar {
+  width: {{ 27*100/31 }}%;
+}
+.draggable {
+    background-repeat: no-repeat;
+    padding: 30px;
+    z-index: 100;
+    display: inline-block;
+    position: relative;
+    width: 24%;
+    height: 90px;
+    margin-top: -5px;
+    background-size: contain;
+    background-position: center;
+    margin-bottom: 15px;
+}
+
+.droppable {
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    color: #f9d28c;
+    text-align: center;
+    z-index: 10;
+    width: 60px;
+    font-size: 12px;
+    padding-top: 0px;
+}
+.droppable.active{background-color:#5C99A5;}
+.desc {
+  display: inline-block;
+    width: calc(100% - 80px);
+    margin-left: 8px;
+    background: #fff2cf;
+    border-radius: 10px;
+    border: 1px solid #f8c949;
+    padding: 10px;
+    color: #85837d;
+    margin-bottom: 10px;
+    font-size: 11px;
+    vertical-align: middle;
+}
+
+.ui-draggable[data-value] {
+    position: absolute;
+    display: block;
+    background-size: 60%;
+    background-position: top center;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+}
+.ui-draggable-dragging {
+    z-index: 9999999999999;
+}
+.drags {
+    margin-top: 90px !important;
+    margin-bottom: 25px !important;
+}
+</style>
+<script>
+$(".draggable").draggable({
+    revert:"invalid",
+    start:function(){
+    }
+});
+$(".droppable").droppable({
+    accept:".draggable",
+    hoverClass:"active",
+    drop:function(ev,ui){
+        var element = this;
+        var dpid=$(element).attr("data-value")-1;
+        var y = $(element).position().top +'px' ;
+        var x = $(element).position().left +'px' ;
+        var width = $(element).css("width");
+        var height= $(element).css("height");
+        _pregunta = $("[data-type='draggable']");
+
+        //espacio al que es arrastrado
+        if($(element).attr("name")!=null){
+            //elemento seleccionado
+            var d=$(element).attr("name");
+            //espacio del que viene
+            var destino= "#drop"+$(element).attr("data-value");
+            var origen = "#"+$(ui.draggable).attr("id");
+            if(!origen.includes("drop"))
+                origen = "#drop"+$(ui.draggable).attr("id");
+
+            //comprobamos si en destino hay algun elemento
+            if($(destino).attr("name")) {
+                //si hay elemento y hay origen intercambiamos
+                if($(origen).attr("name")) {
+                    var y1 = $(origen).css("top");
+                    var x1 = $(origen).css("left");
+                    var width1 = $(origen).css("width");
+                    var height1= $(origen).css("height");   
+                    //si hay elemento y hay origen intercambiamos
+                    $("#"+$(destino).attr("name")).animate({padding: 0,left:x1,top:y1,width:width1,height:height1},300);
+                    $("#"+$(destino).attr("name")).attr("name",$(element).attr("name"));
+                    $("#"+$(destino).attr("name")).attr("data-value",$(ui.draggable).attr("data-value"));
+                } else {
+                    background = $("#"+$(destino).attr("name")).css('background-image');  
+                    $("#"+$(destino).attr("name")).removeAttr('style');  
+                    $("#"+$(destino).attr("name")).removeAttr('data-value');  
+                    $("#"+$(destino).attr("name")).css('background-image',background);
+
+                }
+                //Taket.setAnswer(data);
+               
+            } 
+            
+            //movemos el elemento de origen a la nueva posicion
+            $("#"+$(origen).attr("name"))
+                .animate({padding: 0,left:x,top:y,width:width,height:height},300);
+            $("#drop"+$(ui.draggable).attr("data-value")).attr("name",$(element).attr("name"));
+           /* $("#"+$(origen).attr("name")).attr("data-value",$(ui.draggable).attr("data-value"));
+            $(element).attr("name",$(ui.draggable).attr("id"));*/
+        } else {
+            if($("#drop"+$(ui.draggable).attr("id")).attr("name")) {
+                $("#drop"+$(ui.draggable).attr("id")).attr("name","");
+            }
+            if($("#"+$(ui.draggable).attr("id")).attr("name")) {
+                $("#"+$(ui.draggable).attr("id")).attr("name","");
+            }
+        }
+            
+        
+
+        //asignamos al elemento desplazado el drop al que se le ha puesto
+        $(ui.draggable).attr("data-value",$(element).attr("data-value"));
+        //hacemos animacion de desplazamiento del elemento desplazado a la posicion
+        $(ui.draggable).animate({padding: 0,left:x,top:y,width:width,height:height},300);
+        //asignamos al drop de destino el nuevo valor
+        $(element).attr("name",$(ui.draggable).attr("id"));
+    }
+});
+</script>
+<script>
+    $("#download-button").click(function(){
+      var sendData = [];
+      $(".drags [data-value]").each(function(){
+        var data = {
+            value: $(this).data("value"),
+            question: $(this).attr("id"),
+            peso: $(this).data("peso"),
+        };
+        if($(this).data("value") == $(this).data("answer-correct"))
+          data.points = $(this).data("points-correct");
+        else
+          data.points = $(this).data("points-incorrect");
+        
+        if(data.value)
+          sendData.push(data);
+      })
+      $.request('onSaveAnswers', {
+          data: sendData,
+          success: function(data) {
+            window.location = "pag28?finish=true";
+          }
+      })
+    })
+</script>

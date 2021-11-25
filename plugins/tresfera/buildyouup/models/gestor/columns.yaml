@@ -1,0 +1,9 @@
+columns:
+    name:
+        label: Nombre
+        type: text
+        searchable: true
+        sortable: true
+    email:
+        label: Email
+        type: text

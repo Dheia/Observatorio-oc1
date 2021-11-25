@@ -1,0 +1,79 @@
+<?php 
+
+use Mja\Mail\Models\Email;
+use Mja\Mail\Models\EmailOpens;
+
+if(is_array($record->getEvaluadores()))
+foreach($record->getEvaluadores() as $tipo=>$values) { 
+    if(is_array($values)) {
+        foreach($values as $evaluador) {
+            if( ( $tipo == "autoevaluado" && !$record->isCompletedAutoevaluado() )
+                    || ( $tipo != "autoevaluado" && $evaluador["completed"] != true )    
+                ) {
+            if($tipo == "autoevaluado") {
+                if(!$evaluador['email'] || !isset($evaluador['send_at']) || !isset($evaluador['send_at']['date']))               
+                    $email = Email::whereIn("code", ['talent.require.aprovacion','talent.require.aprovacion_en'])
+                            ->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+                            ->whereRaw(\DB::raw("DATE(date) = DATE('".$record->created_at."')"))
+                            ->first();
+                else
+                    $email = Email::whereIn("code", ['talent.require.aprovacion','talent.require.aprovacion_en'])
+                                ->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+                                ->whereRaw(\DB::raw("DATE(date) = DATE('".$evaluador['send_at']['date']."')"))
+                                ->first();
+                    
+
+                } else {
+                if(!$evaluador['email'] || !isset($evaluador['send_at']) || !isset($evaluador['send_at']['date'])) continue;
+                $email = Email::whereIn("code", ['talent.require.aprovacion','talent.require.aprovacion_en','talent.require.answer.evaluado_en','talent.require.answer.evaluador','talent.require.answer.evaluador_en'])
+                                ->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+                                ->whereRaw(\DB::raw("DATE(date) = DATE('".$evaluador['send_at']['date']."')"))
+                                ->first();
+               // echo $record->id." ".$evaluador['send_at']['date']."<br>";
+            }
+               
+
+           if( isset($email->id) )
+            {
+                echo $tipo.": ".$evaluador['email']."";
+              /*  if( ( $tipo == "autoevaluado" && !$record->isCompletedAutoevaluado() )
+                    || ( $tipo != "autoevaluado" && $evaluador["completed"] != true )    
+                ) 
+                {*/
+                    if($email->getTimesOpenedAttribute() > 0) echo '<span class="text-success">YES</span><br/>';
+                    else echo '<span class="text-danger">NO</span><br/>';
+               // } 
+            } else {
+                echo $tipo.": ".$evaluador['email']."";
+                echo '<span class="text-error">NO enviado</span><br/>';
+            }
+        }
+          /*  foreach($emails as $email)
+            {
+                //print_r($email->to);
+                //dd(key($email->to));
+                //echo key($email->to);
+                if( $evaluador['email'] == key($email->to) )
+                {
+                    echo $evaluador['email']."<br/>";
+                    if( ( $tipo == "autoevaluado" && !$record->isCompletedAutoevaluado() )
+                        || ( $tipo != "autoevaluado" && $evaluador["completed"] != true )    
+                    ) 
+                    {
+                        if($email->getTimesOpenedAttribute() > 0) echo '<span class="text-success">YES</span><br/>';
+                        else echo '<span class="text-danger">NO</span><br/>';
+                    } 
+                } else {
+                    echo $evaluador['email']."<br/>";
+                    echo '<span class="text-error">NO enviado</span><br/>';
+                }
+                
+            }*/
+
+            
+        }
+        
+    }
+    ?>
+
+<?php } ?>

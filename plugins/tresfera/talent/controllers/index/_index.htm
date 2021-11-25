@@ -1,0 +1,96 @@
+<?php
+use Tresfera\TalentApp\Classes\UserControl;
+
+
+$user = BackendAuth::getUser();
+$rol = UserControl::getRole($user);
+
+if($user->activated_at == null) {
+    ?>
+    <script>
+        location.href='<?=url("/backend/tresfera/talent/index/rgpd")?>'
+    </script>
+    <?php
+}
+
+if(UserControl::isAdmin($user) || $user->hasPermission(["talent.gestor"])) {
+    
+ ?>
+    <script>window.location.replace("/backend/tresfera/talent/administrador");</script>
+ <?php   
+ exit;
+}
+?>
+
+<style>
+a {
+    cursor: pointer;
+}
+.text-center {
+    text-align: center;
+}
+.title-value h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #666666;
+    margin: 0;
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: #313131;
+}
+.profile-pic {
+    position: relative;
+    display: inline-block;
+
+
+}
+
+.profile-pic:hover .edit {
+    display: block;
+}
+
+.edit_img:hover {
+    transition:all .3s ease-in-out;
+    filter: blur(3px);
+}
+
+.edit {
+    padding-top: 7px;
+    padding-right: 7px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+}
+
+.edit a {
+    color: #000;
+}
+
+</style>
+<?php
+   
+?>
+
+<div class="control-breadcrumb">
+  <ul>
+      <li><a href="<?= Backend::url('tresfera/talent') ?>">TalentApp</a></li>
+      <li></li>
+  </ul>
+</div>
+
+
+
+<?php
+if($rol == 5) echo $this->makePartial('empresa', ['user' => $user]);
+else if($rol == 4) echo $this->makePartial('gestor', ['user' => $user]);
+else
+{
+    echo $this->makePartial('evaluado', ['user' => $user]);
+}
+?>
+<style>
+.layout-cell.layout-sidenav-container {
+    display: none;
+}
+</style>

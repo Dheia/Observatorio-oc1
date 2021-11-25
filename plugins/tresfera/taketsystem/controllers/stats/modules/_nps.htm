@@ -1,0 +1,31 @@
+<?php
+	$model = new \Tresfera\Taketsystem\Models\Result();
+    $totalsNPS = $model->getTotalsNPS($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+    if(isset($totalsNPS[0])) {
+?>
+<div class="row">
+	<div class="col-md-12">
+		<h3 style="margin-top: 10px"><i class="icon-smile-o"></i>NPS</h3>
+	</div>
+	<div class="col-md-12 bar-line-big">
+		<?php if($totalsNPS[0]->percentKo!="0.00%") {
+        ?>
+		<div class="bar-line bar-line-ko" style="width: <?=$totalsNPS[0]->percentKo?>">Detractores<span><?=$totalsNPS[0]->percentKo?></span></div>
+        <?php
+        }
+        ?>
+        <?php if($totalsNPS[0]->percentMix!="0.00%") {
+        ?>
+        <div class="bar-line bar-line-mix" style="width: <?=$totalsNPS[0]->percentMix?>">Pasivos<span><?=$totalsNPS[0]->percentMix?></span></div>
+        <?php
+        }
+        ?>
+        <?php if($totalsNPS[0]->percentOk!="0.00%") {
+        ?>
+        <div class="bar-line bar-line-ok" style="width: <?=$totalsNPS[0]->percentOk?>">Promotores<span><?=$totalsNPS[0]->percentOk?></span></div>
+        <?php
+        }
+        ?>
+	</div>
+</div>
+<?php } ?>

@@ -1,0 +1,565 @@
+title = "Motivos IESE"
+url = "/slides/slide/:code"
+layout = "render"
+description = "IESE motivos"
+is_hidden = 0
+
+[taketsystemTemplate]
+==
+{variable type="text" name="title" label="Título"}{/variable}
+
+{variable type="text" name="continueText" default="Continuar" label="Texto botón continuar"}{/variable}
+
+{variable type="text" span="auto" name="numItems" label="Progreso: Pantalla actual"}{/variable}
+{variable type="text" span="auto" name="totalITems" label="Progreso: Total pantallas"}{/variable}
+{variable type="checkbox" span="auto" name="showProgres" label="Mostrar progreso"}{/variable}
+
+
+{repeater name="questions" prompt="Añadir otra pregunta"}
+{variable type="text" name="question" label="Motivo"}{/variable}
+{variable type="text" span="auto" name="categoria" label="Categoria"}{/variable}
+{variable type="checkbox" span="auto" name="noAnalizable" label="No analizable"}{/variable}
+{/repeater}
+
+{mediafinder name="bg" label="Fondo"}{/mediafinder}
+{variable type="codeeditor" name="css" label="Personalizado"}{/variable}
+--
+<div id="{{slide_id}}" class="main bg motivos slide_{{slide_id}}">
+  <div class="row">
+    {% if showProgres %}
+
+    <div class="col">
+      <div class="num-progress">
+        {{numItems}}
+      </div>
+      <div class="progress">
+        <div class="percent" style="width: {{ numItems / totalITems * 100 }}%">
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="col">
+      <h1 class="title w-100">{{title}}</h1>
+    </div>
+  </div>
+  <div class="row" id="question">
+    <div class="col">
+      {% for question in questions %}
+      <div class="h-10">
+        <div>
+          <div data-role="pregunta" 
+                data-answer-type="icons" 
+                data-question-type="motivo" 
+                data-question-title="{{question.question}}" 
+                data-question="{{title}}" 
+                data-question-categoria="{{question.categoria}}" 
+                data-no-analizable="{{question.noAnalizable}}"
+                class="pregunta horizontal">
+            <h2>{{question.question}}</h2>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="1" class="smile circle circle-1">
+              <span data-type="value">Nunca</span>
+            </div>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="2" class="smile circle circle-2">
+              <span data-type="value">Casi nunca</span>
+            </div>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="3" class="smile circle circle-3">
+              <span data-type="value">A veces</span>
+            </div>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="4" class="smile circle circle-4">
+              <span data-type="value">Casi siempre</span>
+            </div>
+            <div voto data-no-nextstep  ng-click="voto($event)" data-voto="1" data-value="5" class="smile circle circle-5">
+              <span data-type="value">Siempre</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%endfor%}
+
+    </div>
+  </div>
+
+
+  <div id="continue">
+    <button ng-click="prevStep()" type="submit" id="back-button" class="button goback icon-right ion-chevron-right button-clear button-dark">
+            Volver
+        </button>
+    <button style="display: none"   id="next-button"
+            ng-click="nextStep()" 
+            type="submit" 
+            class="button icon-right ion-chevron-right button-clear button-dark">
+      Continuar
+    </button>
+  </div>
+
+</div>
+
+<style>
+.slide_{{slide_id}}  button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-left: -180px;
+}
+.slide_{{slide_id}}  section {
+  position: absolute;
+  width: 1200px;
+  height: 700px;
+}
+{{css}}
+.slide_{{slide_id}}  {
+    background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+    background-position: center;
+    background-size: 100%;
+}
+.slide_{{slide_id}}  {
+    height: 100%;
+    width: 100%;
+}
+.slide_{{slide_id}}  .circle {
+  height: 150px;
+    background-size: 100%;
+    background-position: 0;
+}
+.slide_{{slide_id}}  .smile span {
+    font-size: 70%;
+    background-color: #fff;
+    text-align: center;
+    list-style: none;
+    line-height: 100%;
+    height: auto;
+    display: block;
+    width: 100%;
+    word-wrap: initial;
+    margin-top: 0;
+}
+.slide_{{slide_id}} h1.title.w-100 {
+    position: absolute;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 35px;
+    top: 105px;
+    width: 240px;
+    left: 480px;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    left: 0;
+}
+.slide_{{slide_id}}  #question {
+    position: absolute;.main
+    top: 64%;
+}
+.slide_{{slide_id}}  .circle.circle-1 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn1.png);
+}
+.slide_{{slide_id}}  .circle.circle-2 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn2.png);
+}
+.slide_{{slide_id}}  .circle.circle-3 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn3.png);
+}
+.slide_{{slide_id}}  .circle.circle-4 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn4.png);
+}
+.slide_{{slide_id}}  .circle.circle-5 {
+  background-image: url(//talentapp360.taket.es/storage/app/media/test/btn5.png);
+}
+.slide_{{slide_id}}  .button.button-dark.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 0px 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+.slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 40px;
+    position: absolute;
+    margin-left: 185px;
+}
+.slide_{{slide_id}}  .button.icon-right:before {
+display: none;
+}
+
+
+.slide_{{slide_id}}  div#back {
+    position: absolute;
+}
+.slide_{{slide_id}}  {
+    background-position: bottom left;
+    background-size: 100%;
+}
+.slide_{{slide_id}}  .row {
+    display: block;
+    width: 100%;
+    position: absolute;
+}
+.slide_{{slide_id}}  .col-25 {
+    max-width: 31.3333%;
+    display: inline-block;
+    margin-top: 27px;
+}
+.slide_{{slide_id}}  .pregunta.horizontal h2 {
+    text-align: left;
+    display: inline-block;
+    width: 45%;
+    font-weight: normal;
+    font-size: 19px;
+}
+.slide_{{slide_id}}  .col-12 {
+  max-width: 11.3333%;
+  display: inline-block;
+}
+.slide_{{slide_id}}  h1, .slide_{{slide_id}}  .h1 {
+    font-size: 110%;
+    color: #fff;
+}
+.slide_{{slide_id}}  .transparent {
+    vertical-align: middle;
+}
+
+.slide_{{slide_id}}  .transparent span {
+  padding: 15px 30px;
+  line-height: 100%;
+  font-size: 80%;
+  display: block;
+  color: #fff;
+  font-style: italic;
+  background: rgba(255,255,255,.5);
+  width: 97%;
+}
+.slide_{{slide_id}}  .percent {
+    background: rgba(255, 255, 255, 0.6);
+    height: 10px;
+}
+.slide_{{slide_id}}  .progress {
+    width: 60%;
+    margin-left: 20%;
+    border: 2px solid #fff;
+    margin-bottom: 25px;
+}
+
+.slide_{{slide_id}}  {
+    background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+    background-position: center;
+    background-size: 100%;
+}
+.slide_{{slide_id}}  .num-progress {
+    position: relative;
+    left: -29%;
+    color: #fff;
+    margin-bottom: 11px;
+    margin-top: 23px;
+}
+.slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;se.taket.es
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #e3c06a;
+    border-color: #e3c06a;
+}
+body, .ionic-body {
+    font-size: 26px;
+}
+.slide_{{slide_id}}  .circle {
+    height: 150px;
+    background-size: 120%;
+    background-position: -10px;
+}
+.slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #e3c06a;
+    border-color: #e3c06a;
+    left: 50%;
+    margin-left: -40px;
+}
+.slide_{{slide_id}}  #question {
+    position: absolute;
+    top: 37%;
+}
+.slide_{{slide_id}}  .pregunta.horizontal h2 {
+    color: #fff;
+}
+.slide_{{slide_id}}  .pregunta.horizontal .smile {
+    vertical-align: middle;
+    margin-top: -10px;
+    margin-left: 2%;
+    height: 75px;
+    width: 66px;
+    background-size: 145%;
+    background-position-y: -7px;
+}
+.slide_{{slide_id}}  .smile span {
+  display: none;
+
+     background: transparent;
+    color: #fff;
+
+     margin-top: -30px;
+    vertical-align: bottom;
+}
+.slide_{{slide_id}}  #question > .col > *:first-child span {
+    display: block;
+}
+.slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+    margin-top: 0;
+    position: absolute;
+    margin-left: 0;
+    bottom: 0;
+    color: #fff;
+    border-color: #fff;
+    left: 67%;
+    margin-left: -40px;
+    bottom: 80px;
+}
+.slide_{{slide_id}}  .circle.noselect {
+    background-image: url(//talentapp360.taket.es/storage/app/media/test/btn_active.png);
+}
+.slide_{{slide_id}}  .col-25 {
+    max-width: 31.1333%;
+    display: inline-block;se.taket.es
+    margin-top: 27px;
+    text-align: center;
+    margin-left: 20px;
+}
+.slide_{{slide_id}}  .smile.noselect {
+    background-position-y: -10px;
+}
+.slide_{{slide_id}}  .h-10 {
+    padding-left: 90px;
+}
+.slide_{{slide_id}}  h1 {
+    text-align: center;
+}
+.slide_{{slide_id}}  #question > .col > *:first-child span {
+    display: block;
+    color: #fff;
+}
+.slide_{{slide_id}}  .num-progress {
+    position: relative;
+    left: 21%;
+    color: #fff;
+    margin-bottom: 11px;
+    margin-top: 23px;
+}
+.slide_{{slide_id}}  .progress {
+    width: 60%;
+    margin-left: 20%;
+    border: 2px solid #fff;
+    margin-bottom: 25px;
+}
+
+@media only screen and (max-width: 600px) {
+    .slide_{{slide_id}}  {
+        background-image: url(//talentapp360.taket.es/storage/app/media/{{bg}});
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .view-container {
+        height: calc(100% + 60px);
+    }
+    .slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+        margin-top: 40px;
+        position: absolute;
+        margin-left: 0%;
+    }
+    .slide_{{slide_id}}  #start button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+        margin-top: 67%;
+        margin-left: 48%;
+        left: -62px;
+    }
+    .slide_{{slide_id}}  h1.title.w-100 {
+        position: relative;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 24px;
+        top: 2%;
+        /* left: 520px; */
+        color: #000;
+    }
+    .slide_{{slide_id}}  h3.title {
+        position: relative;
+        display: inline;
+        font-size: 19px;
+        font-weight: normal;
+        width: 20%;
+        text-align: center;
+        left: 10%;
+        margin-left: -10%;
+        margin-top: 308px;
+        color: #000;
+    }
+    .slide_{{slide_id}}  .progress {
+        width: 80%;
+        margin-left: 10%;
+        margin-bottom: 12px;
+    }
+    .slide_{{slide_id}}  .num-progress {
+        position: relative;
+        left: 15%;
+        color: #fff;
+        margin-bottom: 11px;
+        margin-top: 2px;
+        width: calc(100% - 20%);
+    }
+    .slide_{{slide_id}}  h1.title.w-100 {
+        position: relative;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 18px;
+        top: 0%;
+        left: 0;
+        color: #fff;
+    }
+    .slide_{{slide_id}}  {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .slide_{{slide_id}}  .row {
+        display: block;
+        width: 100%;
+        position: relative;
+    }
+    .slide_{{slide_id}}  #question {
+        position: relative;
+        top: 0;
+    }
+    .slide_{{slide_id}}  .h-10 {
+        padding-left: 0;
+    }
+    .slide_{{slide_id}}  .pregunta.horizontal h2 {
+        text-align: left;
+        display: inline-block;
+        width: 100%;
+        font-weight: normal;
+        font-size: 20px;
+        text-align: center;
+    }
+    .slide_{{slide_id}}  .smile span {
+        display: none;
+        background: transparent;
+        color: #fff;
+        margin-top: -10px;
+        vertical-align: bottom;
+        font-size: 13px;
+        display: none !important;
+    }
+    .slide_{{slide_id}}  .pregunta.horizontal .smile {
+        vertical-align: middle;
+        margin-top: -8px;
+        width: 16%;
+        background-size: 175%;
+        background-position-y: -27px;
+        background-position-x: -13px;
+        margin-bottom: 15px;
+    }
+    .slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+        bottom: 10px;
+    }
+    .slide_{{slide_id}}  .pregunta.horizontal .smile.noselect {
+        background-position-y: -26px !important;
+    }
+    .slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+        margin-left: -40px;
+    }
+    .slide_{{slide_id}}  #question {
+        position: relative;
+        top: 0;
+    }
+    .slide_{{slide_id}}  .row {
+        display: block;
+        width: 100%;
+        position: relative;
+    }
+    .slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+        margin: 0;
+        margin-left: 5px;
+    }
+    .slide_{{slide_id}}  div#continue {
+        width: 100%;
+        margin-left: -40%;
+        position: relative;
+        margin-top: 30px;
+    }
+    .slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+        margin-left: 40px !important;
+        position: relative;
+    }
+    .slide_{{slide_id}}  button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+        margin-left: -80px !important;
+    }
+    .slide_{{slide_id}} {
+        height: 100% !important;
+        width: 100%;
+        min-height: 100%;
+    }
+    .slide_{{slide_id}}  .pregunta.horizontal .smile {
+        vertical-align: middle;
+        margin-top: -8px;
+        width: 16%;
+        background-size: 175%;
+        background-position-y: -17px;
+        background-position-x: -13px;
+        margin-bottom: 15px;
+    }
+    .slide_{{slide_id}}  .pregunta.horizontal .smile.noselect {
+        background-position-y: -16px !important;
+    }
+    .slide_{{slide_id}}  {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .slide_{{slide_id}}  {
+        height: 100% !important;
+    width: 100%;
+    min-height: 100%;
+    overflow: auto;
+    }
+    .slide_{{slide_id}}  button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+        margin-top: 0;
+        position: relative;
+        margin-left: 0;
+        bottom: 0;
+        color: #fff;
+        border-color: #fff;
+        left: 67%;
+        margin-left: 20px;
+        bottom: 10px;
+        font-size: 12px;
+        padding: 10px !important;
+        line-height: 100% !important;
+    }
+    .slide_{{slide_id}}   div#continue {
+        margin-top: 30px;
+        height: 50px;
+        margin-bottom: 50px;
+    }
+    #slide_{{slide_id}} button.button.goback.icon-right.ion-chevron-right.button-clear.button-dark {
+        margin-left: -150px !important;
+    }
+    #slide_{{slide_id}} button.button.icon-right.ion-chevron-right.button-clear.button-dark {
+        margin-left: 10px;
+    }
+    .slide_{{slide_id}} button#back-button {
+        left: 20px !important;
+        margin-left: 150px !important;
+    }
+    .slide_{{slide_id}} button#next-button {
+        right: 60px;
+        margin-left: -90px !important;
+    }
+    
+}
+
+</style>

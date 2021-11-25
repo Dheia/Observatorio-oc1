@@ -1,0 +1,355 @@
+<?php
+use Tresfera\Talentapp\Classes\UserControl;
+use Tresfera\Talentapp\Models\Proyecto;
+use Tresfera\Talentapp\Models\Evaluacion;
+use Tresfera\Talentapp\Models\Cuestionario;
+
+$evaluacion = Evaluacion::find($model->id);
+$proyecto_id = $evaluacion->proyecto_id;
+$proyecto = Proyecto::find($proyecto_id);
+$nombre_proyecto = $proyecto->name;
+$empresa_id = $proyecto->empresa_id;
+
+$evaluados = UserControl::getAllEvaluados($empresa_id);
+$evaluadores_inscritos = UserControl::getEvaluadoresInscritos($evaluacion->id);
+$evaluadores_no_inscritos = UserControl::getEvaluadoresNoInscritos($empresa_id, $evaluacion->id);
+?>
+
+<?php if (!$this->fatalError): ?>
+
+  <?= Form::open(['class' => 'layout']) ?>
+
+  <div class="control-breadcrumb">
+      <ul>
+          <li><a href="<?= Backend::url('tresfera/talentapp/proyectos') ?>">Proyectos</a></li>
+          <li><a href="<?= Backend::url('tresfera/talentapp/proyectos/update/'.$proyecto_id) ?>"><?=$nombre_proyecto?></a></li>
+          <li>Editar Evaluación</li>
+      </ul>
+    </div>
+
+    <script src="/plugins/tresfera/talentapp/js/multiselect.min.js"></script>
+
+  <input id="proyecto_id" value="<?=$proyecto_id?>" type="hidden" />
+
+  <div class="form-group text-field span-left" data-field-name="proyecto" id="Form-field-Evaluacion-proyecto-group">
+    <label for="Form-field-Evaluacion-proyecto">Proyecto</label>
+      <input type="text" value="<?=$nombre_proyecto?>" name="Evaluacion[proyecto]" id="Form-field-Evaluacion-proyecto" class="form-control" autocomplete="off" maxlength="255" disabled="disabled">
+  </div>
+
+  <div class="form-group text-field span-right" data-field-name="evaluado" id="Form-field-Evaluacion-text1-group">
+    <label for="Form-field-Evaluacion-evaluado">Evaluado</label>
+      <select name="Evaluacion[evaluado]" id="Form-field-Evaluacion-evaluado" class="form-control custom-select">
+        <option value="null" disabled="disabled">- Selecciona la persona a evaluar -</option>
+        <?php
+        if($evaluados)
+        {
+          foreach($evaluados as $evaluado)
+          {
+            ?>
+            <option value="<?=$evaluado->id?>" <?php if($evaluado->id==$evaluacion->evaluado_id) echo "selected"; ?>><?= $evaluado->first_name ?> <?= $evaluado->last_name ?></option>
+            <?php
+          }
+        }
+        ?>
+      </select>
+  </div>
+
+  <label for="Form-field-Evaluacion-evaluadores">Evaluadores</label>
+  <div class="row">
+
+      <div class="col-xs-5">
+          <label for="evaluadores_list"><i class="gray">No Inscritos:</i></label>
+          <select name="from[]" id="evaluadores_list" class="form-control" size="13" multiple="multiple">
+            <?php
+            if($evaluadores_no_inscritos)
+            {
+              foreach($evaluadores_no_inscritos as $evaluador)
+              {
+                ?>
+                <option value="<?=$evaluador->id?>"><?= $evaluador->first_name ?> <?= $evaluador->last_name ?></option>
+                <?php
+              }
+            }
+            ?>
+          </select>
+      </div>
+
+      <div class="col-xs-2">
+          <br/>
+          <button type="button" id="evaluadores_list_undo" class="btn btn-primary btn-block text-center">Deshacer</button>
+          <button type="button" id="evaluadores_list_rightAll" class="btn btn-block text-center"><i class="icon-fast-forward"></i></button>
+          <button type="button" id="evaluadores_list_rightSelected" class="btn btn-block text-center"><i class="icon-step-forward"></i></button>
+          <button type="button" id="evaluadores_list_leftSelected" class="btn btn-block text-center"><i class="icon-step-backward"></i></button>
+          <button type="button" id="evaluadores_list_leftAll" class="btn btn-block text-center"><i class="icon-fast-backward"></i></button>
+          <button type="button" id="evaluadores_list_redo" class="btn btn-yellow btn-block text-center">Rehacer</button>
+      </div>
+
+      <div class="col-xs-5">
+        <label for="evaluadores_list_to"><i class="gray">Inscritos:</i></label>
+          <select name="to[]" id="evaluadores_list_to" class="form-control" size="13" multiple="multiple">
+            <?php
+            if($evaluadores_inscritos)
+            {
+              foreach($evaluadores_inscritos as $evaluador)
+              {
+                ?>
+                <option value="<?=$evaluador->id?>"><?= $evaluador->first_name ?> <?= $evaluador->last_name ?></option>
+                <?php
+              }
+            }
+            ?>
+          </select>
+      </div>
+  </div>
+
+  <br/>
+
+
+  <div class="row">
+
+    <div class="col-xs-6 form-group" id="form_cuestionario_evaluado">
+      <label>Cuestionario Evaluado</label>
+      <div>
+        <a id="btn_cuestionario_evaluado" data-toggle="modal" href="#cuestionario-evaluado" class="btn btn-primary btn-lg">Modificar Cuestionario</a>
+      </div>
+
+      <div class="control-popup modal fade" id="cuestionario-evaluado" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Cuestionario para la persona Evaluada</h4>
+                </div>
+                <div class="modal-body">
+                    <button id="btn_add_pregunta_evaluado" type="button" class="btn btn-primary oc-icon-plus">Añadir Pregunta</button>
+
+                    <?php
+                      $cuestionario = Cuestionario::where('id', $evaluacion->cuestionario_evaluado_id)->first();
+                      $preguntas = json_decode($cuestionario->preguntas);
+                    ?>
+                    <div id="get_preguntas_evaluado" class="hidden"><?=$cuestionario->preguntas?></div>
+                    <div id="list_preguntas">
+                      <br/>
+                      <div class="control-list">
+                        <table class="table data">
+                          <thead>
+                            <tr>
+                              <th class="sort-desc text-center"><a href="/">Pregunta</a></th>
+                              <th class="text-center"><a href="/">Tipo Respuesta</a></th>
+                              <th class="text-center"><span>Nº Respuestas</span></th>
+                              <th class="list-setup text-center"><a href="/" title="Opciones"></a></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                            foreach($preguntas as $index=>$pregunta)
+                            {
+                              ?>
+                              <tr id="preguntas<=?$index?>">
+                                <td><?=$pregunta->pregunta?></td>
+                                <td class="text-center"><?=$pregunta->tipoRespuesta?></td>
+                                <td class="text-center"><?=(isset($pregunta->respuestas)) ? count($pregunta->respuestas) : '-';?></td>
+                                <td class="text-center" onclick="eliminarPregunta(preguntas,<?=$index?>,list_preguntas)" style="cursor: pointer;"><i class="icon-trash-o trash"></i></td>
+                              </tr>
+                              <?php
+                            }
+                              ?>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+
+                    <div id="block_preg" class="hidden">
+
+                      <div id="add_pregunta_evaluado" data-field-name="text_pregunta" class="form-group m-t">
+                        <label for="text-pregunta">Pregunta</label>
+                        <textarea id="text_pregunta" type="text" placeholder="Escriba aquí la pregunta..." class="form-control" autocomplete="off" maxlength="255" ></textarea>
+                      </div>
+
+
+                      <div class="m-t">
+                        <label for="tipo-respuesta">Tipo de Respuesta</label>
+                        <select id="tipo-respuesta" class="form-control select-no-search">
+                          <option value="1">Texto</option>
+                          <option value="2">Selección Única (Select)</option>
+                          <option value="3">Selección Única (Radio)</option>
+                          <option value="4">Selección Múltiple (Checkbox)</option>
+                        </select>
+                      </div>
+
+                      <div id="block_resp" class="hidden">
+                          <div class="form-group m-t" data-field-name="text_respuesta" id="Form-field-Evaluacion-text_respuesta">
+                            <label>Añade una respuesta</label>
+                            <textarea id="text_respuesta" type="text" placeholder="Escriba una respuesta..." class="form-control" autocomplete="off" maxlength="255" ></textarea>
+                          </div>
+
+                          <div class="form-group" data-field-name="evaluado" id="Form-field-Evaluacion-btn_text-respuesta" style="text-align:right;">
+                            <button id="btn_text_respuesta" type="button" class="btn btn-success oc-icon-plus">Añadir respuesta</button>
+                          </div>
+
+                          <div>
+                            <label>Posibles respuestas</label>
+                            <p><i id="txt_no_resp">No hay ninguna respuesta añadida...</i></p>
+                            <ol id="respuestas" type="A"></ol>
+                          </div>
+                      </div>
+
+                      <div id="btns_cuestionario_1-2" class="modal-footer m-t">
+                          <button id="btn_cancel_preg" type="button" class="btn btn-danger">Cancelar</button>
+                          <button id="btn_save_preg" type="button" class="btn btn-primary">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+
+                <div id="btns_cuestionario_1-1" class="modal-footer m-t">
+                    <button id="btn_cuestionario_1-1_descartar" type="button" class="btn btn-danger" data-dismiss="modal">Descartar</button>
+                    <button id="btn_cuestionario_1-1_guardar" type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                </div>
+
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xs-6 form-group" id="form_cuestionario_evaluador">
+      <label>Cuestionario Evaluador</label>
+      <div>
+        <a id="btn_cuestionario_evaluador" data-toggle="modal" href="#cuestionario-evaluador" class="btn btn-primary btn-lg">Modificar Cuestionario</a>
+      </div>
+
+      <div class="control-popup modal fade" id="cuestionario-evaluador" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Cuestionario para los Evaluadores</h4>
+                </div>
+                <div class="modal-body">
+                    <button id="btn_add_pregunta_evaluador" type="button" class="btn btn-primary oc-icon-plus">Añadir Pregunta</button>
+
+                    <?php
+                      $cuestionario = Cuestionario::where('id', $evaluacion->cuestionario_evaluador_id)->first();
+                      $preguntas = json_decode($cuestionario->preguntas);
+                    ?>
+                    <div id="get_preguntas_evaluador" class="hidden"><?=$cuestionario->preguntas?></div>
+                    <div id="list_preguntas2">
+                      <br/>
+                      <div class="control-list">
+                        <table class="table data">
+                          <thead>
+                            <tr>
+                              <th class="sort-desc text-center"><a href="/">Pregunta</a></th>
+                              <th class="text-center"><a href="/">Tipo Respuesta</a></th>
+                              <th class="text-center"><span>Nº Respuestas</span></th>
+                              <th class="list-setup text-center"><a href="/" title="Opciones"></a></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php
+                            foreach($preguntas as $index=>$pregunta)
+                            {
+                              ?>
+                              <tr id="preguntas<=?$index?>">
+                                <td><?=$pregunta->pregunta?></td>
+                                <td class="text-center"><?=$pregunta->tipoRespuesta?></td>
+                                <td class="text-center"><?=(isset($pregunta->respuestas)) ? count($pregunta->respuestas) : '-';?></td>
+                                <td class="text-center" onclick="eliminarPregunta(preguntas2,<?=$index?>,list_preguntas2)" style="cursor: pointer;"><i class="icon-trash-o trash"></i></td>
+                              </tr>
+                              <?php
+                            }
+                              ?>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+
+                    <div id="block_preg2" class="hidden">
+
+                      <div id="add_pregunta_evaluador" data-field-name="text_pregunta2" class="form-group m-t">
+                        <label for="text-pregunta2">Pregunta</label>
+                        <textarea id="text_pregunta2" type="text" placeholder="Escriba aquí la pregunta..." class="form-control" autocomplete="off" maxlength="500" ></textarea>
+                      </div>
+
+
+                      <div class="m-t">
+                        <label for="tipo-respuesta2">Tipo de Respuesta</label>
+                        <select id="tipo-respuesta2" class="form-control select-no-search">
+                          <option value="1">Texto</option>
+                          <option value="2">Selección Única (Select)</option>
+                          <option value="3">Selección Única (Radio)</option>
+                          <option value="4">Selección Múltiple (Checkbox)</option>
+                        </select>
+                      </div>
+
+                      <div id="block_resp2" class="hidden">
+                          <div class="form-group m-t" data-field-name="text_respuesta" id="Form-field-Evaluacion-text_respuesta2">
+                            <label>Añade una respuesta</label>
+                            <textarea id="text_respuesta2" type="text" placeholder="Escriba una respuesta..." class="form-control" autocomplete="off" maxlength="500" ></textarea>
+                          </div>
+
+                          <div class="form-group" data-field-name="evaluado" id="Form-field-Evaluacion-btn_text-respuesta2" style="text-align:right;">
+                            <button id="btn_text_respuesta2" type="button" class="btn btn-success oc-icon-plus">Añadir respuesta</button>
+                          </div>
+
+                          <div>
+                            <label>Posibles respuestas</label>
+                            <p><i id="txt_no_resp2">No hay ninguna respuesta añadida...</i></p>
+                            <ol id="respuestas2" type="A"></ol>
+                          </div>
+                      </div>
+
+                      <div id="btns_cuestionario_2-2" class="modal-footer m-t">
+                          <button id="btn_cancel_preg2" type="button" class="btn btn-danger">Cancelar</button>
+                          <button id="btn_save_preg2" type="button" class="btn btn-primary">Guardar</button>
+                      </div>
+                    </div>
+                  </div>
+
+                <div id="btns_cuestionario_2-1" class="modal-footer m-t">
+                    <button id="btn_cuestionario_2-1_descartar" type="button" class="btn btn-danger" data-dismiss="modal">Descartar</button>
+                    <button id="btn_cuestionario_2-1_guardar" type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                </div>
+
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+    <br><br><br><br>
+
+    <div class="form-buttons">
+        <div class="loading-indicator-container">
+          <button id="btn_edit_eval" type="button" class="btn btn-primary">Modificar Evaluación</button>
+            <!--
+            <button
+                id="btn_create_eval"
+                type="submit"
+                data-request="onSaveEval"
+                data-hotkey="ctrl+s, cmd+s"
+                data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+                class="btn btn-primary">
+                Crear Evaluación
+            </button>
+          -->
+
+            <span class="btn-text">
+                o <a href="<?= Backend::url('tresfera/talentapp/proyectos/update/'.$proyecto_id) ?>">Cancelar</a>
+            </span>
+        </div>
+    </div>
+  <?= Form::close() ?>
+
+  <?php else: ?>
+      <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+      <p><a href="<?= Backend::url('tresfera/talentapp/evaluacion') ?>" class="btn btn-default"><?= e(trans('backend::lang.form.return_to_list')) ?></a></p>
+  <?php endif ?>
+
+
+
+  <script src="/plugins/tresfera/talentapp/js/_create_eval.js"></script>

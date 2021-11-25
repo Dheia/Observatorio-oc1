@@ -1,0 +1,65 @@
+title = "N preguntas generales con especificas"
+url = "/slides/slide/:code"
+description = "Encuesta lógica en la que las preguntas se basan en las repuestas"
+type = "logica"
+layout = "render"
+
+[taketsystemTemplate]
+==
+<section data-slide-type="logica">
+    <div class="h-20">
+        <div>
+	        <h1>{text name="enunciado" label="Enunciado"}En general... ¿Qué valoración nos hace de...?{/text}</h1>
+        </div> <!-- Flex Items  -->
+    </div>
+    {repeater name="questions" prompt="Añadir otra pregunta"}
+    <div class="h-10">
+        <div>
+          <div data-role="pregunta" data-answer-type="smiles" data-question-type="general" class="pregunta horizontal">
+            <h2>{text name="question" label="Pregunta principal"}Atención y calidad de servicio{/text}</h2>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="1" class="smile smile-1"></div>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="2" class="smile smile-2"></div>
+            <div voto ng-click="voto($event)" data-voto="1" data-value="3" class="smile smile-3"></div>
+            <section style="display: none">
+			    <!-- Flex Items , Flex Box themselves -->
+			    <div class="h-10">
+			        <div>
+			        </div> <!-- Flex Items  -->
+			    </div>
+			    <div class="h-80">
+			        <div>
+			          <div data-role="pregunta" data-question-type="specific" data-answer-type="smiles">
+			            <h2>{text name="subquestion" label="Pregunta si está insatisfecho"}Que le ha parecido nuestra Atención y Calidad de servicio{/text}</h2>
+			            <div voto ng-click="voto($event)" data-voto="1" data-value="1" class="smile smile-1">
+				            <span data-type="value">{text name="answer_1" label="Respuesta insatisfecho"}Poco profesional{/text}</span>
+			            </div>
+			            <div voto ng-click="voto($event)" data-voto="1" data-value="1" class="smile smile-1">
+				            <span data-type="value">{text name="answer_2" label="Respuesta insatisfecho"}Descortés{/text}</span>
+			            </div>
+			            <div voto ng-click="voto($event)" data-voto="1" data-value="1" class="smile smile-1">
+				            <span data-type="value">{text name="answer_3" label="Respuesta insatisfecho"}Lento{/text}</span>
+			            </div>
+			            <div voto ng-click="voto($event)" data-voto="1" data-value="2" class="smile smile-2">
+				            <span data-type="value">{text name="answer_4" label="Respuesta neutral"}Aceptable{/text}</span>
+			            </div>
+			            <div voto ng-click="voto($event)" data-voto="1" data-value="3" class="smile smile-3">
+				            <span data-type="value">{text name="answer_5" label="Respuesta satisfecho"}Buen trato{/text}</span>
+			            </div>
+			          </div>
+			        </div>
+			    </div>
+			    <div class="h-10">
+			        <div>
+			        </div> <!-- Flex Items  -->
+			    </div>
+			</section>
+          </div>
+        </div>
+    </div>
+    {/repeater}
+
+    <div class="h-10">
+        <div>
+        </div> <!-- Flex Items  -->
+    </div>
+</section>

@@ -1,0 +1,200 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Nombre
+        span: left
+        span: storm
+        cssClass: col-md-5
+    type:
+        label: Tipo
+        type: relation
+        span: storm
+        cssClass: col-md-4
+    hidded:
+        label: Ocultar
+        type: checkbox
+        span: storm
+        cssClass: col-md-2
+tabs:
+    fields: 
+        campos:
+            label: Campo de captura de datos
+            prompt: 'Añade un nuevo campo'
+            span: full
+            type: repeater
+            tab: 'Captura de datos'
+            form:
+                fields:
+                    type:
+                        label: Tipo
+                        options:
+                            text: Texto
+                            textarea: 'Área de texto'
+                            select: Segmentación
+                            question: Pregunta
+                            image: Imágen
+                        span: auto
+                        type: dropdown
+                    tag:
+                        label: Etiqueta
+                        span: auto
+                        type: text
+                    title:
+                        label: Título
+                        span: auto
+                        type: text
+                    hide_title:
+                        label: Ocultar título
+                        span: auto
+                        type: checkbox
+                    image:
+                        label: Máximo de respuestas
+                        span: auto
+                        type: mediafinder
+                        mode: image
+                        trigger:
+                            action: show
+                            field: type
+                            condition: value[image]
+                    ## Select
+                    layer_h3:
+                        label: Tipo de segmentación
+                        span: full
+                        type: section
+                        comment: 'Cómo se visualizará y comportará el campo de segme'
+                        trigger:
+                            action: show
+                            field: type
+                            condition: value[select]
+                    layer:
+                        label: Tipo
+                        options:
+                            select: Desplegable
+                            checkbox: Checkbox
+                            radio: Radios
+                            range: Rangos
+                            stars: Estrellas
+                            buttons: Botones
+                            select_pais: Paises
+                        span: auto
+                        type: dropdown
+                        trigger:
+                            action: show
+                            field: type
+                            condition: value[select]
+                    max_answers:
+                        label: Máximo de respuestas
+                        span: auto
+                        type: text
+                        trigger:
+                            action: show
+                            field: layer
+                            condition: value[buttons], value[checkbox]
+                    datos:
+                        label: Datos
+                        span: full
+                        type: section
+                        comment: 'Indica los elementos que habrá en la segmentación'
+                        trigger:
+                            action: show
+                            field: layer
+                            condition: value[select],value[stars],value[checkbox],value[radio],value[range],value[buttons]
+                    segmentacion:
+                        label: Dato segmentación
+                        prompt: 'Añade un nuevo dato'
+                        span: full
+                        type: repeater
+                        tab: 'Captura de datos'
+                        trigger:
+                            action: show
+                            field: type
+                            condition: value[select],value[stars]
+                        form:
+                            fields:
+                                title:
+                                    label: Título
+                                    span: auto
+                                    type: text
+                                code:
+                                    label: Etiqueta
+                                    span: auto
+                                    type: text
+                    _acciones:
+                        label: Acciones
+                        span: full
+                        type: section
+                        comment: 'Acciones que se realizarán'
+                        trigger:
+                            action: show
+                            field: type
+                            condition: value[text]
+                    action_type:
+                        label: Tipo
+                        type: dropdown
+                        span: storm
+                        cssClass: col-sm-4
+                        options:
+                            0: Sin acción
+                            sum: Suma
+                            rest: Resta
+                            mult: Multiplicación
+                            div: División
+                            custom: Personalizado
+                        trigger:
+                            action: show
+                            field: type
+                            condition: value[text]
+                    action_calc:
+                        label: Fórmula
+                        type: text
+                        span: storm
+                        cssClass: col-sm-4
+                        trigger:
+                            action: show
+                            field: action_type
+                            condition: value[sum], value[mult], value[div], value[custom]
+                    action_dest:
+                        label: Destino
+                        type: text
+                        span: storm
+                        cssClass: col-sm-4
+                        trigger:
+                            action: show
+                            field: action_type
+                            condition: value[sum], value[mult], value[div], value[custom]
+                    ## Diseño
+                    diseno:
+                        label: Diseño
+                        span: full
+                        type: section
+                        comment: 'Configura la disposición y diseño del elemento de captura'
+                    width:
+                        label: Ancho
+                        comment: 'Ancho del elemento. Ej: 100px'
+                        span: storm
+                        type: text
+                        cssClass: col-sm-3
+                    height:
+                        label: Alto
+                        comment: 'Alto del elemento. Ej: 100px'
+                        span: storm
+                        type: text
+                        cssClass: col-sm-3
+                    top:
+                        label: Posición vertical
+                        comment: 'Posición desde la parte superior. Ej: 100px'
+                        span: storm
+                        type: text
+                        cssClass: col-sm-3
+                    left:
+                        label: Posicion horizontal
+                        comment: 'Posición desde la parte izquierda. Ej: 100px'
+                        span: storm
+                        type: text
+                        cssClass: col-sm-3
+                    
+                    
+ 

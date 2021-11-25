@@ -1,0 +1,32 @@
+.profile-picture {
+    border-radius: 100%;
+    width: 50px;
+    border: 2px solid white;
+}
+.full-results {
+    
+}
+table p {
+    margin-top: 15px;
+}
+tr:nth-child(even) {
+    background: #f3f7f9;
+}
+.rank-current-user {
+    background: white !important;
+}
+.main-content {
+    overflow-y: scroll;
+}
+.bg-white.rounded.p-2.flex.leading-normal {
+    border: 1px solid #ccc;
+}
+.me .profile-picture {
+    border-radius: 100%;
+    width: 50px;
+    border: 2px solid white;
+    margin-top: 8px;
+}
+.bg-white.rounded.p-2.flex.leading-normal.me {
+    background: #f3f3f3;
+}

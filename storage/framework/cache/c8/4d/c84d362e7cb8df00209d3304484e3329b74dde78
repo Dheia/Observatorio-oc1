@@ -1,0 +1,109 @@
+1637748433a:1:{s:12:"informes.htm";a:10:{s:8:"fileName";s:12:"informes.htm";s:7:"content";s:2780:"title = "Retos"
+url = "/app/racc/informes"
+layout = "app"
+description = "Segmentaciones"
+is_hidden = 0
+==
+<style>
+.status {
+margin: 0;
+margin-top: 30px;
+float: right;
+}
+</style>
+<div class="container">
+    <h1>Informes</h1>
+        <div class="flex content-start flex-wrap">
+            <div class="p-2 competence-card completed md:w-1/2 md:min-w-0 min-w-full md:min-h-100 h-auto">
+                <button class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Nombre ciclo 1</h3>
+                    <h3 class="competence-title sm:text-l lg:text-2xl">Nombre del evaluado </h3>
+                    <div class="status m-4"><p class="competence">Ver informe</p></div>
+                </button>
+                <div class="meter mt-2">
+                    <span style="width: 100%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card completed md:w-1/2 md:min-w-0 min-w-full md:min-h-100 h-auto">
+                <button class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Nombre ciclo 1</h3>
+                    <h3 class="competence-title sm:text-l lg:text-2xl">Nombre del evaluado 2</h3>
+                    <div class="status m-4"><p class="competence">Ver informe</p></div>
+                </button>
+                <div class="meter mt-2">
+                    <span style="width: 100%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card completed md:w-1/2 md:min-w-0 min-w-full md:min-h-100 h-auto">
+                <button class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Nombre ciclo 1</h3>
+                    <h3 class="competence-title sm:text-l lg:text-2xl">Nombre del evaluado 3</h3>
+                    <div class="status m-4"><p class="competence">Ver informe</p></div>
+                </button>
+                <div class="meter mt-2">
+                    <span style="width: 100%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card completed md:w-1/2 md:min-w-0 min-w-full md:min-h-100 h-auto">
+                <button class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Nombre ciclo 1</h3>
+                    <h3 class="competence-title sm:text-l lg:text-2xl">Nombre del evaluado 4</h3>
+                    <div class="status m-4"><p class="competence">Ver informe</p></div>
+                </button>
+                <div class="meter mt-2">
+                    <span style="width: 100%"></span>
+                </div>
+            </div>
+        </div>
+    </div>";s:5:"mtime";i:1608206636;s:6:"markup";s:2668:"<style>
+.status {
+margin: 0;
+margin-top: 30px;
+float: right;
+}
+</style>
+<div class="container">
+    <h1>Informes</h1>
+        <div class="flex content-start flex-wrap">
+            <div class="p-2 competence-card completed md:w-1/2 md:min-w-0 min-w-full md:min-h-100 h-auto">
+                <button class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Nombre ciclo 1</h3>
+                    <h3 class="competence-title sm:text-l lg:text-2xl">Nombre del evaluado </h3>
+                    <div class="status m-4"><p class="competence">Ver informe</p></div>
+                </button>
+                <div class="meter mt-2">
+                    <span style="width: 100%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card completed md:w-1/2 md:min-w-0 min-w-full md:min-h-100 h-auto">
+                <button class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Nombre ciclo 1</h3>
+                    <h3 class="competence-title sm:text-l lg:text-2xl">Nombre del evaluado 2</h3>
+                    <div class="status m-4"><p class="competence">Ver informe</p></div>
+                </button>
+                <div class="meter mt-2">
+                    <span style="width: 100%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card completed md:w-1/2 md:min-w-0 min-w-full md:min-h-100 h-auto">
+                <button class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Nombre ciclo 1</h3>
+                    <h3 class="competence-title sm:text-l lg:text-2xl">Nombre del evaluado 3</h3>
+                    <div class="status m-4"><p class="competence">Ver informe</p></div>
+                </button>
+                <div class="meter mt-2">
+                    <span style="width: 100%"></span>
+                </div>
+            </div>
+            <div class="p-2 competence-card completed md:w-1/2 md:min-w-0 min-w-full md:min-h-100 h-auto">
+                <button class="competence-button w-1/3">
+                    <h3 class="competence-title sm:text-2xl lg:text-3xl">Nombre ciclo 1</h3>
+                    <h3 class="competence-title sm:text-l lg:text-2xl">Nombre del evaluado 4</h3>
+                    <div class="status m-4"><p class="competence">Ver informe</p></div>
+                </button>
+                <div class="meter mt-2">
+                    <span style="width: 100%"></span>
+                </div>
+            </div>
+        </div>
+    </div>";s:4:"code";N;s:5:"title";s:5:"Retos";s:3:"url";s:18:"/app/racc/informes";s:6:"layout";s:3:"app";s:11:"description";s:14:"Segmentaciones";s:9:"is_hidden";s:1:"0";}}

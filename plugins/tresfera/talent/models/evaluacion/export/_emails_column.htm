@@ -1,0 +1,26 @@
+<?php 
+use Mja\Mail\Models\Email;
+use Mja\Mail\Models\EmailOpens;
+$leidos = 0;
+$no_leidos = 0;
+$no_enviados = 0;
+$evaluador = $record;
+
+     
+$email = Email::whereIn("code", ['talent.require.aprovacion','talent.require.aprovacion_en'])
+->whereRaw(\DB::raw("`to` LIKE '%".$evaluador['email']."%'"))
+->whereRaw(\DB::raw("DATE(date) = DATE('".$record->created_at."')"))
+->first();
+
+
+if( isset($email->id) )
+{
+if($email->getTimesOpenedAttribute() > 0) echo "leido";
+else echo "no leido";
+} else {
+    echo "no enviado";
+}
+
+
+
+?>

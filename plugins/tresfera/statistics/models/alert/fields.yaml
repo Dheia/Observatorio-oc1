@@ -1,0 +1,118 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+fields:
+    info:
+        label: Alertas operativas
+        type: section
+        comment: Especifique que tipo de alertas operativas desea recibir. 
+tabs:
+    fields:
+        ko:
+            label: Por respuestas de insatisfacción
+            commentAbove: Recibirá alertas al instante cuando haya un número de respuestas de insatisfacción definido por usted
+            type: checkbox
+            tab: Alertas
+        ko_num:
+            label: Cantidad
+            type: number
+            default: 5
+            cssClass: field-indent
+            span: left
+            tab: Alertas
+            trigger:
+                action: show
+                field: ko
+                condition: checked
+        ko_sms:
+            label: Activar envío de sms
+            type: checkbox
+            span: right
+            tab: Alertas
+            #cssClass: verticalalign-field
+            commentAbove: Recibirá en su teléfono móvil a través de SMS las alertas generadas con un coste adicional por envío.
+            trigger:
+                action: show
+                field: ko
+                condition: checked
+                
+        ok:
+            label: Por respuestas de satisfacción
+            commentAbove: Recibirá alertas al instante cuando haya un número de respuestas de satisfacción definido por usted
+            type: checkbox
+            tab: Alertas
+        ok_num:
+            label: Cantidad
+            type: number
+            tab: Alertas
+            default: 5
+            cssClass: field-indent
+            span: left
+            trigger:
+                action: show
+                field: ok
+                condition: checked
+        ok_sms:
+            label: Activar envío de sms
+            type: checkbox
+            span: right
+            tab: Alertas
+            #cssClass: verticalalign-field
+            commentAbove: Recibirá en su teléfono móvil a través de SMS las alertas generadas con un coste adicional por envío.
+            trigger:
+                action: show
+                field: ok
+                condition: checked
+    
+    
+        inactivity:
+            label: Por inactividad en sus TCI
+            commentAbove: Recibirá alertas al instante cuando haya pasado un determinado número de días desde que la realización de el último cuestionario
+            type: checkbox
+            tab: Alertas
+        inactivity_num:
+            label: Días
+            type: number
+            default: 5
+            cssClass: field-indent
+            span: left
+            tab: Alertas
+            trigger:
+                action: show
+                field: inactivity
+                condition: checked
+        inactivity_sms:
+            label: Activar envío de sms
+            type: checkbox
+            span: right
+            tab: Alertas
+            #cssClass: verticalalign-field
+            commentAbove: Recibirá en su teléfono móvil a través de SMS las alertas generadas con un coste adicional por envío.
+            trigger:
+                action: show
+                field: inactivity
+                condition: checked
+                
+        emails:
+            label: Emails
+            tab: Emails
+            commentAbove: Añada todos los emails a los que desea que enviemos las alertas configuradas previamente.
+            type: repeater
+            span: left
+            prompt: Añadir nuevo email
+            form:
+                fields:
+                    phone:
+                        label: Email
+        phones:
+            label: Teléfonos móviles
+            tab: Teléfonos móviles
+            commentAbove: Añada todos los teléfonos móviles a los que desea que enviemos las alertas configuradas previamente.
+            type: repeater
+            span: left
+            prompt: Añadir nuevo teléfono móvil
+            form:
+                fields:
+                    phone:
+                        label: Móvil
+                        type: number

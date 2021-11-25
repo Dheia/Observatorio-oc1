@@ -1,0 +1,52 @@
+title = "reto-final"
+url = "/app/quiz/:quiz?"
+layout = "app"
+is_hidden = 0
+
+[Progreso]
+==
+function onStart()
+{
+     $this['quiz'] = $this->param('quiz');
+
+}
+==
+{% put main %}p-0{% endput %}
+
+<iframe src="/evaluacion/quiz/{{quiz}}/{{Progreso.currentpag(quiz)|default('0')}}"></iframe>
+<style>
+    .mdc-top-app-bar {
+    background: transparent;
+}
+.mdc-top-app-bar__title {
+    display: none;
+}
+.main-content {
+    height: 100%;
+    margin: 0;
+    margin-top: 0;
+    padding: 0;
+    padding-bottom: 0;
+}
+@media (max-width: 600px) {
+    .main-content {
+        padding-top: 0;
+        height: 100%;
+        margin: 0;
+    }
+    .p-0 {
+        margin-top: 0 !important;
+    }
+iframe {
+    height: calc(100% + 0px);
+    width: calc(100% + 0px);
+    border: none;
+    margin: 0px;
+    margin-top: 0px;
+}
+
+    .p-0 {
+        padding: 0 !important;
+    }
+}
+</style>

@@ -1,0 +1,10 @@
+name: Localizaciones
+form: $/tresfera/organizaciones/models/localizacion/fields.yaml
+modelClass: Tresfera\Organizaciones\Models\Localizacion
+defaultRedirect: tresfera/organizaciones/localizaciones
+create:
+    redirect: 'tresfera/organizaciones/localizaciones/update/:id'
+    redirectClose: tresfera/organizaciones/localizaciones
+update:
+    redirect: tresfera/organizaciones/localizaciones
+    redirectClose: tresfera/organizaciones/localizaciones

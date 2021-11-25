@@ -1,0 +1,43 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Nombre
+        required: true
+    period:
+        commentAbove: Selecciona cada cuanto quieres recibir este informe. Semanal se recibirá los todos los lunes, quincenal el 1 y 16 de cada mes y mensual cada 1 de mes.
+        label: Periodo
+        type: dropdown
+        options:
+            0: Único
+            1: Semanal
+            2: Quincenal
+            4: Mensual
+            12: Trimestral
+            24: Semestral
+            48: Anual
+    _siguienteTitle:
+        label: Siguiente Periodo
+        path: $/tresfera/statistics/controllers/rapportsperiod/_blank.htm
+        type: partial
+        cssClass: hiddenText
+        commentAbove: Estos campos nos indican el siguiente periodo que se va a procesar. Una vez se haya generado el sistema los cambiará al siguiente periodo automáticamente.
+    datenext_start:
+        label: Inicio
+        type: datepicker
+        mode: date
+        span: left
+    datenext_stop:
+        label: Fin
+        type: datepicker
+        mode: date
+        span: right
+    emails:
+        commentAbove: Indica quien debe recibir este informe de forma automática escribiendo su email.
+        type: repeater
+        form:
+            fields:
+                email:
+                    label: Email

@@ -1,0 +1,119 @@
+title = "Pag6"
+url = "/cofidis/competencia3/pag6"
+layout = "cofidis"
+is_hidden = 0
+==
+<div class="avatar">
+<img src="/storage/app/media/cofidis/2.3 Foto.png"><span style="color: #FFF;">AitanaFriky</span>
+</div>
+<div class="chat">
+	 	<ul>
+      <li class="you">
+        ¿Qué? ¿cómo va la cosa?
+      </li>
+			<li class="me">
+        Estoy con un dilema que no sé qué hacer <img src="/storage/app/media/cofidis/4.2 Emoticon.png">
+      </li>
+			<li class="you">
+        ¿Dilema? ¿sobre qué? <img src="/storage/app/media/cofidis/4.0 Emoticon.png"> <img src="/storage/app/media/cofidis/4.0 Emoticon.png">
+      </li>
+      <li class="me">
+        Tengo que seleccionar a los industriales para hacer las obras. La mujer del kiosko me recomienda una empresa que las hizo en su edificio a buen precio y con resultado bastante profesional.
+      </li>
+			<li class="you">
+        Pues ya lo tienes ¿qué más quieres?
+      </li>
+      <li class="me">
+        Noo, que uno de los vecinos tiene un amigo que podría hacerlo casi a precio de favor…
+      </li>
+      <li class="me">
+        Es que esto de los “amigos”, no lo veo. Una vez, uno del trabajo me aconsejó un mecánico amigo suyo y por no decirle que no, lo llevé... Fue un desastre!! <img src="/storage/app/media/cofidis/4.1 Emoticon.png">
+      </li>
+      <li class="me">
+        Y eso que alguien me avisó que era un chapuzas y aún así lo llevé ¿Voy a caer en el mismo error?
+      </li>
+		</ul>
+		<div class="body">
+    </div>
+    <div class="bg-typed">
+      <div class="typed"></div>
+    </div>
+	</div>
+      <div class="row center fixed-bottom">
+        <a href="pag7?finish=true" 
+            id="download-button" 
+            class="btn-large waves-effect waves-light orange">
+            CONTINUAR
+          </a>
+      </div>
+      <style>
+.topbar {
+  width: {{ 6*100/31 }}%;
+}
+</style>
+
+<script>
+$( document ).ready(function() {
+    var strings = [];
+      var elements = $(" .chat ul li");
+      console.dir(elements)
+      var i = 0;
+      $("body").on('DOMSubtreeModified', ".chat .typed", function() {
+        console.log($(this)[0].scrollHeight)
+        $(this).scrollTop($(this)[0].scrollHeight);
+
+      });
+      function run(num) {
+          if(elements[num] == undefined) return;
+          if($(elements[num]).hasClass("me")) {
+              var options = {
+                  strings: [""],
+                  typeSpeed: 50,
+                  onComplete: function(self) { 
+                      
+                      $(".typed").html("");
+                      $(".typed-cursor").remove();
+                      if(strings[num]) {
+                        $(".chat .body").append("<div class='me'><div>"+strings[num]+"</div></div>");
+                        var $container = $('.chat .body'),
+                        $scrollTo = $('.chat .body div').last();
+  
+                        $container.scrollTop(
+                            $scrollTo.offset().top - $container.offset().top + $container.scrollTop()
+                        );
+                      }
+
+                      if(i>num)
+                          run(num+1)
+                  }
+              }
+              setTimeout(function(){
+                var typed = new Typed(".typed", options);
+              }, 2000);
+              
+          } else {
+              if(i>num)
+                  setTimeout(function(){
+                      $(".chat .body").append("<div class='you'><div>"+strings[num]+"</div></div>");
+                      var $container = $('.chat .body'),
+                      $scrollTo = $('.chat .body div').last();
+
+                      $container.scrollTop(
+                          $scrollTo.offset().top - $container.offset().top + $container.scrollTop()
+                      );
+                      run(num+1)
+                  }, 2000);
+                  
+          }
+          
+      }
+
+      $(".chat ul li").each(function(){
+          strings[i] = $(this).html();
+          i++;
+      })
+      
+      run(0);
+});
+      
+</script>

@@ -1,0 +1,137 @@
+description = "APP"
+==
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>{{ this.page.title }}</title>
+  {% styles %}
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+
+  <link href="{{['assets/app/css/materialize.css','assets/app/css/style.css','assets/app/css/style-quiz.css','assets/app/css/custom-quiz.css' ]|theme}}"
+         type="text/css" rel="stylesheet" media="screen,projection"/>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+  <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="grey darken-1">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <img style="height: 57px;padding-top: 5px;" src="/storage/app/media/cofidis/0.0 Background.png">
+               
+                </div>
+            </div>
+        </nav>
+        <div class="topbar blue "></div>
+    </header>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            {% page %}
+            <br><br>
+        </div>
+    </div>
+    <!--  Scripts-->
+    <script>
+        function pad(num, size) {
+            var s = num+"";
+            while (s.length < size) s = "0" + s;
+            return s;
+        }
+        function saveAnswer(element) {
+            var sendData = {
+                points: $(element).data("points"),
+                value: $(element).text(),
+                question: $(element).data("question"),
+                bonus: $(element).data("bonus"),
+                peso: $(element).data("peso"),
+                id: $(element).data("id"),
+            };
+            if($(element).find("img").length > 0) {
+                sendData.value = $(element).find("img").attr("src");
+            }
+            $.request('onSaveAnswer', {
+                data: sendData,
+                success: function(data) {
+                    $(element).attr("data-id",data.id)
+                }
+            })
+        }
+        function removeAnswer(element) {
+            var sendData = {
+                id: $(element).attr("data-id"),
+            };
+            $.request('onRemoveAnswer', {
+                data: sendData,
+                success: function(data) {
+                    $(element).attr("data-id","")
+                }
+            })
+        }
+    if($(".success1").length == 0 && $(".success2").length == 0 && $("button.orange").length == 0  && $(".draggable").length == 0) {
+        $("button").click(function(){
+            if($(this).parent().data("max-answers") == 1) {
+                $("button.activated").each(function(){
+                    removeAnswer(this);
+                })
+                $("button").removeClass("activated");
+            } 
+            $(this).toggleClass("activated");
+
+            if($(this).hasClass("activated")) {
+                saveAnswer(this);
+            } else {
+                removeAnswer(this);
+            }
+
+            if($("button.activated").length > 0)
+                $("#download-button").removeClass("disabled");
+            else {
+                $("#download-button").addClass("disabled");
+            }
+        })
+
+    }
+    if($("#myProgress").length > 0) {
+        var count = 30, timer = setInterval(function() {
+        $("#myBar").css("width",((count--)*100/30)+'%');
+        $("#myBar-text").html("00:"+pad(count,2));
+            if(count == 0) clearInterval(timer);
+        }, 1000);
+    }
+    
+    if($("button").length > 0 && $(".success1").length == 0 && $(".success2").length == 0 && $("button.orange").length == 0 ) {
+        $("#download-button").addClass("disabled");
+    }
+    
+    </script>
+    <!--Start of Zendesk Chat Script-->
+    <script>
+        window.location.hash="no-back-button";
+        window.location.hash="Again-No-back-button";//esta linea es necesaria para chrome
+        window.onhashchange=function(){window.location.hash="no-back-button";}
+        $(document).ready(function() {
+            window.history.pushState(null, "", window.location.href);        
+            window.onpopstate = function() {
+                window.history.pushState(null, "", window.location.href);
+            };
+        });
+    </script>
+<!--End of Zendesk Chat Script-->
+    <script src="{{ [
+        '@jquery',
+        '@framework',
+        '@framework.extras',
+        'assets/app/js/materialize.js','assets/app/js/init.js']|theme }}"></script>
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+        {% scripts %}
+    </body>
+</html>

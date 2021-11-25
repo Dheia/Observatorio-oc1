@@ -1,0 +1,184 @@
+<?php
+	$faker = Faker\Factory::create();
+	$model = new \Tresfera\Statistics\Models\Result();
+	if(isset($specific))
+		$sondeos = $model->getSondeosSpecific($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+	else
+    $sondeos = $model->getSondeos($this->getFilter(),$this->getFilterId(),$this->getDateRange(),$this->getCuestionario());
+
+		$stats = [];
+    $slide_id = null;
+    foreach($sondeos as $sondeo) {
+			if($sondeo->question_type == 'multiquiz') {
+				$slide = \Tresfera\Taketsystem\Models\QuizMulti::find($sondeo->value);
+				if($slide_id != $sondeo->question_title) {
+						$slide_id = $sondeo->question_title;
+				}
+			} else {
+		    $slide = \Tresfera\Taketsystem\Models\Slide::find($sondeo->slide_id);
+		    if($slide_id != $sondeo->question_title) {
+						$slide_id = $sondeo->question_title;
+				}
+			}
+
+			$stats[$slide_id]['slide'] = $slide;
+
+			if( !isset($stats[$slide_id]['total']) ) $stats[$slide_id]['total'] = 0;
+
+			$stats[$slide_id]['total'] += $sondeo->count;
+
+			if( !isset($stats[$slide_id]['max']) ) $stats[$slide_id]['max'] = 0;
+			if( !isset($stats[$slide_id]['min']) ) $stats[$slide_id]['min'] = 999999999;
+
+			$stats[$slide_id][$sondeo->value]['class'] = 'mix';
+
+			if( $stats[$slide_id]['min'] >= $sondeo->count ) {
+				$stats[$slide_id]['min'] = $sondeo->count;
+			}
+			if( $stats[$slide_id]['max'] <= $sondeo->count ) {
+				$stats[$slide_id]['max'] = $sondeo->count;
+		}
+
+    }
+?>
+<div data-control="" class="sondeos">
+
+	    <?php
+	      $slide_id = null;
+	      $quiz_id = null;
+	      if(isset($sondeos))
+	      foreach($sondeos as $key=>$sondeo) {
+		     	$image_url="";
+					$result = \Tresfera\Statistics\Models\Result::find($sondeo->result_id);
+					$quiz = \Tresfera\Taketsystem\Models\Quiz::find($result->quiz_id);
+			   // $slide = \Tresfera\Taketsystem\Models\Slide::find($sondeo->slide_id);
+
+			    if($sondeo->question_type == 'multiquiz') {
+				    $respuesta = \Tresfera\Taketsystem\Models\QuizMulti::find($sondeo->value);
+
+				    if(isset($respuesta->icon->id))
+	            	$image_url = $respuesta->icon->getPath();
+
+            $title = $respuesta->title;
+
+          } elseif($image = System\Models\File::find($sondeo->value)) {
+		    			$image = System\Models\File::find($sondeo->value);
+		    			if(isset($image))
+            		$image_url = $image->getPath();
+            	$title = "";
+
+							$respuesta = \Tresfera\Taketsystem\Models\QuizMulti::find($sondeo->value);
+							if(isset($respuesta->id)) {
+						    if(isset($respuesta->icon->id))
+			            	$image_url = $respuesta->icon->getPath();
+
+		            $title = $respuesta->title;
+							} else {
+								$title = $sondeo->value;
+							}
+          } else {
+							$respuesta = \Tresfera\Taketsystem\Models\QuizMulti::find($sondeo->value);
+							if(isset($respuesta->id)) {
+						    if(isset($respuesta->icon->id))
+			            	$image_url = $respuesta->icon->getPath();
+
+		            $title = $respuesta->title;
+							} else {
+								$title = $sondeo->value;
+							}
+
+            }
+						
+
+				    //if(!isset($image)) continue;
+				    if($quiz_id != $quiz->id) {
+	            $quiz_id = $quiz->id;
+					?>
+					<?php 	if(isset($specific)) { ?> 
+
+							<?php } else { ?> 
+								<h2><?=$quiz->title?></h2>
+
+							<?php } ?>
+	        <div class="row">
+	        <?php
+		    	}
+					if($slide_id != $sondeo->question_title) {
+	            $slide_id = $sondeo->question_title;
+	        ?>
+
+						<?php 	if(isset($specific)) { ?> 
+
+	        	<div class="col-md-12">
+							<?php } else { ?> 
+								
+								<div class="col-md-6">
+							<?php } ?>
+							<h3><?=$sondeo->question_title;?></h3>
+	            <table style="width: 100%;">
+			      <tbody>
+					<?php
+            }
+           	$stats[$slide_id][$sondeo->value]['class'] = 'mix';
+						if($sondeo->count >= $stats[$slide_id]['max']) {
+							$stats[$slide_id][$sondeo->value]['class'] = 'ok';
+						} elseif($sondeo->count <= $stats[$slide_id]['min']) {
+							$stats[$slide_id][$sondeo->value]['class'] = 'ko';
+						}
+						//exact, portrait, landscape, auto, crop.
+						$image_url= "";
+						$url = "/backend/tresfera/statistics/stats/dashboard/?detalles=1&group_by=value&filter=question&filterId=".$title."&filterName=".$title."";
+            ?>
+				     <tr>
+			            <td class="indicator">
+
+			            </td><?php if($image_url != "") { ?>
+			            <td border=0 cellpadding = 0 style="width: 50px; overflow: hidden">
+
+				            <img class="<?=$stats[$slide_id][$sondeo->value]['class']?>" style="max-height: 64px; max-width: 80px" src="<?=url($image_url)?>">
+
+			            </td>
+			            <?php } ?>
+				        <td border=0 cellpadding = 0 <?php if($image_url == "") { ?>style="padding: 4px 0;"<?php } ?>>
+					        <div class="bar-line bar-line-<?=$stats[$slide_id][$sondeo->value]['class']?>" style=" width: <?=($sondeo->count/$stats[$slide_id]['max']*100)?>%">
+						        <!--<b><a href="<?=$url?>"><?=$title?></a></b>-->
+						        <b><?=$title?></b>
+						        <br>
+						        <span><?=$sondeo->count?> (<?=number_format(($sondeo->count/$stats[$slide_id]['total']*100),2)?>%)</span>
+						    </div>
+				        </td>
+			         </tr>
+
+
+						<?php
+
+						if(($key+1) < count($sondeos)) {
+							$resultNext = \Tresfera\Statistics\Models\Result::find($sondeos[($key+1)]->result_id);
+							$quizNext = \Tresfera\Taketsystem\Models\Quiz::find($resultNext->quiz_id);
+
+							//$slideNext = \Tresfera\Taketsystem\Models\Slide::find($sondeos[($key+1)]->slide_id );
+						  //  $quizNext = \Tresfera\Taketsystem\Models\Quiz::find($slideNext->quiz_id);
+						if($sondeos[($key+1)]->question_title != $slide_id) {
+							?>
+
+					</tbody>
+			   </table>
+			</div>
+				
+			<?php }
+			if($quizNext->id != $quiz_id) {
+				?>
+
+			</div>
+		<?php }
+		}  ?>
+	<?php
+     }
+    ?>
+		<?php if(isset($specific)) { ?> 
+		</tbody>
+	</table>
+</div>
+</div>
+<?php	} ?>
+</div>

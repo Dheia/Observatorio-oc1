@@ -1,0 +1,91 @@
+fields:
+    evaluado_details_section:
+        label: 'tresfera.buildyouup::lang.evaluadores.ev_evaluado'
+        type: section
+        comment: 'tresfera.buildyouup::lang.evaluadores.ev_datos'
+        span: left
+    _url:
+        span: right
+        type: partial
+        context: update
+        path: $/tresfera/buildyouup/controllers/equipos/_url.htm
+    name:
+        label: 'tresfera.buildyouup::lang.proyectos.name'
+        span: left
+    lang:
+        label: 'tresfera.buildyouup::lang.proyectos.lang'
+        type: dropdown
+        span: left
+        options:
+            0: 'tresfera.buildyouup::lang.proyectos.mantener'
+            es: 'tresfera.buildyouup::lang.proyectos.esp'
+            en: 'tresfera.buildyouup::lang.proyectos.eng'
+    
+#        trigger:
+#            action: hide
+#            field: tipo[autoevaluacion]
+#            condition: checked
+
+
+tabs:
+    fields:
+        stats_partial:
+            span: full
+            type: partial
+            path: seguimiento
+            tab: 'tresfera.buildyouup::lang.evaluacion.seguimiento'
+       
+        players:
+            prompt: Nuevo Equipo
+            span: full
+            type: repeater
+            tab: Equipos
+            form:
+              fields:
+                name:
+                  label: 'tresfera.buildyouup::lang.proyectos.name'
+                  span: full
+                notas:
+                    type: nestedform
+                    usePanelStyles: true
+                    label: Notas
+                    form:
+                        fields:
+                            competencia1:
+                                label: Competencia 1
+                                span: left
+                            competencia2:
+                                label: Competencia 2
+                                span: right
+                            competencia3:
+                                label: Competencia 3
+                                span: left
+                            competencia4:
+                                label: Competencia 4
+                                span: right
+                            competencia5:
+                                label: Competencia 5
+                                span: left
+                            competencia6:
+                                label: Competencia 6
+                                span: right
+                            observaciones:
+                                label: Observaciones generales del equipo
+                                type: textarea
+        notas:
+            type: textarea
+            tab: Notas
+            label: Notas Globales
+            
+                #email:
+                #  label: 'tresfera.buildyouup::lang.proyectos.email'
+                #  span: auto
+                #lang:
+                #    label: 'tresfera.buildyouup::lang.proyectos.lang'
+                #    type: dropdown
+                #    span: left
+                #    options:
+                #        0: 'tresfera.buildyouup::lang.proyectos.mantener'
+                #        es: 'tresfera.buildyouup::lang.proyectos.esp'
+                #        en: 'tresfera.buildyouup::lang.proyectos.eng'
+        

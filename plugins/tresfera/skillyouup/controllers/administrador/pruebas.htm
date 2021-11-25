@@ -1,0 +1,150 @@
+
+<?php 
+/* PRUEBAS */
+
+use Tresfera\Taketsystem\Models\Result;
+use Tresfera\Taketsystem\Models\Answer;
+use Tresfera\Taketsystem\Models\Slide;
+use Tresfera\Clients\Models\Client;
+use Tresfera\Skillyouup\Models\Equipo;
+
+use Tresfera\Skillyouup\Models\Proyecto;
+
+
+
+
+
+$ev = Equipo::find(268);
+$eval_tmp = $ev->getEquipos();
+echo count($eval_tmp["pendientes"]);
+
+exit;
+
+$b = Result::where("is_autoevaluacion",1)
+                            ->where("evaluacion_id",76)
+                            ->where("tresfera_taketsystem_answers.duplicated",0)
+                            ->where("tresfera_taketsystem_results.duplicated",0)
+                            ->join('tresfera_taketsystem_answers', 'tresfera_taketsystem_results.id', '=', 'tresfera_taketsystem_answers.result_id')
+                            ->get();
+$a = [];
+
+DB::enableQueryLog();
+$resultMotivoEval = Result::where("is_evaluacion",1)
+                            ->where("evaluacion_id",76)
+                            ->join('tresfera_taketsystem_answers', 'tresfera_taketsystem_results.id', '=', 'tresfera_taketsystem_answers.result_id')
+                            ->where("tresfera_taketsystem_answers.question_type", "motivo")
+                            ->where("tresfera_taketsystem_results.duplicated",0)
+                            ->orderBy("tresfera_taketsystem_answers.slide_id", "asc") 
+                            ->orderBy("tresfera_taketsystem_answers.id", "asc") 
+                            ->get();
+$log = DB::getQueryLog();
+var_dump($log);
+echo "Total evaluadores: " . count($a) . "<br>";
+
+echo "Total evaluadores: " . count($resultMotivoEval) . "<br>";
+
+$tmp = [];
+$slide_id = -1;
+
+foreach($resultMotivoEval as $m)
+{
+    if($slide_id == $m->slide_id) $tmp[count($tmp)-1] = $m;
+    else array_push($tmp, $m);
+    $slide_id = $m->slide_id;
+}
+echo "Total evaluadores: " . count($tmp) . "<br>";
+
+$eval = Equipo::find(76);
+echo $eval->getNumEvaluadores();
+exit;
+Result::where("is_evaluacion",1)
+                        
+                            ->join('tresfera_taketsystem_answers', 'tresfera_taketsystem_results.id', '=', 'tresfera_taketsystem_answers.result_id')
+                            ->where("tresfera_taketsystem_answers.question_type", "motivo")
+                            ->where("tresfera_taketsystem_results.duplicated",0)
+                            ->orderBy("tresfera_taketsystem_answers.slide_id", "asc") 
+                            ->orderBy("tresfera_taketsystem_answers.id", "asc") 
+                            ->get();
+
+
+
+$evaluacion = Equipo::find(292);
+DB::enableQueryLog();
+$re = Result::where("is_autoevaluacion",1)
+                ->where("evaluacion_id",$evaluacion->id)
+                ->where("tresfera_taketsystem_answers.duplicated",0)
+                ->where("tresfera_taketsystem_results.duplicated",0)
+                ->join('tresfera_taketsystem_answers', 'tresfera_taketsystem_results.id', '=', 'tresfera_taketsystem_answers.result_id')
+                ->orderBy('tresfera_taketsystem_answers.slide_id',"asc")
+                ->orderBy('tresfera_taketsystem_answers.result_id',"asc")
+                ->get();
+
+     
+
+$log = DB::getQueryLog();
+var_dump($log);
+
+exit;
+$slide_old = -1;
+$result_old = -1;
+$i = 0;
+foreach($re as $r)
+{
+    if($slide_old == -1)
+    {
+        $slide_old = $r->slide_id;
+        $result_old = $r->result_id;
+        continue;
+    }
+
+    if($slide_old != $r->slide_id) 
+    {
+        echo "Cambia slide - Anterior: $slide_old Actual: $r->slide_id<br>";
+        echo $i++;
+    }
+    if($result_old != $r->result_id) echo "Cambia Result - Anterior: $result_old Actual: $r->result_id<br>";
+
+    $slide_old = $r->slide_id;
+    $result_old = $r->result_id;
+}
+echo "TOTAL: ".count($re);
+exit;
+$ans = Answer::join('tresfera_taketsystem_results', 'tresfera_taketsystem_results.id', 'tresfera_taketsystem_answers.result_id')
+            ->join('tresfera_skillyouup_evaluacion', 'tresfera_taketsystem_results.evaluacion_id', 'tresfera_skillyouup_evaluacion.id')
+            ->where('tresfera_skillyouup_evaluacion.lang','es')
+            ->where('tresfera_taketsystem_answers.question_type','select')
+            ->select('tresfera_taketsystem_answers.*', 'tresfera_skillyouup_evaluacion.lang as idioma' )
+            ->get();
+
+dd($ans[0]);
+
+exit; 
+
+\Queue::push('Tresfera\Skillyouup\Classes\Jobs\SendInformeProyecto', ['proyecto_id' => 88], 'sendinformesproyectos');
+
+exit;
+
+
+/*
+$emails = $proyecto->getEmailsActivacion();
+foreach($emails['no_leidos'] as $email)
+{
+    $cont = 0;
+    foreach($emails['no_leidos'] as $email2)
+    {
+        if($email == $email2)    $cont++;
+    }
+    if($cont>1) echo $email;
+}*/
+dd($proyecto->getEmailsActivacion());
+echo "<br>Emails activacion evaluados leidos: " . $proyecto->getEmailsActivacion();
+echo "<br>Usuarios evaluadores asignados: " . $proyecto->getUsuariosEvaluadoresAsignados();
+echo "<br>Evaluados totales: " . $proyecto->getEvaluadosTotales();
+
+$evaluaciones = $proyecto->getNumEquipos();
+echo "<br>Equipos completadas: " . $evaluaciones['completadas'];
+echo "<br>Equipos totales: " . $evaluaciones['totales'];
+
+
+
+?>

@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: sector
+
+# Model Form Field configuration
+form: $/tresfera/taketsystem/models/sector/fields.yaml
+
+# Model Class name
+modelClass: Tresfera\Taketsystem\Models\Sector
+
+# Default redirect location
+defaultRedirect: tresfera/taketsystem/sectors
+
+# Create page
+create:
+    title: Create sector
+    redirect: tresfera/taketsystem/sectors/update/:id
+    redirectClose: tresfera/taketsystem/sectors
+
+# Update page
+update:
+    title: Edit sector
+    redirect: tresfera/taketsystem/sectors
+    redirectClose: tresfera/taketsystem/sectors
+
+# Preview page
+preview:
+    title: Preview sector

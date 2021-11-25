@@ -1,0 +1,17 @@
+plugin:
+    name: 'tresfera.flex360::lang.plugin.name'
+    description: 'tresfera.flex360::lang.plugin.description'
+    author: Tresfera
+    icon: oc-icon-bell
+    homepage: ''
+permissions:
+    flex360.manage:
+        tab: '360 Flex'
+        label: 'Gestionar 360 Flex'
+navigation:
+    flex360:
+        label: '360 Flex'
+        url: tresfera/flex360/proyectos
+        icon: icon-circle-o-notch
+        permissions:
+            - flex360.manage
